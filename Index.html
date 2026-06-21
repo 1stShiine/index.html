@@ -1,1 +1,376 @@
 
+<div class="min-h-screen bg-[#0B0F19] text-slate-200 font-sans antialiased flex flex-col relative overflow-x-hidden" id="app-container">
+
+    <div id="anonymous-watermark" class="hidden fixed top-0 left-0 w-full bg-amber-500/10 border-b border-amber-500/20 text-amber-500 text-[10px] font-black uppercase tracking-widest text-center py-1.5 z-[100] backdrop-blur-sm">
+        Status: Anonymous Data Extraction Only (No-Rx Pathway)
+    </div>
+
+    <header class="bg-[#0B0F19]/90 backdrop-blur-md border-b border-slate-800/80 px-6 py-4 sticky top-0 z-50 transition-all duration-300" id="main-header">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.8)] animate-pulse"></span>
+                <span class="font-black tracking-widest text-xs uppercase text-white">Medical Room™</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest" id="header-step-text">Step 01 // Entry</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center py-10 px-4 sm:px-6 relative z-10 w-full max-w-4xl mx-auto min-h-[600px]">
+
+        <div id="step-1" class="w-full transition-all duration-500 transform translate-y-0 opacity-100">
+            <div class="text-center space-y-6 max-w-lg mx-auto">
+                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-500">System Initialization</span>
+                <h1 class="text-3xl font-black text-white uppercase tracking-tight">Select Interface.</h1>
+                
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <button onclick="window.selectAvatar('glass')" id="avatar-glass" class="bg-emerald-900/20 border border-emerald-500 rounded-2xl p-6 text-center transition group">
+                        <div class="w-16 h-24 mx-auto border-2 border-emerald-500/50 rounded-full mb-4 opacity-80 group-hover:opacity-100 transition shadow-[0_0_15px_rgba(16,185,129,0.2)]"></div>
+                        <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wide">Translucent Glass</h3>
+                    </button>
+                    <button onclick="window.selectAvatar('anatomy')" id="avatar-anatomy" class="bg-[#111422] border border-slate-800 hover:border-slate-600 rounded-2xl p-6 text-center transition group">
+                        <div class="w-16 h-24 mx-auto border border-slate-600 rounded-lg mb-4 opacity-50 group-hover:opacity-100 transition"></div>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wide">Clinical Anatomy</h3>
+                    </button>
+                </div>
+
+                <div class="bg-[#111422] border border-slate-800 p-6 rounded-2xl space-y-4 mt-8">
+                    <div class="flex items-center justify-between">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Biological Parameters</label>
+                    </div>
+                    <div class="flex space-x-4">
+                        <select class="w-1/2 bg-[#0B0F19] border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 font-bold uppercase text-xs tracking-widest appearance-none">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                        <input type="number" placeholder="Age" class="w-1/2 bg-[#0B0F19] border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 font-bold">
+                    </div>
+                </div>
+
+                <button onclick="window.goToStep(2)" class="w-full bg-white hover:bg-slate-200 text-slate-900 text-xs font-black uppercase tracking-widest py-5 rounded-full transition shadow-lg mt-6">
+                    Launch Body Map ➔
+                </button>
+            </div>
+        </div>
+
+        <div id="step-2" class="w-full hidden transition-all duration-500 transform translate-y-4 opacity-0">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                
+                <div class="md:col-span-5 bg-[#111422] border border-slate-800 rounded-[2rem] p-8 flex flex-col items-center justify-center relative min-h-[500px]" id="avatar-container">
+                    <span class="absolute top-6 left-6 text-[10px] font-black uppercase tracking-widest text-slate-500">Select Zone</span>
+                    
+                    <div id="full-body-view" class="space-y-2 w-full max-w-[200px] transition-all duration-500">
+                        <button onclick="window.zoomZone('head')" class="w-full py-4 border border-slate-700 bg-[#0B0F19] hover:border-emerald-500 hover:bg-emerald-900/20 rounded-t-full text-xs font-bold text-slate-400 uppercase tracking-widest transition">01: Head</button>
+                        <button onclick="window.zoomZone('chest')" class="w-full py-8 border border-slate-700 bg-[#0B0F19] hover:border-emerald-500 hover:bg-emerald-900/20 rounded-lg text-xs font-bold text-slate-400 uppercase tracking-widest transition">02: Chest</button>
+                        <button onclick="window.zoomZone('gut')" class="w-full py-8 border border-emerald-500 bg-emerald-900/20 shadow-[0_0_20px_rgba(16,185,129,0.15)] rounded-lg text-xs font-bold text-emerald-400 uppercase tracking-widest transition transform scale-105 z-10">03: Core / Gut</button>
+                        <button onclick="window.zoomZone('pelvis')" class="w-full py-6 border border-slate-700 bg-[#0B0F19] hover:border-emerald-500 hover:bg-emerald-900/20 rounded-b-3xl text-xs font-bold text-slate-400 uppercase tracking-widest transition">04: Pelvis</button>
+                    </div>
+
+                    <div id="zoomed-view" class="hidden flex-col items-center justify-center w-full h-full text-center transition-all duration-500">
+                        <div class="w-48 h-48 bg-emerald-900/30 border border-emerald-500 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.2)] flex items-center justify-center mb-6">
+                            <span class="text-emerald-400 font-black uppercase tracking-widest">Zone 03<br>Core Map</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button onclick="window.resetZone()" class="text-[10px] border border-slate-700 px-4 py-2 rounded-md font-bold uppercase tracking-widest text-slate-400 hover:text-white">Cancel</button>
+                            <button onclick="window.lockZone()" class="text-[10px] bg-emerald-600 px-4 py-2 rounded-md font-bold uppercase tracking-widest text-white">Target Area</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-7 space-y-6">
+                    <div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-emerald-500">Step 02 // Triage</span>
+                        <h2 class="text-3xl font-black text-white uppercase tracking-tight mt-1">Map Your Friction.</h2>
+                    </div>
+
+                    <div id="translation-engine" class="opacity-50 pointer-events-none transition-opacity duration-300 space-y-6 bg-[#111422] border border-slate-800 p-6 rounded-2xl">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-800 pb-2">Select Context Bubbles</p>
+                        
+                        <div class="flex flex-wrap gap-3">
+                            <button class="bg-[#0B0F19] border border-slate-700 hover:border-emerald-500 text-slate-300 hover:text-emerald-400 text-sm px-4 py-2.5 rounded-full transition shadow-sm">"Feels like a balloon after eating"</button>
+                            <button class="bg-emerald-900/20 border border-emerald-500 text-emerald-400 text-sm px-4 py-2.5 rounded-full transition shadow-sm">"Dull ache that won't go away"</button>
+                            <button class="bg-[#0B0F19] border border-slate-700 hover:border-emerald-500 text-slate-300 hover:text-emerald-400 text-sm px-4 py-2.5 rounded-full transition shadow-sm">"Sharp, sudden spikes"</button>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-2">Use your own words (Optional)</label>
+                            <textarea placeholder="Describe exactly how it feels..." class="w-full bg-[#0B0F19] border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 text-sm transition h-20 resize-none"></textarea>
+                        </div>
+
+                        <button onclick="window.goToStep(3)" class="w-full bg-white hover:bg-slate-200 text-slate-900 text-xs font-black uppercase tracking-widest py-4 rounded-xl transition shadow-[0_0_20px_rgba(16,185,129,0.2)] mt-4">
+                            Compile Diagnostic Dossier ➔
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="step-3" class="w-full hidden transition-all duration-500 transform translate-y-4 opacity-0">
+            <div class="text-center space-y-6 max-w-2xl mx-auto">
+                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-500">Step 03 // Privacy Gateway</span>
+                <h2 class="text-3xl font-black text-white uppercase tracking-tight">Select Your Pathway.</h2>
+                <p class="text-sm text-slate-400 font-medium">How would you like your decoded telemetry stored?</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <div class="bg-[#111422] border border-slate-800 p-8 rounded-3xl text-left hover:border-emerald-500 transition group cursor-pointer" onclick="window.goToStep(4)">
+                        <div class="w-12 h-12 bg-emerald-900/20 rounded-full flex items-center justify-center text-emerald-500 mb-6 border border-emerald-500/30">✓</div>
+                        <h3 class="text-lg font-black text-white uppercase tracking-wide">Verified Vault</h3>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">Standard clinical protocol. Uses your legal identity. Required if you intend to submit to insurance or receive medication.</p>
+                    </div>
+
+                    <div class="bg-[#111422] border border-amber-900/50 p-8 rounded-3xl text-left relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-amber-500/10 text-amber-500 text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-bl-lg border-b border-l border-amber-900/50">Cash Only</div>
+                        <div class="w-12 h-12 bg-amber-900/20 rounded-full flex items-center justify-center text-amber-500 mb-6 border border-amber-500/30">?</div>
+                        <h3 class="text-lg font-black text-white uppercase tracking-wide">"John Doe" Vault</h3>
+                        <p class="text-xs text-slate-400 mt-2 mb-4 leading-relaxed">Total privacy. You are assigned an alphanumeric ID. No external medical records. strictly for data extraction.</p>
+                        
+                        <div class="bg-[#0B0F19] p-4 rounded-xl border border-slate-800">
+                            <label class="text-[9px] font-bold text-amber-500 uppercase tracking-widest block mb-2">Type "AGREE" to confirm NO-RX terms:</label>
+                            <input type="text" id="agree-input" onkeyup="window.checkAgree()" placeholder="AGREE" class="w-full bg-[#111422] border border-slate-700 rounded-lg px-3 py-2 text-white focus:border-amber-500 focus:outline-none uppercase text-xs font-bold transition">
+                            <button id="btn-anonymous" onclick="window.activateAnonymous()" class="w-full mt-3 bg-slate-800 text-slate-500 text-[10px] font-black uppercase tracking-widest py-2 rounded-lg pointer-events-none transition">Proceed Anonymously ➔</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-4" class="w-full hidden transition-all duration-500 transform translate-y-4 opacity-0">
+            <div class="max-w-xl mx-auto bg-[#111422] border border-slate-800 rounded-[2rem] shadow-2xl overflow-hidden relative">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-600 to-teal-500"></div>
+                <div class="p-8 sm:p-10 space-y-8">
+                    <div class="text-center space-y-2 border-b border-slate-800/80 pb-6">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-emerald-500">Step 04 // Requisition Built</span>
+                        <h2 class="text-2xl font-black text-white uppercase tracking-tight">Your Diagnostic Proposal is Ready.</h2>
+                    </div>
+
+                    <div class="bg-[#0B0F19] rounded-xl p-5 border border-slate-800/60 flex justify-between items-center">
+                        <div>
+                            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Unlocking</span>
+                            <span class="text-sm font-bold text-slate-200 uppercase tracking-wide">Metabolic & Gut Matrix (18 Assays)</span>
+                        </div>
+                        <span class="text-[9px] font-mono text-emerald-500 bg-emerald-900/20 px-2 py-1 rounded border border-emerald-900/50" id="patient-id-display">ID: Verified</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-300 font-medium leading-relaxed">
+                            Let's bring in your doctor to review and authorize your request. This brief video sync is your time to ask any questions.
+                        </p>
+                        
+                        <div class="bg-[#0B0F19] border border-slate-700/50 p-6 rounded-2xl">
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-emerald-500 text-center mb-3">Enter mobile number to initialize secure room</label>
+                            <div class="flex space-x-2">
+                                <div class="w-16 bg-[#111422] border border-slate-700 rounded-xl flex items-center justify-center text-slate-400 font-bold">+1</div>
+                                <input type="tel" placeholder="(555) 000-0000" class="flex-1 bg-[#111422] border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 font-bold transition text-center text-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="window.goToStep(5)" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black uppercase tracking-widest py-5 rounded-full transition shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                        Bring in the Doctor ➔
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-5" class="w-full hidden transition-all duration-500 transform translate-y-4 opacity-0">
+            <div class="max-w-3xl mx-auto rounded-[2rem] overflow-hidden relative shadow-2xl border border-slate-800 bg-[#111422]">
+                
+                <div id="doc-warning" class="hidden bg-amber-500 text-slate-900 text-[10px] font-black uppercase tracking-widest text-center py-2">
+                    Physician Notice: Acknowledged No-Prescription Consultation
+                </div>
+
+                <div class="aspect-video bg-[#0B0F19] relative border-b border-slate-800">
+                    <div class="w-full h-full flex flex-col items-center justify-center space-y-4">
+                        <div class="w-20 h-20 border border-slate-700 rounded-full flex items-center justify-center bg-[#111422]">
+                            <span class="w-4 h-4 rounded-full bg-emerald-500 animate-pulse"></span>
+                        </div>
+                        <span class="text-slate-500 text-sm font-bold uppercase tracking-widest">Secure Video Feed Connected</span>
+                    </div>
+                    
+                    <div class="absolute bottom-6 left-6 bg-slate-900/80 backdrop-blur px-4 py-2 rounded-lg border border-slate-700 flex items-center space-x-3">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <div>
+                            <p class="text-xs font-bold text-white">Dr. Sarah Jenkins, MD</p>
+                            <p class="text-[10px] text-slate-400 uppercase tracking-widest">Authorizing Request</p>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-6 right-6 w-32 aspect-video bg-black rounded-lg border border-slate-600 flex items-center justify-center">
+                        <span class="text-slate-600 text-[10px] font-bold uppercase" id="pip-label">You</span>
+                    </div>
+                </div>
+
+                <div class="p-6 flex justify-between items-center">
+                    <p class="text-xs text-slate-400 font-medium">"Your logic is perfect. I am authorizing this proposal..."</p>
+                    <button onclick="window.goToStep(6)" class="bg-rose-500 hover:bg-rose-600 text-white text-[10px] font-black uppercase tracking-widest py-3 px-6 rounded-lg transition">
+                        End Call & Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-6" class="w-full hidden transition-all duration-500 transform translate-y-4 opacity-0">
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-emerald-500 flex items-center"><span class="mr-1">✓</span> Requisition Authorized</span>
+                        <h2 class="text-3xl font-black text-white uppercase tracking-tight">Secure Your Dispatch.</h2>
+                        <p class="text-sm text-slate-400 font-medium">Your physician has approved the order. Select a window for your local clinic visit or mobile draw.</p>
+                    </div>
+
+                    <div class="bg-[#111422] border border-slate-800 rounded-2xl p-6">
+                        <h4 class="text-xs font-black uppercase tracking-widest text-slate-300 mb-4">Select Date & Time</h4>
+                        <div class="grid grid-cols-3 gap-2 mb-4">
+                            <div class="bg-[#0B0F19] border border-slate-700 text-center py-3 rounded-xl opacity-50"><span class="block text-[10px] uppercase">Mon</span><span class="text-lg font-bold">16</span></div>
+                            <div class="bg-emerald-900/20 border border-emerald-500 text-emerald-400 text-center py-3 rounded-xl shadow-[inset_0_0_15px_rgba(16,185,129,0.1)]"><span class="block text-[10px] uppercase">Tue</span><span class="text-lg font-bold">17</span></div>
+                            <div class="bg-[#0B0F19] border border-slate-700 text-center py-3 rounded-xl"><span class="block text-[10px] uppercase">Wed</span><span class="text-lg font-bold">18</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#111422] border border-slate-800 rounded-[2rem] p-8 shadow-2xl">
+                    <h3 class="text-xs font-black text-white uppercase tracking-widest border-b border-slate-800 pb-3 mb-4">Dispatch Summary</h3>
+                    
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between text-sm text-slate-300">
+                            <span>Metabolic Matrix (18 Assays)</span>
+                            <span>$299.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-emerald-500 font-bold">
+                            <span>Physician Authorization</span>
+                            <span>Included</span>
+                        </div>
+                        <div class="border-t border-slate-800 pt-3 flex justify-between text-lg font-black text-white">
+                            <span>Total</span>
+                            <span>$299.00</span>
+                        </div>
+                    </div>
+
+                    <button onclick="window.goToStep(7)" class="w-full bg-white hover:bg-slate-200 text-slate-900 text-sm font-black uppercase py-4 rounded-xl transition flex items-center justify-center space-x-2">
+                        <span>Pay with</span> <span class="font-black tracking-tighter"> Pay</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="step-7" class="w-full hidden transition-all duration-500 transform translate-y-4 opacity-0">
+            <div class="text-center space-y-6 max-w-md mx-auto">
+                <div class="w-20 h-20 mx-auto rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-3xl shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                    ✓
+                </div>
+                <div>
+                    <h2 class="text-3xl font-black text-white uppercase tracking-tight">Dispatch Confirmed.</h2>
+                    <p class="text-sm text-slate-400 font-medium mt-2">Your requisition history and upcoming decoded telemetry have been securely stored.</p>
+                </div>
+                
+                <div class="bg-[#111422] border border-slate-800 p-8 rounded-[2rem] space-y-6 mt-8">
+                    <div class="space-y-2 text-left">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-emerald-500">Create a password to lock your Vault</label>
+                        <input type="password" placeholder="••••••••" class="w-full bg-[#0B0F19] border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 text-lg font-bold transition tracking-widest">
+                    </div>
+                    <button class="w-full bg-slate-800 hover:bg-slate-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-xl transition border border-slate-600">
+                        Lock Vault & Exit ➔
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    window.isAnonymous = false;
+
+    // Navigation Engine
+    window.goToStep = function(stepNumber) {
+        for (let i = 1; i <= 7; i++) {
+            const el = document.getElementById('step-' + i);
+            if (el) {
+                el.classList.add('hidden');
+                el.classList.remove('translate-y-0', 'opacity-100');
+                el.classList.add('translate-y-4', 'opacity-0');
+            }
+        }
+        
+        const target = document.getElementById('step-' + stepNumber);
+        if (target) {
+            target.classList.remove('hidden');
+            setTimeout(() => {
+                target.classList.remove('translate-y-4', 'opacity-0');
+                target.classList.add('translate-y-0', 'opacity-100');
+            }, 50);
+        }
+
+        const phaseTitles = {
+            1: "Step 01 // Entry",
+            2: "Step 02 // Triage",
+            3: "Step 03 // Privacy",
+            4: "Step 04 // Requisition",
+            5: "Step 05 // Telehealth",
+            6: "Step 06 // Checkout",
+            7: "Step 07 // The Vault"
+        };
+        document.getElementById('header-step-text').innerText = phaseTitles[stepNumber];
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Step 1: Avatar Selection Logic
+    window.selectAvatar = function(type) {
+        document.getElementById('avatar-glass').classList.remove('border-emerald-500', 'bg-emerald-900/20');
+        document.getElementById('avatar-anatomy').classList.remove('border-emerald-500', 'bg-emerald-900/20');
+        document.getElementById('avatar-' + type).classList.add('border-emerald-500', 'bg-emerald-900/20');
+    };
+
+    // Step 2: 3D Puzzle Logic (Simulated)
+    window.zoomZone = function(zone) {
+        document.getElementById('full-body-view').classList.add('hidden');
+        document.getElementById('zoomed-view').classList.remove('hidden');
+        document.getElementById('zoomed-view').classList.add('flex');
+    };
+
+    window.resetZone = function() {
+        document.getElementById('zoomed-view').classList.add('hidden');
+        document.getElementById('zoomed-view').classList.remove('flex');
+        document.getElementById('full-body-view').classList.remove('hidden');
+        document.getElementById('translation-engine').classList.add('opacity-50', 'pointer-events-none');
+    };
+
+    window.lockZone = function() {
+        // Unlocks the context bubbles
+        document.getElementById('translation-engine').classList.remove('opacity-50', 'pointer-events-none');
+    };
+
+    // Step 3: Anonymous Logic
+    window.checkAgree = function() {
+        const input = document.getElementById('agree-input').value.toUpperCase();
+        const btn = document.getElementById('btn-anonymous');
+        if (input === 'AGREE') {
+            btn.classList.remove('bg-slate-800', 'text-slate-500', 'pointer-events-none');
+            btn.classList.add('bg-amber-500', 'text-slate-900');
+        } else {
+            btn.classList.add('bg-slate-800', 'text-slate-500', 'pointer-events-none');
+            btn.classList.remove('bg-amber-500', 'text-slate-900');
+        }
+    };
+
+    window.activateAnonymous = function() {
+        window.isAnonymous = true;
+        // Trigger Watermark
+        document.getElementById('anonymous-watermark').classList.remove('hidden');
+        document.getElementById('main-header').classList.add('mt-6'); // Push header down
+        // Change IDs
+        document.getElementById('patient-id-display').innerText = "ID: APDx-994";
+        document.getElementById('patient-id-display').classList.replace('text-emerald-500', 'text-amber-500');
+        document.getElementById('patient-id-display').classList.replace('bg-emerald-900/20', 'bg-amber-900/20');
+        document.getElementById('patient-id-display').classList.replace('border-emerald-900/50', 'border-amber-900/50');
+        
+        document.getElementById('pip-label').innerText = "John Doe";
+        document.getElementById('doc-warning').classList.remove('hidden');
+
+        window.goToStep(4);
+    };
+</script>
