@@ -3,363 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Room™ - Unified Command Center</title>
+    <title>Medical Room™ - The Active Clinic</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom UI Micro-Interactions & Theming */
+        /* Global Theming & Discreet Mode Variables */
         .discreet-active {
             --bg-main: #090A0F;
             --bg-card: #12141C;
-            --border-glow: rgba(245, 158, 11, 0.2);
-            --accent: #F59E0B;
+            --accent: #F59E0B; /* Amber */
             --svg-stroke: #451A03;
+            --ghost-opacity: 0.05;
         }
         .standard-active {
             --bg-main: #0B0F19;
             --bg-card: #111422;
-            --border-glow: rgba(16, 185, 129, 0.2);
-            --accent: #10B981;
+            --accent: #10B981; /* Emerald */
             --svg-stroke: #1e293b;
+            --ghost-opacity: 0.15;
         }
-        .smooth-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         
-        /* 3D Body Map SVG Styling */
-        .body-zone { cursor: pointer; transition: all 0.3s ease; }
-        .base-shape { fill: var(--bg-card); stroke: var(--svg-stroke); stroke-width: 3; stroke-linejoin: round; }
-        .body-zone:hover .base-shape { fill: var(--border-glow); stroke: var(--accent); filter: drop-shadow(0 0 8px var(--border-glow)); }
-        .body-zone text { fill: var(--accent); }
+        body { transition: background-color 0.4s ease, color 0.4s ease; }
+        .smooth-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* SVG Micro-Puzzle Mechanics */
+        .body-map-container { perspective: 1000px; }
+        .svg-body { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center; }
+        .flipped { transform: scaleX(-1); }
+        
+        .macro-zone, .micro-piece { 
+            cursor: pointer; 
+            fill: var(--bg-card); 
+            stroke: var(--svg-stroke); 
+            stroke-width: 2; 
+            stroke-linejoin: round;
+            transition: all 0.3s ease;
+        }
+        
+        .macro-zone:hover { fill: rgba(255,255,255,0.05); stroke: var(--accent); }
+        
+        /* Ghosting Context */
+        .ghosted { opacity: var(--ghost-opacity); pointer-events: none; filter: grayscale(100%); }
+        
+        /* Selected Micro Piece defaults to Emerald, but overridden by inline Heat Map styles */
+        .micro-piece:hover { stroke: var(--accent); filter: drop-shadow(0 0 8px var(--accent)); }
+        .piece-active { stroke: var(--accent); stroke-width: 3; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); }
+
+        /* Custom Heat Map Vertical Slider */
+        input[type=range][orient=vertical] {
+            appearance: slider-vertical;
+            width: 8px;
+            height: 150px;
+            cursor: pointer;
+            background: linear-gradient(to top, #10B981, #F59E0B, #EF4444);
+            border-radius: 10px;
+            outline: none;
+        }
+        
+        /* Hide scrollbar for clean UI */
+        .scrollbar-none::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body id="global-body" class="standard-active bg-[#0B0F19] text-slate-200 font-sans antialiased smooth-transition">
+<body id="global-body" class="standard-active bg-[#0B0F19] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden">
 
-    <div id="emergency-gatekeeper" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-[200] flex items-center justify-center p-4">
-        <div class="bg-[#111422] border border-red-500/30 max-w-lg w-full rounded-3xl p-8 text-center space-y-6 shadow-2xl">
-            <div class="w-16 h-16 bg-red-500/10 border border-red-500/30 rounded-full flex items-center justify-center mx-auto animate-pulse">
-                <span class="text-red-500 text-2xl font-bold">⚠️</span>
+    <!-- Global Header -->
+    <header class="border-b border-slate-800/80 bg-inherit px-6 py-4 z-50 flex-shrink-0">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span id="header-pulse" class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.8)] animate-pulse"></span>
+                <span id="brand-logo" class="font-black tracking-widest text-xs uppercase text-white">Medical Room™</span>
             </div>
-            <div class="space-y-2">
-                <h2 class="text-2xl font-black text-white uppercase tracking-tight">Safety Verification</h2>
-                <p class="text-xs text-slate-400 leading-relaxed">Are you experiencing a life-threatening medical emergency, active self-harm intentions, or acute severe symptom onset?</p>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                <button onclick="window.triggerEmergency()" class="w-full bg-red-600 hover:bg-red-500 text-white text-xs font-black uppercase tracking-widest py-4 rounded-xl transition shadow-lg shadow-red-600/20">YES: Connect Emergency</button>
-                <button onclick="window.clearEmergencyGate()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-black uppercase tracking-widest py-4 rounded-xl transition">NO: Enter Secure Vault</button>
-            </div>
+            <button onclick="window.toggleDiscreetMode()" class="flex items-center space-x-2 bg-slate-900 border border-slate-800 px-4 py-2 rounded-full hover:border-slate-700 transition">
+                <span class="text-xs">👁️</span>
+                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400" id="discreet-text">Discreet Mode: OFF</span>
+            </button>
         </div>
-    </div>
+    </header>
 
-    <div class="min-h-screen flex flex-col relative pb-24">
+    <!-- Main Command Center -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 flex flex-col h-full overflow-hidden">
         
-        <header class="border-b border-slate-800/80 bg-[#0B0F19]/90 backdrop-blur-md px-6 py-4 sticky top-0 z-50 smooth-transition">
-            <div class="max-w-6xl mx-auto flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <span id="header-pulse" class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.8)] animate-pulse smooth-transition"></span>
-                    <span id="brand-logo" class="font-black tracking-widest text-xs uppercase text-white smooth-transition">Medical Room™</span>
-                </div>
-
-                <button onclick="window.toggleDiscreetMode()" class="flex items-center space-x-2 bg-slate-900 border border-slate-800 px-4 py-2 rounded-full hover:border-slate-700 transition">
-                    <span class="text-xs">👁️</span>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400" id="discreet-text">Discreet Mode: OFF</span>
-                </button>
-            </div>
-        </header>
-
-        <nav class="max-w-4xl mx-auto w-full px-4 mt-6">
-            <div class="grid grid-cols-3 gap-2 bg-slate-900/60 border border-slate-800/60 p-1.5 rounded-2xl">
-                <button onclick="window.switchTab(1)" id="tab-btn-1" class="bg-emerald-500/10 border border-emerald-500 text-emerald-400 flex flex-col items-center justify-center py-3 rounded-xl transition-all">
-                    <span class="text-xl mb-1">🧬</span>
-                    <span class="text-[9px] font-black uppercase tracking-widest">Bio-Labs</span>
-                </button>
-                <button onclick="window.switchTab(2)" id="tab-btn-2" class="border border-transparent text-slate-500 hover:text-slate-300 flex flex-col items-center justify-center py-3 rounded-xl transition-all">
-                    <span class="text-xl mb-1">🛋️</span>
-                    <span class="text-[9px] font-black uppercase tracking-widest">Mind Couch</span>
-                </button>
-                <button onclick="window.switchTab(3)" id="tab-btn-3" class="border border-transparent text-slate-500 hover:text-slate-300 flex flex-col items-center justify-center py-3 rounded-xl transition-all">
-                    <span class="text-xl mb-1">🩺</span>
-                    <span class="text-[9px] font-black uppercase tracking-widest">Active Clinic</span>
-                </button>
-            </div>
+        <!-- Tab Navigation -->
+        <nav class="grid grid-cols-3 gap-2 bg-slate-900/60 border border-slate-800/60 p-1.5 rounded-2xl mb-4 flex-shrink-0">
+            <button class="border border-transparent text-slate-500 flex flex-col items-center justify-center py-2 rounded-xl">
+                <span class="text-lg mb-1">🧬</span><span class="text-[9px] font-black uppercase tracking-widest">Bio-Labs</span>
+            </button>
+            <button class="border border-transparent text-slate-500 flex flex-col items-center justify-center py-2 rounded-xl">
+                <span class="text-lg mb-1">🛋️</span><span class="text-[9px] font-black uppercase tracking-widest">Mind Couch</span>
+            </button>
+            <button class="bg-emerald-500/10 border border-emerald-500 text-emerald-400 flex flex-col items-center justify-center py-2 rounded-xl" id="tab-clinic">
+                <span class="text-lg mb-1">🩺</span><span class="text-[9px] font-black uppercase tracking-widest">Active Clinic</span>
+            </button>
         </nav>
 
-        <main class="flex-grow max-w-6xl w-full mx-auto px-4 mt-8">
+        <!-- THE ACTIVE CLINIC ENGINE (Tab 3) -->
+        <section class="flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-0 relative">
             
-            <section id="tab-view-1" class="smooth-transition space-y-6">
-                <div class="max-w-md mx-auto text-center space-y-2 mb-8">
-                    <h2 class="text-2xl font-black text-white uppercase tracking-tight" id="lab-title">Bio-Logic Engine</h2>
-                    <p class="text-xs text-slate-400">Direct transactional biomarker panel provisioning.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-[#111422] border border-slate-800 p-6 rounded-2xl flex flex-col justify-between space-y-4">
-                        <div class="space-y-2"><span class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest block" id="panel-tag-1">Optimization Matrix</span><h3 class="text-base font-black text-white uppercase tracking-tight" id="panel-name-1">Executive Longevity</h3><p class="text-xs text-slate-400">Comprehensive hormonal and metabolic profiling.</p></div>
-                        <button onclick="window.purchaseLab('Executive Longevity', 850)" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold text-[10px] uppercase tracking-widest py-3 rounded-xl transition mt-4">Order Panel</button>
+            <!-- LEFT COLUMN: The Visual Body Map -->
+            <div class="lg:col-span-5 bg-[#111422] border border-slate-800 rounded-3xl p-6 flex flex-col relative overflow-hidden">
+                
+                <!-- Top Controls: Front/Back Pivot & Swipe Reset -->
+                <div class="flex items-center justify-between z-10">
+                    <div class="bg-slate-900 border border-slate-700 rounded-lg flex p-1">
+                        <button onclick="window.pivotBody('Front')" id="btn-front" class="bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition">Front</button>
+                        <button onclick="window.pivotBody('Back')" id="btn-back" class="text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition">Back</button>
                     </div>
-                </div>
-            </section>
-
-            <section id="tab-view-2" class="hidden smooth-transition max-w-xl mx-auto space-y-6">
-                <div class="text-center space-y-2">
-                    <h2 class="text-2xl font-black text-white uppercase tracking-tight">Mind Couch</h2>
-                    <p class="text-xs text-slate-400">Acute neuropsychiatric crisis mitigation and diagnostic routing.</p>
-                </div>
-                <div class="space-y-3">
-                    <button onclick="window.initMindConsult('Severe Professional Burnout / Stress')" class="w-full bg-[#111422] border border-slate-800 hover:border-slate-700 p-5 rounded-2xl text-left flex items-center justify-between transition group">
-                        <div><h4 class="text-xs font-bold text-white uppercase tracking-wider">Severe Professional Burnout</h4></div>
-                        <span class="text-slate-600 group-hover:text-white transition">➔</span>
+                    
+                    <button onclick="window.resetMacroMap()" id="btn-reset" class="hidden text-[9px] font-bold text-slate-500 uppercase tracking-widest hover:text-white transition flex items-center">
+                        <span class="mr-1 text-lg">«</span> Swipe / Reset
                     </button>
                 </div>
-            </section>
 
-            <section id="tab-view-3" class="hidden smooth-transition space-y-6">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- 2D Tactile Body Map -->
+                <div class="flex-grow flex items-center justify-center body-map-container mt-4 relative">
                     
-                    <div class="lg:col-span-5 bg-[#111422] border border-slate-800 rounded-3xl p-6 flex flex-col space-y-6 min-h-[500px]">
-                        
-                        <div>
-                            <span class="text-[9px] font-black tracking-widest uppercase text-slate-500 block mb-2">Internal Organ Fast-Track</span>
-                            <div class="flex space-x-2 overflow-x-auto pb-2 scrollbar-none">
-                                <button onclick="window.selectMacroZone('Heart')" class="bg-slate-900 border border-slate-700 text-[10px] font-bold uppercase tracking-wider px-3 py-2 rounded-lg whitespace-nowrap hover:border-emerald-500 transition">Heart</button>
-                                <button onclick="window.selectMacroZone('Liver')" class="bg-slate-900 border border-slate-700 text-[10px] font-bold uppercase tracking-wider px-3 py-2 rounded-lg whitespace-nowrap hover:border-emerald-500 transition">Liver</button>
-                                <button id="discreet-organ-btn" onclick="window.selectMacroZone('Reproductive / Pelvic')" class="hidden bg-amber-950/20 border border-amber-500/30 text-[10px] text-amber-400 font-bold uppercase tracking-wider px-3 py-2 rounded-lg whitespace-nowrap transition">Reproductive</button>
-                            </div>
-                        </div>
-                        <div class="border-t border-slate-800/80 my-2"></div>
-
-                        <div id="macro-body-selection" class="flex-grow flex items-center justify-center relative">
-                            <svg viewBox="0 0 200 450" class="w-full max-w-[220px] max-h-[400px] drop-shadow-2xl overflow-visible">
-                                
-                                <g onclick="window.selectMacroZone('Head')" class="body-zone group">
-                                    <ellipse cx="100" cy="50" rx="28" ry="36" class="base-shape" />
-                                    <text x="100" y="55" text-anchor="middle" class="opacity-0 group-hover:opacity-100 text-[11px] font-black tracking-widest pointer-events-none">HEAD</text>
-                                </g>
-
-                                <g onclick="window.selectMacroZone('Torso & Chest')" class="body-zone group">
-                                    <path d="M 60 100 Q 100 85 140 100 L 160 210 Q 155 220 140 200 L 130 140 L 125 180 L 75 180 L 70 140 L 60 200 Q 45 220 40 210 Z" class="base-shape" />
-                                    <text x="100" y="145" text-anchor="middle" class="opacity-0 group-hover:opacity-100 text-[11px] font-black tracking-widest pointer-events-none">CHEST</text>
-                                </g>
-
-                                <g onclick="window.selectMacroZone('Stomach & Gut')" class="body-zone group">
-                                    <path d="M 73 185 L 127 185 L 122 255 Q 100 280 78 255 Z" class="base-shape" />
-                                    <text x="100" y="225" text-anchor="middle" class="opacity-0 group-hover:opacity-100 text-[11px] font-black tracking-widest pointer-events-none">CORE</text>
-                                </g>
-
-                                <g onclick="window.selectMacroZone('Legs & Feet')" class="body-zone group">
-                                    <path d="M 78 260 L 60 420 L 85 420 L 98 280 L 102 280 L 115 420 L 140 420 L 122 260 Q 100 280 78 260 Z" class="base-shape" />
-                                    <text x="100" y="350" text-anchor="middle" class="opacity-0 group-hover:opacity-100 text-[11px] font-black tracking-widest pointer-events-none">LEGS</text>
-                                </g>
-                            </svg>
-                        </div>
-
-                        <div id="micro-anatomy-selection" class="hidden space-y-3 flex-grow flex flex-col justify-center animate-fade-in">
-                            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2">
-                                <span class="text-[10px] font-black tracking-widest text-emerald-400 uppercase" id="active-macro-label">ZONE ISOLATED</span>
-                                <button onclick="window.resetToMacro()" class="text-[9px] font-bold text-slate-500 uppercase tracking-widest hover:text-white transition">➔ Reset Map</button>
-                            </div>
-                            <div id="micro-node-container" class="space-y-2 overflow-y-auto max-h-[300px] scrollbar-none">
-                                </div>
-                        </div>
+                    <!-- Severity Heat Map Slider (Appears when micro piece selected) -->
+                    <div id="heat-map-control" class="hidden absolute left-0 top-1/2 -translate-y-1/2 flex-col items-center space-y-2 z-20">
+                        <span class="text-[9px] font-black uppercase tracking-widest text-slate-400">Severity</span>
+                        <input type="range" orient="vertical" id="severity-slider" min="1" max="10" value="1" oninput="window.updateHeatMap(this.value)">
+                        <span id="severity-val" class="text-[10px] font-bold text-emerald-400">1</span>
                     </div>
 
-                    <div class="lg:col-span-7 bg-[#111422] border border-slate-800 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
+                    <!-- SVG Human Silhouette -->
+                    <svg viewBox="0 0 200 450" class="w-full max-w-[220px] max-h-[400px] drop-shadow-2xl svg-body" id="human-svg">
                         
-                        <div id="friction-column-empty" class="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] flex items-center justify-center p-6 z-10">
-                            <p class="text-xs text-slate-500 font-bold uppercase tracking-widest text-center border border-slate-800 p-4 rounded-xl border-dashed">Select Sub-Anatomy on Left to Populate Symptoms</p>
-                        </div>
+                        <!-- HEAD MACRO -->
+                        <g id="macro-head" class="macro-zone" onclick="window.fractureZone('head')">
+                            <ellipse cx="100" cy="50" rx="28" ry="36" />
+                        </g>
+                        <!-- HEAD MICRO PUZZLE (Hidden initially) -->
+                        <g id="micro-head" class="hidden">
+                            <path id="head-forehead" class="micro-piece" d="M 72 50 A 28 36 0 0 1 128 50 L 128 55 L 72 55 Z" onclick="window.toggleTactilePiece('head-forehead', 'Forehead')" />
+                            <path id="head-eyes" class="micro-piece" d="M 72 55 L 128 55 L 128 65 L 72 65 Z" onclick="window.toggleTactilePiece('head-eyes', 'Eyes')" />
+                            <path id="head-jaw" class="micro-piece" d="M 72 65 L 128 65 A 28 36 0 0 1 72 65 Z" onclick="window.toggleTactilePiece('head-jaw', 'Jaw')" />
+                        </g>
 
-                        <div class="z-20 space-y-4 w-full">
-                            <span class="text-[10px] font-black tracking-widest text-slate-400 uppercase block border-b border-slate-800 pb-2">Functional Symptoms Dictionary</span>
-                            <div id="symptom-bubbles-container" class="flex flex-wrap gap-2">
-                                </div>
-                        </div>
+                        <!-- TORSO MACRO -->
+                        <g id="macro-torso" class="macro-zone" onclick="window.fractureZone('torso')">
+                            <path d="M 70 100 Q 100 85 130 100 L 125 210 Q 100 220 75 210 Z" />
+                        </g>
+                        <!-- TORSO MICRO PUZZLE -->
+                        <g id="micro-torso" class="hidden">
+                            <path id="torso-chest" class="micro-piece" d="M 70 100 Q 100 85 130 100 L 128 140 Q 100 150 72 140 Z" onclick="window.toggleTactilePiece('torso-chest', 'Chest/Heart')" />
+                            <path id="torso-stomach" class="micro-piece" d="M 72 140 Q 100 150 128 140 L 125 210 Q 100 220 75 210 Z" onclick="window.toggleTactilePiece('torso-stomach', 'Abdomen')" />
+                        </g>
 
-                        <div id="laterality-overlay" class="hidden absolute inset-0 bg-slate-950/95 z-30 flex-col items-center justify-center p-6 space-y-4">
-                            <div class="text-center">
-                                <h4 class="text-sm font-black text-white uppercase tracking-wider">Specify Anatomical Symmetry</h4>
-                                <p class="text-[11px] text-slate-400 mt-1">Determine physical spatial layer direction.</p>
-                            </div>
-                            <div class="flex space-x-3 w-full max-w-xs">
-                                <button onclick="window.commitSymptomWithLaterality('Left')" class="w-full bg-slate-900 border border-slate-700 py-3 rounded-xl text-xs font-bold uppercase text-cyan-400 hover:border-cyan-400 transition">Left</button>
-                                <button onclick="window.commitSymptomWithLaterality('Right')" class="w-full bg-slate-900 border border-slate-700 py-3 rounded-xl text-xs font-bold uppercase text-emerald-400 hover:border-emerald-400 transition">Right</button>
-                                <button onclick="window.commitSymptomWithLaterality('Both')" class="w-full bg-slate-900 border border-slate-700 py-3 rounded-xl text-xs font-bold uppercase text-purple-400 hover:border-purple-400 transition">Both</button>
-                            </div>
-                        </div>
+                        <!-- ARMS MACRO (Left & Right combined for Macro click) -->
+                        <g id="macro-arms" class="macro-zone" onclick="window.fractureZone('arms')">
+                            <!-- Left Arm -->
+                            <path d="M 70 100 L 40 180 L 35 240 L 45 240 L 55 180 L 73 140 Z" />
+                            <!-- Right Arm -->
+                            <path d="M 130 100 L 160 180 L 165 240 L 155 240 L 145 180 L 127 140 Z" />
+                        </g>
+                        <!-- ARMS MICRO PUZZLE (Fractured for Left/Right tactile symmetry) -->
+                        <g id="micro-arms" class="hidden">
+                            <!-- Left -->
+                            <path id="arm-l-shoulder" class="micro-piece" d="M 70 100 L 55 140 L 73 140 Z" onclick="window.toggleTactilePiece('arm-l-shoulder', 'Left Shoulder')" />
+                            <path id="arm-l-forearm" class="micro-piece" d="M 55 140 L 40 210 L 50 210 L 73 140 Z" onclick="window.toggleTactilePiece('arm-l-forearm', 'Left Forearm')" />
+                            <path id="arm-l-hand" class="micro-piece" d="M 40 210 L 35 240 L 45 240 L 50 210 Z" onclick="window.toggleTactilePiece('arm-l-hand', 'Left Hand')" />
+                            <!-- Right -->
+                            <path id="arm-r-shoulder" class="micro-piece" d="M 130 100 L 145 140 L 127 140 Z" onclick="window.toggleTactilePiece('arm-r-shoulder', 'Right Shoulder')" />
+                            <path id="arm-r-forearm" class="micro-piece" d="M 145 140 L 160 210 L 150 210 L 127 140 Z" onclick="window.toggleTactilePiece('arm-r-forearm', 'Right Forearm')" />
+                            <path id="arm-r-hand" class="micro-piece" d="M 160 210 L 165 240 L 155 240 L 150 210 Z" onclick="window.toggleTactilePiece('arm-r-hand', 'Right Hand')" />
+                        </g>
+
+                        <!-- LEGS MACRO -->
+                        <g id="macro-legs" class="macro-zone" onclick="window.fractureZone('legs')">
+                            <path d="M 75 210 L 60 400 L 85 400 L 98 250 L 102 250 L 115 400 L 140 400 L 125 210 Q 100 230 75 210 Z" />
+                        </g>
+                        <!-- LEGS MICRO PUZZLE -->
+                        <g id="micro-legs" class="hidden">
+                            <!-- Left -->
+                            <path id="leg-l-thigh" class="micro-piece" d="M 75 210 L 68 300 L 92 300 L 98 250 Z" onclick="window.toggleTactilePiece('leg-l-thigh', 'Left Thigh')" />
+                            <path id="leg-l-calf" class="micro-piece" d="M 68 300 L 60 400 L 85 400 L 92 300 Z" onclick="window.toggleTactilePiece('leg-l-calf', 'Left Knee/Calf')" />
+                            <!-- Right -->
+                            <path id="leg-r-thigh" class="micro-piece" d="M 125 210 L 132 300 L 108 300 L 102 250 Z" onclick="window.toggleTactilePiece('leg-r-thigh', 'Right Thigh')" />
+                            <path id="leg-r-calf" class="micro-piece" d="M 132 300 L 140 400 L 115 400 L 108 300 Z" onclick="window.toggleTactilePiece('leg-r-calf', 'Right Knee/Calf')" />
+                        </g>
+
+                    </svg>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Immediate Feedback Symptoms & Time Track -->
+            <div class="lg:col-span-7 bg-[#111422] border border-slate-800 rounded-3xl p-6 flex flex-col relative overflow-hidden h-full">
+                
+                <!-- Empty State -->
+                <div id="friction-column-empty" class="absolute inset-0 bg-slate-950/20 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 z-10 transition-opacity duration-300">
+                    <div class="border border-dashed border-slate-700/50 p-6 rounded-2xl text-center">
+                        <span class="text-3xl block mb-2">🧩</span>
+                        <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Select an anatomical puzzle piece<br>to map functional symptoms</p>
                     </div>
                 </div>
-            </section>
-        </main>
 
-        <div id="dossier-drawer" class="fixed bottom-0 left-0 right-0 bg-[#111422]/95 border-t border-slate-800 backdrop-blur-lg z-40 translate-y-[calc(100%-60px)] smooth-transition rounded-t-[2rem] shadow-2xl">
-            <div onclick="window.toggleDossierDrawer()" class="h-[60px] flex items-center justify-between px-8 cursor-pointer select-none border-b border-slate-800/40">
+                <!-- Populated State -->
+                <div class="z-20 flex flex-col h-full">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4 flex-shrink-0">
+                        <span class="text-[10px] font-black tracking-widest text-slate-400 uppercase">Functional Dictionary</span>
+                        <span id="active-target-label" class="text-[10px] font-black tracking-widest text-emerald-400 uppercase">No Target Locked</span>
+                    </div>
+                    
+                    <div id="symptom-bubbles-container" class="flex flex-wrap content-start gap-3 overflow-y-auto pb-20 scrollbar-none flex-grow">
+                        <!-- Populated Dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE DOSSIER DRAWER (Sticky Bottom) -->
+        <div id="dossier-drawer" class="absolute bottom-0 left-0 right-0 bg-[#111422]/95 border-t border-slate-800 backdrop-blur-xl z-40 translate-y-[calc(100%-60px)] transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+            <div onclick="window.toggleDossier()" class="h-[60px] flex items-center justify-between px-8 cursor-pointer select-none">
                 <div class="flex items-center space-x-3">
-                    <span class="w-2 h-2 rounded-full bg-amber-500" id="dossier-indicator"></span>
-                    <span class="text-xs font-black uppercase tracking-widest text-slate-300" id="dossier-summary-text">0 Friction Blocks Compiled</span>
+                    <span class="w-2 h-2 rounded-full bg-slate-600" id="dossier-indicator"></span>
+                    <span class="text-xs font-black uppercase tracking-widest text-slate-300" id="dossier-text">0 Friction Blocks Compiled</span>
                 </div>
                 <span class="text-slate-400 font-bold transition-transform duration-300" id="dossier-chevron">ᐱ</span>
             </div>
-            <div class="max-w-4xl mx-auto p-6 space-y-6 max-h-[350px] overflow-y-auto">
-                <div id="dossier-items-list" class="space-y-2">
-                    <p class="text-xs text-slate-500 font-mono text-center py-4">No structural symptom data captured.</p>
-                </div>
-                <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
-                    <button onclick="window.clearDossier()" class="text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-red-300 transition">Flush Engine</button>
-                    <button onclick="window.goToCheckout()" class="bg-white text-slate-950 font-black text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl transition shadow-xl">Compile Diagnostic Dossier ➔</button>
-                </div>
+            <div class="p-6 max-h-[300px] overflow-y-auto">
+                <div id="dossier-list" class="space-y-2 mb-4"></div>
+                <button onclick="alert('Dossier Encrypted. Routing to vendor match engine...')" class="w-full bg-white text-slate-950 font-black text-xs uppercase tracking-widest px-6 py-4 rounded-xl shadow-xl hover:bg-slate-200 transition">Compile & Route Dossier ➔</button>
             </div>
         </div>
 
-    </div>
+    </main>
 
+    <!-- CORE LOGIC ENGINE -->
     <script>
-        const ANATOMICAL_DB = {
-            'Head': { nodes: ['Forehead & Skull', 'Ocular System (Eyes)', 'Dental & Jaw'], symptoms: { 'Forehead & Skull': ['Sharp crushing temple compression', 'Surface sensitivity to lighting'], 'Ocular System (Eyes)': ['Blurry tracking visions', 'Deep retro-orbital point pressures'], 'Dental & Jaw': ['Sharp radiating crown pains', 'Temporomandibular click tracking'] }, paired: true },
-            'Torso & Chest': { nodes: ['Cardiovascular Center', 'Pulmonary Wall (Lungs)'], symptoms: { 'Cardiovascular Center': ['Rapid tachycardic spike tracks', 'Heavy sub-sternal anchor weights'], 'Pulmonary Wall (Lungs)': ['Sharp pleural stitching pains', 'Dry hyper-reactive track cough'] }, paired: false },
-            'Stomach & Gut': { nodes: ['Upper Gastric', 'Lower Intestinal'], symptoms: { 'Upper Gastric': ['Gaseous ballooning distension', 'Burning epigastric acid reflux'], 'Lower Intestinal': ['Sharp spasmodic colic contractions', 'Diffuse dull visceral friction'] }, paired: false },
-            'Legs & Feet': { nodes: ['Knee Assembly', 'Plantar Core'], symptoms: { 'Knee Assembly': ['Sharp load bearing friction', 'Deep capsule fluid swellings'], 'Plantar Core': ['Morning heel spur stitching', 'Vascular peripheral numbness'] }, paired: true },
-            'Heart': { nodes: ['Cardiovascular Center'], symptoms: { 'Cardiovascular Center': ['Rapid tachycardic spike tracks', 'Heavy sub-sternal anchor weights'] }, paired: false },
-            'Liver': { nodes: ['Upper Gastric'], symptoms: { 'Upper Gastric': ['Right upper quadrant pressure', 'Visceral dull processing lethargy'] }, paired: false },
-            'Reproductive / Pelvic': { nodes: ['Private Deep Tissue'], symptoms: { 'Private Deep Tissue': ['Discrete localized pelvic path burning', 'Deep visceral structural congestion'] }, paired: false }
+        // Database linking puzzle pieces to plain-English symptoms
+        const SYMPTOM_DB = {
+            'head-forehead': ['Sharp crushing temple compression', 'Surface sensitivity to lighting'],
+            'head-eyes': ['Blurry tracking visions', 'Deep retro-orbital point pressures'],
+            'head-jaw': ['Radiating crown/tooth pains', 'Temporomandibular joint clicking'],
+            'torso-chest': ['Rapid tachycardic spike tracks', 'Heavy sub-sternal anchor weights', 'Sharp pleural stitching'],
+            'torso-stomach': ['Gaseous ballooning distension', 'Burning epigastric acid reflux', 'Spasmodic colic contractions'],
+            'arm-l-shoulder': ['Rotator cuff impingement friction', 'Deep joint capsule aching'],
+            'arm-l-hand': ['Vascular peripheral numbness', 'Radiating pins & needles', 'Grip strength failure'],
+            'arm-r-shoulder': ['Rotator cuff impingement friction', 'Deep joint capsule aching'],
+            'arm-r-hand': ['Vascular peripheral numbness', 'Radiating pins & needles', 'Grip strength failure'],
+            'leg-l-calf': ['Deep vein throbbing', 'Load-bearing localized structural pain'],
+            'leg-r-calf': ['Deep vein throbbing', 'Load-bearing localized structural pain'],
+            // Fallback for others
+            'default': ['Dull localized aching', 'Sharp movement-based friction', 'Structural swelling']
         };
 
-        let isDiscreetMode = false, activeMacro = null, activeMicroNode = null, selectedSymptomPending = null, compiledDossier = [], isDrawerOpen = false;
+        let isDiscreetMode = false;
+        let isBackView = false;
+        let activeMacroZone = null;
+        let activeMicroPiece = null; // The piece currently being edited
+        let compiledDossier = []; // Array of objects
+        let isDossierOpen = false;
 
-        window.clearEmergencyGate = () => document.getElementById('emergency-gatekeeper').classList.add('hidden');
-        window.triggerEmergency = () => alert("SYSTEM OVERRIDE: Redirecting to Emergency Services Dispatch UI...");
-
-        window.switchTab = function(tabIndex) {
-            for (let i = 1; i <= 3; i++) {
-                document.getElementById('tab-view-' + i).classList.add('hidden');
-                document.getElementById('tab-btn-' + i).className = "border border-transparent text-slate-500 hover:text-slate-300 flex flex-col items-center justify-center py-3 rounded-xl transition-all";
-            }
-            document.getElementById('tab-view-' + tabIndex).classList.remove('hidden');
-            let activeColor = isDiscreetMode ? "bg-amber-500/10 border-amber-500 text-amber-400" : "bg-emerald-500/10 border-emerald-500 text-emerald-400";
-            document.getElementById('tab-btn-' + tabIndex).className = `${activeColor} border flex flex-col items-center justify-center py-3 rounded-xl transition-all`;
-        };
-
-        window.toggleDiscreetMode = function() {
-            isDiscreetMode = !isDiscreetMode;
-            const body = document.getElementById('global-body');
-            const txt = document.getElementById('discreet-text');
-            const discreteOrgan = document.getElementById('discreet-organ-btn');
-
-            if (isDiscreetMode) {
-                body.className = "discreet-active bg-[#090A0F] text-slate-400 font-sans antialiased smooth-transition";
-                txt.innerText = "Discreet Mode: ACTIVE";
-                txt.classList.replace('text-slate-400', 'text-amber-500');
-                discreteOrgan.classList.remove('hidden');
-                document.getElementById('brand-logo').innerText = "MR System Operations";
-            } else {
-                body.className = "standard-active bg-[#0B0F19] text-slate-200 font-sans antialiased smooth-transition";
-                txt.innerText = "Discreet Mode: OFF";
-                txt.classList.replace('text-amber-500', 'text-slate-400');
-                discreteOrgan.classList.add('hidden');
-                document.getElementById('brand-logo').innerText = "Medical Room™";
-            }
+        // 1. Pivot Mechanics (Front/Back)
+        window.pivotBody = function(view) {
+            isBackView = (view === 'Back');
+            document.getElementById('btn-front').className = isBackView ? "text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition" : "bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition";
+            document.getElementById('btn-back').className = isBackView ? "bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition" : "text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition";
             
-            // Re-apply active styling to current tab
-            const activeTab = !document.getElementById('tab-view-1').classList.contains('hidden') ? 1 : 
-                              !document.getElementById('tab-view-2').classList.contains('hidden') ? 2 : 3;
-            window.switchTab(activeTab);
-            window.updateDossierUI();
+            const svg = document.getElementById('human-svg');
+            if(isBackView) svg.classList.add('flipped');
+            else svg.classList.remove('flipped');
+            
+            // Wipe state on pivot to prevent spatial confusion
+            window.resetMacroMap();
         };
 
-        window.selectMacroZone = function(macroZoneKey) {
-            activeMacro = macroZoneKey;
-            const targetData = ANATOMICAL_DB[macroZoneKey];
-            document.getElementById('active-macro-label').innerText = `${macroZoneKey.toUpperCase()} ISOLATED`;
-            document.getElementById('macro-body-selection').classList.add('hidden');
+        // 2. Micro-Puzzle Fracturing & Ghosting
+        window.fractureZone = function(zoneName) {
+            activeMacroZone = zoneName;
             
-            const nodeContainer = document.getElementById('micro-node-container');
-            nodeContainer.innerHTML = "";
-            targetData.nodes.forEach(node => {
-                const btn = document.createElement('button');
-                btn.className = "w-full bg-slate-900 border border-slate-700 text-left px-4 py-3 rounded-xl text-xs font-bold uppercase text-slate-300 tracking-wide hover:border-emerald-500 transition";
-                btn.innerText = node;
-                btn.onclick = () => window.selectMicroNode(node);
-                nodeContainer.appendChild(btn);
+            // Ghost everything
+            document.querySelectorAll('.macro-zone').forEach(el => el.classList.add('ghosted'));
+            document.querySelectorAll('[id^="micro-"]').forEach(el => el.classList.add('hidden'));
+            
+            // Hide the clicked macro, reveal its micro puzzle
+            document.getElementById(`macro-${zoneName}`).classList.add('hidden');
+            document.getElementById(`micro-${zoneName}`).classList.remove('hidden');
+            
+            // Show Reset Button
+            document.getElementById('btn-reset').classList.remove('hidden');
+        };
+
+        window.resetMacroMap = function() {
+            // Un-ghost
+            document.querySelectorAll('.macro-zone').forEach(el => {
+                el.classList.remove('ghosted');
+                el.classList.remove('hidden');
             });
-            document.getElementById('micro-anatomy-selection').classList.remove('hidden');
-        };
-
-        window.resetToMacro = function() {
-            document.getElementById('micro-anatomy-selection').classList.add('hidden');
-            document.getElementById('macro-body-selection').classList.remove('hidden');
-            document.getElementById('friction-column-empty').classList.remove('hidden');
-            document.getElementById('symptom-bubbles-container').innerHTML = "";
-            activeMacro = null; activeMicroNode = null;
-        };
-
-        window.selectMicroNode = function(nodeKey) {
-            activeMicroNode = nodeKey;
-            document.getElementById('friction-column-empty').classList.add('hidden');
-            const bubbleContainer = document.getElementById('symptom-bubbles-container');
-            bubbleContainer.innerHTML = "";
-            ANATOMICAL_DB[activeMacro].symptoms[nodeKey].forEach(symptomText => {
-                const bubbleBtn = document.createElement('button');
-                bubbleBtn.className = "bg-[#0B0F19] border border-slate-700 hover:border-emerald-500 text-slate-300 text-left text-xs px-4 py-3 rounded-2xl max-w-full transition smooth-transition";
-                bubbleBtn.innerText = `"${symptomText}"`;
-                bubbleBtn.onclick = () => window.interceptSymptomLaterality(symptomText);
-                bubbleContainer.appendChild(bubbleBtn);
+            // Hide puzzles
+            document.querySelectorAll('[id^="micro-"]').forEach(el => el.classList.add('hidden'));
+            // Remove piece highlights
+            document.querySelectorAll('.micro-piece').forEach(el => {
+                el.classList.remove('piece-active');
+                el.style.fill = ''; // clear heatmap
             });
-        };
-
-        window.interceptSymptomLaterality = function(symptomText) {
-            selectedSymptomPending = symptomText;
-            if (ANATOMICAL_DB[activeMacro].paired) {
-                document.getElementById('laterality-overlay').classList.remove('hidden');
-                document.getElementById('laterality-overlay').classList.add('flex');
-            } else {
-                window.commitSymptomWithLaterality('Central / Systemic');
-            }
-        };
-
-        window.commitSymptomWithLaterality = function(laterality) {
-            compiledDossier.push({ id: Date.now(), zone: activeMacro, subZone: activeMicroNode, descriptor: selectedSymptomPending, alignment: laterality });
-            document.getElementById('laterality-overlay').className = "hidden absolute inset-0 bg-slate-950/95 z-30 flex-col items-center justify-center p-6 space-y-4";
-            window.updateDossierUI();
-            if(!isDrawerOpen) window.toggleDossierDrawer();
-        };
-
-        window.updateDossierUI = function() {
-            const summaryText = document.getElementById('dossier-summary-text');
-            const container = document.getElementById('dossier-items-list');
-            const indicator = document.getElementById('dossier-indicator');
             
-            let pulseColor = isDiscreetMode ? "bg-amber-500 shadow-[0_0_8px_#F59E0B]" : "bg-emerald-500 shadow-[0_0_8px_#10B981]";
+            document.getElementById('friction-column-empty').style.opacity = '1';
+            document.getElementById('friction-column-empty').style.pointerEvents = 'auto';
+            document.getElementById('heat-map-control').classList.add('hidden');
+            document.getElementById('btn-reset').classList.add('hidden');
             
-            summaryText.innerText = `${compiledDossier.length} Friction Blocks Compiled`;
-            indicator.className = compiledDossier.length > 0 ? `w-2 h-2 rounded-full ${pulseColor}` : "w-2 h-2 rounded-full bg-slate-600";
+            activeMacroZone = null;
+            activeMicroPiece = null;
+        };
 
-            if (compiledDossier.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-500 font-mono text-center py-4">No structural symptom data captured.</p>`;
+        // 3. Tactile Symmetry Toggle (The Puzzle Piece click)
+        window.toggleTactilePiece = function(pieceId, labelName) {
+            const el = document.getElementById(pieceId);
+            
+            // If already active, deselect it
+            if(el.classList.contains('piece-active')) {
+                el.classList.remove('piece-active');
+                el.style.fill = ''; // Wipe heatmap
+                
+                // Clear UI if we deselected the currently focused piece
+                if(activeMicroPiece && activeMicroPiece.id === pieceId) {
+                    document.getElementById('heat-map-control').classList.add('hidden');
+                    document.getElementById('friction-column-empty').style.opacity = '1';
+                    document.getElementById('friction-column-empty').style.pointerEvents = 'auto';
+                    activeMicroPiece = null;
+                }
                 return;
             }
 
+            // Make it active
+            el.classList.add('piece-active');
+            
+            // By default, set fill to Emerald color
+            el.style.fill = isDiscreetMode ? 'var(--accent)' : '#10B981';
+            
+            // Set as currently focused piece for right-column and heatmap
+            activeMicroPiece = { id: pieceId, label: (isBackView ? "Posterior " : "") + labelName, severity: 1 };
+            
+            // Update Heatmap UI
+            const hm = document.getElementById('heat-map-control');
+            hm.classList.remove('hidden');
+            document.getElementById('severity-slider').value = 1;
+            document.getElementById('severity-val').innerText = '1';
+            document.getElementById('severity-val').className = "text-[10px] font-bold text-emerald-400";
+
+            // Populate Symptoms
+            populateSymptoms(pieceId);
+        };
+
+        // 4. Immediate Feedback Loop
+        function populateSymptoms(pieceId) {
+            document.getElementById('friction-column-empty').style.opacity = '0';
+            document.getElementById('friction-column-empty').style.pointerEvents = 'none';
+            document.getElementById('active-target-label').innerText = `TARGET: ${activeMicroPiece.label}`;
+            
+            const container = document.getElementById('symptom-bubbles-container');
+            container.innerHTML = "";
+            
+            let symptoms = SYMPTOM_DB[pieceId] || SYMPTOM_DB['default'];
+            
+            symptoms.forEach(sym => {
+                const wrapper = document.createElement('div');
+                wrapper.className = "w-full";
+                
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-[#0B0F19] border border-slate-700 hover:border-emerald-500 text-slate-300 text-xs px-5 py-4 rounded-2xl transition smooth-transition";
+                btn.innerText = `"${sym}"`;
+                btn.onclick = () => showDurationTrack(wrapper, sym, btn);
+                
+                wrapper.appendChild(btn);
+                container.appendChild(wrapper);
+            });
+        }
+
+        // 5. Visual Heat Map (Severity)
+        window.updateHeatMap = function(val) {
+            if(!activeMicroPiece) return;
+            activeMicroPiece.severity = val;
+            
+            const el = document.getElementById(activeMicroPiece.id);
+            const valLabel = document.getElementById('severity-val');
+            valLabel.innerText = val;
+            
+            // Calculate Color Shift (1=Emerald, 5=Amber, 10=Red)
+            let color = '';
+            let textClass = '';
+            if(val <= 4) { color = '#10B981'; textClass = 'text-emerald-400'; }
+            else if(val <= 7) { color = '#F59E0B'; textClass = 'text-amber-400'; }
+            else { color = '#EF4444'; textClass = 'text-red-500'; }
+            
+            el.style.fill = color;
+            valLabel.className = `text-[10px] font-bold ${textClass}`;
+        };
+
+        // 6. Segmented Time Track (Duration)
+        function showDurationTrack(wrapper, symptomText, btnElement) {
+            // Prevent multiple tracks
+            if(wrapper.querySelector('.duration-track')) return;
+            
+            btnElement.classList.add('border-emerald-500', 'bg-emerald-500/5');
+            
+            const track = document.createElement('div');
+            track.className = "duration-track mt-2 ml-4 flex space-x-2 animate-fade-in";
+            track.innerHTML = `
+                <button onclick="commitToDossier('${symptomText}', '24 Hrs')" class="bg-emerald-500 text-slate-950 text-[9px] font-bold px-3 py-1.5 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.5)] transition">24 Hrs</button>
+                <button onclick="commitToDossier('${symptomText}', '3-5 Days')" class="bg-slate-900 border border-slate-700 text-slate-400 hover:text-white text-[9px] font-bold px-3 py-1.5 rounded-full transition">3-5 Days</button>
+                <button onclick="commitToDossier('${symptomText}', 'Weeks')" class="bg-slate-900 border border-slate-700 text-slate-400 hover:text-white text-[9px] font-bold px-3 py-1.5 rounded-full transition">Weeks</button>
+                <button onclick="commitToDossier('${symptomText}', 'Months+')" class="bg-slate-900 border border-slate-700 text-slate-400 hover:text-white text-[9px] font-bold px-3 py-1.5 rounded-full transition">Months+</button>
+            `;
+            wrapper.appendChild(track);
+        }
+
+        // Commit to Dossier
+        window.commitToDossier = function(symptom, duration) {
+            const entry = {
+                id: Date.now(),
+                label: isDiscreetMode ? "Secured Segment" : activeMicroPiece.label,
+                symptom: symptom,
+                severity: activeMicroPiece.severity,
+                duration: duration
+            };
+            compiledDossier.push(entry);
+            renderDossier();
+            if(!isDossierOpen) toggleDossier();
+        };
+
+        function renderDossier() {
+            const container = document.getElementById('dossier-list');
+            const ind = document.getElementById('dossier-indicator');
+            document.getElementById('dossier-text').innerText = `${compiledDossier.length} Friction Blocks Compiled`;
+            
+            ind.className = compiledDossier.length > 0 ? "w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10B981]" : "w-2 h-2 rounded-full bg-slate-600";
+            
             container.innerHTML = "";
             compiledDossier.forEach(item => {
-                const row = document.createElement('div');
-                row.className = "flex items-center justify-between bg-slate-900 border border-slate-800 p-3 rounded-xl text-xs font-mono";
-                let displayZone = isDiscreetMode ? "Secured Mapping" : `${item.zone} (➔ ${item.subZone})`;
-                let hlColor = isDiscreetMode ? "text-amber-500" : "text-emerald-500";
-                row.innerHTML = `
-                    <div class="space-y-1"><span class="text-[9px] font-bold ${hlColor} uppercase tracking-widest">[${item.alignment.toUpperCase()}] ${displayZone}</span><p class="text-slate-300">${item.descriptor}</p></div>
-                    <button onclick="window.removeDossierItem(${item.id})" class="text-red-500 hover:text-red-400 font-bold px-2">✕</button>
+                const div = document.createElement('div');
+                div.className = "bg-slate-900 border border-slate-800 p-3 rounded-xl flex justify-between items-center";
+                
+                let sevColor = item.severity <= 4 ? "text-emerald-500" : (item.severity <= 7 ? "text-amber-500" : "text-red-500");
+                
+                div.innerHTML = `
+                    <div>
+                        <div class="flex items-center space-x-2 mb-1">
+                            <span class="text-[9px] font-black uppercase tracking-widest ${sevColor}">[ SEV: ${item.severity} ] ${item.label}</span>
+                            <span class="text-[9px] text-slate-500 bg-slate-800 px-2 rounded-full">${item.duration}</span>
+                        </div>
+                        <p class="text-xs text-slate-300 font-mono">"${item.symptom}"</p>
+                    </div>
+                    <button onclick="compiledDossier = compiledDossier.filter(i => i.id !== ${item.id}); renderDossier();" class="text-slate-600 hover:text-red-500 font-bold px-2">✕</button>
                 `;
-                container.appendChild(row);
+                container.appendChild(div);
             });
+        }
+
+        window.toggleDossier = function() {
+            isDossierOpen = !isDossierOpen;
+            const drw = document.getElementById('dossier-drawer');
+            const chev = document.getElementById('dossier-chevron');
+            if(isDossierOpen) {
+                drw.classList.remove('translate-y-[calc(100%-60px)]');
+                drw.classList.add('translate-y-0');
+                chev.style.transform = 'rotate(180deg)';
+            } else {
+                drw.classList.add('translate-y-[calc(100%-60px)]');
+                drw.classList.remove('translate-y-0');
+                chev.style.transform = 'rotate(0deg)';
+            }
         };
 
-        window.removeDossierItem = (id) => { compiledDossier = compiledDossier.filter(i => i.id !== id); window.updateDossierUI(); };
-        window.clearDossier = () => { compiledDossier = []; window.updateDossierUI(); if(isDrawerOpen) window.toggleDossierDrawer(); };
-        window.goToCheckout = () => alert(compiledDossier.length === 0 ? "Cannot compile: Empty Data Payload." : "Encrypting Payload Array... Data routed to Physician Vault.");
-
-        window.toggleDossierDrawer = function() {
-            isDrawerOpen = !isDrawerOpen;
-            const drawer = document.getElementById('dossier-drawer'), chev = document.getElementById('dossier-chevron');
-            drawer.className = isDrawerOpen ? "fixed bottom-0 left-0 right-0 bg-[#111422]/95 border-t border-slate-800 backdrop-blur-lg z-40 translate-y-0 smooth-transition rounded-t-[2rem] shadow-2xl" : "fixed bottom-0 left-0 right-0 bg-[#111422]/95 border-t border-slate-800 backdrop-blur-lg z-40 translate-y-[calc(100%-60px)] smooth-transition rounded-t-[2rem] shadow-2xl";
-            chev.style.transform = isDrawerOpen ? "rotate(180deg)" : "rotate(0deg)";
+        // Discreet Mode
+        window.toggleDiscreetMode = function() {
+            isDiscreetMode = !isDiscreetMode;
+            document.body.className = isDiscreetMode ? "discreet-active bg-[#090A0F] text-slate-400 font-sans antialiased h-screen flex flex-col overflow-hidden" : "standard-active bg-[#0B0F19] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden";
+            document.getElementById('discreet-text').innerText = isDiscreetMode ? "Discreet Mode: ACTIVE" : "Discreet Mode: OFF";
+            document.getElementById('discreet-text').className = isDiscreetMode ? "text-[10px] font-black uppercase tracking-widest text-amber-500" : "text-[10px] font-black uppercase tracking-widest text-slate-400";
+            document.getElementById('brand-logo').innerText = isDiscreetMode ? "MR System Operations" : "Medical Room™";
+            
+            const pulse = document.getElementById('header-pulse');
+            pulse.className = isDiscreetMode ? "w-2.5 h-2.5 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.8)] animate-pulse" : "w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.8)] animate-pulse";
+            
+            // Adjust active tab color
+            document.getElementById('tab-clinic').className = isDiscreetMode ? "bg-amber-500/10 border border-amber-500 text-amber-400 flex flex-col items-center justify-center py-2 rounded-xl" : "bg-emerald-500/10 border border-emerald-500 text-emerald-400 flex flex-col items-center justify-center py-2 rounded-xl";
+            
+            renderDossier(); // Update labels in dossier
         };
-        
-        // Initialize Default Tab
-        window.switchTab(3);
     </script>
 </body>
 </html>
