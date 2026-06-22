@@ -3,232 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Room™ - The Active Clinic</title>
+    <title>Medical Room™ - Holographic Command Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Global Theming & Discreet Mode Variables */
+        :root {
+            --bg-main: #0B0F19;
+            --bg-card: #111422;
+            --accent: #10B981; /* Emerald */
+            --accent-glow: rgba(16, 185, 129, 0.4);
+            --svg-base: rgba(255, 255, 255, 0.03);
+            --svg-stroke: rgba(255, 255, 255, 0.15);
+            --ghost-opacity: 0.05;
+        }
+        
         .discreet-active {
             --bg-main: #090A0F;
             --bg-card: #12141C;
             --accent: #F59E0B; /* Amber */
-            --svg-stroke: #451A03;
-            --ghost-opacity: 0.05;
+            --accent-glow: rgba(245, 158, 11, 0.4);
+            --svg-base: rgba(255, 255, 255, 0.02);
+            --svg-stroke: rgba(245, 158, 11, 0.2);
         }
-        .standard-active {
-            --bg-main: #0B0F19;
-            --bg-card: #111422;
-            --accent: #10B981; /* Emerald */
-            --svg-stroke: #1e293b;
-            --ghost-opacity: 0.15;
-        }
-        
-        body { transition: background-color 0.4s ease, color 0.4s ease; }
-        .smooth-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* SVG Micro-Puzzle Mechanics */
-        .body-map-container { perspective: 1000px; }
-        .svg-body { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center; }
+        body { transition: background-color 0.4s ease, color 0.4s ease; overscroll-behavior-y: none; }
+        .smooth-transition { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Holographic Avatar Styling */
+        .body-map-container { perspective: 1000px; overflow: visible; }
+        .svg-body { 
+            transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy spring zoom */
+            transform-origin: center; 
+        }
         .flipped { transform: scaleX(-1); }
         
         .macro-zone, .micro-piece { 
             cursor: pointer; 
-            fill: var(--bg-card); 
+            fill: var(--svg-base); 
             stroke: var(--svg-stroke); 
             stroke-width: 2; 
             stroke-linejoin: round;
             transition: all 0.3s ease;
         }
         
-        .macro-zone:hover { fill: rgba(255,255,255,0.05); stroke: var(--accent); }
+        .macro-zone:hover { fill: rgba(255,255,255,0.08); stroke: var(--accent); }
+        .ghosted { opacity: var(--ghost-opacity); pointer-events: none; }
         
-        /* Ghosting Context */
-        .ghosted { opacity: var(--ghost-opacity); pointer-events: none; filter: grayscale(100%); }
-        
-        /* Selected Micro Piece defaults to Emerald, but overridden by inline Heat Map styles */
-        .micro-piece:hover { stroke: var(--accent); filter: drop-shadow(0 0 8px var(--accent)); }
-        .piece-active { stroke: var(--accent); stroke-width: 3; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); }
+        .micro-piece:hover { stroke: var(--accent); fill: var(--accent-glow); }
+        .piece-active { 
+            stroke: var(--accent); 
+            stroke-width: 3; 
+            fill: var(--accent);
+            filter: drop-shadow(0 0 15px var(--accent-glow)); 
+        }
 
-        /* Custom Heat Map Vertical Slider */
+        /* 3D Chunky Vertical Heat Map Slider */
         input[type=range][orient=vertical] {
             appearance: slider-vertical;
-            width: 8px;
-            height: 150px;
+            width: 14px;
+            height: 180px;
             cursor: pointer;
             background: linear-gradient(to top, #10B981, #F59E0B, #EF4444);
-            border-radius: 10px;
+            border-radius: 12px;
             outline: none;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
         }
-        
-        /* Hide scrollbar for clean UI */
+        input[type=range][orient=vertical]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid #111422;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            cursor: grab;
+        }
+        input[type=range][orient=vertical]::-webkit-slider-thumb:active { cursor: grabbing; }
+
+        /* 3D Time Track Buttons */
+        .time-btn {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border-bottom: 2px solid rgba(0,0,0,0.5);
+        }
+        .time-btn:active { transform: translateY(2px); box-shadow: 0 1px 2px rgba(0,0,0,0.3); border-bottom: 0px; }
+
         .scrollbar-none::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body id="global-body" class="standard-active bg-[#0B0F19] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden">
+<body id="global-body" class="bg-[var(--bg-main)] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden">
 
-    <!-- Global Header -->
-    <header class="border-b border-slate-800/80 bg-inherit px-6 py-4 z-50 flex-shrink-0">
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <span id="header-pulse" class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.8)] animate-pulse"></span>
-                <span id="brand-logo" class="font-black tracking-widest text-xs uppercase text-white">Medical Room™</span>
+    <div id="master-header" class="smooth-transition flex-shrink-0 z-50 bg-inherit relative shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+        <header class="border-b border-slate-800/80 px-6 py-4">
+            <div class="max-w-6xl mx-auto flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <span id="header-pulse" class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_var(--accent-glow)] animate-pulse"></span>
+                    <span id="brand-logo" class="font-black tracking-widest text-xs uppercase text-white">Medical Room™</span>
+                </div>
+                <button onclick="window.toggleDiscreetMode()" class="flex items-center space-x-2 bg-slate-900 border border-slate-800 px-4 py-2 rounded-full hover:border-slate-700 transition">
+                    <span class="text-xs">👁️</span>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400" id="discreet-text">Discreet: OFF</span>
+                </button>
             </div>
-            <button onclick="window.toggleDiscreetMode()" class="flex items-center space-x-2 bg-slate-900 border border-slate-800 px-4 py-2 rounded-full hover:border-slate-700 transition">
-                <span class="text-xs">👁️</span>
-                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400" id="discreet-text">Discreet Mode: OFF</span>
-            </button>
-        </div>
-    </header>
+        </header>
 
-    <!-- Main Command Center -->
-    <main class="flex-grow max-w-6xl w-full mx-auto p-4 flex flex-col h-full overflow-hidden">
-        
-        <!-- Tab Navigation -->
-        <nav class="grid grid-cols-3 gap-2 bg-slate-900/60 border border-slate-800/60 p-1.5 rounded-2xl mb-4 flex-shrink-0">
-            <button class="border border-transparent text-slate-500 flex flex-col items-center justify-center py-2 rounded-xl">
-                <span class="text-lg mb-1">🧬</span><span class="text-[9px] font-black uppercase tracking-widest">Bio-Labs</span>
-            </button>
-            <button class="border border-transparent text-slate-500 flex flex-col items-center justify-center py-2 rounded-xl">
-                <span class="text-lg mb-1">🛋️</span><span class="text-[9px] font-black uppercase tracking-widest">Mind Couch</span>
-            </button>
-            <button class="bg-emerald-500/10 border border-emerald-500 text-emerald-400 flex flex-col items-center justify-center py-2 rounded-xl" id="tab-clinic">
-                <span class="text-lg mb-1">🩺</span><span class="text-[9px] font-black uppercase tracking-widest">Active Clinic</span>
-            </button>
+        <nav class="max-w-4xl mx-auto w-full px-4 py-3">
+            <div class="grid grid-cols-3 gap-2 bg-[#111422] border border-slate-800/60 p-1.5 rounded-2xl">
+                <button onclick="window.switchTab(1)" id="tab-btn-1" class="border border-transparent text-slate-500 hover:text-slate-300 flex flex-col items-center justify-center py-2 rounded-xl transition">
+                    <span class="text-lg mb-1">🧬</span><span class="text-[9px] font-black uppercase tracking-widest">Bio-Labs</span>
+                </button>
+                <button onclick="window.switchTab(2)" id="tab-btn-2" class="border border-transparent text-slate-500 hover:text-slate-300 flex flex-col items-center justify-center py-2 rounded-xl transition">
+                    <span class="text-lg mb-1">🛋️</span><span class="text-[9px] font-black uppercase tracking-widest">Mind Couch</span>
+                </button>
+                <button onclick="window.switchTab(3)" id="tab-btn-3" class="bg-[var(--accent-glow)] border border-[var(--accent)] text-[var(--accent)] flex flex-col items-center justify-center py-2 rounded-xl transition">
+                    <span class="text-lg mb-1">🩺</span><span class="text-[9px] font-black uppercase tracking-widest">Active Clinic</span>
+                </button>
+            </div>
         </nav>
+    </div>
 
-        <!-- THE ACTIVE CLINIC ENGINE (Tab 3) -->
-        <section class="flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-0 relative">
+    <main class="flex-grow w-full mx-auto flex flex-col h-full overflow-hidden relative">
+        
+        <section id="tab-1" class="hidden h-full flex items-center justify-center">
+            <div class="text-center space-y-3"><h2 class="text-2xl font-black uppercase">Bio-Logic Storefront</h2><p class="text-slate-500 text-sm">AccessPoint dx Lab Integrations</p></div>
+        </section>
+
+        <section id="tab-2" class="hidden h-full flex items-center justify-center">
+            <div class="text-center space-y-3"><h2 class="text-2xl font-black uppercase">Mind Couch</h2><p class="text-slate-500 text-sm">Encrypted Psychiatric Sync</p></div>
+        </section>
+
+        <section id="tab-3" class="h-full flex flex-col p-4">
             
-            <!-- LEFT COLUMN: The Visual Body Map -->
-            <div class="lg:col-span-5 bg-[#111422] border border-slate-800 rounded-3xl p-6 flex flex-col relative overflow-hidden">
-                
-                <!-- Top Controls: Front/Back Pivot & Swipe Reset -->
-                <div class="flex items-center justify-between z-10">
-                    <div class="bg-slate-900 border border-slate-700 rounded-lg flex p-1">
-                        <button onclick="window.pivotBody('Front')" id="btn-front" class="bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition">Front</button>
-                        <button onclick="window.pivotBody('Back')" id="btn-back" class="text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition">Back</button>
-                    </div>
-                    
-                    <button onclick="window.resetMacroMap()" id="btn-reset" class="hidden text-[9px] font-bold text-slate-500 uppercase tracking-widest hover:text-white transition flex items-center">
-                        <span class="mr-1 text-lg">«</span> Swipe / Reset
-                    </button>
-                </div>
-
-                <!-- 2D Tactile Body Map -->
-                <div class="flex-grow flex items-center justify-center body-map-container mt-4 relative">
-                    
-                    <!-- Severity Heat Map Slider (Appears when micro piece selected) -->
-                    <div id="heat-map-control" class="hidden absolute left-0 top-1/2 -translate-y-1/2 flex-col items-center space-y-2 z-20">
-                        <span class="text-[9px] font-black uppercase tracking-widest text-slate-400">Severity</span>
-                        <input type="range" orient="vertical" id="severity-slider" min="1" max="10" value="1" oninput="window.updateHeatMap(this.value)">
-                        <span id="severity-val" class="text-[10px] font-bold text-emerald-400">1</span>
-                    </div>
-
-                    <!-- SVG Human Silhouette -->
-                    <svg viewBox="0 0 200 450" class="w-full max-w-[220px] max-h-[400px] drop-shadow-2xl svg-body" id="human-svg">
-                        
-                        <!-- HEAD MACRO -->
-                        <g id="macro-head" class="macro-zone" onclick="window.fractureZone('head')">
-                            <ellipse cx="100" cy="50" rx="28" ry="36" />
-                        </g>
-                        <!-- HEAD MICRO PUZZLE (Hidden initially) -->
-                        <g id="micro-head" class="hidden">
-                            <path id="head-forehead" class="micro-piece" d="M 72 50 A 28 36 0 0 1 128 50 L 128 55 L 72 55 Z" onclick="window.toggleTactilePiece('head-forehead', 'Forehead')" />
-                            <path id="head-eyes" class="micro-piece" d="M 72 55 L 128 55 L 128 65 L 72 65 Z" onclick="window.toggleTactilePiece('head-eyes', 'Eyes')" />
-                            <path id="head-jaw" class="micro-piece" d="M 72 65 L 128 65 A 28 36 0 0 1 72 65 Z" onclick="window.toggleTactilePiece('head-jaw', 'Jaw')" />
-                        </g>
-
-                        <!-- TORSO MACRO -->
-                        <g id="macro-torso" class="macro-zone" onclick="window.fractureZone('torso')">
-                            <path d="M 70 100 Q 100 85 130 100 L 125 210 Q 100 220 75 210 Z" />
-                        </g>
-                        <!-- TORSO MICRO PUZZLE -->
-                        <g id="micro-torso" class="hidden">
-                            <path id="torso-chest" class="micro-piece" d="M 70 100 Q 100 85 130 100 L 128 140 Q 100 150 72 140 Z" onclick="window.toggleTactilePiece('torso-chest', 'Chest/Heart')" />
-                            <path id="torso-stomach" class="micro-piece" d="M 72 140 Q 100 150 128 140 L 125 210 Q 100 220 75 210 Z" onclick="window.toggleTactilePiece('torso-stomach', 'Abdomen')" />
-                        </g>
-
-                        <!-- ARMS MACRO (Left & Right combined for Macro click) -->
-                        <g id="macro-arms" class="macro-zone" onclick="window.fractureZone('arms')">
-                            <!-- Left Arm -->
-                            <path d="M 70 100 L 40 180 L 35 240 L 45 240 L 55 180 L 73 140 Z" />
-                            <!-- Right Arm -->
-                            <path d="M 130 100 L 160 180 L 165 240 L 155 240 L 145 180 L 127 140 Z" />
-                        </g>
-                        <!-- ARMS MICRO PUZZLE (Fractured for Left/Right tactile symmetry) -->
-                        <g id="micro-arms" class="hidden">
-                            <!-- Left -->
-                            <path id="arm-l-shoulder" class="micro-piece" d="M 70 100 L 55 140 L 73 140 Z" onclick="window.toggleTactilePiece('arm-l-shoulder', 'Left Shoulder')" />
-                            <path id="arm-l-forearm" class="micro-piece" d="M 55 140 L 40 210 L 50 210 L 73 140 Z" onclick="window.toggleTactilePiece('arm-l-forearm', 'Left Forearm')" />
-                            <path id="arm-l-hand" class="micro-piece" d="M 40 210 L 35 240 L 45 240 L 50 210 Z" onclick="window.toggleTactilePiece('arm-l-hand', 'Left Hand')" />
-                            <!-- Right -->
-                            <path id="arm-r-shoulder" class="micro-piece" d="M 130 100 L 145 140 L 127 140 Z" onclick="window.toggleTactilePiece('arm-r-shoulder', 'Right Shoulder')" />
-                            <path id="arm-r-forearm" class="micro-piece" d="M 145 140 L 160 210 L 150 210 L 127 140 Z" onclick="window.toggleTactilePiece('arm-r-forearm', 'Right Forearm')" />
-                            <path id="arm-r-hand" class="micro-piece" d="M 160 210 L 165 240 L 155 240 L 150 210 Z" onclick="window.toggleTactilePiece('arm-r-hand', 'Right Hand')" />
-                        </g>
-
-                        <!-- LEGS MACRO -->
-                        <g id="macro-legs" class="macro-zone" onclick="window.fractureZone('legs')">
-                            <path d="M 75 210 L 60 400 L 85 400 L 98 250 L 102 250 L 115 400 L 140 400 L 125 210 Q 100 230 75 210 Z" />
-                        </g>
-                        <!-- LEGS MICRO PUZZLE -->
-                        <g id="micro-legs" class="hidden">
-                            <!-- Left -->
-                            <path id="leg-l-thigh" class="micro-piece" d="M 75 210 L 68 300 L 92 300 L 98 250 Z" onclick="window.toggleTactilePiece('leg-l-thigh', 'Left Thigh')" />
-                            <path id="leg-l-calf" class="micro-piece" d="M 68 300 L 60 400 L 85 400 L 92 300 Z" onclick="window.toggleTactilePiece('leg-l-calf', 'Left Knee/Calf')" />
-                            <!-- Right -->
-                            <path id="leg-r-thigh" class="micro-piece" d="M 125 210 L 132 300 L 108 300 L 102 250 Z" onclick="window.toggleTactilePiece('leg-r-thigh', 'Right Thigh')" />
-                            <path id="leg-r-calf" class="micro-piece" d="M 132 300 L 140 400 L 115 400 L 108 300 Z" onclick="window.toggleTactilePiece('leg-r-calf', 'Right Knee/Calf')" />
-                        </g>
-
-                    </svg>
+            <div id="organ-track" class="smooth-transition flex-shrink-0 mb-4 max-w-6xl mx-auto w-full">
+                <span class="text-[9px] font-black tracking-widest uppercase text-slate-500 block mb-2 px-2">Fast-Track Systems</span>
+                <div class="flex space-x-2 overflow-x-auto pb-2 scrollbar-none px-2">
+                    <button class="bg-[#111422] border border-slate-700 text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg whitespace-nowrap hover:border-[var(--accent)] transition shadow-md">Cardio / Heart</button>
+                    <button class="bg-[#111422] border border-slate-700 text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg whitespace-nowrap hover:border-[var(--accent)] transition shadow-md">Hepatic / Liver</button>
+                    <button class="bg-[#111422] border border-slate-700 text-[10px] font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg whitespace-nowrap hover:border-[var(--accent)] transition shadow-md">Renal / Kidneys</button>
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: Immediate Feedback Symptoms & Time Track -->
-            <div class="lg:col-span-7 bg-[#111422] border border-slate-800 rounded-3xl p-6 flex flex-col relative overflow-hidden h-full">
+            <div class="flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-0 relative max-w-6xl mx-auto w-full">
                 
-                <!-- Empty State -->
-                <div id="friction-column-empty" class="absolute inset-0 bg-slate-950/20 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 z-10 transition-opacity duration-300">
-                    <div class="border border-dashed border-slate-700/50 p-6 rounded-2xl text-center">
-                        <span class="text-3xl block mb-2">🧩</span>
-                        <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Select an anatomical puzzle piece<br>to map functional symptoms</p>
+                <div id="touch-area" class="lg:col-span-5 bg-[#111422] border border-slate-800 rounded-3xl p-6 flex flex-col relative overflow-hidden shadow-2xl">
+                    
+                    <div class="flex items-center justify-between z-10">
+                        <div class="bg-slate-900 border border-slate-700 rounded-lg flex p-1 shadow-inner">
+                            <button onclick="window.pivotBody('Front')" id="btn-front" class="bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition shadow-sm">Front</button>
+                            <button onclick="window.pivotBody('Back')" id="btn-back" class="text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition">Back</button>
+                        </div>
+                        
+                        <button onclick="window.resetMacroMap()" id="btn-reset" class="hidden bg-slate-800/80 backdrop-blur border border-slate-700 text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:text-white transition flex items-center px-3 py-2 rounded-lg shadow-lg">
+                            <span class="mr-2 text-lg leading-none">«</span> Swipe Right
+                        </button>
+                    </div>
+
+                    <div class="flex-grow flex items-center justify-center body-map-container mt-2 relative">
+                        
+                        <div id="heat-map-control" class="hidden absolute left-2 top-1/2 -translate-y-1/2 flex-col items-center space-y-3 z-20 bg-[#0B0F19]/80 backdrop-blur-md p-3 rounded-2xl border border-slate-800 shadow-2xl">
+                            <span class="text-[8px] font-black uppercase tracking-widest text-slate-400">Heat</span>
+                            <input type="range" orient="vertical" id="severity-slider" min="1" max="10" value="1" oninput="window.updateHeatMap(this.value)">
+                            <span id="severity-val" class="text-[12px] font-black text-emerald-400 drop-shadow-md">1</span>
+                        </div>
+
+                        <svg viewBox="0 0 200 450" class="w-full max-w-[240px] max-h-[420px] svg-body" id="human-svg">
+                            
+                            <g id="macro-head" class="macro-zone" onclick="window.fractureZone('head', 2.2, 15)">
+                                <ellipse cx="100" cy="50" rx="32" ry="40" />
+                            </g>
+                            <g id="micro-head" class="hidden">
+                                <path id="head-forehead" class="micro-piece" d="M 68 50 A 32 40 0 0 1 132 50 L 132 55 L 68 55 Z" onclick="window.toggleTactilePiece('head-forehead', 'Forehead')" />
+                                <path id="head-eyes" class="micro-piece" d="M 68 55 L 132 55 L 132 68 L 68 68 Z" onclick="window.toggleTactilePiece('head-eyes', 'Eyes')" />
+                                <path id="head-jaw" class="micro-piece" d="M 68 68 L 132 68 A 32 40 0 0 1 68 68 Z" onclick="window.toggleTactilePiece('head-jaw', 'Jaw')" />
+                            </g>
+
+                            <g id="macro-torso" class="macro-zone" onclick="window.fractureZone('torso', 1.8, -10)">
+                                <path d="M 65 105 Q 100 85 135 105 L 130 220 Q 100 235 70 220 Z" />
+                            </g>
+                            <g id="micro-torso" class="hidden">
+                                <path id="torso-chest" class="micro-piece" d="M 65 105 Q 100 85 135 105 L 132 150 Q 100 160 68 150 Z" onclick="window.toggleTactilePiece('torso-chest', 'Chest/Pulmonary')" />
+                                <path id="torso-stomach" class="micro-piece" d="M 68 150 Q 100 160 132 150 L 130 220 Q 100 235 70 220 Z" onclick="window.toggleTactilePiece('torso-stomach', 'Abdomen')" />
+                            </g>
+
+                            <g id="macro-arms" class="macro-zone" onclick="window.fractureZone('arms', 1.5, -5)">
+                                <path d="M 65 105 L 35 190 L 25 260 L 40 260 L 50 190 L 72 145 Z" />
+                                <path d="M 135 105 L 165 190 L 175 260 L 160 260 L 150 190 L 128 145 Z" />
+                            </g>
+                            <g id="micro-arms" class="hidden">
+                                <path id="arm-l-shoulder" class="micro-piece" d="M 65 105 L 50 145 L 72 145 Z" onclick="window.toggleTactilePiece('arm-l-shoulder', 'Left Shoulder')" />
+                                <path id="arm-l-forearm" class="micro-piece" d="M 50 145 L 35 220 L 45 220 L 72 145 Z" onclick="window.toggleTactilePiece('arm-l-forearm', 'Left Forearm')" />
+                                <path id="arm-l-hand" class="micro-piece" d="M 35 220 L 25 260 L 40 260 L 45 220 Z" onclick="window.toggleTactilePiece('arm-l-hand', 'Left Hand')" />
+                                
+                                <path id="arm-r-shoulder" class="micro-piece" d="M 135 105 L 150 145 L 128 145 Z" onclick="window.toggleTactilePiece('arm-r-shoulder', 'Right Shoulder')" />
+                                <path id="arm-r-forearm" class="micro-piece" d="M 150 145 L 165 220 L 155 220 L 128 145 Z" onclick="window.toggleTactilePiece('arm-r-forearm', 'Right Forearm')" />
+                                <path id="arm-r-hand" class="micro-piece" d="M 165 220 L 175 260 L 160 260 L 155 220 Z" onclick="window.toggleTactilePiece('arm-r-hand', 'Right Hand')" />
+                            </g>
+
+                            <g id="macro-legs" class="macro-zone" onclick="window.fractureZone('legs', 1.4, -25)">
+                                <path d="M 70 220 L 55 420 L 85 420 L 98 260 L 102 260 L 115 420 L 145 420 L 130 220 Q 100 240 70 220 Z" />
+                            </g>
+                            <g id="micro-legs" class="hidden">
+                                <path id="leg-l-thigh" class="micro-piece" d="M 70 220 L 63 320 L 90 320 L 98 260 Z" onclick="window.toggleTactilePiece('leg-l-thigh', 'Left Thigh')" />
+                                <path id="leg-l-calf" class="micro-piece" d="M 63 320 L 55 420 L 85 420 L 90 320 Z" onclick="window.toggleTactilePiece('leg-l-calf', 'Left Calf/Foot')" />
+                                
+                                <path id="leg-r-thigh" class="micro-piece" d="M 130 220 L 137 320 L 110 320 L 102 260 Z" onclick="window.toggleTactilePiece('leg-r-thigh', 'Right Thigh')" />
+                                <path id="leg-r-calf" class="micro-piece" d="M 137 320 L 145 420 L 115 420 L 110 320 Z" onclick="window.toggleTactilePiece('leg-r-calf', 'Right Calf/Foot')" />
+                            </g>
+                        </svg>
                     </div>
                 </div>
 
-                <!-- Populated State -->
-                <div class="z-20 flex flex-col h-full">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4 flex-shrink-0">
-                        <span class="text-[10px] font-black tracking-widest text-slate-400 uppercase">Functional Dictionary</span>
-                        <span id="active-target-label" class="text-[10px] font-black tracking-widest text-emerald-400 uppercase">No Target Locked</span>
-                    </div>
+                <div class="lg:col-span-7 bg-[#111422] border border-slate-800 rounded-3xl p-6 flex flex-col relative overflow-hidden h-full shadow-2xl">
                     
-                    <div id="symptom-bubbles-container" class="flex flex-wrap content-start gap-3 overflow-y-auto pb-20 scrollbar-none flex-grow">
-                        <!-- Populated Dynamically -->
+                    <div id="friction-column-empty" class="absolute inset-0 bg-[#0B0F19]/60 backdrop-blur-[4px] flex flex-col items-center justify-center p-6 z-10 transition-opacity duration-300">
+                        <div class="border border-slate-700 bg-slate-900/50 shadow-2xl p-8 rounded-3xl text-center">
+                            <span class="text-4xl block mb-4 drop-shadow-lg">🧩</span>
+                            <p class="text-[11px] text-slate-300 font-black uppercase tracking-widest leading-relaxed">Select a holographic<br>anatomical sector to begin</p>
+                        </div>
+                    </div>
+
+                    <div class="z-20 flex flex-col h-full">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4 flex-shrink-0">
+                            <span class="text-[10px] font-black tracking-widest text-slate-400 uppercase">Functional Translation</span>
+                            <span id="active-target-label" class="text-[10px] font-black tracking-widest text-[var(--accent)] uppercase drop-shadow-md">No Target Locked</span>
+                        </div>
+                        
+                        <div id="symptom-bubbles-container" class="flex flex-wrap content-start gap-4 overflow-y-auto pb-24 scrollbar-none flex-grow">
+                            </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- THE DOSSIER DRAWER (Sticky Bottom) -->
-        <div id="dossier-drawer" class="absolute bottom-0 left-0 right-0 bg-[#111422]/95 border-t border-slate-800 backdrop-blur-xl z-40 translate-y-[calc(100%-60px)] transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <div id="dossier-drawer" class="absolute bottom-0 left-0 right-0 bg-[#111422]/95 border-t border-slate-800 backdrop-blur-2xl z-50 translate-y-[calc(100%-60px)] transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) rounded-t-[2rem] shadow-[0_-20px_50px_rgba(0,0,0,0.6)]">
             <div onclick="window.toggleDossier()" class="h-[60px] flex items-center justify-between px-8 cursor-pointer select-none">
                 <div class="flex items-center space-x-3">
                     <span class="w-2 h-2 rounded-full bg-slate-600" id="dossier-indicator"></span>
-                    <span class="text-xs font-black uppercase tracking-widest text-slate-300" id="dossier-text">0 Friction Blocks Compiled</span>
+                    <span class="text-[11px] font-black uppercase tracking-widest text-white" id="dossier-text">0 Friction Blocks Compiled</span>
                 </div>
                 <span class="text-slate-400 font-bold transition-transform duration-300" id="dossier-chevron">ᐱ</span>
             </div>
-            <div class="p-6 max-h-[300px] overflow-y-auto">
-                <div id="dossier-list" class="space-y-2 mb-4"></div>
-                <button onclick="alert('Dossier Encrypted. Routing to vendor match engine...')" class="w-full bg-white text-slate-950 font-black text-xs uppercase tracking-widest px-6 py-4 rounded-xl shadow-xl hover:bg-slate-200 transition">Compile & Route Dossier ➔</button>
+            <div class="p-6 max-h-[350px] overflow-y-auto">
+                <div id="dossier-list" class="space-y-3 mb-6"></div>
+                <button onclick="alert('Dossier Compiled. Initiating AccessPoint dx API Handoff...')" class="w-full bg-white text-slate-950 font-black text-[11px] uppercase tracking-widest px-6 py-4 rounded-xl shadow-xl hover:bg-slate-200 transition">Initialize Fulfillment Route ➔</button>
             </div>
         </div>
-
     </main>
 
-    <!-- CORE LOGIC ENGINE -->
     <script>
-        // Database linking puzzle pieces to plain-English symptoms
         const SYMPTOM_DB = {
             'head-forehead': ['Sharp crushing temple compression', 'Surface sensitivity to lighting'],
             'head-eyes': ['Blurry tracking visions', 'Deep retro-orbital point pressures'],
@@ -241,110 +262,107 @@
             'arm-r-hand': ['Vascular peripheral numbness', 'Radiating pins & needles', 'Grip strength failure'],
             'leg-l-calf': ['Deep vein throbbing', 'Load-bearing localized structural pain'],
             'leg-r-calf': ['Deep vein throbbing', 'Load-bearing localized structural pain'],
-            // Fallback for others
             'default': ['Dull localized aching', 'Sharp movement-based friction', 'Structural swelling']
         };
 
-        let isDiscreetMode = false;
-        let isBackView = false;
-        let activeMacroZone = null;
-        let activeMicroPiece = null; // The piece currently being edited
-        let compiledDossier = []; // Array of objects
-        let isDossierOpen = false;
+        let isDiscreetMode = false, isBackView = false, activeMacroZone = null, activeMicroPiece = null, compiledDossier = [], isDossierOpen = false;
+        let activeSymptomId = null; // Tracks the specific symptom being edited
 
-        // 1. Pivot Mechanics (Front/Back)
+        // --- TAB SWITCHING ---
+        window.switchTab = function(index) {
+            for(let i=1; i<=3; i++) {
+                document.getElementById('tab-'+i).classList.add('hidden');
+                document.getElementById('tab-btn-'+i).className = "border border-transparent text-slate-500 hover:text-slate-300 flex flex-col items-center justify-center py-2 rounded-xl transition";
+            }
+            document.getElementById('tab-'+index).classList.remove('hidden');
+            document.getElementById('tab-btn-'+index).className = "bg-[var(--accent-glow)] border border-[var(--accent)] text-[var(--accent)] flex flex-col items-center justify-center py-2 rounded-xl transition";
+        };
+
+        // --- NATIVE SWIPE GESTURES ---
+        let touchstartX = 0;
+        document.getElementById('touch-area').addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; });
+        document.getElementById('touch-area').addEventListener('touchend', e => {
+            if (e.changedTouches[0].screenX - touchstartX > 60 && activeMacroZone) window.resetMacroMap(); // Swipe Right
+        });
+
+        // --- HOLOGRAPHIC CAMERA MECHANICS ---
         window.pivotBody = function(view) {
             isBackView = (view === 'Back');
-            document.getElementById('btn-front').className = isBackView ? "text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition" : "bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition";
-            document.getElementById('btn-back').className = isBackView ? "bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition" : "text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition";
-            
-            const svg = document.getElementById('human-svg');
-            if(isBackView) svg.classList.add('flipped');
-            else svg.classList.remove('flipped');
-            
-            // Wipe state on pivot to prevent spatial confusion
+            document.getElementById('btn-front').className = isBackView ? "text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition" : "bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition shadow-sm";
+            document.getElementById('btn-back').className = isBackView ? "bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition shadow-sm" : "text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition";
+            document.getElementById('human-svg').classList.toggle('flipped', isBackView);
             window.resetMacroMap();
         };
 
-        // 2. Micro-Puzzle Fracturing & Ghosting
-        window.fractureZone = function(zoneName) {
+        window.fractureZone = function(zoneName, scale, translateY) {
             activeMacroZone = zoneName;
             
-            // Ghost everything
+            // 1. Ghost non-active macros
             document.querySelectorAll('.macro-zone').forEach(el => el.classList.add('ghosted'));
-            document.querySelectorAll('[id^="micro-"]').forEach(el => el.classList.add('hidden'));
-            
-            // Hide the clicked macro, reveal its micro puzzle
             document.getElementById(`macro-${zoneName}`).classList.add('hidden');
+            
+            // 2. Reveal micro pieces
+            document.querySelectorAll('[id^="micro-"]').forEach(el => el.classList.add('hidden'));
             document.getElementById(`micro-${zoneName}`).classList.remove('hidden');
             
-            // Show Reset Button
+            // 3. Dynamic Camera Zoom
+            document.getElementById('human-svg').style.transform = `scale(${scale}) translateY(${translateY}%) ${isBackView ? 'scaleX(-1)' : ''}`;
+            
+            // 4. Hide Master Header to save space (Sticky Hide)
+            document.getElementById('master-header').style.transform = "translateY(-100%)";
+            document.getElementById('master-header').style.position = "absolute";
+            document.getElementById('organ-track').classList.add('hidden');
+            
             document.getElementById('btn-reset').classList.remove('hidden');
         };
 
         window.resetMacroMap = function() {
-            // Un-ghost
-            document.querySelectorAll('.macro-zone').forEach(el => {
-                el.classList.remove('ghosted');
-                el.classList.remove('hidden');
-            });
-            // Hide puzzles
+            document.querySelectorAll('.macro-zone').forEach(el => { el.classList.remove('ghosted'); el.classList.remove('hidden'); });
             document.querySelectorAll('[id^="micro-"]').forEach(el => el.classList.add('hidden'));
-            // Remove piece highlights
-            document.querySelectorAll('.micro-piece').forEach(el => {
-                el.classList.remove('piece-active');
-                el.style.fill = ''; // clear heatmap
-            });
+            document.querySelectorAll('.micro-piece').forEach(el => { el.classList.remove('piece-active'); el.style.fill = ''; });
             
+            // Reset Camera
+            document.getElementById('human-svg').style.transform = isBackView ? 'scaleX(-1)' : 'scale(1)';
+            
+            // Reveal Master Header
+            document.getElementById('master-header').style.transform = "translateY(0)";
+            document.getElementById('master-header').style.position = "relative";
+            document.getElementById('organ-track').classList.remove('hidden');
+
             document.getElementById('friction-column-empty').style.opacity = '1';
             document.getElementById('friction-column-empty').style.pointerEvents = 'auto';
             document.getElementById('heat-map-control').classList.add('hidden');
             document.getElementById('btn-reset').classList.add('hidden');
             
-            activeMacroZone = null;
-            activeMicroPiece = null;
+            activeMacroZone = null; activeMicroPiece = null; activeSymptomId = null;
         };
 
-        // 3. Tactile Symmetry Toggle (The Puzzle Piece click)
         window.toggleTactilePiece = function(pieceId, labelName) {
             const el = document.getElementById(pieceId);
-            
-            // If already active, deselect it
             if(el.classList.contains('piece-active')) {
                 el.classList.remove('piece-active');
-                el.style.fill = ''; // Wipe heatmap
-                
-                // Clear UI if we deselected the currently focused piece
                 if(activeMicroPiece && activeMicroPiece.id === pieceId) {
                     document.getElementById('heat-map-control').classList.add('hidden');
                     document.getElementById('friction-column-empty').style.opacity = '1';
                     document.getElementById('friction-column-empty').style.pointerEvents = 'auto';
-                    activeMicroPiece = null;
+                    activeMicroPiece = null; activeSymptomId = null;
                 }
                 return;
             }
-
-            // Make it active
+            // Deselect others in this micro-group for clean UI
+            document.querySelectorAll(`#micro-${activeMacroZone} .micro-piece`).forEach(p => p.classList.remove('piece-active'));
+            
             el.classList.add('piece-active');
-            
-            // By default, set fill to Emerald color
-            el.style.fill = isDiscreetMode ? 'var(--accent)' : '#10B981';
-            
-            // Set as currently focused piece for right-column and heatmap
             activeMicroPiece = { id: pieceId, label: (isBackView ? "Posterior " : "") + labelName, severity: 1 };
             
-            // Update Heatmap UI
             const hm = document.getElementById('heat-map-control');
             hm.classList.remove('hidden');
             document.getElementById('severity-slider').value = 1;
-            document.getElementById('severity-val').innerText = '1';
-            document.getElementById('severity-val').className = "text-[10px] font-bold text-emerald-400";
+            window.updateHeatMap(1);
 
-            // Populate Symptoms
             populateSymptoms(pieceId);
         };
 
-        // 4. Immediate Feedback Loop
         function populateSymptoms(pieceId) {
             document.getElementById('friction-column-empty').style.opacity = '0';
             document.getElementById('friction-column-empty').style.pointerEvents = 'none';
@@ -352,98 +370,89 @@
             
             const container = document.getElementById('symptom-bubbles-container');
             container.innerHTML = "";
-            
             let symptoms = SYMPTOM_DB[pieceId] || SYMPTOM_DB['default'];
             
             symptoms.forEach(sym => {
-                const wrapper = document.createElement('div');
-                wrapper.className = "w-full";
-                
+                const wrapper = document.createElement('div'); wrapper.className = "w-full";
                 const btn = document.createElement('button');
-                btn.className = "w-full text-left bg-[#0B0F19] border border-slate-700 hover:border-emerald-500 text-slate-300 text-xs px-5 py-4 rounded-2xl transition smooth-transition";
+                btn.className = "w-full text-left bg-slate-900 border border-slate-700 hover:border-[var(--accent)] text-slate-300 text-xs px-5 py-4 rounded-2xl transition shadow-md";
                 btn.innerText = `"${sym}"`;
-                btn.onclick = () => showDurationTrack(wrapper, sym, btn);
-                
-                wrapper.appendChild(btn);
-                container.appendChild(wrapper);
+                btn.onclick = () => handleSymptomClick(wrapper, sym, btn);
+                wrapper.appendChild(btn); container.appendChild(wrapper);
             });
         }
 
-        // 5. Visual Heat Map (Severity)
-        window.updateHeatMap = function(val) {
-            if(!activeMicroPiece) return;
-            activeMicroPiece.severity = val;
+        // --- ZERO FRICTION AUTO-COMMIT ---
+        function handleSymptomClick(wrapper, symptomText, btnElement) {
+            if(wrapper.querySelector('.duration-track')) return; // Already expanded
             
-            const el = document.getElementById(activeMicroPiece.id);
-            const valLabel = document.getElementById('severity-val');
-            valLabel.innerText = val;
+            // Instantly commit to dossier
+            const newId = Date.now();
+            activeSymptomId = newId;
+            compiledDossier.push({ id: newId, pieceId: activeMicroPiece.id, label: isDiscreetMode ? "Secured Segment" : activeMicroPiece.label, symptom: symptomText, severity: activeMicroPiece.severity, duration: '24 Hrs' });
+            renderDossier();
             
-            // Calculate Color Shift (1=Emerald, 5=Amber, 10=Red)
-            let color = '';
-            let textClass = '';
-            if(val <= 4) { color = '#10B981'; textClass = 'text-emerald-400'; }
-            else if(val <= 7) { color = '#F59E0B'; textClass = 'text-amber-400'; }
-            else { color = '#EF4444'; textClass = 'text-red-500'; }
-            
-            el.style.fill = color;
-            valLabel.className = `text-[10px] font-bold ${textClass}`;
-        };
-
-        // 6. Segmented Time Track (Duration)
-        function showDurationTrack(wrapper, symptomText, btnElement) {
-            // Prevent multiple tracks
-            if(wrapper.querySelector('.duration-track')) return;
-            
-            btnElement.classList.add('border-emerald-500', 'bg-emerald-500/5');
-            
+            // Show UI Editor
+            btnElement.classList.add('border-[var(--accent)]', 'bg-[var(--accent-glow)]');
             const track = document.createElement('div');
-            track.className = "duration-track mt-2 ml-4 flex space-x-2 animate-fade-in";
+            track.className = "duration-track mt-3 ml-4 flex space-x-2 animate-fade-in";
             track.innerHTML = `
-                <button onclick="commitToDossier('${symptomText}', '24 Hrs')" class="bg-emerald-500 text-slate-950 text-[9px] font-bold px-3 py-1.5 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.5)] transition">24 Hrs</button>
-                <button onclick="commitToDossier('${symptomText}', '3-5 Days')" class="bg-slate-900 border border-slate-700 text-slate-400 hover:text-white text-[9px] font-bold px-3 py-1.5 rounded-full transition">3-5 Days</button>
-                <button onclick="commitToDossier('${symptomText}', 'Weeks')" class="bg-slate-900 border border-slate-700 text-slate-400 hover:text-white text-[9px] font-bold px-3 py-1.5 rounded-full transition">Weeks</button>
-                <button onclick="commitToDossier('${symptomText}', 'Months+')" class="bg-slate-900 border border-slate-700 text-slate-400 hover:text-white text-[9px] font-bold px-3 py-1.5 rounded-full transition">Months+</button>
+                <button onclick="updateDuration(${newId}, '24 Hrs', this)" class="time-btn bg-[var(--accent)] text-slate-950 text-[10px] font-black px-4 py-2 rounded-full transition">24 Hrs</button>
+                <button onclick="updateDuration(${newId}, '3-5 Days', this)" class="time-btn bg-slate-800 border border-slate-700 text-slate-400 hover:text-white text-[10px] font-bold px-4 py-2 rounded-full transition">3-5 Days</button>
+                <button onclick="updateDuration(${newId}, 'Weeks', this)" class="time-btn bg-slate-800 border border-slate-700 text-slate-400 hover:text-white text-[10px] font-bold px-4 py-2 rounded-full transition">Weeks</button>
             `;
             wrapper.appendChild(track);
         }
 
-        // Commit to Dossier
-        window.commitToDossier = function(symptom, duration) {
-            const entry = {
-                id: Date.now(),
-                label: isDiscreetMode ? "Secured Segment" : activeMicroPiece.label,
-                symptom: symptom,
-                severity: activeMicroPiece.severity,
-                duration: duration
-            };
-            compiledDossier.push(entry);
+        window.updateDuration = function(id, duration, btnEl) {
+            let item = compiledDossier.find(i => i.id === id);
+            if(item) item.duration = duration;
+            // Reset sibling buttons
+            Array.from(btnEl.parentElement.children).forEach(b => {
+                b.className = "time-btn bg-slate-800 border border-slate-700 text-slate-400 hover:text-white text-[10px] font-bold px-4 py-2 rounded-full transition";
+            });
+            // Highlight clicked
+            btnEl.className = "time-btn bg-[var(--accent)] text-slate-950 text-[10px] font-black px-4 py-2 rounded-full transition";
             renderDossier();
-            if(!isDossierOpen) toggleDossier();
         };
 
+        window.updateHeatMap = function(val) {
+            if(!activeMicroPiece) return;
+            activeMicroPiece.severity = val;
+            
+            let color = val <= 4 ? '#10B981' : (val <= 7 ? '#F59E0B' : '#EF4444');
+            let txtClass = val <= 4 ? 'text-emerald-400' : (val <= 7 ? 'text-amber-400' : 'text-red-500');
+            
+            document.documentElement.style.setProperty('--accent', color);
+            document.documentElement.style.setProperty('--accent-glow', color + '66');
+            document.getElementById('severity-val').innerText = val;
+            document.getElementById('severity-val').className = `text-[12px] font-black ${txtClass} drop-shadow-md`;
+
+            // Update all dossier items tied to this physical piece
+            compiledDossier.forEach(item => { if(item.pieceId === activeMicroPiece.id) item.severity = val; });
+            renderDossier();
+        };
+
+        // --- DOSSIER LOGIC ---
         function renderDossier() {
             const container = document.getElementById('dossier-list');
-            const ind = document.getElementById('dossier-indicator');
             document.getElementById('dossier-text').innerText = `${compiledDossier.length} Friction Blocks Compiled`;
-            
-            ind.className = compiledDossier.length > 0 ? "w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10B981]" : "w-2 h-2 rounded-full bg-slate-600";
+            document.getElementById('dossier-indicator').className = compiledDossier.length > 0 ? "w-2 h-2 rounded-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent-glow)]" : "w-2 h-2 rounded-full bg-slate-600";
             
             container.innerHTML = "";
             compiledDossier.forEach(item => {
                 const div = document.createElement('div');
-                div.className = "bg-slate-900 border border-slate-800 p-3 rounded-xl flex justify-between items-center";
-                
-                let sevColor = item.severity <= 4 ? "text-emerald-500" : (item.severity <= 7 ? "text-amber-500" : "text-red-500");
-                
+                div.className = "bg-slate-900 border border-slate-700 p-4 rounded-xl flex justify-between items-center shadow-md";
+                let sColor = item.severity <= 4 ? "text-emerald-500" : (item.severity <= 7 ? "text-amber-500" : "text-red-500");
                 div.innerHTML = `
                     <div>
-                        <div class="flex items-center space-x-2 mb-1">
-                            <span class="text-[9px] font-black uppercase tracking-widest ${sevColor}">[ SEV: ${item.severity} ] ${item.label}</span>
-                            <span class="text-[9px] text-slate-500 bg-slate-800 px-2 rounded-full">${item.duration}</span>
+                        <div class="flex items-center space-x-3 mb-1">
+                            <span class="text-[10px] font-black uppercase tracking-widest ${sColor}">[ HEAT: ${item.severity} ] ${item.label}</span>
+                            <span class="text-[9px] text-slate-300 font-bold bg-slate-800 border border-slate-600 px-2 py-0.5 rounded-full">${item.duration}</span>
                         </div>
-                        <p class="text-xs text-slate-300 font-mono">"${item.symptom}"</p>
+                        <p class="text-xs text-slate-400 font-mono mt-2">"${item.symptom}"</p>
                     </div>
-                    <button onclick="compiledDossier = compiledDossier.filter(i => i.id !== ${item.id}); renderDossier();" class="text-slate-600 hover:text-red-500 font-bold px-2">✕</button>
+                    <button onclick="compiledDossier = compiledDossier.filter(i => i.id !== ${item.id}); renderDossier();" class="text-slate-600 hover:text-red-500 font-bold px-3 text-lg">✕</button>
                 `;
                 container.appendChild(div);
             });
@@ -451,34 +460,17 @@
 
         window.toggleDossier = function() {
             isDossierOpen = !isDossierOpen;
-            const drw = document.getElementById('dossier-drawer');
-            const chev = document.getElementById('dossier-chevron');
-            if(isDossierOpen) {
-                drw.classList.remove('translate-y-[calc(100%-60px)]');
-                drw.classList.add('translate-y-0');
-                chev.style.transform = 'rotate(180deg)';
-            } else {
-                drw.classList.add('translate-y-[calc(100%-60px)]');
-                drw.classList.remove('translate-y-0');
-                chev.style.transform = 'rotate(0deg)';
-            }
+            const drw = document.getElementById('dossier-drawer'), chev = document.getElementById('dossier-chevron');
+            drw.style.transform = isDossierOpen ? 'translateY(0)' : 'translateY(calc(100% - 60px))';
+            chev.style.transform = isDossierOpen ? 'rotate(180deg)' : 'rotate(0deg)';
         };
 
-        // Discreet Mode
         window.toggleDiscreetMode = function() {
             isDiscreetMode = !isDiscreetMode;
-            document.body.className = isDiscreetMode ? "discreet-active bg-[#090A0F] text-slate-400 font-sans antialiased h-screen flex flex-col overflow-hidden" : "standard-active bg-[#0B0F19] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden";
-            document.getElementById('discreet-text').innerText = isDiscreetMode ? "Discreet Mode: ACTIVE" : "Discreet Mode: OFF";
-            document.getElementById('discreet-text').className = isDiscreetMode ? "text-[10px] font-black uppercase tracking-widest text-amber-500" : "text-[10px] font-black uppercase tracking-widest text-slate-400";
-            document.getElementById('brand-logo').innerText = isDiscreetMode ? "MR System Operations" : "Medical Room™";
-            
-            const pulse = document.getElementById('header-pulse');
-            pulse.className = isDiscreetMode ? "w-2.5 h-2.5 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.8)] animate-pulse" : "w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.8)] animate-pulse";
-            
-            // Adjust active tab color
-            document.getElementById('tab-clinic').className = isDiscreetMode ? "bg-amber-500/10 border border-amber-500 text-amber-400 flex flex-col items-center justify-center py-2 rounded-xl" : "bg-emerald-500/10 border border-emerald-500 text-emerald-400 flex flex-col items-center justify-center py-2 rounded-xl";
-            
-            renderDossier(); // Update labels in dossier
+            document.body.className = isDiscreetMode ? "discreet-active bg-[var(--bg-main)] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden" : "bg-[var(--bg-main)] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden";
+            document.getElementById('discreet-text').innerText = isDiscreetMode ? "Discreet: ACTIVE" : "Discreet: OFF";
+            document.getElementById('brand-logo').innerText = isDiscreetMode ? "MR System" : "Medical Room™";
+            renderDossier();
         };
     </script>
 </body>
