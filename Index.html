@@ -238,7 +238,6 @@
                             </div>
                         </div>
 
-                        <!-- Corporate Compliance Screen Options -->
                         <div id="market-grid-corporate" class="hidden space-y-2">
                             <div class="border border-slate-200/80 bg-white p-3.5 rounded-xl flex items-center justify-between shadow-sm border-l-2 border-msgBlue">
                                 <div class="space-y-0.5 max-w-[70%]">
@@ -252,7 +251,6 @@
                             </div>
                         </div>
 
-                        <!-- Fulfillment Preferences -->
                         <div class="space-y-2 pt-1">
                             <label class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 block">Fulfillment Collection Preference</label>
                             <div class="grid grid-cols-2 gap-2">
@@ -273,11 +271,10 @@
                         <span class="text-2xl block animate-pulse">🧠</span>
                         <h3 class="text-xs font-black uppercase tracking-wider text-slate-900">MindLink Portal</h3>
                         <p class="text-[11px] text-slate-500 leading-relaxed">System parameters sync user sessions straight to licensed networks. Full legal name verification filters will analyze credentials on handshake.</p>
-                        <!-- Straight forward vocabulary applied -->
                         <button type="button" onclick="window.queueAsset('MindLink Specialist Assignment', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Secure Your Place In Line ➔</button>
                     </div>
 
-                    <!-- WORKFLOW C: CARELIVE TUNNEL ARENA (Zones Terminologies) -->
+                    <!-- WORKFLOW C: CARELIVE TUNNEL ARENA -->
                     <div id="subpane-carelive" class="hidden space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
                             <div class="sm:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center justify-center relative shadow-inner">
@@ -312,7 +309,7 @@
                         </div>
                     </div>
 
-                    <!-- Wizard Action Button (Straight forward vocabulary applied) -->
+                    <!-- Wizard Action Button -->
                     <div class="pt-1">
                         <button type="button" id="stage-1-master-btn" onclick="window.handleStage1Submission()" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl transition shadow-md font-mono tracking-widest cursor-pointer">
                             Proceed ➔
@@ -320,7 +317,7 @@
                     </div>
                 </div>
 
-                <!-- STAGE 2: PREVIEW CHECKLIST PANEL -->
+                <!-- STAGE 2: AMBIENT ENVIRONMENT CALIBRATION (CareLive Only) -->
                 <div id="stage-2" class="hidden border border-slate-200 bg-white text-slate-900 rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm animate-fadeIn">
                     <div class="flex justify-between items-end border-b border-slate-100 pb-3">
                         <div>
@@ -353,7 +350,6 @@
                         </div>
                     </div>
 
-                    <!-- Straight forward text target mapping applied -->
                     <button type="button" onclick="window.goToStage(3)" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl transition shadow-md font-mono tracking-widest cursor-pointer">
                         Submit ➔
                     </button>
@@ -369,7 +365,7 @@
                         <span class="text-[9px] font-mono font-black text-fbBlue bg-blue-50 border border-blue-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-block">Allocation Complete</span>
                         <h2 class="text-sm font-black uppercase tracking-tight text-slate-900">Transient Token Hold Dispatched</h2>
                         <p class="text-[11px] text-slate-500 font-medium leading-normal">
-                            Session logs have dispatched out to processing server nodes. Your localized device caching layer is prepared to execute memory purge routines.
+                            Session logs have transferred out to processing server nodes. Your localized device caching layer is prepared to execute memory purge routines.
                         </p>
                     </div>
 
@@ -382,7 +378,6 @@
                         <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Settlement Hold Terms:</span><span id="receipt-net" class="text-fbBlue text-xs font-mono font-black">--</span></div>
                     </div>
 
-                    <!-- Straight forward vocabulary "Done" applied -->
                     <div class="pt-1">
                         <button type="button" onclick="window.triggerTransientPurgeAnnihilation()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[9px] font-black uppercase tracking-widest py-3.5 rounded-xl transition shadow-lg cursor-pointer font-mono">
                             Done ➔
@@ -411,7 +406,7 @@
                 </div>
 
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-1.5 text-[9px] leading-relaxed font-mono text-slate-500">
-                    <div class="font-bold text-slate-700 flex items-center space-x-1 uppercase text-[8px] tracking-wider">
+                    <div class="font-bold text-slate-300 flex items-center space-x-1 uppercase text-[8px] tracking-wider">
                         <span>📋 Asynchronous Compliance Frame</span>
                     </div>
                     <p class="leading-normal font-medium text-slate-400">
@@ -429,7 +424,7 @@
     <footer class="border-t border-slate-200 bg-white py-6 px-4 text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest relative z-10 flex-shrink-0">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <span>© 2026 Wellness Front™ Platforms. All Rights Reserved.</span>
-            <span>Decoupled Data Security Infrastructure • Build-Premium-Light-v4.6</span>
+            <span>Decoupled Data Security Infrastructure • Build-Premium-Light-v4.7</span>
         </div>
     </footer>
 
@@ -449,7 +444,6 @@
         
         let compiledManifestArray = [];
 
-        // ON LAYOUT INITIALIZATION: Run persistence loop token verification checks
         window.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('wf_user_registered') === 'true') {
                 userFullLegalName = localStorage.getItem('wf_user_fullname');
@@ -535,8 +529,9 @@
                 statusBar.innerHTML = `<span id="nav-step-1" class="text-fbBlue font-black">01 / You are in line</span><span class="text-slate-300">•</span><span id="nav-step-3" class="text-slate-400 font-normal">02 / Done</span>`;
                 if(masterBtn) masterBtn.innerText = "Proceed to Checkout ➔";
             } else if(trackKey === 'carelive') {
-                statusBar.innerHTML = `<span id="nav-step-1" class="text-fbBlue font-black">01 / Select Zone</span><span class="text-slate-300">•</span><span id="nav-step-2" class="text-slate-400 font-normal">02 / Calibrate WebRTC</span><span class="text-slate-300">•</span><span id="nav-step-3" class="text-slate-400 font-normal">03 / Submit</span>`;
-                if(masterBtn) masterBtn.innerText = "Proceed to Calibration Checklist ➔";
+                // Terminology updated to 'Camera Check'
+                statusBar.innerHTML = `<span id="nav-step-1" class="text-fbBlue font-black">01 / Select Zone</span><span class="text-slate-300">•</span><span id="nav-step-2" class="text-slate-400 font-normal">02 / Camera Check</span><span class="text-slate-300">•</span><span id="nav-step-3" class="text-slate-400 font-normal">03 / Submit</span>`;
+                if(masterBtn) masterBtn.innerText = "Proceed to Camera Check ➔";
             }
 
             const anonWrapper = document.getElementById('anonymity-container');
@@ -579,13 +574,13 @@
             const gridCorp = document.getElementById('market-grid-corporate');
 
             if(subKey === 'executive') {
-                if(btnExec) btnExec.className = "flex-1 bg-white text-slate-900 border border-slate-200/60 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
-                if(btnCorp) btnCorp.className = "flex-1 text-slate-500 hover:text-slate-800 text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
+                if(btnExec) btnExec.className = "flex-1 bg-white text-slate-900 border border-slate-200/30 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
+                if(btnCorp) btnCorp.className = "flex-1 text-slate-400 hover:text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
                 if(gridExec) gridExec.classList.remove('hidden');
                 if(gridCorp) gridCorp.classList.add('hidden');
             } else {
-                if(btnCorp) btnCorp.className = "flex-1 bg-white text-slate-900 border border-slate-200/60 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
-                if(btnExec) btnExec.className = "flex-1 text-slate-500 hover:text-slate-800 text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
+                if(btnCorp) btnCorp.className = "flex-1 bg-white text-slate-900 border border-slate-200/30 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
+                if(btnExec) btnExec.className = "flex-1 text-slate-400 hover:text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
                 if(gridCorp) gridCorp.classList.remove('hidden');
                 if(gridExec) gridExec.classList.add('hidden');
             }
@@ -695,8 +690,6 @@
                 document.getElementById('receipt-id-tag').innerText = `WF-HASH-${Math.floor(10000 + Math.random() * 90000)}`;
                 document.getElementById('receipt-track').innerText = activeMainTrack.toUpperCase();
                 document.getElementById('receipt-logistics').innerText = activeMainTrack === 'itest' ? activeLogisticsChannel.toUpperCase() : 'CLOUD TERMINAL';
-                
-                // Mask account name on outbound invoice sheet strictly if the data anonymity engine runs live
                 document.getElementById('receipt-profile-name').innerText = isAnonymityActive ? "ANONYMIZED DISCREET DECOUPLED CODE HOLD" : userFullLegalName.toUpperCase();
                 document.getElementById('receipt-net').innerText = document.getElementById('summary-total-price').innerText;
                 
