@@ -18,10 +18,8 @@
         }
     </script>
     <style>
-        /* Smooth Fluid Transitions */
         .smooth-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         
-        /* 4-Zone Rectangular Layout Mechanics */
         .zone-rect {
             cursor: pointer;
             fill: rgba(255, 255, 255, 0.02);
@@ -55,34 +53,33 @@
             <p class="text-xs text-slate-400 mb-6 font-medium">Secure verification endpoint. Phone authorization mandatory.</p>
             
             <div class="space-y-4 text-left">
-                <!-- Step A: Phone Number Entry -->
                 <div id="phone-stage">
                     <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Verified Phone Destination</label>
                     <input type="tel" id="auth-phone" placeholder="+1 (555) 000-0000" class="w-full bg-[#090C16] border border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-emerald-500 font-mono text-white mb-4 shadow-inner">
                     <button onclick="window.submitPhoneVerification()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-[10px] uppercase tracking-widest py-4 rounded-xl transition shadow-lg shadow-emerald-500/10 cursor-pointer">Request Passing Token ➔</button>
                 </div>
 
-                <!-- Step B: Simulated Token Verification -->
                 <div id="token-stage" class="hidden">
                     <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Enter 6-Digit SMS Token</label>
                     <input type="text" id="auth-token" placeholder="000000" maxlength="6" class="w-full bg-[#090C16] border border-slate-800 rounded-xl px-4 py-3.5 text-center text-lg tracking-[0.5em] focus:outline-none focus:border-emerald-500 font-mono text-white mb-4 shadow-inner">
                     <button onclick="window.submitTokenVerification()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-[10px] uppercase tracking-widest py-4 rounded-xl transition shadow-lg cursor-pointer">Verify Instance Access</button>
                 </div>
 
-                <!-- Step C: Minimal Profile Setup -->
                 <div id="profile-stage" class="hidden space-y-4">
                     <div>
                         <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1.5">Year of Biological Birth (Year Only)</label>
                         <input type="number" id="profile-year" placeholder="1995" min="1900" max="2026" class="w-full bg-[#090C16] border border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-emerald-500 font-mono text-white shadow-inner">
                     </div>
+                    
+                    <!-- AMENDED: Dropdown replaced with prominent side-by-side layout buttons -->
                     <div>
-                        <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1.5">Biological Gender Reference Frame</label>
-                        <select id="profile-gender" class="w-full bg-[#090C16] border border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-emerald-500 text-slate-300">
-                            <option value="unassigned">Select Allocation Target</option>
-                            <option value="male">Male baseline reference parameters</option>
-                            <option value="female">Female baseline reference parameters</option>
-                        </select>
+                        <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Biological Gender Reference Frame</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" onclick="window.setGenderFramework('male')" id="gender-male" class="bg-[#090C16] border border-slate-800 text-slate-400 text-[9px] font-black uppercase py-3.5 rounded-xl transition cursor-pointer">Male Ranges</button>
+                            <button type="button" onclick="window.setGenderFramework('female')" id="gender-female" class="bg-[#090C16] border border-slate-800 text-slate-400 text-[9px] font-black uppercase py-3.5 rounded-xl transition cursor-pointer">Female Ranges</button>
+                        </div>
                     </div>
+
                     <div class="border-t border-slate-800/80 pt-3">
                         <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Target Profile Intent</label>
                         <div class="grid grid-cols-2 gap-2">
@@ -97,36 +94,36 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- BRAND HEADER                               -->
+    <!-- MASTER BRAND CHASSIS HEADER                -->
     <!-- ========================================== -->
     <header class="border-b border-slate-800 bg-[#0A0E1A] sticky top-0 z-50 px-6 py-4 shadow-md">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] animate-pulse"></span>
-                <a href="#" class="font-black tracking-wider text-sm uppercase text-white hover:text-emerald-400 transition">
+                <span class="font-black tracking-wider text-sm uppercase text-white">
                     Wellness Front<span class="text-emerald-500">™</span>
-                </a>
+                </span>
             </div>
             
             <div class="flex items-center space-x-4">
-                <!-- Dynamic Discreet Anonymity Toggle -->
-                <div id="anonymity-container" class="smooth-transition">
+                <!-- Exit Active Track Switch Engine -->
+                <button type="button" id="exit-track-hub-btn" onclick="window.returnToSelectionHub()" class="hidden text-[9px] font-black uppercase tracking-wider text-slate-400 hover:text-white transition border border-slate-800 bg-[#05070F] px-4 py-2 rounded-full cursor-pointer">
+                    « Exit Workspace Track
+                </button>
+                <div id="anonymity-container" class="smooth-transition hidden">
                     <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-2 bg-[#05070F] border border-slate-800 px-4 py-2 rounded-full transition shadow-inner cursor-pointer hover:border-slate-700">
                         <span id="anon-icon">🕵️</span>
                         <span class="text-[9px] font-mono font-black uppercase tracking-widest text-slate-400" id="anon-text">Anonymity Layer: OFF</span>
                     </button>
                 </div>
-                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-950/40 border border-emerald-900/60 px-3 py-1 rounded-full select-none shadow-sm hidden sm:inline-block">
-                    Simulation OS v3.0
-                </span>
             </div>
         </div>
     </header>
 
     <!-- ========================================== -->
-    <!-- LOW-PROFILE STATUS BAR                     -->
+    <!-- STEP STATUS INDICATOR CHASSIS              -->
     <!-- ========================================== -->
-    <section class="bg-[#090C16] border-b border-slate-900 py-3 px-6 relative z-10">
+    <section id="system-status-bar" class="hidden bg-[#090C16] border-b border-slate-900 py-3 px-6 relative z-10 animate-fadeIn">
         <div class="max-w-xl mx-auto flex items-center justify-center space-x-8 text-center text-[10px] font-black uppercase tracking-widest font-mono">
             <span id="nav-step-1" class="text-emerald-400 transition-colors duration-200">01 / Configure</span>
             <span class="text-slate-700">•</span>
@@ -137,64 +134,74 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- CORE SYSTEM CONTAINER                      -->
+    <!-- POST-AUTH INTERACTIVE TRACK SELECTION HUB  -->
     <!-- ========================================== -->
-    <section class="py-12 bg-[#060811] min-h-[calc(100vh-120px)] relative z-10">
+    <section id="workspace-selection-hub" class="hidden py-16 bg-[#060811] min-h-[calc(100vh-80px)] flex flex-col justify-center items-center px-6 animate-fadeIn">
+        <div class="max-w-4xl w-full space-y-8 text-center">
+            <div class="space-y-2">
+                <span class="text-[10px] font-mono font-black tracking-[0.25em] text-emerald-400 uppercase">System Initialized</span>
+                <h2 class="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">Choose isolated environment track</h2>
+                <p class="text-xs text-slate-400 max-w-md mx-auto font-medium">Select one system track below. The environment configuration automatically locks down for absolute security.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                <div onclick="window.launchIsolatedTrack('itest')" class="border border-slate-800 bg-[#0D1224] p-6 rounded-3xl cursor-pointer hover:border-emerald-500 group transition flex flex-col justify-between min-h-[180px] text-left shadow-2xl relative">
+                    <span class="text-3xl block group-hover:scale-105 transition-transform duration-300">🧬</span>
+                    <div>
+                        <h3 class="text-xs font-black uppercase text-white tracking-wide group-hover:text-emerald-400 transition">iTest Market</h3>
+                        <p class="text-[10.5px] text-slate-400 leading-relaxed font-medium mt-1">Direct laboratory panels marketplace. Zero provider reference requirements.</p>
+                    </div>
+                </div>
+                <div onclick="window.launchIsolatedTrack('mindlink')" class="border border-slate-800 bg-[#0D1224] p-6 rounded-3xl cursor-pointer hover:border-emerald-500 group transition flex flex-col justify-between min-h-[180px] text-left shadow-2xl relative">
+                    <span class="text-3xl block group-hover:scale-105 transition-transform duration-300">🧠</span>
+                    <div>
+                        <h3 class="text-xs font-black uppercase text-white tracking-wide group-hover:text-emerald-400 transition">MindLink Portal</h3>
+                        <p class="text-[10.5px] text-slate-400 leading-relaxed font-medium mt-1">Immediate behavioral therapy routing engine for credentialed networks.</p>
+                    </div>
+                </div>
+                <div onclick="window.launchIsolatedTrack('carelive')" class="border border-slate-800 bg-[#0D1224] p-6 rounded-3xl cursor-pointer hover:border-emerald-500 group transition flex flex-col justify-between min-h-[180px] text-left shadow-2xl relative">
+                    <span class="text-3xl block group-hover:scale-105 transition-transform duration-300">📐</span>
+                    <div>
+                        <h3 class="text-xs font-black uppercase text-white tracking-wide group-hover:text-emerald-400 transition">CareLive Arena</h3>
+                        <p class="text-[10.5px] text-slate-400 leading-relaxed font-medium mt-1">Acute virtual visit environment validation & preview buffering sandbox.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TUNNEL-VISION WORKSPACE WORKFLOW LAYER     -->
+    <!-- ========================================== -->
+    <section id="workspace-execution-enclosure" class="hidden py-12 bg-[#060811] min-h-[calc(100vh-140px)] relative z-10 animate-fadeIn">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <!-- LEFT AREA: WIZARD PIPELINE -->
+            <!-- LEFT AREA: WIZARD FLOW CARDS -->
             <div class="lg:col-span-7">
                 
-                <!-- STAGE 1: THREE-TRACK INTEGRATION -->
+                <!-- STAGE 1: ACTIVE CONFIGURATOR CONTROL PANEL -->
                 <div id="stage-1" class="border border-slate-800/60 bg-[#0D1224] rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
-                    <div class="space-y-1">
-                        <span class="text-[9px] font-black tracking-[0.2em] text-emerald-400 uppercase block font-mono">Ecosystem Platform Tracks</span>
-                        <h2 class="text-base font-black uppercase tracking-tight text-white">Select Execution Path Gateway</h2>
-                    </div>
-                    <hr class="border-slate-800/80">
+                    
+                    <!-- PANE A: iTEST TUNNEL WORKFLOW -->
+                    <div id="subpane-itest" class="hidden space-y-6">
+                        <div class="space-y-1">
+                            <span class="text-[9px] font-mono font-black tracking-[0.2em] text-emerald-400 uppercase block">Isolated Operational Core</span>
+                            <h2 class="text-base font-black uppercase tracking-tight text-white">iTest Diagnostic Panel Marketplace</h2>
+                        </div>
+                        <hr class="border-slate-800/80">
 
-                    <!-- Three-Track Radio Choices -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div onclick="window.switchMainTrack('itest')" class="border border-slate-800 bg-[#070911] p-4 rounded-xl cursor-pointer hover:border-emerald-500/40 transition flex flex-col justify-between min-h-[110px] shadow-inner relative select-none" id="card-track-itest">
-                            <input type="radio" id="track-itest" name="track_select" value="itest" checked class="absolute top-4 right-4 accent-emerald-500 w-3.5 h-3.5">
-                            <span class="text-base block">🧬</span>
-                            <div class="mt-2">
-                                <h3 class="text-[11px] font-black uppercase text-white tracking-wide">iTest Market</h3>
-                                <p class="text-[9.5px] text-slate-400 leading-normal font-medium mt-0.5">Direct lab orders without a physician.</p>
-                            </div>
-                        </div>
-                        <div onclick="window.switchMainTrack('mindlink')" class="border border-slate-800 bg-[#070911] p-4 rounded-xl cursor-pointer hover:border-emerald-500/40 transition flex flex-col justify-between min-h-[110px] shadow-inner relative select-none" id="card-track-mindlink">
-                            <input type="radio" id="track-mindlink" name="track_select" value="mindlink" class="absolute top-4 right-4 accent-emerald-500 w-3.5 h-3.5">
-                            <span class="text-base block">🧠</span>
-                            <div class="mt-2">
-                                <h3 class="text-[11px] font-black uppercase text-white tracking-wide">MindLink</h3>
-                                <p class="text-[9.5px] text-slate-400 leading-normal font-medium mt-0.5">Immediate behavioral therapy routing.</p>
-                            </div>
-                        </div>
-                        <div onclick="window.switchMainTrack('carelive')" class="border border-slate-800 bg-[#070911] p-4 rounded-xl cursor-pointer hover:border-emerald-500/40 transition flex flex-col justify-between min-h-[110px] shadow-inner relative select-none" id="card-track-carelive">
-                            <input type="radio" id="track-carelive" name="track_select" value="carelive" class="absolute top-4 right-4 accent-emerald-500 w-3.5 h-3.5">
-                            <span class="text-base block">📐</span>
-                            <div class="mt-2">
-                                <h3 class="text-[11px] font-black uppercase text-white tracking-wide">CareLive Arena</h3>
-                                <p class="text-[9.5px] text-slate-400 leading-normal font-medium mt-0.5">Acute telehealth & preview sandbox.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SUB-PANE A: iTEST MARKETPLACE WINDOW -->
-                    <div id="subpane-itest" class="space-y-6 pt-2">
                         <!-- Horizontal Twin Sub-Tabs Buttons -->
                         <div class="flex space-x-2 bg-[#070911] border border-slate-800/80 p-1.5 rounded-xl">
                             <button type="button" id="subtab-btn-executive" onclick="window.toggleSubTab('executive')" class="flex-1 bg-slate-800 text-white text-[10px] font-black uppercase tracking-wider py-2 rounded-lg transition cursor-pointer">Executive Panels</button>
                             <button type="button" id="subtab-btn-corporate" onclick="window.toggleSubTab('corporate')" class="flex-1 text-slate-400 hover:text-white text-[10px] font-black uppercase tracking-wider py-2 rounded-lg transition cursor-pointer">Corporate Compliance</button>
                         </div>
 
-                        <!-- Sub-Tab Content Content: Executive (Adapted Grid) -->
+                        <!-- Executive Track Menus Grid -->
                         <div id="market-grid-executive" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="border border-slate-800 bg-[#080B16] p-4 rounded-xl relative flex flex-col justify-between shadow-md">
                                 <div class="space-y-1">
                                     <h4 class="text-xs font-black uppercase text-white">The Core Health Baseline™</h4>
-                                    <p class="text-[11px] text-slate-400 leading-normal font-medium">CMP, CBC with Diff, Lipid Profiling, HbA1c, Vitamin D, TSH Framework.</p>
+                                    <p class="text-[11px] text-slate-400 leading-normal font-medium">CMP, CBC with Diff, Lipid Profiling, HbA1c, Vitamin D, TSH Reference Engine.</p>
                                     <span class="text-[10px] font-mono font-black text-emerald-400 block pt-1">Private Rate: $165.00</span>
                                 </div>
                                 <button type="button" onclick="window.queueAsset('Core Health Baseline', 165, 'lab')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-[9px] font-black uppercase tracking-wider py-2.5 rounded-lg mt-4 transition cursor-pointer">Select Assay</button>
@@ -202,32 +209,32 @@
                             <div class="border border-slate-800 bg-[#080B16] p-4 rounded-xl relative flex flex-col justify-between shadow-md">
                                 <div class="space-y-1">
                                     <h4 class="text-xs font-black uppercase text-white">Longevity & Performance Matrix™</h4>
-                                    <p class="text-[11px] text-slate-400 leading-normal font-medium">Core Panels + Advanced Lipids (ApoB), Inflammation hs-CRP, Testosterone Matrix.</p>
+                                    <p class="text-[11px] text-slate-400 leading-normal font-medium">Core Baseline + Advanced Lipids (ApoB), Inflammation hs-CRP, Testosterone Metrics.</p>
                                     <span class="text-[10px] font-mono font-black text-emerald-400 block pt-1">Private Rate: $349.00</span>
                                 </div>
                                 <button type="button" onclick="window.queueAsset('Longevity Matrix', 349, 'lab')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-[9px] font-black uppercase tracking-wider py-2.5 rounded-lg mt-4 transition cursor-pointer">Select Assay</button>
                             </div>
                         </div>
 
-                        <!-- Sub-Tab Content: Corporate (Separated Compliance Menu) -->
+                        <!-- Corporate Track Menus Grid -->
                         <div id="market-grid-corporate" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="border border-slate-800 bg-[#080B16] p-4 rounded-xl relative flex flex-col justify-between shadow-md border-l-2 border-cyan-500/40">
                                 <div class="space-y-1">
-                                    <h4 class="text-xs font-black uppercase text-cyan-400">Standard Workplace Drug Screening</h4>
-                                    <p class="text-[11px] text-slate-400 leading-normal font-medium">Fast-track corporate occupational verification screening panel. Direct system hold token.</p>
+                                    <h4 class="text-xs font-black uppercase text-cyan-400">Workplace Drug Screening</h4>
+                                    <p class="text-[11px] text-slate-400 leading-normal font-medium">Rapid compliance occupational verification checking panel. Decoupled organizational token mapping.</p>
                                     <span class="text-[10px] font-mono font-black text-cyan-400 block pt-1">Corporate Rate: $85.00</span>
                                 </div>
                                 <button type="button" onclick="window.queueAsset('Workplace Drug Screen', 85, 'lab')" class="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 text-[9px] font-black uppercase tracking-wider py-2.5 rounded-lg mt-4 transition cursor-pointer">Request Voucher</button>
                             </div>
                         </div>
 
-                        <!-- Logistics Fulfillment Channels Matrix -->
+                        <!-- Fulfillment Choice Blocks Layout -->
                         <div class="space-y-3 pt-2">
                             <label class="text-[10px] font-mono font-black uppercase tracking-wider text-slate-400 block">Fulfillment Collection Preference</label>
                             <div class="grid grid-cols-2 gap-3">
                                 <button type="button" id="btn-affiliate" onclick="window.setLogisticsChannel('affiliate')" class="border-2 border-emerald-500 bg-emerald-950/20 p-4 rounded-xl text-left hover:border-emerald-400 transition flex flex-col justify-between min-h-[90px] shadow-md cursor-pointer">
                                     <span class="text-xs font-black uppercase text-white block">Affiliate Draw Network</span>
-                                    <span class="text-[9px] font-bold text-slate-400 uppercase font-mono">Digital Token Hold • Walk-In</span>
+                                    <span class="text-[9px] font-bold text-slate-400 uppercase font-mono">Digital Token Hold • Walk-In Hub</span>
                                 </button>
                                 <button type="button" id="btn-shipping" onclick="window.setLogisticsChannel('shipping')" class="border border-slate-800 bg-[#070911] p-4 rounded-xl text-left hover:border-slate-700 transition flex flex-col justify-between min-h-[90px] shadow-sm cursor-pointer">
                                     <span class="text-xs font-black uppercase text-white block">Direct Kit Shipping</span>
@@ -237,56 +244,64 @@
                         </div>
                     </div>
 
-                    <!-- SUB-PANE B: MINDLINK REDIRECT LAYOUT -->
-                    <div id="subpane-mindlink" class="hidden text-center py-6 max-w-sm mx-auto space-y-4">
-                        <span class="text-3xl block animate-pulse">🧠</span>
-                        <h3 class="text-sm font-black uppercase tracking-wider text-white">Therapeutic Routing Pipeline Active</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">License framework coordinates verified user sessions straight to behavioral specialists. Official credential verification will execute instantly on the outbound network handshake hook.</p>
-                        <button type="button" onclick="window.queueAsset('MindLink Therapist Allocation', 0, 'simulation')" class="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 text-[10px] font-black uppercase py-3.5 rounded-xl transition cursor-pointer">Queue Therapist Routing Ingress</button>
+                    <!-- PANE B: MINDLINK TUNNEL WORKFLOW -->
+                    <div id="subpane-mindlink" class="hidden text-center py-8 max-w-sm mx-auto space-y-4">
+                        <div class="space-y-1">
+                            <span class="text-[9px] font-mono font-black tracking-[0.2em] text-emerald-400 uppercase block">Isolated Behavioral Core</span>
+                            <h2 class="text-base font-black uppercase tracking-tight text-white">MindLink Specialist Portal</h2>
+                        </div>
+                        <hr class="border-slate-800/80">
+                        <span class="text-4xl block animate-pulse pt-4">🧠</span>
+                        <p class="text-xs text-slate-400 leading-relaxed font-medium">System verification logs map encrypted browser instances directly out to licensing providers. Identity credential arrays are calculated strictly during the final handshake loop.</p>
+                        <button type="button" onclick="window.queueAsset('MindLink Specialist Allocation', 0, 'simulation')" class="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 text-[10px] font-black uppercase py-4 rounded-xl transition cursor-pointer">Queue Network Specialist Target</button>
                     </div>
 
-                    <!-- SUB-PANE C: CARELIVE RECTANGULAR 4-ZONE INTERACTIVE MATRIX -->
-                    <div id="subpane-carelive" class="hidden grid grid-cols-1 sm:grid-cols-12 gap-6 pt-2">
-                        <!-- The 4-Zone Horizontal Stack Matrix Box -->
-                        <div class="sm:col-span-5 bg-[#070911] border border-slate-800/80 p-4 rounded-2xl flex flex-col items-center justify-center relative shadow-inner">
-                            <span class="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest mb-3">Anatomical Preview Canvas</span>
-                            <svg viewBox="0 0 160 380" class="w-full max-w-[150px] h-[310px]" id="rectangular-mesh">
-                                <!-- Head and Neck Box Zone -->
-                                <rect id="rect-head" x="10" y="10" width="140" height="75" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-head', 'Head & Neck Grid Core')" />
-                                <text x="80" y="52" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Head & Neck</text>
-                                
-                                <!-- Chest Box Zone -->
-                                <rect id="rect-chest" x="10" y="95" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-chest', 'Anterior Chest Core')" />
-                                <text x="80" y="142" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Chest Zone</text>
-                                
-                                <!-- Abdominal Box Zone -->
-                                <rect id="rect-abdomen" x="10" y="190" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-abdomen', 'Abdominal Core Quadrant')" />
-                                <text x="80" y="237" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Abdominal</text>
-                                
-                                <!-- Leg Box Zone -->
-                                <rect id="rect-legs" x="10" y="285" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-legs', 'Lower Distal Extremities')" />
-                                <text x="80" y="332" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Legs / Distal</text>
-                            </svg>
+                    <!-- PANE C: CARELIVE TUNNEL WORKFLOW -->
+                    <div id="subpane-carelive" class="hidden space-y-6">
+                        <div class="space-y-1">
+                            <span class="text-[9px] font-mono font-black tracking-[0.2em] text-emerald-400 uppercase block">Isolated Telehealth Core</span>
+                            <h2 class="text-base font-black uppercase tracking-tight text-white">CareLive Arena Interaction Canvas</h2>
                         </div>
-
-                        <!-- Live Streaming Video Buffer Target Frame -->
-                        <div class="sm:col-span-7 bg-[#05070F] border border-slate-900 rounded-2xl p-6 flex flex-col justify-center items-center text-center relative min-h-[260px] shadow-inner">
-                            <div id="stream-placeholder" class="space-y-2">
-                                <span class="text-xl block animate-bounce">📺</span>
-                                <h4 class="text-[10px] font-mono font-black uppercase text-slate-500 tracking-wider">Video Buffering Sandbox</h4>
-                                <p class="text-[10px] text-slate-400 max-w-xs leading-relaxed font-medium">Select a geometric quadrant zone to anchor the background setup calibration preview video stream pipeline.</p>
+                        <hr class="border-slate-800/80">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-6">
+                            <!-- 4-Zone Rectangular Layout Container Grid Matrix -->
+                            <div class="sm:col-span-5 bg-[#070911] border border-slate-800/80 p-4 rounded-2xl flex flex-col items-center justify-center relative shadow-inner">
+                                <span class="text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest mb-3">Anatomical Preference Grid</span>
+                                <svg viewBox="0 0 160 380" class="w-full max-w-[140px] h-[300px]" id="rectangular-mesh">
+                                    <rect id="rect-head" x="10" y="10" width="140" height="75" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-head', 'Head & Neck Region Config')" />
+                                    <text x="80" y="52" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Head & Neck</text>
+                                    
+                                    <rect id="rect-chest" x="10" y="95" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-chest', 'Anterior Chest Core Matrix')" />
+                                    <text x="80" y="142" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Chest Zone</text>
+                                    
+                                    <rect id="rect-abdomen" x="10" y="190" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-abdomen', 'Abdominal Core Segment')" />
+                                    <text x="80" y="237" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Abdominal</text>
+                                    
+                                    <rect id="rect-legs" x="10" y="285" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-legs', 'Lower Distal Extremities')" />
+                                    <text x="80" y="332" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Legs / Distal</text>
+                                </svg>
                             </div>
-                            <div id="stream-active-viewport" class="hidden w-full h-full flex flex-col items-center justify-center p-1 animate-fadeIn">
-                                <span class="text-[9px] font-mono text-emerald-400 font-bold mb-2 uppercase tracking-widest" id="stream-label-out">Channel Active</span>
-                                <div class="w-full aspect-video bg-[#0A0E1A] rounded-xl border border-slate-800 flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                                    <span class="text-[9px] font-mono text-slate-500 z-20 uppercase tracking-wide animate-pulse">[ Buffering Modular Rehearsal Media Asset ]</span>
+
+                            <!-- Stream Feedback Viewport Frame -->
+                            <div class="sm:col-span-7 bg-[#05070F] border border-slate-900 rounded-2xl p-6 flex flex-col justify-center items-center text-center min-h-[250px] shadow-inner">
+                                <div id="stream-placeholder" class="space-y-2">
+                                    <span class="text-xl block animate-bounce">📺</span>
+                                    <h4 class="text-[10px] font-mono font-black uppercase text-slate-500 tracking-wider">Passive Media Sandbox</h4>
+                                    <p class="text-[10px] text-slate-400 max-w-xs leading-relaxed font-medium">Select a canvas preference cell to buffer the technical routing calibration video snippet.</p>
+                                </div>
+                                <div id="stream-active-viewport" class="hidden w-full h-full flex flex-col items-center justify-center p-1 animate-fadeIn">
+                                    <span class="text-[9px] font-mono text-emerald-400 font-bold mb-2 uppercase tracking-widest" id="stream-label-out">Channel Configured</span>
+                                    <div class="w-full aspect-video bg-[#0A0E1A] rounded-xl border border-slate-800 flex items-center justify-center relative overflow-hidden">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                                        <span class="text-[9px] font-mono text-slate-500 z-20 uppercase tracking-wide animate-pulse">[ Buffering Modular Rehearsal Media Asset ]</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Advance Wizard Action Button -->
+                    <!-- Pipeline Wizard Execution Button -->
                     <div class="pt-2">
                         <button type="button" onclick="window.goToStage(2)" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-black uppercase tracking-wider py-4 rounded-xl transition shadow-lg font-bold font-mono tracking-widest cursor-pointer">
                             Proceed to Calibration Pipeline ➔
@@ -294,11 +309,11 @@
                     </div>
                 </div>
 
-                <!-- STAGE 2: PASSIVE TECHNICAL ENVIRONMENT PREVIEW -->
+                <!-- STAGE 2: PASSIVE RUNTIME TESTING CARD -->
                 <div id="stage-2" class="hidden border border-slate-200 bg-white text-slate-900 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
                     <div class="flex justify-between items-end border-b border-slate-100 pb-4">
                         <div>
-                            <span class="text-[9px] font-mono font-black text-emerald-700 uppercase tracking-widest block mb-1">Stage 02 Matrix</span>
+                            <span class="text-[9px] font-mono font-black text-emerald-700 uppercase tracking-widest block mb-1">Stage 02 Parameters</span>
                             <h2 class="text-base font-black uppercase tracking-tight text-slate-900">Environment Verification Preview</h2>
                         </div>
                         <button type="button" onclick="window.goToStage(1)" class="text-[10px] font-black text-slate-400 hover:text-slate-600 uppercase tracking-wider cursor-pointer font-mono">⇠ Back</button>
@@ -306,22 +321,21 @@
 
                     <div class="space-y-4">
                         <p class="text-[11px] text-slate-600 font-medium leading-relaxed">
-                            Wellness Front™ initiates system telemetry tests prior to infrastructure handoffs. Please confirm environmental parameters below to achieve optimal stream performance calibration.
+                            Wellness Front™ scans browser ecosystem metrics prior to integration handoffs. Confirm your external terminal parameters to optimize the baseline communication array.
                         </p>
                         
-                        <!-- Real Hardware Calibration Simulators -->
                         <div class="space-y-3 font-medium text-xs">
                             <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
                                 <div class="space-y-0.5">
                                     <span class="font-black text-slate-900 uppercase text-[10px] tracking-wide block">Ambient Facetime Lighting</span>
-                                    <p class="text-[10.5px] text-slate-500">Validate clear illumination contours.</p>
+                                    <p class="text-[10.5px] text-slate-500">Analyze user face contour transparency.</p>
                                 </div>
                                 <span class="text-emerald-600 font-mono font-black uppercase text-[10px] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Clear Clearance</span>
                             </div>
                             <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
                                 <div class="space-y-0.5">
                                     <span class="font-black text-slate-900 uppercase text-[10px] tracking-wide block">WebRTC Device Camera Mount</span>
-                                    <p class="text-[10.5px] text-slate-500">Horizontal eye-level perspective calibration.</p>
+                                    <p class="text-[10.5px] text-slate-500">Horizontal peripheral alignment verify track.</p>
                                 </div>
                                 <span class="text-emerald-600 font-mono font-black uppercase text-[10px] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Aligned Bounded</span>
                             </div>
@@ -333,7 +347,7 @@
                     </button>
                 </div>
 
-                <!-- STAGE 3: TRANSIENT ZERO-FOOTPRINT RECEIPT -->
+                <!-- STAGE 3: CRYPTOGRAPHIC TRANSIENT DISPATCH DRAWER -->
                 <div id="stage-3" class="hidden border border-slate-800 bg-[#0D1224] rounded-3xl p-8 text-center space-y-6 shadow-2xl">
                     <div class="w-14 h-14 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-full flex items-center justify-center text-xl font-black mx-auto shadow-sm select-none">
                         ✓
@@ -347,7 +361,6 @@
                         </p>
                     </div>
 
-                    <!-- Absolute Anonymous Overwrite Invoice Box -->
                     <div class="bg-[#070911] border border-slate-800 rounded-2xl p-5 text-left text-xs space-y-2.5 max-w-sm mx-auto font-medium shadow-inner">
                         <div class="flex justify-between text-slate-500 text-[9px] uppercase font-mono font-black tracking-wider pb-1 border-b border-slate-800/80"><span>System Logs</span><span id="receipt-id-tag" class="text-slate-300 font-mono">--</span></div>
                         <div class="flex justify-between text-slate-400"><span>Target Track:</span><span id="receipt-track" class="text-white font-black uppercase font-mono tracking-wider">--</span></div>
@@ -365,13 +378,13 @@
 
             </div>
 
-            <!-- RIGHT AREA: REAL-TIME PARAMETER AGGREGATOR SIDEBAR -->
+            <!-- RIGHT AREA: REAL-TIME ACCUMULATOR COLUMN -->
             <div id="sticky-summary-panel" class="lg:col-span-5 border border-slate-800/60 bg-[#0D1224] rounded-3xl p-6 sm:p-8 space-y-6 lg:sticky lg:top-24 shadow-2xl transition-all duration-300">
                 <h2 class="text-[10px] font-mono font-black uppercase tracking-wider text-slate-400 border-b border-slate-800/80 pb-3">Real-Time Allocation Manifest</h2>
                 
                 <div class="space-y-4 font-medium text-xs">
                     <div id="manifest-items-list" class="space-y-2 max-h-[180px] overflow-y-auto scrollbar-none pr-1">
-                        <!-- Dynamic list nodes load here -->
+                        <!-- Items paint programmatically -->
                     </div>
 
                     <div class="flex justify-between items-baseline border-t border-slate-800/80 pt-4">
@@ -397,21 +410,20 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- COMPLIANCE FOOTER                    -->
+    <!-- SECURE COMPLIANCE LAYER FOOTER             -->
     <!-- ========================================== -->
     <footer class="border-t border-slate-900 bg-[#0A0E1A] py-8 px-6 text-center text-slate-500 text-[9px] font-mono uppercase tracking-widest relative z-10">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <span>© 2026 Wellness Front™ Platforms. All Rights Reserved.</span>
-            <span>Decoupled Data Security Infrastructure • Build-Premium-v3.2</span>
+            <span>Decoupled Data Security Infrastructure • Build-Premium-v4.0</span>
         </div>
     </footer>
 
     <!-- ========================================== -->
-    <!-- CORE SYSTEM INTEGRATION JAVASCRIPT JIGSAW  -->
+    <!-- MASTER ARCHITECTURAL LOGIC ENGINE          -->
     <!-- ========================================== -->
     <script>
-        // Internal platform runtime metrics
-        let activeMainTrack = 'itest';
+        let activeMainTrack = '';
         let currentSubTab = 'executive';
         let activeLogisticsChannel = 'affiliate';
         let isAnonymityActive = false;
@@ -423,11 +435,11 @@
         
         let compiledManifestArray = [];
 
-        // --- ENTRANCE SECURITY PASSING MATRIX ---
+        // --- GATE CREDENTIAL CHALLENGE HANDLERS ---
         window.submitPhoneVerification = function() {
-            const phone = document.getElementById('auth-phone').value.trim();
-            if(!phone || phone.length < 8) { alert("Invalid Line Format Assignment."); return; }
-            userPhoneInstance = phone;
+            const num = document.getElementById('auth-phone').value.trim();
+            if(!num || num.length < 8) { alert("Invalid phone registration format."); return; }
+            userPhoneInstance = num;
             document.getElementById('phone-stage').classList.add('hidden');
             document.getElementById('token-stage').classList.remove('hidden');
         };
@@ -435,6 +447,13 @@
         window.submitTokenVerification = function() {
             document.getElementById('token-stage').classList.add('hidden');
             document.getElementById('profile-stage').classList.remove('hidden');
+        };
+
+        // AMENDED: Prominent Grid button framework assigner replaces the native drop menu
+        window.setGenderFramework = function(genderKey) {
+            userGender = genderKey;
+            document.getElementById('gender-male').className = genderKey === 'male' ? "bg-[#090C16] border-2 border-emerald-500 text-white text-[9px] font-black uppercase py-3.5 rounded-xl transition cursor-pointer shadow-md" : "bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-3.5 rounded-xl transition cursor-pointer";
+            document.getElementById('gender-female').className = genderKey === 'female' ? "bg-[#090C16] border-2 border-emerald-500 text-white text-[9px] font-black uppercase py-3.5 rounded-xl transition cursor-pointer shadow-md" : "bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-3.5 rounded-xl transition cursor-pointer";
         };
 
         window.setIntent = function(intent) {
@@ -445,46 +464,58 @@
 
         window.finalizeProfileGate = function() {
             const year = document.getElementById('profile-year').value;
-            const gender = document.getElementById('profile-gender').value;
-            if(!year || gender === 'unassigned') { alert("All infrastructure parameters require assignment fields."); return; }
-            userBirthYear = year; userGender = gender;
+            if(!year || !userGender) { alert("All biological configuration parameters require fields."); return; }
+            userBirthYear = year;
             
             document.getElementById('auth-gate').classList.add('opacity-0', 'pointer-events-none');
             setTimeout(() => document.getElementById('auth-gate').classList.add('hidden'), 400);
             
-            // Execute default startup state layout checks
-            switchMainTrack('itest');
+            // AMENDED: Routing immediately hits the 3-Option Isolated Hub Page
+            document.getElementById('workspace-selection-hub').classList.replace('hidden', 'flex');
         };
 
-        // --- TRACK AND SUB-TAB SWITCHING PARADIGMS ---
-        window.switchMainTrack = function(trackKey) {
+        // --- AMENDED: TUNNEL VISION WORKSPACE INITIALIZER ---
+        window.launchIsolatedTrack = function(trackKey) {
             activeMainTrack = trackKey;
             
-            // Standard radio button click synchronizer
-            const rad = document.getElementById(`track-${trackKey}`);
-            if(rad) rad.checked = true;
+            // Hide selection page, expose locked execution wrapper layout
+            document.getElementById('workspace-selection-hub').classList.replace('flex', 'hidden');
+            document.getElementById('workspace-execution-enclosure').classList.remove('hidden');
+            document.getElementById('system-status-bar').classList.remove('hidden');
+            document.getElementById('exit-track-hub-btn').classList.remove('hidden');
 
-            const cards = ['itest', 'mindlink', 'carelive'];
-            cards.forEach(k => {
-                const el = document.getElementById(`card-track-${k}`);
-                const pane = document.getElementById(`subpane-${k}`);
-                if(el) el.className = "border border-slate-800 bg-[#070911] p-4 rounded-xl cursor-pointer hover:border-emerald-500/40 transition flex flex-col justify-between min-h-[110px] shadow-inner relative select-none";
-                if(pane) pane.classList.add('hidden');
-            });
+            // Strip alternatives and load specified module content card
+            document.getElementById('subpane-itest').classList.add('hidden');
+            document.getElementById('subpane-mindlink').classList.add('hidden');
+            document.getElementById('subpane-carelive').classList.add('hidden');
+            document.getElementById(`subpane-${trackKey}`).classList.remove('hidden');
 
-            const targetCard = document.getElementById(`card-track-${trackKey}`);
-            const targetPane = document.getElementById(`subpane-${trackKey}`);
-            if(targetCard) targetCard.className = "border-2 border-emerald-500 bg-emerald-950/20 p-4 rounded-xl cursor-pointer transition flex flex-col justify-between min-h-[110px] shadow-md relative select-none";
-            if(targetPane) targetPane.classList.remove('hidden');
-
-            // Header Anonymity Controller Visibility Loop
-            const anonWrapper = document.getElementById('anonymity-container');
-            if(anonWrapper) {
-                anonWrapper.style.opacity = trackKey === 'itest' ? '1' : '0';
-                anonWrapper.style.pointerEvents = trackKey === 'itest' ? 'auto' : 'none';
+            // Dynamic visibility configuration for Anonymity toggle engine
+            const anonBox = document.getElementById('anonymity-container');
+            if(anonBox) {
+                anonBox.className = trackKey === 'itest' ? "smooth-transition block" : "smooth-transition hidden";
             }
+            goToStage(1);
         };
 
+        window.returnToSelectionHub = function() {
+            // Resets the workspace wrapper and pulls back up the isolated track selection engine
+            document.getElementById('workspace-execution-enclosure').classList.add('hidden');
+            document.getElementById('system-status-bar').classList.add('hidden');
+            document.getElementById('exit-track-hub-btn').classList.add('hidden');
+            document.getElementById('anonymity-container').className = "smooth-transition hidden";
+            
+            // Wipe variable selections to ensure complete track sanitization
+            compiledManifestArray = [];
+            document.getElementById('stream-active-viewport').classList.replace('flex', 'hidden');
+            document.getElementById('stream-placeholder').classList.remove('hidden');
+            document.querySelectorAll('.zone-rect').forEach(r => r.classList.remove('zone-rect-active'));
+            renderPlatformManifestView();
+
+            document.getElementById('workspace-selection-hub').classList.replace('hidden', 'flex');
+        };
+
+        // --- INTERNAL DATA LAYER CONTROLS ---
         window.toggleSubTab = function(subKey) {
             currentSubTab = subKey;
             const btnExec = document.getElementById('subtab-btn-executive');
@@ -517,7 +548,6 @@
             if(activeBtn) activeBtn.className = "border-2 border-emerald-500 bg-emerald-950/20 p-4 rounded-xl text-left focus:outline-none flex flex-col justify-between min-h-[90px] shadow-md cursor-pointer";
         };
 
-        // --- ANONYMITY CONTROLLER METHOD ---
         window.toggleAnonymityEngine = function() {
             isAnonymityActive = !isAnonymityActive;
             const txt = document.getElementById('anon-text');
@@ -535,7 +565,6 @@
             renderPlatformManifestView();
         };
 
-        // --- RECTANGULAR GEOMETRY PASSIVE STREAM CHANNELING ---
         window.triggerPassiveVideoBuffer = function(rectId, label) {
             document.querySelectorAll('.zone-rect').forEach(r => r.classList.remove('zone-rect-active'));
             const rect = document.getElementById(rectId);
@@ -548,12 +577,9 @@
             window.queueAsset(label, 0, 'simulation');
         };
 
-        // --- MANIFEST PARSING & CRITICAL DUPLICATION ELIMINATION LOOP ---
+        // --- NON-DUPLICATION PARSING PARAMS ---
         window.queueAsset = function(title, price, type) {
-            // Enforcement of non-duplication principles across token array checks
-            if (compiledManifestArray.some(item => item.title === title)) {
-                return; 
-            }
+            if (compiledManifestArray.some(item => item.title === title)) return; 
             compiledManifestArray.push({ id: Date.now(), title: title, price: price, type: type });
             renderPlatformManifestView();
         };
@@ -570,7 +596,6 @@
                 row.className = "bg-[#060811] border border-slate-900 p-3.5 rounded-xl flex justify-between items-center animate-fadeIn shadow-inner";
                 
                 let titleLabel = item.title;
-                // Rewrite identifier with random pseudonym numbers if anonymity layer maps over lab track
                 if (isAnonymityActive && item.type === 'lab') {
                     titleLabel = `Cryptographic Specimen Bundle Token #AP-${Math.floor(21212 + Math.random() * 67676)}`;
                 }
@@ -589,7 +614,7 @@
             if(displayPrice) displayPrice.innerText = `$${totalSum.toFixed(2)}`;
         }
 
-        // --- STAGE ROUTER WIZARD CONTROLLER ---
+        // --- WIZARD FLOW MATRIX CONTROLLER ---
         window.goToStage = function(stageNum) {
             if (stageNum === 3 && compiledManifestArray.length === 0) {
                 alert("Workspace configuration logs empty. Choose profile tracking metrics.");
@@ -613,7 +638,6 @@
             if(selectedPanel) selectedPanel.classList.remove('hidden');
 
             if (stageNum === 3) {
-                // Populate invoice fields securely with overwritten parameters
                 document.getElementById('receipt-id-tag').innerText = `WF-HASH-${Math.floor(10000 + Math.random() * 90000)}`;
                 document.getElementById('receipt-track').innerText = activeMainTrack;
                 document.getElementById('receipt-logistics').innerText = activeMainTrack === 'itest' ? activeLogisticsChannel : 'Direct Cloud Stream';
@@ -625,11 +649,10 @@
             }
         };
 
-        // --- TRANSIENT CACHE ERASURE & ANNIHILATION HANDSHAKE ---
+        // --- MEMORY PURGE AND COMPLETION ROUTINE ---
         window.triggerTransientPurgeAnnihilation = function() {
             alert("TRANSIENT DATA BRIDGE HANDSHAKE: Local memory registry completely wiped.");
             
-            // SYSTEM AMENDMENT APPLIED: Flush operational local variables down to absolute zero
             compiledManifestArray = [];
             userPhoneInstance = ""; userBirthYear = null; userGender = "";
             
@@ -641,14 +664,19 @@
             if(summaryPanel) summaryPanel.style.opacity = "1";
             renderPlatformManifestView();
             
-            // Re-lock interface, rebounding stack back to the authentication portal screen
-            goToStage(1);
+            // Break down enclosure blocks and kick container states straight back to start line
+            document.getElementById('workspace-execution-enclosure').classList.add('hidden');
+            document.getElementById('system-status-bar').classList.add('hidden');
+            document.getElementById('exit-track-hub-btn').classList.add('hidden');
+            
             document.getElementById('auth-gate').classList.remove('hidden', 'opacity-0', 'pointer-events-none');
             document.getElementById('phone-stage').classList.remove('hidden');
             document.getElementById('profile-stage').classList.add('hidden');
+            
             document.getElementById('auth-phone').value = "";
             document.getElementById('profile-year').value = "";
-            document.getElementById('profile-gender').value = "unassigned";
+            document.getElementById('gender-male').className = "bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-3.5 rounded-xl transition cursor-pointer";
+            document.getElementById('gender-female').className = "bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-3.5 rounded-xl transition cursor-pointer";
         };
     </script>
 </body>
