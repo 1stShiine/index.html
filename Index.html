@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -61,21 +60,18 @@
             <p class="text-xs text-slate-500 mb-6 font-medium">Secure verification endpoint. Phone authorization mandatory.</p>
             
             <div class="space-y-4 text-left">
-                <!-- Step A: Phone Number Verification Challenge -->
                 <div id="phone-stage">
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Verified Phone Destination</label>
                     <input type="tel" id="auth-phone" placeholder="+1 (555) 000-0000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-fbBlue focus:bg-white text-slate-900 transition shadow-inner">
                     <button onclick="window.submitPhoneVerification()" class="w-full bg-fbBlue hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl transition shadow-md mt-4 cursor-pointer">Request Passing Token ➔</button>
                 </div>
 
-                <!-- Step B: SMS Verification Simulated Entry -->
                 <div id="token-stage" class="hidden">
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Enter 6-Digit SMS Token</label>
                     <input type="text" id="auth-token" placeholder="000000" maxlength="6" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-center text-lg tracking-[0.5em] focus:outline-none focus:border-fbBlue focus:bg-white font-mono text-slate-900 transition shadow-inner">
                     <button onclick="window.submitTokenVerification()" class="w-full bg-fbBlue hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl transition shadow-md cursor-pointer">Verify Instance Access</button>
                 </div>
 
-                <!-- Step C: Legal Onboarding Inputs -->
                 <div id="profile-stage" class="hidden space-y-4">
                     <div>
                         <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Full Legal Name (ID Verification Anchor)</label>
@@ -112,7 +108,7 @@
     <!-- ========================================== -->
     <!-- MASTER BRAND HEADER                        -->
     <!-- ========================================== -->
-    <header class="border-b border-slate-200 bg-white sticky top-0 z-50 px-4 py-3 shadow-sm flex-shrink-0">
+    <header class="border-b border-slate-200 bg-white sticky top-0 z-50 px-4 py-2.5 shadow-sm flex-shrink-0">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <span class="w-2.5 h-2.5 rounded-full bg-fbBlue shadow-[0_0_8px_rgba(24,119,242,0.6)] animate-pulse"></span>
@@ -122,11 +118,9 @@
             </div>
             
             <div class="flex items-center space-x-2">
-                <!-- Exit Active Track Switch Engine -->
                 <button type="button" id="exit-track-hub-btn" onclick="window.returnToSelectionHub()" class="hidden text-[10px] font-black uppercase tracking-wider text-slate-600 hover:text-slate-900 transition border border-slate-300 bg-white px-3 py-1.5 rounded-full shadow-sm cursor-pointer">
                     « Exit Path
                 </button>
-                <!-- Order-Level payload anonymity mask trigger -->
                 <div id="anonymity-container" class="smooth-transition hidden">
                     <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full transition cursor-pointer hover:bg-slate-200">
                         <span id="anon-icon">🕵️</span>
@@ -137,35 +131,33 @@
         </div>
     </header>
 
-    <!-- Permanent Application-Level Owner Banner -->
+    <!-- Application Owner Banner Context -->
     <div class="bg-white border-b border-slate-100 px-4 py-1.5 flex items-center justify-center space-x-2 flex-shrink-0 shadow-sm">
         <span class="text-[10px] font-bold tracking-wide text-slate-400 uppercase select-none">Secured Node:</span>
         <span id="header-user-anchor" class="text-[10px] font-mono font-black uppercase text-slate-700">Unallocated</span>
     </div>
 
-    <!-- DYNAMIC STATUS BAR INDICATOR -->
+    <!-- DYNAMIC TRACK STATUS INDICATOR BAR -->
     <section id="system-status-bar" class="hidden bg-white border-b border-slate-200 py-2.5 px-4 flex-shrink-0 relative z-10 animate-fadeIn">
         <div id="status-bar-container" class="max-w-xl mx-auto flex items-center justify-center space-x-6 text-center text-[10px] font-black uppercase tracking-wider font-mono"></div>
     </section>
 
     <!-- ========================================== -->
-    <!-- VIEW CONTAINER PANELS                      -->
+    <!-- VIEW CONTAINER ENGINE OVERLAYS             -->
     <!-- ========================================== -->
     <main class="flex-grow flex flex-col justify-start">
 
-        <!-- PANEL A: HIGH-END PORTRAIT THREE-TRACK SELECTION HUB -->
+        <!-- PANEL A: HIGH-END PORTRAIT THREE-TRACK DASHBOARD HUB -->
         <section id="workspace-selection-hub" class="hidden flex-grow bg-[#F4F6FA] flex-col justify-start pt-8 items-center px-4 animate-fadeIn overflow-hidden">
             <div class="w-full max-w-2xl space-y-6">
                 <div class="text-center space-y-1">
                     <span class="text-[10px] font-mono font-black tracking-[0.2em] text-fbBlue uppercase">System Operations</span>
-                    <h2 class="text-base font-black uppercase tracking-tight text-slate-900">Select Environment Track</h2>
+                    <h2 class="text-sm font-black uppercase tracking-tight text-slate-900">Select Environment Track</h2>
                 </div>
                 
-                <!-- Premium Engineered Card Row Matrix (Benchmark Fitted Layout) -->
                 <div class="flex md:justify-center space-x-4 overflow-x-auto pb-6 pt-2 px-4 scrollbar-none snap-x snap-mandatory w-full">
-                    
                     <!-- iTest Track Card -->
-                    <div onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[160px] bg-gradient-to-br from-white via-slate-50 to-blue-50/30 border border-slate-200/80 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-lg hover:-translate-y-0.5 smooth-transition shadow-sm flex flex-col justify-between min-h-[195px] text-left group relative overflow-hidden">
+                    <div onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[145px] bg-gradient-to-br from-white via-slate-50 to-blue-50/30 border border-slate-200/80 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-lg hover:-translate-y-0.5 smooth-transition shadow-sm flex flex-col justify-between min-h-[195px] text-left group relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-blue-500/10 text-fbBlue border-b border-l border-slate-200 font-mono text-[7px] font-black uppercase px-2 py-0.5 tracking-wider rounded-bl-lg">Direct Access</div>
                         <div class="w-10 h-12 bg-white text-base rounded-xl flex items-center justify-center border border-slate-200 shadow-sm group-hover:scale-105 transition-transform">🧬</div>
                         <div class="space-y-1 mt-4">
@@ -175,7 +167,7 @@
                     </div>
 
                     <!-- MindLink Track Card -->
-                    <div onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[140px] bg-gradient-to-br from-white via-slate-50 to-purple-50/20 border border-slate-200/80 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-lg hover:-translate-y-0.5 smooth-transition shadow-sm flex flex-col justify-between min-h-[195px] text-left group relative overflow-hidden">
+                    <div onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[145px] bg-gradient-to-br from-white via-slate-50 to-purple-50/20 border border-slate-200/80 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-lg hover:-translate-y-0.5 smooth-transition shadow-sm flex flex-col justify-between min-h-[195px] text-left group relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-purple-500/10 text-purple-600 border-b border-l border-slate-200 font-mono text-[7px] font-black uppercase px-2 py-0.5 tracking-wider rounded-bl-lg">Encrypted</div>
                         <div class="w-10 h-12 bg-white text-base rounded-xl flex items-center justify-center border border-slate-200 shadow-sm group-hover:scale-105 transition-transform">🧠</div>
                         <div class="space-y-1 mt-4">
@@ -185,7 +177,7 @@
                     </div>
 
                     <!-- CareLive Track Card -->
-                    <div onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[140px] bg-gradient-to-br from-white via-slate-50 to-emerald-50/20 border border-slate-200/80 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-lg hover:-translate-y-0.5 smooth-transition shadow-sm flex flex-col justify-between min-h-[195px] text-left group relative overflow-hidden">
+                    <div onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[145px] bg-gradient-to-br from-white via-slate-50 to-emerald-50/20 border border-slate-200/80 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-lg hover:-translate-y-0.5 smooth-transition shadow-sm flex flex-col justify-between min-h-[195px] text-left group relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-emerald-500/10 text-emerald-600 border-b border-l border-slate-200 font-mono text-[7px] font-black uppercase px-2 py-0.5 tracking-wider rounded-bl-lg">Sandbox</div>
                         <div class="w-10 h-12 bg-white text-base rounded-xl flex items-center justify-center border border-slate-200 shadow-sm group-hover:scale-105 transition-transform">📐</div>
                         <div class="space-y-1 mt-4">
@@ -193,23 +185,27 @@
                             <p class="text-[9px] text-slate-500 leading-tight font-medium">Acute stream interface setup validation.</p>
                         </div>
                     </div>
-
                 </div>
                 <p class="text-[8.5px] font-mono font-black text-slate-400 uppercase text-center tracking-widest animate-pulse select-none">Swipe horizontally to scroll tracks ↔</p>
             </div>
         </section>
 
-        <!-- PANEL B: TUNNEL-VISION WORKSPACE INNER FLOWS -->
+        <!-- PANEL B: TUNNEL-VISION WORKSPACE WORKFLOW LAYER -->
         <section id="workspace-execution-enclosure" class="hidden flex-grow bg-[#F4F6FA] px-4 py-4 relative z-10 animate-fadeIn min-h-0 overflow-y-auto scrollbar-none">
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 items-start pb-24">
+                
                 <div class="lg:col-span-7">
+                    <!-- STAGE 1 WORKING WINDOW CHASSIS -->
                     <div id="stage-1" class="border border-slate-200 bg-white rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm">
-                        <!-- iTEST PACKAGES INNER FORM -->
+                        
+                        <!-- WORKFLOW A: iTEST MARKETPLACE -->
                         <div id="subpane-itest" class="hidden space-y-4">
                             <div class="flex space-x-1.5 bg-slate-100 border border-slate-200/60 p-1 rounded-xl">
                                 <button type="button" id="subtab-btn-executive" onclick="window.toggleSubTab('executive')" class="flex-1 bg-white text-slate-900 border border-slate-200/30 text-[10px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer">Executive Panels</button>
                                 <button type="button" id="subtab-btn-corporate" onclick="window.toggleSubTab('corporate')" class="flex-1 text-slate-500 hover:text-slate-800 text-[10px] font-black uppercase py-2 rounded-lg transition cursor-pointer">Corporate Compliance</button>
                             </div>
+
+                            <!-- RESTORED: All Executive Diagnostic Panel Offerings Built Since Milestone 1 -->
                             <div id="market-grid-executive" class="space-y-2">
                                 <div class="border border-slate-200/80 bg-white p-3.5 rounded-xl flex items-center justify-between shadow-sm">
                                     <div class="space-y-0.5 max-w-[70%]">
@@ -221,12 +217,24 @@
                                         <button type="button" onclick="window.queueAsset('Core Baseline', 165, 'lab')" class="bg-fbBlue hover:bg-blue-600 text-white text-[10px] font-black uppercase px-3 py-1.5 rounded-md transition cursor-pointer">Select</button>
                                     </div>
                                 </div>
+                                <!-- RESTORED MISSING OPTION BLOCK -->
+                                <div class="border border-slate-200/80 bg-white p-3.5 rounded-xl flex items-center justify-between shadow-sm">
+                                    <div class="space-y-0.5 max-w-[70%]">
+                                        <h4 class="text-xs font-black uppercase text-slate-900">Longevity Protocol™</h4>
+                                        <p class="text-[10.5px] text-slate-500 leading-tight font-medium">Core Baseline + Advanced Lipids (ApoB), Inflammation hs-CRP, Total Testosterone Matrix.</p>
+                                    </div>
+                                    <div class="text-right flex-shrink-0">
+                                        <span class="text-xs font-mono font-black text-fbBlue block mb-1.5">$349.00</span>
+                                        <button type="button" onclick="window.queueAsset('Longevity Matrix', 349, 'lab')" class="bg-fbBlue hover:bg-blue-600 text-white text-[10px] font-black uppercase px-3 py-1.5 rounded-md transition cursor-pointer">Select</button>
+                                    </div>
+                                </div>
                             </div>
+
                             <div id="market-grid-corporate" class="hidden space-y-2">
                                 <div class="border border-slate-200/80 bg-white p-3.5 rounded-xl flex items-center justify-between shadow-sm border-l-2 border-msgBlue">
                                     <div class="space-y-0.5 max-w-[70%]">
                                         <h4 class="text-xs font-black uppercase text-msgBlue">Workplace Drug Screening</h4>
-                                        <p class="text-[10.5px] text-slate-500 leading-tight font-medium">Rapid workplace compliance testing.</p>
+                                        <p class="text-[10.5px] text-slate-500 leading-tight font-medium">Rapid workplace compliance testing. Cryptographic masking metrics enabled.</p>
                                     </div>
                                     <div class="text-right flex-shrink-0">
                                         <span class="text-xs font-mono font-black text-msgBlue block mb-1.5">$85.00</span>
@@ -234,6 +242,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="space-y-2 pt-1">
                                 <label class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 block">Fulfillment Channel</label>
                                 <div class="grid grid-cols-2 gap-2">
@@ -249,15 +258,15 @@
                             </div>
                         </div>
 
-                        <!-- MINDLINK INNER VIEW -->
+                        <!-- WORKFLOW B: MINDLINK VIEW -->
                         <div id="subpane-mindlink" class="hidden text-center py-4 max-w-sm mx-auto space-y-3">
                             <div class="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center text-xl mx-auto border border-purple-100 animate-pulse">🧠</div>
                             <h3 class="text-xs font-black uppercase tracking-wider text-slate-900">MindLink Specialist Room</h3>
                             <p class="text-[11px] text-slate-500 leading-relaxed">Encrypted validation networks are ready to synchronize your clinical session records.</p>
-                            <button type="button" onclick="window.queueAsset('MindLink Specialized Allocation', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Secure Your Place In Line ➔</button>
+                            <button type="button" onclick="window.queueAsset('MindLink Specialist Assignment', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Secure Your Place In Line ➔</button>
                         </div>
 
-                        <!-- CARELIVE ZONE INNER VIEW -->
+                        <!-- WORKFLOW C: CARELIVE ZONE ARENA -->
                         <div id="subpane-carelive" class="hidden space-y-4">
                             <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
                                 <div class="sm:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center justify-center relative shadow-inner">
@@ -286,8 +295,12 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- RESTORED: Dynamic Submission Button Triggers Binding Explicitly -->
                         <div class="pt-1">
-                            <button type="button" id="stage-1-master-btn" onclick="window.handleStage1Submission()" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl shadow-md font-mono tracking-widest cursor-pointer">Proceed ➔</button>
+                            <button type="button" id="stage-1-master-btn" onclick="window.handleStage1Submission()" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl shadow-md font-mono tracking-widest cursor-pointer">
+                                Proceed ➔
+                            </button>
                         </div>
                     </div>
 
@@ -317,6 +330,7 @@
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-[11px] space-y-2 max-w-sm mx-auto font-medium shadow-inner">
                             <div class="flex justify-between text-slate-400 text-[8px] font-mono font-black pb-1 border-b border-slate-200"><span>System Logs</span><span id="receipt-id-tag">--</span></div>
                             <div class="flex justify-between"><span>Account Profile Name:</span><span id="receipt-profile-name" class="font-black">--</span></div>
+                            <div class="flex justify-between"><span>Profile Intent Frame:</span><span id="receipt-intent-view" class="font-mono font-bold text-fbBlue uppercase text-[10px]">--</span></div>
                             <div class="flex justify-between"><span>Active Track Code:</span><span id="receipt-track" class="font-black">--</span></div>
                             <div class="flex justify-between"><span>Fulfillment Mode:</span><span id="receipt-logistics" class="font-black">--</span></div>
                             <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Settlement Terms:</span><span id="receipt-net" class="text-fbBlue text-xs font-mono">--</span></div>
@@ -337,11 +351,10 @@
             </div>
         </section>
 
-        <!-- PANEL C: PREMIUM PROFILE ACCOUNT CANVAS OVERLAY (Matches 1782223353450.jpeg) -->
+        <!-- PANEL C: PREMIUM PROFILE ACCOUNT CANVAS OVERLAY -->
         <section id="workspace-account-dashboard" class="hidden flex-grow bg-[#F4F6FA] px-4 py-6 animate-fadeIn">
             <div class="max-w-md mx-auto bg-white border border-slate-200/80 rounded-3xl shadow-xl p-6 space-y-5">
                 
-                <!-- Identity Block Layout -->
                 <div class="flex items-center space-x-4 pb-4 border-b border-slate-100">
                     <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded-full flex items-center justify-center shadow-inner select-none">
                         <svg class="w-6 h-6 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.67-5-3.33-8-3z"/></svg>
@@ -355,14 +368,12 @@
                     </div>
                 </div>
 
-                <!-- Premium Tool Grid Buttons Block -->
                 <div class="grid grid-cols-3 gap-2 text-center text-[10px] font-black uppercase tracking-wide">
-                    <button onclick="alert('Current operational environment token is locked.');" class="bg-gradient-to-b from-white to-slate-50 border border-slate-200 text-slate-700 py-3 rounded-xl shadow-sm hover:shadow transition cursor-pointer flex flex-col items-center justify-center space-y-1"><svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
-                    <button onclick="alert('Secure result vouchers generated.');" class="bg-gradient-to-b from-white to-slate-50 border border-slate-200 text-slate-700 py-3 rounded-xl shadow-sm hover:shadow transition cursor-pointer flex flex-col items-center justify-center space-y-1"><svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
-                    <button onclick="alert('Invitation copied to system clipboard array.');" class="bg-gradient-to-b from-white to-slate-50 border border-slate-200 text-slate-700 py-3 rounded-xl shadow-sm hover:shadow transition cursor-pointer flex flex-col items-center justify-center space-y-1"><svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
+                    <button onclick="alert('Current operational environment track configuration matrix is locked.');" class="bg-gradient-to-b from-white to-slate-50 border border-slate-200 text-slate-700 py-3 rounded-xl shadow-sm hover:shadow transition cursor-pointer flex flex-col items-center justify-center space-y-1"><svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
+                    <button onclick="alert('Secure payload result link copied to clipboard device mapping.');" class="bg-gradient-to-b from-white to-slate-50 border border-slate-200 text-slate-700 py-3 rounded-xl shadow-sm hover:shadow transition cursor-pointer flex flex-col items-center justify-center space-y-1"><svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
+                    <button onclick="alert('Platform reference invite string buffered to system cache clipboard.');" class="bg-gradient-to-b from-white to-slate-50 border border-slate-200 text-slate-700 py-3 rounded-xl shadow-sm hover:shadow transition cursor-pointer flex flex-col items-center justify-center space-y-1"><svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
                 </div>
 
-                <!-- Premium Menu Selection Table List Rows -->
                 <div class="border border-slate-200/70 rounded-2xl overflow-hidden divide-y divide-slate-100 text-xs font-bold text-slate-700 shadow-sm bg-white">
                     <div class="p-3.5 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer">
                         <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg><span>Ecosystem Inbox Channels</span></div>
@@ -372,7 +383,7 @@
                         <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.033 6.033 0 00-4.59-5.741C13.07 4.54 11.96 4 10.5 4s-2.57.54-2.91 1.259A6.033 6.033 0 003 11v3.159c0 .538-.214 1.055-.595 1.436L1 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg><span>System Activity Notifications</span></div>
                         <span class="w-2 h-2 bg-fbBlue rounded-full animate-pulse"></span>
                     </div>
-                    <div class="p-3.5 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="alert('Historic ledger arrays cleared.');">
+                    <div class="p-3.5 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="alert('Historic ledger logs cleared from active window view frames.');">
                         <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg><span>Transaction History Log Registry</span></div>
                         <span class="text-[10px] font-mono text-slate-400 font-bold">View Logs</span>
                     </div>
@@ -386,7 +397,6 @@
                     </div>
                 </div>
 
-                <!-- Warning Block -->
                 <div class="bg-red-50 border border-red-100 rounded-2xl p-4 text-[10px] font-medium leading-normal text-red-600 flex items-start space-x-3 shadow-sm">
                     <svg class="w-4 h-4 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                     <p>High-Security Endpoint: Local screenshot captures and client hardware media streaming storage profiles are programmatically restricted inside this canvas matrix wrapper frame.</p>
@@ -399,12 +409,10 @@
     <!-- SECURE PERSISTENT BOTTOM NAVIGATION BAR    -->
     <!-- ========================================== -->
     <nav class="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200/80 shadow-[0_-4px_12px_rgba(0,0,0,0.03)] z-50 px-12 py-2 flex items-center justify-between max-w-md mx-auto rounded-t-2xl select-none">
-        <!-- Home Button with Clean Path SVG (Benchmark Fitted, Dropped Emojis) -->
         <button id="nav-btn-home" onclick="window.switchBottomNavigationTab('home')" class="flex flex-col items-center space-y-0.5 text-fbBlue focus:outline-none transition group cursor-pointer flex-1">
             <svg class="w-5 h-5 group-hover:scale-105 smooth-transition" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
             <span class="text-[9px] font-black uppercase tracking-wider font-mono">Home</span>
         </button>
-        <!-- Account Button with Clean Profile SVG (Benchmark Fitted, Dropped Emojis) -->
         <button id="nav-btn-account" onclick="window.switchBottomNavigationTab('account')" class="flex flex-col items-center space-y-0.5 text-slate-400 focus:outline-none transition group cursor-pointer flex-1">
             <svg class="w-5 h-5 group-hover:scale-105 smooth-transition" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
             <span class="text-[9px] font-black uppercase tracking-wider font-mono">Account</span>
@@ -412,7 +420,7 @@
     </nav>
 
     <!-- ========================================== -->
-    <!-- MASTER ARCHITECTURAL IMPLEMENTATION CORE   -->
+    <!-- SYSTEMS RUNTIME ENGINE PLATFORM SCRIPT     -->
     <!-- ========================================== -->
     <script>
         let activeMainTrack = '';
@@ -434,6 +442,7 @@
                 userEmailAddress = localStorage.getItem('wf_user_email') || "not.allocated@endpoint.com";
                 userBirthYear = localStorage.getItem('wf_user_birthyear');
                 userGender = localStorage.getItem('wf_user_gender');
+                userProfileIntent = localStorage.getItem('wf_user_intent') || "Self";
                 
                 document.getElementById('auth-gate').classList.add('hidden', 'opacity-0', 'pointer-events-none');
                 hydrateUserHeadersAndContext();
@@ -512,6 +521,7 @@
             localStorage.setItem('wf_user_email', userEmailAddress);
             localStorage.setItem('wf_user_birthyear', userBirthYear);
             localStorage.setItem('wf_user_gender', userGender);
+            localStorage.setItem('wf_user_intent', userProfileIntent);
             
             document.getElementById('auth-gate').classList.add('opacity-0', 'pointer-events-none');
             setTimeout(() => document.getElementById('auth-gate').classList.add('hidden'), 400);
@@ -579,12 +589,12 @@
 
             if(subKey === 'executive') {
                 if(btnExec) btnExec.className = "flex-1 bg-white text-slate-900 border border-slate-200/30 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
-                if(btnCorp) btnCorp.className = "flex-1 text-slate-400 hover:text-white text-[9px] font-black uppercase py-2 rounded-lg transition";
+                if(btnCorp) btnCorp.className = "flex-1 text-slate-400 hover:text-slate-800 text-[9px] font-black uppercase py-2 rounded-lg transition";
                 if(gridExec) gridExec.classList.remove('hidden');
                 if(gridCorp) gridCorp.classList.add('hidden');
             } else {
                 if(btnCorp) btnCorp.className = "flex-1 bg-white text-slate-900 border border-slate-200/30 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
-                if(btnExec) btnExec.className = "flex-1 text-slate-400 hover:text-white text-[9px] font-black uppercase py-2 rounded-lg transition";
+                if(btnExec) btnExec.className = "flex-1 text-slate-400 hover:text-slate-800 text-[9px] font-black uppercase py-2 rounded-lg transition";
                 if(gridCorp) gridCorp.classList.remove('hidden');
                 if(gridExec) gridExec.classList.add('hidden');
             }
@@ -692,6 +702,7 @@
                 document.getElementById('receipt-track').innerText = activeMainTrack.toUpperCase();
                 document.getElementById('receipt-logistics').innerText = activeMainTrack === 'itest' ? activeLogisticsChannel.toUpperCase() : 'CLOUD TERMINAL';
                 document.getElementById('receipt-profile-name').innerText = isAnonymityActive ? "ANONYMIZED DISCREET DECOUPLED CODE HOLD" : userFullLegalName.toUpperCase();
+                document.getElementById('receipt-intent-view').innerText = `FOR ${userProfileIntent.toUpperCase()}`;
                 document.getElementById('receipt-net').innerText = document.getElementById('summary-total-price').innerText;
                 
                 const summaryPanel = document.getElementById('sticky-summary-panel');
@@ -702,7 +713,7 @@
         window.triggerTransientPurgeAnnihilation = function() {
             alert("TRANSIENT DATA BRIDGE HANDSHAKE: Local temporary session records completely wiped.");
             compiledManifestArray = [];
-            document.getElementById('stream-active-viewport').classList.replace('flex', 'hidden');
+            document.getElementById('stream-active-viewport').classList.replace('hidden', 'flex');
             document.getElementById('stream-placeholder').classList.remove('hidden');
             document.querySelectorAll('.zone-rect').forEach(r => r.classList.remove('zone-rect-active'));
             
