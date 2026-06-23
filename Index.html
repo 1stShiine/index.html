@@ -140,15 +140,11 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- STEP STATUS TIMELINE INDICATOR             -->
+    <!-- DYNAMIC STATUS BAR INDICATOR               -->
     <!-- ========================================== -->
     <section id="system-status-bar" class="hidden bg-white border-b border-slate-200 py-2 px-4 flex-shrink-0 relative z-10 animate-fadeIn">
-        <div class="max-w-xl mx-auto flex items-center justify-center space-x-6 text-center text-[10px] font-black uppercase tracking-wider font-mono">
-            <span id="nav-step-1" class="text-fbBlue transition-colors duration-200">01 / Setup</span>
-            <span class="text-slate-300">•</span>
-            <span id="nav-step-2" class="text-slate-400 transition-colors duration-200">02 / Review</span>
-            <span class="text-slate-300">•</span>
-            <span id="nav-step-3" class="text-slate-400 transition-colors duration-200">03 / Handshake</span>
+        <div id="status-bar-container" class="max-w-xl mx-auto flex items-center justify-center space-x-6 text-center text-[10px] font-black uppercase tracking-wider font-mono">
+            <!-- Content swaps out dynamically via straight forward script rules -->
         </div>
     </section>
 
@@ -157,13 +153,12 @@
     <!-- ========================================== -->
     <section id="workspace-selection-hub" class="hidden flex-grow bg-msgLightBg flex-col justify-start pt-4 items-center px-4 animate-fadeIn overflow-hidden">
         <div class="w-full max-w-2xl space-y-4">
-            <!-- AMENDED: Clean text headers optimized for crisp spacing metrics -->
             <div class="text-center space-y-0.5">
                 <span class="text-[9px] font-mono font-black tracking-widest text-fbBlue uppercase">System Initialized</span>
                 <h2 class="text-sm font-black uppercase tracking-tight text-slate-900">Select Environment Track</h2>
             </div>
             
-            <!-- AMENDED: Engraved, tight portait card matrix distribution blocks -->
+            <!-- Engraved portrait card matrix distribution blocks (Matches 24623.jpg Proportions) -->
             <div class="flex md:justify-center space-x-3 overflow-x-auto pb-4 pt-1 px-4 scrollbar-none snap-x snap-mandatory w-full">
                 
                 <!-- Track Card 1: iTest -->
@@ -208,7 +203,7 @@
             <!-- LEFT WORKSPACE AREA -->
             <div class="lg:col-span-7">
                 
-                <!-- STAGE 1: SYSTEM CONTROLS -->
+                <!-- STAGE 1: LOCK CONTROL PANELS -->
                 <div id="stage-1" class="border border-slate-200 bg-white rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm">
                     
                     <!-- WORKFLOW A: iTEST MARKETPLACE MAPPED LISTS -->
@@ -278,16 +273,16 @@
                         <span class="text-2xl block animate-pulse">🧠</span>
                         <h3 class="text-xs font-black uppercase tracking-wider text-slate-900">MindLink Portal</h3>
                         <p class="text-[11px] text-slate-500 leading-relaxed">System parameters sync user sessions straight to licensed networks. Full legal name verification filters will analyze credentials on handshake.</p>
-                        <button type="button" onclick="window.queueAsset('MindLink Specialist Assignment', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Queue Specialist Target</button>
+                        <!-- Straight forward vocabulary applied -->
+                        <button type="button" onclick="window.queueAsset('MindLink Specialist Assignment', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Secure Your Place In Line ➔</button>
                     </div>
 
-                    <!-- WORKFLOW C: CARELIVE TUNNEL ARENA -->
+                    <!-- WORKFLOW C: CARELIVE TUNNEL ARENA (Zones Terminologies) -->
                     <div id="subpane-carelive" class="hidden space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
-                            <!-- 4-Zone Matrix Canvas Box -->
                             <div class="sm:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center justify-center relative shadow-inner">
                                 <svg viewBox="0 0 160 380" class="w-full max-w-[120px] h-[250px]" id="rectangular-mesh">
-                                    <rect id="rect-head" x="10" y="10" width="140" height="75" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-head', 'Head & Neck Section')" />
+                                    <rect id="rect-head" x="10" y="10" width="140" height="75" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-head', 'Head & Neck Zone')" />
                                     <text x="80" y="52" fill="#6B7280" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Head & Neck</text>
                                     
                                     <rect id="rect-chest" x="10" y="95" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-chest', 'Anterior Chest Zone')" />
@@ -301,12 +296,11 @@
                                 </svg>
                             </div>
 
-                            <!-- Passive Setup Stream Feed Monitor -->
                             <div class="sm:col-span-7 bg-slate-900 border border-slate-950 rounded-xl p-4 flex flex-col justify-center items-center text-center min-h-[190px] shadow-inner relative">
                                 <div id="stream-placeholder" class="space-y-1 text-slate-400">
                                     <span class="text-xl block animate-pulse">📺</span>
                                     <h4 class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-500">Media Sandbox</h4>
-                                    <p class="text-[10px] text-slate-400 max-w-[180px] mx-auto leading-normal">Select a canvas quadrant cell to update the background calibration video monitor.</p>
+                                    <p class="text-[10px] text-slate-400 max-w-[180px] mx-auto leading-normal">Identify target area preference cell quadrant to update the validation stream monitoring.</p>
                                 </div>
                                 <div id="stream-active-viewport" class="hidden w-full h-full flex flex-col items-center justify-center animate-fadeIn">
                                     <span class="text-[9px] font-mono text-fbBlue font-bold mb-1.5 uppercase tracking-widest" id="stream-label-out">Channel Configured</span>
@@ -318,10 +312,10 @@
                         </div>
                     </div>
 
-                    <!-- Wizard Pipeline Core Execution Action Button -->
+                    <!-- Wizard Action Button (Straight forward vocabulary applied) -->
                     <div class="pt-1">
-                        <button type="button" onclick="window.goToStage(2)" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl transition shadow-md font-mono tracking-widest cursor-pointer">
-                            Proceed to Calibration Pipeline ➔
+                        <button type="button" id="stage-1-master-btn" onclick="window.handleStage1Submission()" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl transition shadow-md font-mono tracking-widest cursor-pointer">
+                            Proceed ➔
                         </button>
                     </div>
                 </div>
@@ -359,12 +353,13 @@
                         </div>
                     </div>
 
+                    <!-- Straight forward text target mapping applied -->
                     <button type="button" onclick="window.goToStage(3)" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl transition shadow-md font-mono tracking-widest cursor-pointer">
-                        Execute Network Validation Handshake ➔
+                        Submit ➔
                     </button>
                 </div>
 
-                <!-- STAGE 3: DATA DESTRUCTION INVOICE RECEIPT -->
+                <!-- STAGE 3: TRANSIENT RECEIPT LOG DRAWER -->
                 <div id="stage-3" class="hidden border border-slate-200 bg-white text-slate-900 rounded-2xl p-6 text-center space-y-4 shadow-sm animate-fadeIn">
                     <div class="w-11 h-11 bg-blue-50 text-fbBlue rounded-full flex items-center justify-center text-lg font-black mx-auto shadow-sm select-none">
                         ✓
@@ -380,16 +375,17 @@
 
                     <!-- Order-Level Decoupled Invoice Confirmation Block -->
                     <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-[11px] space-y-2 max-w-sm mx-auto font-medium shadow-inner">
-                        <div class="flex justify-between text-slate-400 text-[8px] uppercase font-mono font-black tracking-wider pb-1 border-b border-slate-200"><span>System Logs</span><span id="receipt-id-tag" class="text-slate-300 font-mono">--</span></div>
+                        <div class="flex justify-between text-slate-400 text-[8px] uppercase font-mono font-black tracking-wider pb-1 border-b border-slate-200"><span>System Logs</span><span id="receipt-id-tag" class="text-slate-600 font-mono">--</span></div>
                         <div class="flex justify-between text-slate-600"><span>Profile Account Anchor:</span><span id="receipt-profile-name" class="text-slate-900 font-black uppercase font-mono tracking-wider">--</span></div>
                         <div class="flex justify-between text-slate-600"><span>Target Track:</span><span id="receipt-track" class="text-slate-900 font-black uppercase font-mono tracking-wider">--</span></div>
                         <div class="flex justify-between text-slate-600"><span>Fulfillment Logic:</span><span id="receipt-logistics" class="text-slate-900 font-black uppercase font-mono tracking-wider">--</span></div>
                         <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Settlement Hold Terms:</span><span id="receipt-net" class="text-fbBlue text-xs font-mono font-black">--</span></div>
                     </div>
 
+                    <!-- Straight forward vocabulary "Done" applied -->
                     <div class="pt-1">
                         <button type="button" onclick="window.triggerTransientPurgeAnnihilation()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[9px] font-black uppercase tracking-widest py-3.5 rounded-xl transition shadow-lg cursor-pointer font-mono">
-                            Purge Local Device Cache Matrix ➔
+                            Done ➔
                         </button>
                     </div>
                 </div>
@@ -433,7 +429,7 @@
     <footer class="border-t border-slate-200 bg-white py-6 px-4 text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest relative z-10 flex-shrink-0">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <span>© 2026 Wellness Front™ Platforms. All Rights Reserved.</span>
-            <span>Decoupled Data Security Infrastructure • Build-Premium-Light-v4.5</span>
+            <span>Decoupled Data Security Infrastructure • Build-Premium-Light-v4.6</span>
         </div>
     </footer>
 
@@ -499,10 +495,9 @@
         window.finalizeProfileGate = function() {
             const name = document.getElementById('profile-fullname').value.trim();
             const year = document.getElementById('profile-year').value;
-            if(!name || !year || !userGender) { alert("All initialization configurations require parameter inputs."); return; }
+            if(!name || !year || !userGender) { alert("All initialization configurations require fields."); return; }
             
             userFullLegalName = name; userBirthYear = year;
-            
             localStorage.setItem('wf_user_registered', 'true');
             localStorage.setItem('wf_user_fullname', userFullLegalName);
             localStorage.setItem('wf_user_birthyear', userBirthYear);
@@ -529,11 +524,35 @@
             document.getElementById('subpane-carelive').classList.add('hidden');
             document.getElementById(`subpane-${trackKey}`).classList.remove('hidden');
 
+            // Dynamically rewrite status bars with straightforward terms
+            const statusBar = document.getElementById('status-bar-container');
+            const masterBtn = document.getElementById('stage-1-master-btn');
+
+            if(trackKey === 'itest') {
+                statusBar.innerHTML = `<span id="nav-step-1" class="text-fbBlue font-black">01 / Select Panel</span><span class="text-slate-300">•</span><span id="nav-step-3" class="text-slate-400 font-normal">02 / Checkout</span>`;
+                if(masterBtn) masterBtn.innerText = "Proceed to Checkout ➔";
+            } else if(trackKey === 'mindlink') {
+                statusBar.innerHTML = `<span id="nav-step-1" class="text-fbBlue font-black">01 / You are in line</span><span class="text-slate-300">•</span><span id="nav-step-3" class="text-slate-400 font-normal">02 / Done</span>`;
+                if(masterBtn) masterBtn.innerText = "Proceed to Checkout ➔";
+            } else if(trackKey === 'carelive') {
+                statusBar.innerHTML = `<span id="nav-step-1" class="text-fbBlue font-black">01 / Select Zone</span><span class="text-slate-300">•</span><span id="nav-step-2" class="text-slate-400 font-normal">02 / Calibrate WebRTC</span><span class="text-slate-300">•</span><span id="nav-step-3" class="text-slate-400 font-normal">03 / Submit</span>`;
+                if(masterBtn) masterBtn.innerText = "Proceed to Calibration Checklist ➔";
+            }
+
             const anonWrapper = document.getElementById('anonymity-container');
             if(anonWrapper) {
                 anonWrapper.className = trackKey === 'itest' ? "smooth-transition block" : "smooth-transition hidden";
             }
             goToStage(1);
+        };
+
+        window.handleStage1Submission = function() {
+            // Enforce routing locks to prevent checklist leaks across paths
+            if(activeMainTrack === 'carelive') {
+                goToStage(2); 
+            } else {
+                goToStage(3); 
+            }
         };
 
         window.returnToSelectionHub = function() {
@@ -561,7 +580,7 @@
 
             if(subKey === 'executive') {
                 if(btnExec) btnExec.className = "flex-1 bg-white text-slate-900 border border-slate-200/60 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
-                if(btnCorp) btnCorp.className = "flex-1 text-slate-400 hover:text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
+                if(btnCorp) btnCorp.className = "flex-1 text-slate-500 hover:text-slate-800 text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
                 if(gridExec) gridExec.classList.remove('hidden');
                 if(gridCorp) gridCorp.classList.add('hidden');
             } else {
@@ -630,7 +649,6 @@
                 const row = document.createElement('div');
                 row.className = "bg-slate-50 border border-slate-200 p-3 rounded-xl flex justify-between items-center shadow-inner animate-fadeIn";
                 
-                // Mask item labels strictly inside outbound order lines if anonymity is live
                 let visibleLabel = item.title;
                 if (isAnonymityActive && item.type === 'lab') {
                     visibleLabel = `Cryptographic Specimen Hold Token #AP-${Math.floor(21212 + Math.random() * 67676)}`;
@@ -638,7 +656,7 @@
 
                 row.innerHTML = `
                     <div>
-                        <span class="text-[8px] font-mono font-black uppercase px-2 py-0.5 rounded ${item.type === 'lab' ? 'bg-blue-50 text-fbBlue border border-fbBlue/20' : 'bg-slate-200 text-slate-700'}">${item.type.toUpperCase()} BOUND</span>
+                        <span class="text-[8px] font-mono font-black uppercase px-2 py-0.5 rounded ${item.type === 'lab' ? 'bg-blue-50 text-fbBlue border border-fbBlue/20' : 'bg-slate-200 text-slate-700'}">iTest BOUND</span>
                         <p class="text-[10px] font-mono font-bold text-slate-700 mt-1">"${visibleLabel}"</p>
                     </div>
                     <button onclick="compiledManifestArray = compiledManifestArray.filter(i => i.id !== ${item.id}); renderPlatformManifestView();" class="text-slate-400 hover:text-red-500 font-bold pl-2 text-xs cursor-pointer">✕</button>
@@ -653,7 +671,7 @@
         // --- SYSTEM WORKFLOW PIPELINE STAGE DRIVER ---
         window.goToStage = function(stageNum) {
             if (stageNum === 3 && compiledManifestArray.length === 0) {
-                alert("Manifest log arrays are unassigned. Choose system parameters.");
+                alert("Manifest allocations are empty. Select preference targets.");
                 return;
             }
 
@@ -687,7 +705,6 @@
             }
         };
 
-        // --- HANDSHAKE COMPLETE AND CACHE DESTRUCTION METRIC ---
         window.triggerTransientPurgeAnnihilation = function() {
             alert("TRANSIENT DATA BRIDGE HANDSHAKE: Local temporary session records completely wiped.");
             
@@ -700,7 +717,6 @@
             if(summaryPanel) summaryPanel.style.opacity = "1";
             renderPlatformManifestView();
             
-            // Rebound system status container paths safely into the Main Track Hub view screen
             document.getElementById('workspace-execution-enclosure').classList.add('hidden');
             document.getElementById('system-status-bar').classList.add('hidden');
             document.getElementById('exit-track-hub-btn').classList.add('hidden');
