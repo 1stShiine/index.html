@@ -107,7 +107,7 @@
     <!-- ========================================== -->
     <!-- MASTER BRAND HEADER                        -->
     <!-- ========================================== -->
-    <header class="border-b border-slate-200 bg-white sticky top-0 z-50 px-4 py-2.5 shadow-sm flex-shrink-0">
+    <header class="border-b border-slate-200 bg-white sticky top-0 z-50 px-4 py-3 shadow-sm flex-shrink-0">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <span class="w-2.5 h-2.5 rounded-full bg-fbBlue shadow-[0_0_8px_rgba(24,119,242,0.6)] animate-pulse"></span>
@@ -115,36 +115,28 @@
                     Wellness Front<span class="text-fbBlue">™</span>
                 </span>
             </div>
-            
-            <div class="flex items-center space-x-2">
-                <!-- AMENDED: Discreet Data Toggle Frame with Locking Icon Hooks -->
-                <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full transition cursor-pointer hover:bg-slate-200">
-                    <span id="anon-icon" class="text-xs">🔓</span>
-                    <span class="text-[10px] font-black uppercase tracking-wide text-slate-600" id="anon-text">Discreet Data: OFF</span>
-                </button>
+            <div class="text-[10px] font-mono font-black text-slate-400 uppercase select-none tracking-wider">
+                Dashboard Node Secure
             </div>
         </div>
     </header>
 
-    <!-- Application Owner Banner Context -->
-    <div class="bg-white border-b border-slate-100 px-4 py-1.5 flex items-center justify-center space-x-2 flex-shrink-0 shadow-sm">
-        <span class="text-[10px] font-bold tracking-wide text-slate-400 uppercase select-none">Secured Node:</span>
-        <span id="header-user-anchor" class="text-[10px] font-mono font-black uppercase text-slate-700">Unallocated</span>
-    </div>
-
     <!-- ========================================== -->
-    <!-- UNIFIED DASHBOARD SYSTEM CORE              -->
+    <!-- UNIFIED RESPONSIVE COCKPIT LAYOUT FRAME     -->
     <!-- ========================================== -->
-    <main class="max-w-7xl mx-auto w-full px-4 pt-4 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-5 items-start relative">
+    <main class="max-w-md lg:max-w-7xl mx-auto w-full px-4 pt-4 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         
-        <!-- LEFT WORKSPACE COLUMN: Interactive Dashboard Controls (7/12 Width Ratio) -->
-        <div class="lg:col-span-7 space-y-4 relative">
+        <!-- LEFT CONTROL COLUMN (7/12 Workspace Width) -->
+        <div class="lg:col-span-7 space-y-4">
             
-            <!-- IDENTITY ROW: Merged Balanced Profile and Inbox Architecture Block -->
-            <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 flex items-center justify-between">
+            <!-- MASTER IDENTITY PROFILE CARD FRAME -->
+            <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                
+                <!-- Left Sub-Flex Section: 3D Alive Avatar Profile Context (Matches 24679.webp Depth) -->
                 <div class="flex items-center space-x-4 overflow-hidden">
-                    <div class="w-11 h-11 bg-slate-100 border border-slate-200 rounded-full flex items-center justify-center text-xl shadow-inner select-none shrink-0">
-                        <svg class="w-5 h-5 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.67-5-3.33-8-3z"/></svg>
+                    <div class="w-12 h-12 bg-gradient-to-b from-[#4AA3FF] via-[#1877F2] to-[#0056B3] rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(24,119,242,0.35)] select-none shrink-0 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10"></div>
+                        <svg class="w-6 h-6 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.67-5-3.33-8-3z"/></svg>
                     </div>
                     <div class="space-y-0.5 overflow-hidden">
                         <h2 id="acc-display-name" class="text-xs font-black text-slate-900 uppercase tracking-wide truncate">--</h2>
@@ -155,24 +147,30 @@
                     </div>
                 </div>
 
-                <!-- Balanced Ecosystem Inbox Counter Integration Element -->
-                <div class="flex items-center space-x-2.5 border-l border-slate-100 pl-4 shrink-0">
-                    <div class="w-9 h-9 bg-blue-50/60 border border-blue-100/50 rounded-full flex items-center justify-center relative shadow-sm">
-                        <svg class="w-4 h-4 text-fbBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
-                        <span class="absolute -top-1 -right-1 bg-fbBlue text-white font-mono text-[8px] font-black w-4 h-4 rounded-full flex items-center justify-center border border-white">0</span>
+                <!-- Right Sub-Flex Section: Balanced Inline Operational Utilities -->
+                <div class="flex items-center space-x-3 sm:border-l sm:border-slate-100 sm:pl-4 shrink-0">
+                    <!-- Ecosystem Inbox Component -->
+                    <div class="flex items-center space-x-1.5 bg-slate-50 border border-slate-200 px-2.5 py-1.5 rounded-xl shadow-inner" title="Asynchronous Inbox Channel Logs">
+                        <svg class="w-3.5 h-3.5 text-fbBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
+                        <span class="bg-fbBlue text-white font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">0</span>
                     </div>
-                    <span class="hidden sm:inline text-[9.5px] font-bold text-slate-400 uppercase tracking-wider">Inbox</span>
+
+                    <!-- Discreet Data Lock Component -->
+                    <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-xl transition cursor-pointer hover:bg-slate-200 shadow-sm" title="Discreet Data Mask Protection">
+                        <span id="anon-icon" class="text-xs">🔓</span>
+                        <span class="text-[9.5px] font-black uppercase tracking-wide text-slate-600" id="anon-text">Discreet: OFF</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- CORE PLATFORM ACTION UTILITIES -->
+            <!-- CORE SYSTEM SHORTCUTS UTILITIES -->
             <div class="grid grid-cols-3 gap-2 text-center text-[9.5px] font-black uppercase tracking-wide">
-                <button onclick="alert('Environment tracking matrix is locked.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
-                <button onclick="alert('Secure result vouchers generated.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
-                <button onclick="alert('Invitation string copied.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
+                <button onclick="alert('Environment tracking template is locked.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
+                <button onclick="alert('Diagnostic results export vouchers generated.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
+                <button onclick="alert('Invitation link string array buffered.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
             </div>
 
-            <!-- PERMANENTLY VISIBLE TRACK SELECTION VIEWPORT CARDS -->
+            <!-- PREMIUM PERFORMANCE SECTION SELECTION TRACKS (Always-On Menu Matrix) -->
             <div class="space-y-2">
                 <label class="text-[9px] font-mono font-black uppercase tracking-widest text-slate-400 block px-1">Select Active Service Track</label>
                 <div class="flex space-x-3 overflow-x-auto pb-2 pt-0.5 px-1 scrollbar-none snap-x snap-mandatory w-full">
@@ -198,7 +196,7 @@
                     </div>
 
                     <!-- CareLive Track Card -->
-                    <div id="card-carelive" onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 border border-slate-200 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
+                    <div id="card-carelive" onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-emerald-500/10 text-emerald-600 border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Sandbox</div>
                         <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">📐</div>
                         <div class="space-y-0.5 mt-2">
@@ -210,18 +208,18 @@
             </div>
 
             <!-- ========================================== -->
-            <!-- ISOLATED INTERACTIVE WORKFLOW PAGE LAYER   -->
+            <!-- DYNAMIC INLINE WORKFLOW CONTAINER FRAME    -->
             <!-- ========================================== -->
-            <!-- AMENDED: Absolute overlay turns the workflow track container into an isolated dedicated full page screen -->
-            <div id="workspace-execution-enclosure" class="hidden absolute inset-x-0 top-0 bg-[#F4F6FA] z-40 space-y-4 animate-fadeIn min-h-[500px]" style="touch-action: pan-y;">
+            <!-- AMENDED: Container loads inline below layout matrix targets to safeguard navigation memory logs -->
+            <div id="workspace-execution-enclosure" class="hidden w-full flex-col space-y-4 animate-fadeIn" style="touch-action: pan-y;">
                 
                 <!-- RE-ENGINEERED STEPPER LINE: Premium Vector Pipeline inspired by 24674.png -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
                     
-                    <!-- Floating Hover Active Vector Dismiss Close X Cross Trigger -->
-                    <button type="button" onclick="window.returnToSelectionHub()" class="absolute top-3.5 right-4 w-7 h-7 bg-slate-100 hover:bg-red-50 hover:text-red-500 rounded-full flex items-center justify-center font-black text-xs text-slate-400 transition cursor-pointer shadow-sm border border-slate-200/40" title="Close Workspace">✕</button>
+                    <!-- High-Contrast Floating Close Button Target -->
+                    <button type="button" onclick="window.returnToSelectionHub()" class="absolute top-3.5 right-4 w-7 h-7 bg-slate-100 hover:bg-red-50 hover:text-red-500 rounded-full flex items-center justify-center font-black text-xs text-slate-400 transition cursor-pointer shadow-sm border border-slate-200/40" title="Close Active Workflow Workspace">✕</button>
                     
-                    <!-- SVG Visual Connected Stepper Layer Array Mapping Layout Framework (24674.png) -->
+                    <!-- SVG Visual Connected Stepper Layer Array Mapping Layout Framework -->
                     <div class="max-w-xs mx-auto flex items-center justify-between relative pt-3 pb-1">
                         <!-- Connecting Track Vector Base Line -->
                         <div class="absolute top-6 left-2 right-2 h-0.5 bg-slate-100 -z-0">
@@ -248,10 +246,10 @@
                     </div>
                 </div>
 
-                <!-- MAIN INTERACTION CONFIGURATOR STAGE CARD -->
+                <!-- MAIN CONTROL CONFIGURATOR PANEL -->
                 <div id="stage-1" class="border border-slate-200 bg-white rounded-3xl p-4 sm:p-5 shadow-sm space-y-4">
                     
-                    <!-- CONTAINER A: iTEST FORM MENU SELECTION -->
+                    <!-- SUB-PANE A: iTEST MARKETPLACE DATA MAPPING -->
                     <div id="subpane-itest" class="hidden space-y-4">
                         <div class="flex space-x-1.5 bg-slate-100 border border-slate-200/60 p-1 rounded-xl">
                             <button type="button" id="subtab-btn-executive" onclick="window.toggleSubTab('executive')" class="flex-1 bg-white text-slate-900 border border-slate-200/30 text-[10px] font-black uppercase py-1.5 rounded-lg shadow-sm cursor-pointer">Executive</button>
@@ -306,14 +304,14 @@
                         </div>
                     </div>
 
-                    <!-- CONTAINER B: MINDLINK ALLOCATION DETAILS -->
+                    <!-- SUB-PANE B: MINDLINK VIEW -->
                     <div id="subpane-mindlink" class="hidden text-center py-2 max-w-xs mx-auto space-y-3">
                         <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center text-base mx-auto border border-purple-100 animate-pulse">🧠</div>
                         <p class="text-[10.5px] text-slate-500 leading-relaxed">System parameters sync user sessions straight to credentialed therapists.</p>
                         <button type="button" onclick="window.queueAsset('MindLink Specialist Assignment', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer">Confirm Allocation Place</button>
                     </div>
 
-                    <!-- CONTAINER C: CARELIVE RECTANGULAR MAP CANVAS -->
+                    <!-- SUB-PANE C: CARELIVE VIEW -->
                     <div id="subpane-carelive" class="hidden space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
                             <div class="sm:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-2 flex flex-col items-center justify-center shadow-inner">
@@ -329,7 +327,7 @@
                                 </svg>
                             </div>
                             <div class="sm:col-span-7 bg-slate-900 border border-slate-950 rounded-xl p-3 flex flex-col justify-center items-center text-center min-h-[150px] relative">
-                                <div id="stream-placeholder" class="text-slate-400 space-y-0.5"><span class="text-lg block">📺</span><p class="text-[9px]">Select target area mesh segment grid context.</p></div>
+                                <div id="stream-placeholder" class="text-slate-400 space-y-0.5"><span class="text-xl block">📺</span><p class="text-[9px]">Select target area mesh segment grid context.</p></div>
                                 <div id="stream-active-viewport" class="hidden w-full h-full flex flex-col items-center justify-center animate-fadeIn">
                                     <span class="text-[9px] font-mono text-fbBlue font-bold mb-1 uppercase" id="stream-label-out">Configured</span>
                                     <div class="w-full aspect-video bg-black rounded border border-slate-800 flex items-center justify-center"><span class="text-[9px] font-mono text-slate-500 animate-pulse">[ Capture Ready ]</span></div>
@@ -343,7 +341,7 @@
                     </div>
                 </div>
 
-                <!-- STAGE 2 CARD: CAMERA CHECKLIST FRAME -->
+                <!-- STAGE 2 CARD: CAMERA TELEMETRY -->
                 <div id="stage-2" class="hidden border border-slate-200 bg-white rounded-3xl p-4 space-y-4 shadow-sm animate-fadeIn">
                     <div class="flex justify-between items-end border-b border-slate-100 pb-2">
                         <h2 class="text-xs font-black uppercase text-slate-900">Environment Verification Preview</h2>
@@ -356,7 +354,7 @@
                     <button type="button" onclick="window.goToStage(3)" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl font-mono tracking-wider cursor-pointer">Submit ➔</button>
                 </div>
 
-                <!-- STAGE 3 CARD: INVOICE TRANSIENT HOLD SHEET -->
+                <!-- STAGE 3 CARD: INVOICE TRANSACTION REVENUE -->
                 <div id="stage-3" class="hidden border border-slate-200 bg-white rounded-3xl p-5 text-center space-y-4 shadow-sm animate-fadeIn">
                     <div class="w-10 h-10 bg-blue-50 text-fbBlue rounded-full flex items-center justify-center text-base font-black mx-auto shadow-inner">✓</div>
                     <h2 class="text-xs font-black uppercase tracking-tight text-slate-900">Transient Token Hold Dispatched</h2>
@@ -365,18 +363,18 @@
                         <div class="flex justify-between"><span>Account Profile Holder:</span><span id="receipt-profile-name" class="font-black">--</span></div>
                         <div class="flex justify-between"><span>Profile Intent Context:</span><span id="receipt-intent-view" class="font-bold text-fbBlue">--</span></div>
                         <div class="flex justify-between"><span>Active Track Code:</span><span id="receipt-track" class="font-black">--</span></div>
-                        <div class="flex justify-between"><span>Logistics Routing:</span><span id="receipt-logistics" class="font-black">--</span></div>
-                        <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Discreet Data Terms:</span><span id="receipt-net" class="text-fbBlue font-mono font-black">--</span></div>
+                        <div class="flex justify-between"><span>Logistics Routing Framework:</span><span id="receipt-logistics" class="font-black">--</span></div>
+                        <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Discreet Hold Terms:</span><span id="receipt-net" class="text-fbBlue font-mono font-black">--</span></div>
                     </div>
                     <button type="button" onclick="window.triggerTransientPurgeAnnihilation()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase tracking-wider py-3 rounded-xl font-mono cursor-pointer">Done</button>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT WORKSPACE COLUMN: Manifest Ledger & Static Banners (5/12 Width Ratio) -->
+        <!-- RIGHT WORKSPACE COLUMN: Manifest Accumulator & Directory Logs (5/12 Ratio) -->
         <div class="lg:col-span-5 space-y-4">
             
-            <!-- REAL-TIME MANIFEST SUMMARY INFRASTRUCTURE -->
+            <!-- REAL-TIME MANIFEST BLOCK SUMMARY -->
             <div id="sticky-summary-panel" class="border border-slate-200 bg-white rounded-3xl p-5 space-y-4 shadow-sm">
                 <h2 class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">Real-Time Allocation Manifest</h2>
                 <div id="manifest-items-list" class="space-y-1.5 max-h-[140px] overflow-y-auto scrollbar-none pr-0.5"></div>
@@ -386,9 +384,9 @@
                 </div>
             </div>
 
-            <!-- ADMINISTRATIVE DIRECTORY LINK REGISTERS -->
+            <!-- SYSTEM LOG LEDGERS DIRECTORY -->
             <div class="border border-slate-200 rounded-2xl overflow-hidden divide-y divide-slate-100 text-xs font-bold text-slate-700 shadow-sm bg-white">
-                <div class="p-3 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="alert('Voucher tracking logs synchronized.');">
+                <div class="p-3 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="alert('Voucher records synchronized.');">
                     <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg><span>Transaction Log Registry</span></div>
                     <span class="text-[9.5px] font-mono text-slate-400">View Logs</span>
                 </div>
@@ -398,7 +396,7 @@
                 </div>
             </div>
 
-            <!-- SECURITY ASSURANCE RESTRICTION CARD -->
+            <!-- COMPLIANCE RISK PROTECTION WARNING BADGE CARD -->
             <div class="bg-red-50 border border-red-100 rounded-2xl p-4 text-[10px] font-medium leading-normal text-red-600 flex items-start space-x-3 shadow-sm">
                 <svg class="w-4 h-4 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                 <p>High-Security Endpoint: Local screenshot captures and client hardware media streaming storage profiles are programmatically restricted inside this canvas matrix wrapper frame.</p>
@@ -408,11 +406,11 @@
 
     <!-- Operational Legal Compliance Footing -->
     <footer class="text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest py-6 flex-shrink-0">
-        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v5.7</span>
+        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v5.8</span>
     </footer>
 
     <!-- ========================================== -->
-    <!-- SECURE RUNTIME PIPELINE MACHINE CORES      -->
+    <!-- SECURE OPERATIONAL ENGINE PROGRAM MACHINE  -->
     <!-- ========================================== -->
     <script>
         let activeMainTrack = '';
@@ -446,15 +444,11 @@
         });
 
         function hydrateUserHeadersAndContext() {
-            const displayHeaderLabel = document.getElementById('header-user-anchor');
-            if (displayHeaderLabel) displayHeaderLabel.innerText = `${userFullLegalName.toUpperCase()}`;
-            
             document.getElementById('acc-display-name').innerText = userFullLegalName;
             document.getElementById('acc-display-email').innerText = userEmailAddress;
             document.getElementById('acc-display-id').innerText = `WF-2026-${Math.floor(11111 + Math.random() * 88888)}`;
         }
 
-        // --- HARDWARE SWIPE ACCELERATION GESTURE LAYER ---
         function setupHardwareSwipeGestureListeners() {
             const elementEnclosure = document.getElementById('workspace-execution-enclosure');
             
@@ -474,7 +468,6 @@
             }
         }
 
-        // --- GATE ACCESS ROUTINE HANDLERS ---
         window.submitPhoneVerification = function() {
             const num = document.getElementById('auth-phone').value.trim();
             if(!num || num.length < 8) { alert("Invalid registration phone format."); return; }
@@ -520,7 +513,6 @@
             setupHardwareSwipeGestureListeners();
         };
 
-        // --- TRACK NAVIGATION ROUTER SYSTEMS ---
         window.launchIsolatedTrack = function(trackKey) {
             activeMainTrack = trackKey;
             
@@ -529,7 +521,6 @@
             
             document.getElementById('workspace-execution-enclosure').classList.remove('hidden');
             document.getElementById('system-status-bar').classList.remove('hidden');
-            document.getElementById('exit-track-hub-btn').classList.remove('hidden');
 
             document.getElementById('subpane-itest').classList.add('hidden');
             document.getElementById('subpane-mindlink').classList.add('hidden');
@@ -538,7 +529,6 @@
 
             const masterBtn = document.getElementById('stage-1-master-btn');
             
-            // Adjusting premium vector line node parameters dynamically based on structural routes (24674.png)
             const label2 = document.getElementById('step-label-2');
             const label3 = document.getElementById('step-label-3');
             const wrapper2 = document.getElementById('step-wrapper-2');
@@ -573,7 +563,6 @@
             
             document.getElementById('workspace-execution-enclosure').classList.add('hidden');
             document.getElementById('system-status-bar').classList.add('hidden');
-            document.getElementById('exit-track-hub-btn').classList.add('hidden');
             
             compiledManifestArray = [];
             document.getElementById('stream-active-viewport').classList.replace('hidden', 'flex');
@@ -614,7 +603,6 @@
             if(activeBtn) activeBtn.className = "border-2 border-fbBlue bg-blue-50/40 p-3 rounded-xl text-left focus:outline-none flex flex-col justify-center min-h-[60px] shadow-md cursor-pointer";
         };
 
-        // --- AMENDED: Discreet Data Toggle Frame with Locking Icon Hooks ---
         window.toggleAnonymityEngine = function() {
             isAnonymityActive = !isAnonymityActive;
             const txt = document.getElementById('anon-text');
@@ -622,13 +610,13 @@
             const icon = document.getElementById('anon-icon');
 
             if(isAnonymityActive) {
-                txt.innerText = "Discreet Data: ON";
+                txt.innerText = "Discreet: ON";
                 icon.innerText = "🔒";
-                if(btn) btn.className = "flex items-center space-x-1.5 bg-blue-50 border border-fbBlue/40 px-3 py-1.5 rounded-full shadow-sm cursor-pointer";
+                if(btn) btn.className = "flex items-center space-x-1.5 bg-blue-50 border border-fbBlue/40 px-3 py-1.5 rounded-xl shadow-sm cursor-pointer";
             } else {
-                txt.innerText = "Discreet Data: OFF";
+                txt.innerText = "Discreet: OFF";
                 icon.innerText = "🔓";
-                if(btn) btn.className = "flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full cursor-pointer hover:bg-slate-200";
+                if(btn) btn.className = "flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-xl cursor-pointer hover:bg-slate-200 shadow-sm";
             }
             renderPlatformManifestView();
         };
@@ -681,7 +669,6 @@
             if(displayPrice) displayPrice.innerText = `$${total.toFixed(2)}`;
         }
 
-        // --- AMENDED: High-Fidelity Stepper State Progression (24674.png) ---
         window.goToStage = function(stageNum) {
             if (stageNum === 3 && compiledManifestArray.length === 0) {
                 alert("Manifest allocations are empty. Select preference targets.");
@@ -691,7 +678,6 @@
             const tracks = [1, 2, 3];
             let totalStepsCount = activeMainTrack === 'carelive' ? 3 : 2;
             
-            // Adjusting premium vector line track loader weights
             const progressLineFill = document.getElementById('premium-track-line-progress');
             if(progressLineFill) {
                 let fillWeight = stageNum === 1 ? 0 : (stageNum === 2 ? 50 : 100);
@@ -699,7 +685,6 @@
                 progressLineFill.style.width = `${fillWeight}%`;
             }
 
-            // Sync node icon elements with bright active statuses (24674.png)
             tracks.forEach(t => {
                 const innerPanel = document.getElementById(`stage-${t}`);
                 if(innerPanel) innerPanel.classList.add('hidden');
@@ -711,7 +696,7 @@
                         nodeCircle.innerHTML = t;
                     } else if (t < stageNum) {
                         nodeCircle.className = "w-6 h-6 rounded-full bg-emerald-500 border-2 border-emerald-500 flex items-center justify-center text-[10px] font-bold text-white shadow-sm smooth-transition";
-                        nodeCircle.innerHTML = "✓"; // Inject premium complete checklist vector checks
+                        nodeCircle.innerHTML = "✓"; 
                     } else {
                         nodeCircle.className = "w-6 h-6 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-400 smooth-transition";
                         nodeCircle.innerHTML = t;
