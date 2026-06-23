@@ -3,148 +3,723 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwind Mesh Testing Environment - Final locked Geometry</title>
+    <title>Wellness Vault™ - Master Command Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #D3D6D9; }
-        .puzzle-piece {
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
+        /* Global Theming & Glassmorphism Variables */
+        :root {
+            --bg-main: #0B0F19;
+            --bg-card: #111422;
+            --accent: #10B981; /* Emerald Primary Optimization Glow */
+            --accent-glow: rgba(16, 185, 129, 0.25);
+            --glass-base: rgba(255, 255, 255, 0.03);
+            --glass-stroke: rgba(255, 255, 255, 0.15);
+            --ghost-opacity: 0.1;
         }
+        
+        .discreet-active {
+            --bg-main: #07090E;
+            --bg-card: #0C0E17;
+            --accent: #60A5FA; /* Cool Privacy Blue */
+            --accent-glow: rgba(96, 165, 250, 0.25);
+            --glass-base: rgba(255, 255, 255, 0.01);
+            --glass-stroke: rgba(96, 165, 250, 0.15);
+        }
+
+        body { transition: background-color 0.4s ease, color 0.4s ease; overscroll-behavior-y: none; }
+        .smooth-transition { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* UI Cards - Premium Glass Illusion */
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-stroke);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.05), 0 12px 40px rgba(0,0,0,0.5);
+        }
+
+        /* SVG Holographic Jigsaw Styles (The Lego/Bowed-Arm Model) */
+        .body-map-container { perspective: 1000px; overflow: visible; }
+        .svg-body { 
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.25, 1); 
+            transform-origin: center; 
+            filter: drop-shadow(0 0 25px rgba(0,0,0,0.7));
+        }
+        .flipped { transform: scaleX(-1); }
+        
+        /* Strict Non-Diagnostic Base Styling (Equal-Weight Stroke Architecture) */
+        .macro-zone, .micro-piece { 
+            cursor: pointer; 
+            fill: var(--glass-base); 
+            stroke: var(--glass-stroke); 
+            stroke-width: 2; 
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .macro-zone:hover { 
+            fill: rgba(255, 255, 255, 0.05); 
+            stroke: var(--accent); 
+            filter: drop-shadow(0 0 10px var(--accent-glow)); 
+        }
+        .ghosted { opacity: var(--ghost-opacity); pointer-events: none; }
+        
+        .micro-piece:hover { stroke: var(--accent); fill: rgba(255, 255, 255, 0.05); }
+        
+        /* Flat, Equal selection state verifying zero interpretive color mapping */
+        .piece-active { 
+            stroke: var(--accent); 
+            stroke-width: 3; 
+            fill: var(--accent-glow);
+            filter: drop-shadow(0 0 12px var(--accent-glow)); 
+        }
+
+        .time-btn {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3); border-bottom: 2px solid rgba(0,0,0,0.4);
+        }
+        .time-btn:active { transform: translateY(1px); box-shadow: 0 1px 2px rgba(0,0,0,0.3); border-bottom: 0px; }
+        .scrollbar-none::-webkit-scrollbar { display: none; }
+        
+        /* Discreet Mode Text Blur */
+        .discreet-active .secure-text { filter: blur(5px); transition: filter 0.3s ease; user-select: none; }
+        .discreet-active .secure-text:hover { filter: blur(0px); }
+
+        /* Animation Blends */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.35s ease forwards; }
     </style>
 </head>
-<body class="h-screen w-screen flex items-center justify-center p-4 overflow-hidden">
+<body id="global-body" class="bg-[var(--bg-main)] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden relative">
 
-    <div class="w-full max-w-lg bg-[#111422]/95 rounded-3xl p-6 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] border border-slate-800 flex flex-col items-center relative">
-        
-        <div class="w-full flex items-center justify-between border-b border-slate-800/80 pb-4 mb-4">
-            <div class="flex items-center space-x-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10B981]"></span>
-                <span class="text-[10px] font-mono font-black tracking-widest text-slate-400 uppercase">SVG Vector Canvas Layer</span>
+    <div id="acuity-gate" class="fixed inset-0 bg-[#06080F]/95 backdrop-blur-xl z-[100] flex items-center justify-center p-4">
+        <div class="max-w-md w-full glass-card p-8 rounded-3xl border border-red-500/30 text-center shadow-[0_0_5px_rgba(239,68,68,0.2)]">
+            <div class="w-16 h-16 bg-red-500/10 border border-red-500/40 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-2xl text-red-400">⚠️</span>
             </div>
-            <span id="active-piece-log" class="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">Select Interlocking Piece</span>
+            <h1 class="text-lg font-black uppercase tracking-widest text-white mb-3">Acuity Validation Protocol</h1>
+            <p class="text-xs text-slate-400 leading-relaxed mb-8">Wellness Vault™ functions exclusively as an optimization tracking system and platform aggregator. This software does not perform medical intervention, diagnostic classification, or emergency management.</p>
+            <div class="flex flex-col space-y-3">
+                <button onclick="window.triggerEmergencyEject()" class="w-full bg-red-600 hover:bg-red-700 text-white text-[10px] font-black uppercase tracking-widest py-4 rounded-xl transition shadow-lg">I am experiencing acute/critical symptoms</button>
+                <button onclick="window.clearAcuityGate()" class="w-full bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 text-[10px] font-black uppercase tracking-widest py-4 rounded-xl transition">I confirm this is for non-clinical tracking</button>
+            </div>
         </div>
-
-        <div class="w-full flex items-center justify-center relative bg-slate-950/40 rounded-2xl p-4 border border-slate-900 shadow-inner">
-            
-            <svg viewBox="0 0 200 440" class="w-full max-w-[260px] h-[400px]" id="vector-mesh">
-
-                <!-- 1. DETAILED CYBERNETIC HEAD -->
-                <g id="segment-head" class="puzzle-piece" onclick="window.logPieceClick('Cybernetic Cranial Core')">
-                    <!-- Head & Neck Base Mapping -->
-                    <path d="M 84 35 
-                             C 84 20, 116 20, 116 35 
-                             C 124 40, 124 58, 120 72 
-                             C 116 82, 110 85, 100 88 
-                             C 90 85, 84 82, 80 72 
-                             C 76 58, 76 40, 84 35 Z" 
-                          class="fill-[#A1B5CC] stroke-[#5A738E] stroke-[1.5] hover:fill-[#B9CADA] hover:stroke-emerald-400" />
-                </g>
-
-                <!-- NECK HOUSING COLLAR -->
-                <path d="M 92 86 L 108 86 L 112 94 L 88 94 Z" class="fill-[#333F4D] stroke-[#28323E] stroke-1" />
-
-                <!-- 2. HIGH-FIDELITY BOWED ARMS & PUZZLE-JOINED CHEST MODULE -->
-                <!-- Muted Light Green Optimization Theme -->
-                <g id="segment-upper-torso" class="puzzle-piece">
-                    
-                    <!-- Left Bowed Arm: Sweeps outward from shoulder base, fractures up into an inverted elbow, and places hand panels directly flush against the upper ears -->
-                    <path id="piece-left-arm" d="M 70 102 
-                             L 54 102
-                             C 40 102, 28 116, 28 132
-                             C 28 144, 38 152, 48 140
-                             L 66 116
-                             C 74 116, 76 110, 76 106 Z" 
-                          class="fill-[#BFD9C3] stroke-[#6E8F74] stroke-[1.5] hover:fill-[#D2E6D5] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Left Bowed Superior Brachium')" />
-                    
-                    <!-- Right Bowed Arm: Exact geometric mirror of the hand-on-head configuration -->
-                    <path id="piece-right-arm" d="M 130 102 
-                             L 146 102
-                             C 160 102, 172 116, 172 132
-                             C 172 144, 162 152, 152 140
-                             L 134 116
-                             C 126 116, 124 110, 124 106 Z" 
-                          class="fill-[#BFD9C3] stroke-[#6E8F74] stroke-[1.5] hover:fill-[#D2E6D5] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Right Bowed Superior Brachium')" />
-
-                    <!-- Left Chest Half: Features explicit puzzle interlocking tabs along center and abdominal boundaries -->
-                    <path id="piece-chest-left" d="M 70 102 L 100 102 L 100 114 C 105 114, 105 124, 100 124 L 100 152 L 68 152 Z" 
-                          class="fill-[#CBE6CE] stroke-[#7E9F84] stroke-[1.5] hover:fill-[#DCF0DD] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Anterior Left Chest Plate')" />
-                          
-                    <!-- Right Chest Half: Features true matching female socket cuts along the layout spine lines -->
-                    <path id="piece-chest-right" d="M 100 102 L 130 102 L 132 152 L 100 152 L 100 124 C 105 124, 105 114, 100 114 Z" 
-                          class="fill-[#CBE6CE] stroke-[#7E9F84] stroke-[1.5] hover:fill-[#DCF0DD] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Anterior Right Chest Plate')" />
-                </g>
-
-                <!-- 3. ZONE 3 MID-SECTION (STOMACH UNTO PELVES) -->
-                <!-- Dark Charcoal Core Base Variant Theme with smooth side curves and interlocking puzzle keys -->
-                <g id="segment-mid-core" class="puzzle-piece">
-                    <!-- Abdominal Segment with clean mechanical side drops and bottom interlocking nodes -->
-                    <path id="piece-abdomen" d="M 68 152 
-                             L 132 152 
-                             L 130 188 
-                             C 116 188, 116 196, 100 196 
-                             C 84 196, 84 188, 70 188 Z" 
-                          class="fill-[#455263] stroke-[#28323E] stroke-[1.5] hover:fill-[#566579] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Abdominal Core Panel')" />
-                          
-                    <!-- Pelvic Alignment Chassis with curved outer wings wrapping into thigh slots -->
-                    <path id="piece-pelvis" d="M 70 188 
-                             C 84 188, 84 196, 100 196 
-                             C 116 196, 116 188, 130 188 
-                             L 132 232 
-                             Q 100 252, 68 232 Z" 
-                          class="fill-[#556475] stroke-[#333F4D] stroke-[1.5] hover:fill-[#67778B] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Pelvic Alignment Base')" />
-                </g>
-
-                <!-- 4. LOWER EXTREMITIES (PILLAR STRUCTURAL LEGS WITH KNEE BLOCK JOINTS) -->
-                <!-- Soft Warm Beige Sub-Theme -->
-                <g id="segment-lower-extremities" class="puzzle-piece">
-                    <!-- Left Upper Thigh Component -->
-                    <path id="piece-left-thigh" d="M 68 232 Q 84 242, 100 238 L 98 292 C 86 292, 86 298, 70 298 Z" 
-                          class="fill-[#E6CCA8] stroke-[#998161] stroke-[1.5] hover:fill-[#F2DCBE] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Left Femoral Thigh Pillar')" />
-                    <!-- Left Lower Shin and Flat Mechanical Foot Block -->
-                    <path id="piece-left-shin" d="M 70 298 C 86 298, 86 292, 98 292 L 96 416 L 72 416 Z" 
-                          class="fill-[#D9BE96] stroke-[#8C7454] stroke-[1.5] hover:fill-[#EBD1A9] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Left Tibial Shin Foot')" />
-                    
-                    <!-- Right Upper Thigh Component -->
-                    <path id="piece-right-thigh" d="M 100 238 Q 116 242, 132 232 L 130 296 C 114 296, 114 292, 102 292 Z" 
-                          class="fill-[#E6CCA8] stroke-[#998161] stroke-[1.5] hover:fill-[#F2DCBE] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Right Femoral Thigh Pillar')" />
-                    <!-- Right Lower Shin and Flat Mechanical Foot Block -->
-                    <path id="piece-right-shin" d="M 102 292 C 114 292, 114 296, 130 296 L 128 416 L 104 416 Z" 
-                          class="fill-[#D9BE96] stroke-[#8C7454] stroke-[1.5] hover:fill-[#EBD1A9] hover:stroke-emerald-400"
-                          onclick="window.logPieceClick('Right Tibial Shin Foot')" />
-                </g>
-
-                <!-- TARGET CRITERIA WINDOW OVERLAY -->
-                <rect x="62" y="250" width="76" height="172" 
-                      class="fill-transparent stroke-yellow-400/80 stroke-[1.5] stroke-dasharray-[4_4] pointer-events-none" />
-            </svg>
-        </div>
-
-        <p class="text-[9px] font-mono text-slate-500 mt-4 text-center leading-relaxed uppercase tracking-wider">
-            Vector Node Coordinates Rendered Purely Inside Single Code Environment.<br>
-            Hover segments to test native fill mutations and grid bounding states.
-        </p>
     </div>
 
+    <div id="attestation-gate" class="hidden fixed inset-0 bg-[#06080F]/95 backdrop-blur-xl z-[100] flex items-center justify-center p-4">
+        <div class="max-w-md w-full glass-card p-8 rounded-3xl border border-emerald-500/30 text-center">
+            <div class="w-16 h-16 bg-emerald-500/10 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-2xl text-emerald-400">📜</span>
+            </div>
+            <h1 class="text-lg font-black uppercase tracking-widest text-white mb-3">Safety Re-Entry Attestation</h1>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">Your system lockout period has elapsed. To restore active workspace routing pathways, you must provide a standard diagnostic clearance declaration.</p>
+            <div class="bg-slate-950/50 border border-slate-800 p-4 rounded-xl mb-6 text-left">
+                <label class="flex items-start space-x-3 cursor-pointer select-none">
+                    <input type="checkbox" id="attestation-check" onchange="document.getElementById('attestation-submit').disabled = !this.checked" class="mt-0.5 rounded border-slate-700 bg-slate-900 text-emerald-500 focus:ring-0">
+                    <span class="text-[11px] text-slate-300 leading-relaxed font-medium">I legally attest that the acute clinical markers previously flagged have entirely resolved, or I have been evaluated and explicitly cleared by a licensed, in-person primary health provider.</span>
+                </label>
+            </div>
+            <button id="attestation-submit" disabled onclick="window.clearAttestationGate()" class="w-full bg-emerald-600 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed text-slate-950 disabled:shadow-none font-black text-[10px] uppercase tracking-widest py-4 rounded-xl transition shadow-[0_0_20px_rgba(16,185,129,0.3)]">Authorize Access Blueprint</button>
+        </div>
+    </div>
+
+    <div id="crisis-hub" class="hidden fixed inset-0 bg-[#06080F]/98 backdrop-blur-2xl z-[110] flex items-center justify-center p-4">
+        <div class="max-w-md w-full glass-card p-8 rounded-3xl border border-amber-500/30 text-center shadow-2xl">
+            <div class="w-16 h-16 bg-amber-500/10 border border-amber-500/40 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-2xl text-amber-400">❤️</span>
+            </div>
+            <h1 class="text-lg font-black uppercase tracking-widest text-white mb-3">Crisis Liaison Protocol</h1>
+            <p class="text-xs text-slate-400 leading-relaxed mb-8">The physiological or behavioral indexes selected match our localized support flags. Wellness Vault™ does not handle clinical intervention or psychiatric dispatch. Please connect directly with secure external specialist resources below.</p>
+            <div class="space-y-3">
+                <a href="tel:988" class="block w-full bg-amber-500 hover:bg-amber-600 text-slate-950 text-center text-[10px] font-black uppercase tracking-widest py-4 rounded-xl transition shadow-lg">Call 988 Crisis Lifeline</a>
+                <button onclick="window.triggerEmergencyEject()" class="w-full bg-slate-900 border border-slate-800 text-slate-400 text-[10px] font-black uppercase tracking-widest py-4 rounded-xl transition">Abruptly Clear Session</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="master-header" class="smooth-transition flex-shrink-0 z-50 bg-inherit relative shadow-[0_4px_20px_rgba(0,0,0,0.3)] w-full">
+        <header class="border-b border-slate-800/80 px-6 py-4">
+            <div class="max-w-6xl mx-auto flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <span id="header-pulse" class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_var(--accent-glow)] animate-pulse"></span>
+                    <span id="brand-logo" class="font-black tracking-widest text-xs uppercase text-white">Wellness Vault™</span>
+                </div>
+                <button onclick="window.toggleDiscreetMode()" class="flex items-center space-x-2 bg-slate-900 border border-slate-700 px-4 py-2 rounded-full hover:border-[var(--accent)] transition shadow-lg">
+                    <span>👁️</span>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400" id="discreet-text">Discreet: OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <nav class="max-w-4xl mx-auto w-full px-4 py-3">
+            <div class="grid grid-cols-3 gap-2 bg-[#111422] border border-slate-800/60 p-1.5 rounded-2xl shadow-inner">
+                <button onclick="window.switchTab(1)" id="tab-btn-1" class="border border-transparent text-slate-500 hover:text-slate-300 flex flex-col items-center justify-center py-2 rounded-xl transition">
+                    <span class="text-lg mb-1 drop-shadow-md">⚙️</span><span class="text-[9px] font-black uppercase tracking-widest">Tractor OS</span>
+                </button>
+                <button onclick="window.switchTab(2)" id="tab-btn-2" class="border border-transparent text-slate-500 hover:text-slate-300 flex flex-col items-center justify-center py-2 rounded-xl transition">
+                    <span class="text-lg mb-1 drop-shadow-md">🔒</span><span class="text-[9px] font-black uppercase tracking-widest">Privacy Vault</span>
+                </button>
+                <button onclick="window.switchTab(3)" id="tab-btn-3" class="bg-[var(--accent-glow)] border border-[var(--accent)] text-[var(--accent)] flex flex-col items-center justify-center py-2 rounded-xl transition shadow-[0_0_15px_var(--accent-glow)]">
+                    <span class="text-lg mb-1 drop-shadow-md">📐</span><span class="text-[9px] font-black uppercase tracking-widest">Active Scan</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <main class="flex-grow w-full max-w-6xl mx-auto flex flex-col h-full overflow-hidden relative p-4">
+        
+        <section id="tab-1" class="hidden h-full flex-col space-y-6 overflow-y-auto scrollbar-none pb-24">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">Ecosystem Hosting Umbrella</h2>
+                <span class="text-[10px] font-bold text-[var(--accent)]">SDK Core Bindings Connected</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-sm font-black uppercase text-white">Oura Health Module</h3>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" onchange="window.toggleTractorAttachment('oura', this.checked)" class="sr-only peer">
+                                <div class="w-9 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 peer-checked:after:bg-white after:border-none after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
+                            </label>
+                        </div>
+                        <p class="text-[11px] text-slate-400 leading-relaxed mb-4">Mount automated sleep architectural telemetry and recovery index matrices onto the central UI chassis framework.</p>
+                    </div>
+                    <div id="attachment-data-oura" class="hidden border-t border-slate-800/80 pt-4 mt-2 animate-fade-in">
+                        <div class="grid grid-cols-2 gap-2 text-center">
+                            <div class="bg-slate-950/40 border border-slate-800 p-2 rounded-xl"><span class="block text-[10px] uppercase text-slate-500 font-bold">Sleep Score</span><span class="text-sm font-mono font-bold text-emerald-400">88/100</span></div>
+                            <div class="bg-slate-950/40 border border-slate-800 p-2 rounded-xl"><span class="block text-[10px] uppercase text-slate-500 font-bold">Readiness</span><span class="text-sm font-mono font-bold text-emerald-400">92%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-sm font-black uppercase text-white">Apple HealthKit Sync</h3>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" onchange="window.toggleTractorAttachment('apple', this.checked)" class="sr-only peer">
+                                <div class="w-9 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 peer-checked:after:bg-white after:border-none after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
+                            </label>
+                        </div>
+                        <p class="text-[11px] text-slate-400 leading-relaxed mb-4">Bind baseline mechanical values directly via secure OAuth pipelines. Maps standard hardware step inputs side-by-side.</p>
+                    </div>
+                    <div id="attachment-data-apple" class="hidden border-t border-slate-800/80 pt-4 mt-2 animate-fade-in">
+                        <div class="grid grid-cols-2 gap-2 text-center">
+                            <div class="bg-slate-950/40 border border-slate-800 p-2 rounded-xl"><span class="block text-[10px] uppercase text-slate-500 font-bold">Daily Steps</span><span class="text-sm font-mono font-bold text-blue-400">11,432</span></div>
+                            <div class="bg-slate-950/40 border border-slate-800 p-2 rounded-xl"><span class="block text-[10px] uppercase text-slate-500 font-bold">Resting HR</span><span class="text-sm font-mono font-bold text-blue-400">58 bpm</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between border-b border-slate-800 pt-4 pb-2">
+                <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">Downstream Commercial Vendors</h2>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+                <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4 flex justify-between items-center">
+                    <div>
+                        <span class="text-[10px] font-black uppercase text-slate-500 tracking-wider">Strategic Local Fulfillment Solutions</span>
+                        <h4 class="text-xs font-bold text-white mt-0.5">AccessPoint dx Storefront Integration</h4>
+                    </div>
+                    <button onclick="window.addToManifest('AccessPoint Optimization Panel Allocation', 380)" class="bg-slate-900 border border-slate-700 hover:border-emerald-500 text-[10px] text-slate-300 hover:text-white font-black uppercase tracking-widest px-4 py-2.5 rounded-lg transition shadow-md">Acquire Hub Panel ($380)</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-2" class="hidden h-full flex-col space-y-6 overflow-y-auto scrollbar-none pb-24">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">Cryptographic Behavior Mapping</h2>
+                <span class="text-[10px] font-bold text-[var(--accent)]">Zero Server-Side Telemetry Mining</span>
+            </div>
+            
+            <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-blue-500/20 text-blue-400 text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-bl-lg">Encrypted Device Instance</div>
+                <h3 class="text-lg font-black uppercase text-white mb-2 secure-text">Discreet Baseline Verification</h3>
+                <p class="text-xs text-slate-400 leading-relaxed mb-6 secure-text">Establish localized behavioral baselines securely. All metric data models exist purely within an ephemeral environment until external specialist routing parameters are explicitly authorized.</p>
+                
+                <div class="space-y-3">
+                    <button onclick="window.addToManifest('Behavioral Profiling: Spatial Hyper-Acuity Mapping', 0)" class="w-full text-left bg-slate-900 border border-slate-700 hover:border-[var(--accent)] px-5 py-4 rounded-xl transition flex justify-between items-center group shadow-md">
+                        <span class="text-xs font-bold text-slate-300 secure-text group-hover:text-white">Spatial Stress & Environmental Friction Profile</span>
+                        <span class="text-lg text-slate-500">➔</span>
+                    </button>
+                    <button onclick="window.addToManifest('Behavioral Profiling: Circadian Performance Mapping', 0)" class="w-full text-left bg-slate-900 border border-slate-700 hover:border-[var(--accent)] px-5 py-4 rounded-xl transition flex justify-between items-center group shadow-md">
+                        <span class="text-xs font-bold text-slate-300 secure-text group-hover:text-white">Circadian Exhaustion / Metabolic Slump Ingress</span>
+                        <span class="text-lg text-slate-500">➔</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-3" class="h-full flex flex-col">
+            
+            <div id="organ-track" class="smooth-transition flex-shrink-0 mb-4 w-full">
+                <span class="text-[9px] font-black tracking-widest uppercase text-slate-500 block mb-2 px-2">Core Optimization Pipelines</span>
+                <div class="flex space-x-2 overflow-x-auto pb-2 scrollbar-none px-2">
+                    <button onclick="window.fastTrackOrgan('Cardiovascular Optimization Line')" class="glass-card text-[10px] font-bold uppercase tracking-wider px-5 py-3 rounded-xl whitespace-nowrap hover:border-[var(--accent)] hover:text-[var(--accent)] transition">Cardio / Circulatory</button>
+                    <button onclick="window.fastTrackOrgan('Hepatic Biomarker Track')" class="glass-card text-[10px] font-bold uppercase tracking-wider px-5 py-3 rounded-xl whitespace-nowrap hover:border-[var(--accent)] hover:text-[var(--accent)] transition">Hepatic / Metabolic</button>
+                    <button onclick="window.fastTrackOrgan('Renal Filtration Matrix')" class="glass-card text-[10px] font-bold uppercase tracking-wider px-5 py-3 rounded-xl whitespace-nowrap hover:border-[var(--accent)] hover:text-[var(--accent)] transition">Renal / Filtration</button>
+                </div>
+            </div>
+
+            <div class="flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-0 relative w-full">
+                
+                <div id="touch-area" class="lg:col-span-5 glass-card rounded-3xl p-6 flex flex-col relative overflow-hidden">
+                    
+                    <div class="flex items-center justify-between z-10">
+                        <div class="bg-slate-900/80 border border-slate-700 rounded-lg flex p-1 shadow-inner backdrop-blur">
+                            <button onclick="window.pivotBody('Front')" id="btn-front" class="bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition shadow-sm">Anterior</button>
+                            <button onclick="window.pivotBody('Back')" id="btn-back" class="text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition">Posterior</button>
+                        </div>
+                        <button onclick="window.resetMacroMap()" id="btn-reset" class="hidden bg-slate-900 border border-slate-700 text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:border-[var(--accent)] hover:text-white transition flex items-center px-4 py-2 rounded-lg shadow-lg">
+                            <span class="mr-2 text-lg leading-none">«</span> Reset Matrix
+                        </button>
+                    </div>
+
+                    <div class="flex-grow flex items-center justify-center body-map-container mt-2 relative">
+                        <svg viewBox="0 0 200 450" class="w-full max-w-[240px] max-h-[420px] svg-body" id="human-svg">
+                            
+                            <g id="macro-head" class="macro-zone" onclick="window.fractureZone('head', 2.3, 20)">
+                                <path d="M 80 35 L 120 35 L 128 55 L 124 75 L 100 88 L 76 75 L 72 55 Z" />
+                            </g>
+                            <g id="micro-head" class="hidden">
+                                <path id="head-cranium" class="micro-piece" d="M 80 35 L 120 35 L 125 48 C 110 52, 90 52, 75 48 Z" onclick="window.toggleTactilePiece('head-cranium', 'Cranial Zone')" />
+                                <path id="head-eyes" class="micro-piece" d="M 75 48 C 90 52, 110 52, 125 48 L 128 55 L 124 68 C 110 65, 90 65, 72 68 L 72 55 Z" onclick="window.toggleTactilePiece('head-eyes', 'Ocular/Visual Core')" />
+                                <path id="head-jaw" class="micro-piece" d="M 72 68 C 90 65, 110 65, 124 68 L 122 75 L 100 88 L 78 75 Z" onclick="window.toggleTactilePiece('head-jaw', 'Maxillofacial/Jaw Hinges')" />
+                            </g>
+
+                            <g id="macro-upper-torso" class="macro-zone" onclick="window.fractureZone('upper-torso', 1.8, -3)">
+                                <path d="M 76 88 L 124 88 L 132 100 L 152 75 L 168 85 L 144 125 L 130 145 L 70 145 L 56 125 L 32 85 L 48 75 L 68 100 Z" />
+                            </g>
+                            <g id="micro-upper-torso" class="hidden">
+                                <path id="torso-chest" class="micro-piece" d="M 76 88 L 124 88 L 130 115 C 115 110, 115 125, 100 125 C 85 125, 85 110, 70 115 Z" onclick="window.toggleTactilePiece('torso-chest', 'Anterior Chest Wall')" />
+                                <path id="arm-left-bow" class="micro-piece" d="M 70 115 C 85 110, 85 125, 100 125 L 100 145 L 70 145 L 56 125 L 32 85 L 48 75 L 68 100 Z" onclick="window.toggleTactilePiece('arm-left-bow', 'Left Superior Limb Brachium')" />
+                                <path id="arm-right-bow" class="micro-piece" d="M 100 125 C 115 125, 115 110, 130 115 L 132 100 L 152 75 L 168 85 L 144 125 L 130 145 L 100 145 Z" onclick="window.toggleTactilePiece('arm-right-bow', 'Right Superior Limb Brachium')" />
+                            </g>
+
+                            <g id="macro-pelvis-quad" class="macro-zone" onclick="window.fractureZone('pelvis-quad', 1.9, -15)">
+                                <path d="M 70 145 L 130 145 L 130 225 L 100 242 L 70 225 Z" />
+                            </g>
+                            <g id="micro-pelvis-quad" class="hidden">
+                                <path id="quad-stomach" class="micro-piece" d="M 70 145 L 130 145 L 128 185 C 115 190, 85 190, 72 185 Z" onclick="window.toggleTactilePiece('quad-stomach', 'Epigastric Core Zone')" />
+                                <path id="quad-pelvis" class="micro-piece" d="M 72 185 C 85 190, 115 190, 128 185 L 130 225 L 100 242 L 70 225 Z" onclick="window.toggleTactilePiece('quad-pelvis', 'Pelvic/Structural Base')" />
+                            </g>
+
+                            <g id="macro-legs" class="macro-zone" onclick="window.fractureZone('legs', 1.4, -28)">
+                                <path d="M 70 225 L 100 242 L 130 225 L 125 420 L 98 420 L 98 280 L 102 280 L 102 420 L 75 420 Z" />
+                            </g>
+                            <g id="micro-legs" class="hidden">
+                                <path id="leg-l-structural" class="micro-piece" d="M 70 225 L 100 242 L 98 280 L 72 280 Z" onclick="window.toggleTactilePiece('leg-l-structural', 'Left Superior Leg Chassis')" />
+                                <path id="leg-l-distal" class="micro-piece" d="M 72 280 L 98 280 L 98 420 L 75 420 Z" onclick="window.toggleTactilePiece('leg-l-distal', 'Left Distal Leg Pillar')" />
+                                <path id="leg-r-structural" class="micro-piece" d="M 100 242 L 130 225 L 128 280 L 102 280 Z" onclick="window.toggleTactilePiece('leg-r-structural', 'Right Superior Leg Chassis')" />
+                                <path id="leg-r-distal" class="micro-piece" d="M 102 280 L 128 280 L 125 420 L 102 420 Z" onclick="window.toggleTactilePiece('leg-r-distal', 'Right Distal Leg Pillar')" />
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 glass-card rounded-3xl p-6 flex flex-col relative overflow-hidden h-full">
+                    
+                    <div id="friction-column-empty" class="absolute inset-0 bg-[#0B0F19]/80 backdrop-blur-md flex flex-col items-center justify-center p-6 z-10 transition-opacity duration-300">
+                        <div class="border border-slate-700 bg-slate-900/50 shadow-2xl p-8 rounded-3xl text-center">
+                            <span class="text-4xl block mb-4 drop-shadow-lg">🧩</span>
+                            <p class="text-[11px] text-slate-300 font-black uppercase tracking-widest leading-relaxed">Isolate An Interlocking Structural<br>Segment To Query System Log</p>
+                        </div>
+                    </div>
+
+                    <div class="z-20 flex flex-col h-full">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4 flex-shrink-0">
+                            <span class="text-[10px] font-black tracking-widest text-slate-400 uppercase">System Log Translation</span>
+                            <span id="active-target-label" class="text-[10px] font-black tracking-widest text-[var(--accent)] uppercase drop-shadow-md">No Sector Segment Engaged</span>
+                        </div>
+                        
+                        <div id="symptom-bubbles-container" class="flex flex-wrap content-start gap-4 overflow-y-auto pb-24 scrollbar-none flex-grow">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="telehealth-timer-banner" class="hidden glass-card border border-amber-500/30 p-4 rounded-2xl flex items-center justify-between mb-4 animate-fade-in flex-shrink-0">
+            <div class="flex items-center space-x-3">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                <span class="text-[10px] font-black uppercase tracking-widest text-slate-200">Telehealth Queue Handshake Live</span>
+            </div>
+            <div class="font-mono text-xs font-black bg-slate-950/80 px-3 py-1.5 rounded-lg border border-slate-800 text-amber-400">
+                SLA Timeout: <span id="sla-clock">30:00</span>
+            </div>
+        </div>
+
+        <div id="dossier-drawer" class="absolute bottom-0 left-0 right-0 bg-[#0B0F19]/95 border-t border-slate-700 backdrop-blur-2xl z-50 translate-y-[calc(100%-60px)] transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) rounded-t-[2rem] shadow-[0_-20px_50px_rgba(0,0,0,0.8)]">
+            <div onclick="window.toggleDossier()" class="h-[60px] flex items-center justify-between px-8 cursor-pointer select-none">
+                <div class="flex items-center space-x-3">
+                    <span class="w-2 h-2 rounded-full bg-slate-600" id="dossier-indicator"></span>
+                    <span class="text-[11px] font-black uppercase tracking-widest text-white" id="dossier-text">Manifest Clear</span>
+                </div>
+                <span class="text-slate-400 font-bold transition-transform duration-300" id="dossier-chevron">ᐱ</span>
+            </div>
+            <div class="p-6 max-h-[350px] overflow-y-auto scrollbar-none">
+                <div id="dossier-list" class="space-y-3 mb-6"></div>
+                <div class="flex items-center justify-between border-t border-slate-800 pt-4 mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Pre-Auth Hold Aggregate</span>
+                    <span id="manifest-total" class="text-lg font-black text-[var(--accent)]">$0</span>
+                </div>
+                <button onclick="window.initiateFulfillmentRouting()" class="w-full bg-white text-slate-950 font-black text-[11px] uppercase tracking-widest px-6 py-4 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:scale-[1.01] transition-transform">Authorize Hold & Query Routing Matrix ➔</button>
+            </div>
+        </div>
+    </main>
+
     <script>
-        window.logPieceClick = function(segmentLabel) {
-            const displayLog = document.getElementById('active-piece-log');
-            displayLog.innerText = `LOCKED: ${segmentLabel}`;
-            displayLog.classList.remove('text-emerald-400');
-            displayLog.classList.add('text-yellow-400');
-            setTimeout(() => {
-                displayLog.classList.remove('text-yellow-400');
-                displayLog.classList.add('text-emerald-400');
-            }, 300);
+        // STRICT NON-DIAGNOSTIC ARCHITECTURAL SYMPTOM DICTIONARY
+        // Features targeted legal delta triggers for grey-area tracking oversight mapping
+        const INTEGRATED_DICTIONARY = {
+            'head-cranium': [
+                { txt: 'Sustained cranial pressure sensations', delta: false },
+                { txt: 'Surface sensitivity markers across temple zone', delta: false }
+            ],
+            'head-eyes': [
+                { txt: 'Transient tracking focus lag metrics', delta: false },
+                { txt: 'Retro-orbital point stress indications', delta: true } // Delta trigger flag
+            ],
+            'head-jaw': [
+                { txt: 'Masseter muscle loading resistance', delta: false },
+                { txt: 'Temporomandibular structural alignment clicking', delta: false }
+            ],
+            'torso-chest': [
+                { txt: 'Superficial pleural stitching during exercise', delta: false },
+                { txt: 'Sub-sternal constriction sensations', delta: true } // Delta trigger flag
+            ],
+            'quad-stomach': [
+                { txt: 'Gaseous volume expansion indexes', delta: false },
+                { txt: 'Epigastric acidity tracking markers', delta: false }
+            ],
+            'arm-left-bow': [
+                { txt: 'Elbow hinge friction anomalies', delta: false },
+                { txt: 'Distal vascular tingling under load', delta: false }
+            ],
+            'arm-right-bow': [
+                { txt: 'Elbow hinge friction anomalies', delta: false },
+                { txt: 'Distal vascular tingling under load', delta: false }
+            ],
+            'leg-l-structural': [
+                { txt: 'Quadriceps recovery exhaustion markers', delta: false }
+            ],
+            'leg-l-distal': [
+                { txt: 'Deep calf muscular stiffness tracking', delta: false }
+            ],
+            'organ-Cardiovascular Optimization Line': [
+                { txt: 'Baseline heart rate variability variance tracking', delta: false }
+            ],
+            'organ-Hepatic Biomarker Track': [
+                { txt: 'Localized deep upper abdominal heavy sensation tracking', delta: true }
+            ],
+            'organ-Renal Filtration Matrix': [
+                { txt: 'Posterior flank loading feedback metrics', delta: false }
+            ],
+            'default': [
+                { txt: 'General localized fatigue indexing feedback', delta: false },
+                { txt: 'Movement-associated mechanical resistance', delta: false }
+            ]
+        };
+
+        // CRITICAL ACUITY CRITERIA TRIPPERS (Continuous Ejector Assets)
+        const HARD_EJECT_KEYWORDS = [
+            'crushing temple compression',
+            'retro-orbital point pressures',
+            'sub-sternal anchor weights',
+            'crushing chest compression'
+        ];
+
+        let isDiscreetMode = false, isBackView = false, activeMacroZone = null, activeMicroPiece = null, compiledDossier = [], isDossierOpen = false, timerInterval = null;
+
+        // --- GATE EXECUTION PATHWAYS ---
+        window.clearAcuityGate = function() {
+            // Check for synthetic persistent block simulation
+            if(localStorage.getItem('vault_lockout_active') === 'true') {
+                document.getElementById('acuity-gate').classList.add('hidden');
+                document.getElementById('attestation-gate').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('acuity-gate').classList.add('smooth-transition', 'opacity-0');
+            setTimeout(() => document.getElementById('acuity-gate').classList.add('hidden'), 500);
+        };
+
+        window.triggerEmergencyEject = function() {
+            localStorage.setItem('vault_lockout_active', 'true');
+            window.location.href = "tel:911";
+            alert("Emergency Eject Triggered. System Lockout Initiated. Routing Session directly to Emergency Response Services (911).");
+        };
+
+        window.clearAttestationGate = function() {
+            localStorage.removeItem('vault_lockout_active');
+            document.getElementById('attestation-gate').classList.add('hidden');
+            document.getElementById('acuity-gate').classList.remove('hidden');
+            window.clearAcuityGate();
+        };
+
+        // --- ECOSYSTEM HOUSTING UMBRELLA (TRACTOR MODULAR INTEGRATION) ---
+        window.toggleTractorAttachment = function(moduleKey, isActive) {
+            const dataPanel = document.getElementById(`attachment-data-${moduleKey}`);
+            if(isActive) {
+                dataPanel.classList.remove('hidden');
+                compiledDossier.push({ type: 'attachment', id: `attach-${moduleKey}`, title: `${moduleKey.toUpperCase()} Wearable Integration Pipeline Bounded`, price: 0 });
+            } else {
+                dataPanel.classList.add('hidden');
+                compiledDossier = compiledDossier.filter(i => i.id !== `attach-${moduleKey}`);
+            }
+            renderDossier();
+        };
+
+        // --- TAB SELECTION PATHWAYS ---
+        window.switchTab = function(index) {
+            for(let i=1; i<=3; i++) {
+                document.getElementById('tab-'+i).classList.add('hidden');
+                document.getElementById('tab-btn-'+i).className = "border border-transparent text-slate-500 hover:text-slate-300 flex flex-col items-center justify-center py-2 rounded-xl transition";
+            }
+            document.getElementById('tab-'+index).classList.remove('hidden');
+            document.getElementById('tab-'+index).classList.add('flex');
+            document.getElementById('tab-btn-'+index).className = "bg-[var(--accent-glow)] border border-[var(--accent)] text-[var(--accent)] flex flex-col items-center justify-center py-2 rounded-xl transition shadow-[0_0_15px_var(--accent-glow)]";
+        };
+
+        // --- INTERACTIVE BluePrint JIGSAW LOGIC (THE LEGO VECTOR MESH) ---
+        window.pivotBody = function(view) {
+            isBackView = (view === 'Back');
+            document.getElementById('btn-front').className = isBackView ? "text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition" : "bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition shadow-sm";
+            document.getElementById('btn-back').className = isBackView ? "bg-slate-800 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition shadow-sm" : "text-slate-500 hover:text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-md transition";
+            document.getElementById('human-svg').classList.toggle('flipped', isBackView);
+            window.resetMacroMap();
+        };
+
+        window.fractureZone = function(zoneName, scale, translateY) {
+            activeMacroZone = zoneName;
+            document.querySelectorAll('.macro-zone').forEach(el => el.classList.add('ghosted'));
+            document.getElementById(`macro-${zoneName}`).classList.add('hidden');
+            document.querySelectorAll('[id^="micro-"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`micro-${zoneName}`).classList.remove('hidden');
+            
+            document.getElementById('human-svg').style.transform = `scale(${scale}) translateY(${translateY}%) ${isBackView ? 'scaleX(-1)' : ''}`;
+            document.getElementById('master-header').style.transform = "translateY(-100%)";
+            document.getElementById('master-header').style.position = "absolute";
+            document.getElementById('organ-track').classList.add('hidden');
+            document.getElementById('btn-reset').classList.remove('hidden');
+            document.getElementById('touch-area').classList.add('border-[var(--accent)]');
+        };
+
+        window.resetMacroMap = function() {
+            document.querySelectorAll('.macro-zone').forEach(el => { el.classList.remove('ghosted'); el.classList.remove('hidden'); });
+            document.querySelectorAll('[id^="micro-"]').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.micro-piece').forEach(el => { el.classList.remove('piece-active'); });
+            
+            document.getElementById('human-svg').style.transform = isBackView ? 'scaleX(-1)' : 'scale(1)';
+            document.getElementById('master-header').style.transform = "translateY(0)";
+            document.getElementById('master-header').style.position = "relative";
+            document.getElementById('organ-track').classList.remove('hidden');
+            
+            document.getElementById('friction-column-empty').style.opacity = '1';
+            document.getElementById('friction-column-empty').style.pointerEvents = 'auto';
+            window.killSeverityArchitecture();
+            document.getElementById('btn-reset').classList.add('hidden');
+            document.getElementById('touch-area').classList.remove('border-[var(--accent)]');
+            
+            activeMacroZone = null; activeMicroPiece = null;
+        };
+
+        window.toggleTactilePiece = function(pieceId, labelName) {
+            const el = document.getElementById(pieceId);
+            if(el.classList.contains('piece-active')) {
+                el.classList.remove('piece-active');
+                if(activeMicroPiece && activeMicroPiece.id === pieceId) {
+                    window.killSeverityArchitecture();
+                    document.getElementById('friction-column-empty').style.opacity = '1';
+                    document.getElementById('friction-column-empty').style.pointerEvents = 'auto';
+                    activeMicroPiece = null;
+                }
+                return;
+            }
+            document.querySelectorAll(`#micro-${activeMacroZone} .micro-piece`).forEach(p => p.classList.remove('piece-active'));
+            el.classList.add('piece-active');
+            activeMicroPiece = { id: pieceId, label: (isBackView ? "Posterior " : "") + labelName };
+            
+            populateSymptoms(pieceId);
+        };
+
+        window.fastTrackOrgan = function(organName) {
+            document.getElementById('human-svg').style.transform = 'scale(0)'; 
+            document.getElementById('master-header').style.transform = "translateY(-100%)";
+            document.getElementById('master-header').style.position = "absolute";
+            document.getElementById('btn-reset').classList.remove('hidden');
+            
+            activeMicroPiece = { id: 'organ-'+organName, label: organName }; 
+            populateSymptoms('organ-'+organName);
+        };
+
+        window.killSeverityArchitecture = function() {
+            // Re-enforces baseline global accents, discarding variable health evaluation maps
+            let defColor = isDiscreetMode ? '#60A5FA' : '#10B981';
+            document.documentElement.style.setProperty('--accent', defColor);
+            document.documentElement.style.setProperty('--accent-glow', defColor + '40');
+        };
+
+        // --- DICTIONARY & COMPLIANCE PIPELINES ---
+        function populateSymptoms(pieceId) {
+            document.getElementById('friction-column-empty').style.opacity = '0';
+            document.getElementById('friction-column-empty').style.pointerEvents = 'none';
+            document.getElementById('active-target-label').innerText = `SEGMENT CORE: ${activeMicroPiece.label}`;
+            
+            const container = document.getElementById('symptom-bubbles-container');
+            container.innerHTML = "";
+            let configurations = INTEGRATED_DICTIONARY[pieceId] || INTEGRATED_DICTIONARY['default'];
+            
+            configurations.forEach(config => {
+                const wrapper = document.createElement('div'); wrapper.className = "w-full";
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-slate-900 border border-slate-700 hover:border-[var(--accent)] text-slate-300 text-xs px-5 py-4 rounded-xl transition shadow-md";
+                btn.innerText = `"${config.txt}"`;
+                btn.onclick = () => handleSymptomCommit(wrapper, config, btn);
+                wrapper.appendChild(btn); container.appendChild(wrapper);
+            });
+        }
+
+        function handleSymptomCommit(wrapper, targetConfig, btnElement) {
+            if(wrapper.querySelector('.duration-track')) return; 
+
+            // Continuous Keyword Ejector Checklist Validation
+            let mappedLower = targetConfig.txt.toLowerCase();
+            let matchedCritper = HARD_EJECT_KEYWORDS.some(key => mappedLower.includes(key));
+            if(matchedCritper) {
+                window.triggerEmergencyEject();
+                return;
+            }
+
+            // Severe Psychiatric Key Flag Mapping Check
+            if(activeMicroPiece.id === 'head-cranium' && targetConfig.txt.includes('pressure')) {
+                document.getElementById('crisis-hub').classList.remove('hidden');
+                return;
+            }
+
+            const newId = Date.now();
+            compiledDossier.push({ 
+                type: 'symptom', 
+                id: newId, 
+                pieceId: activeMicroPiece.id, 
+                label: isDiscreetMode ? "Secured Segment Cluster" : activeMicroPiece.label, 
+                title: targetConfig.txt, 
+                deltaTrigger: targetConfig.delta, // Append compliance delta parameter mapping flag
+                duration: '24 Hrs', 
+                price: 0 
+            });
+            renderDossier();
+            
+            btnElement.classList.add('border-[var(--accent)]', 'bg-[var(--accent-glow)]');
+            const track = document.createElement('div');
+            track.className = "duration-track mt-3 ml-4 flex space-x-2 animate-fade-in";
+            track.innerHTML = `
+                <button onclick="updateDuration(${newId}, '24 Hrs', this)" class="time-btn bg-[var(--accent)] text-slate-950 text-[10px] font-black px-4 py-2 rounded-full transition">24 Hrs</button>
+                <button onclick="updateDuration(${newId}, '3-5 Days', this)" class="time-btn bg-slate-800 border border-slate-700 text-slate-400 hover:text-white text-[10px] font-bold px-4 py-2 rounded-full transition">3-5 Days</button>
+                <button onclick="updateDuration(${newId}, 'Weeks', this)" class="time-btn bg-slate-800 border border-slate-700 text-slate-400 hover:text-white text-[10px] font-bold px-4 py-2 rounded-full transition">Weeks</button>
+            `;
+            wrapper.appendChild(track);
+        }
+
+        window.updateDuration = function(id, duration, btnEl) {
+            let item = compiledDossier.find(i => i.id === id);
+            if(item) item.duration = duration;
+            Array.from(btnEl.parentElement.children).forEach(b => { b.className = "time-btn bg-slate-800 border border-slate-700 text-slate-400 hover:text-white text-[10px] font-bold px-4 py-2 rounded-full transition"; });
+            btnEl.className = "time-btn bg-[var(--accent)] text-slate-950 text-[10px] font-black px-4 py-2 rounded-full transition";
+            renderDossier();
+        };
+
+        window.addToManifest = function(title, price) {
+            compiledDossier.push({ type: 'lab', id: Date.now(), title: title, price: price });
+            renderDossier();
+            if(!isDossierOpen) window.toggleDossier();
+        };
+
+        // --- MASTER SYSTEM DOSSIER ENGINE ---
+        function renderDossier() {
+            const container = document.getElementById('dossier-list');
+            document.getElementById('dossier-text').innerText = `${compiledDossier.length} Segment Configurations Allocated`;
+            document.getElementById('dossier-indicator').className = compiledDossier.length > 0 ? "w-2 h-2 rounded-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent-glow)]" : "w-2 h-2 rounded-full bg-slate-600";
+            
+            let total = 0; container.innerHTML = "";
+            compiledDossier.forEach(item => {
+                total += item.price;
+                const div = document.createElement('div');
+                div.className = "bg-slate-900 border border-slate-700 p-4 rounded-xl flex justify-between items-center shadow-md animate-fade-in";
+                
+                if(item.type === 'symptom') {
+                    div.innerHTML = `
+                        <div>
+                            <div class="flex items-center space-x-3 mb-1">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-[var(--accent)]">[ CORE VECTOR ] ${item.label}</span>
+                                <span class="text-[9px] text-slate-300 font-bold bg-slate-800 border border-slate-600 px-2 py-0.5 rounded-full">${item.duration}</span>
+                                ${item.deltaTrigger ? `<span class="text-[8px] font-black bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2 py-0.5 rounded-md uppercase tracking-wider">[ QA DELTA RE-CHECK TRIGGERED ]</span>` : ''}
+                            </div>
+                            <p class="text-xs text-slate-400 font-mono mt-2">"${item.title}"</p>
+                        </div>
+                        <button onclick="compiledDossier = compiledDossier.filter(i => i.id !== ${item.id}); renderDossier();" class="text-slate-600 hover:text-red-500 font-bold px-3 text-lg">✕</button>
+                    `;
+                } else {
+                    div.innerHTML = `
+                        <div>
+                            <div class="flex items-center space-x-3 mb-1">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-cyan-400">[ PACKAGED ASSET ]</span>
+                            </div>
+                            <p class="text-xs text-slate-200 font-bold mt-1 secure-text">${item.title}</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm font-black text-[var(--accent)]">${item.price > 0 ? '$'+item.price : 'Bounded'}</span>
+                            <button onclick="compiledDossier = compiledDossier.filter(i => i.id !== ${item.id}); renderDossier();" class="text-slate-600 hover:text-red-500 font-bold px-2 text-lg">✕</button>
+                        </div>
+                    `;
+                }
+                container.appendChild(div);
+            });
+            document.getElementById('manifest-total').innerText = `$${total}`;
+        }
+
+        // --- SLA WAIT DEFIANCE RUNTIME TRACKER ---
+        window.initiateFulfillmentRouting = function() {
+            if(compiledDossier.length === 0) {
+                alert("Workspace configuration logs empty. Allocate diagnostic or symptom vectors.");
+                return;
+            }
+            window.toggleDossier();
+            document.getElementById('telehealth-timer-banner').classList.remove('hidden');
+            
+            let secondsLeft = 1800; // 30 Minute SLA Guardrail
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                secondsLeft--;
+                let m = Math.floor(secondsLeft / 60).toString().padStart(2, '0');
+                let s = (secondsLeft % 60).toString().padStart(2, '0');
+                document.getElementById('sla-clock').innerText = `${m}:${s}`;
+                
+                if(secondsLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('telehealth-timer-banner').classList.add('hidden');
+                    alert("SLA Handshake Timeout Upper Boundary Reached. Hold Authorization Voided Automatically. No capture executed. Please re-route via alternative hospital endpoints.");
+                    compiledDossier = [];
+                    renderDossier();
+                }
+            }, 1000);
+            alert("Pre-Authorization Hold Locked. Initializing Patient Choice Matrix routing configuration over current localized grid network.");
+        };
+
+        window.toggleDossier = function() {
+            isDossierOpen = !isDossierOpen;
+            const drw = document.getElementById('dossier-drawer'), chev = document.getElementById('dossier-chevron');
+            drw.style.transform = isDossierOpen ? 'translateY(0)' : 'translateY(calc(100% - 60px))';
+            chev.style.transform = isDossierOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+        };
+
+        window.toggleDiscreetMode = function() {
+            isDiscreetMode = !isDiscreetMode;
+            document.body.className = isDiscreetMode ? "discreet-active bg-[var(--bg-main)] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden" : "bg-[var(--bg-main)] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden";
+            document.getElementById('discreet-text').innerText = isDiscreetMode ? "Discreet: ACTIVE" : "Discreet: OFF";
+            document.getElementById('brand-logo').innerText = isDiscreetMode ? "Vault Instance OS" : "Wellness Vault™";
+            window.killSeverityArchitecture();
+            renderDossier();
         };
     </script>
 </body>
