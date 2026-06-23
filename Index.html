@@ -117,7 +117,9 @@
             </div>
             
             <div class="flex items-center space-x-2">
-                <!-- REBRANDED: Anon toggle modified to Discreet Data -->
+                <button type="button" id="exit-track-hub-btn" onclick="window.returnToSelectionHub()" class="hidden text-[10px] font-black uppercase tracking-wider text-slate-600 hover:text-slate-900 transition border border-slate-300 bg-white px-3 py-1.5 rounded-full shadow-sm cursor-pointer">
+                    « Close Track
+                </button>
                 <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full transition cursor-pointer hover:bg-slate-200">
                     <span id="anon-icon">🔓</span>
                     <span class="text-[10px] font-black uppercase tracking-wide text-slate-600" id="anon-text">Discreet Data: OFF</span>
@@ -126,17 +128,23 @@
         </div>
     </header>
 
+    <!-- DYNAMIC PIPELINE TRACK STATUS BAR -->
+    <section id="system-status-bar" class="hidden bg-white border-b border-slate-200 py-2 px-4 flex-shrink-0 relative z-10 animate-fadeIn">
+        <div id="status-bar-container" class="max-w-xl mx-auto flex items-center justify-center space-x-6 text-center text-[10px] font-black uppercase tracking-wider font-mono"></div>
+    </section>
+
     <!-- ========================================== -->
-    <!-- MASTER UNIFIED LAYOUT CANVAS CONTAINER     -->
+    <!-- UNIFIED RESPONSIVE COMMAND LAYOUT VIEW     -->
     <!-- ========================================== -->
-    <main class="max-w-7xl mx-auto w-full px-4 pt-4 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+    <!-- AMENDED: Container drops strict max-w boundaries on desktop layout scales -->
+    <main class="max-w-md lg:max-w-7xl mx-auto w-full px-4 pt-4 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         
-        <!-- LEFT COLUMN: PROPORTIONATE COCKPIT CONTROLS (7/12 Real Estate) -->
+        <!-- LEFT WORKSPACE COLUMN: Interactive Cockpit Controls (7/12 Width Ratio) -->
         <div class="lg:col-span-7 space-y-4">
             
-            <!-- IDENTITY ROW: Matches Identity Sizing Metrics Layout -->
+            <!-- IDENTITY PROFILE AND INBOX TILES GRID -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- User Profile Box -->
+                <!-- User Information Profile -->
                 <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 flex items-center space-x-4">
                     <div class="w-11 h-11 bg-slate-100 border border-slate-200 rounded-full flex items-center justify-center text-xl shadow-inner select-none shrink-0">
                         <svg class="w-5 h-5 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.67-5-3.33-8-3z"/></svg>
@@ -150,7 +158,7 @@
                     </div>
                 </div>
 
-                <!-- RECONFIGURED: Inbox matching raw dimension fields perfectly -->
+                <!-- Synchronized Raw Inbox Row -->
                 <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-4 flex items-center justify-between">
                     <div class="flex items-center space-x-4 overflow-hidden">
                         <div class="w-11 h-11 bg-blue-50 border border-blue-100 rounded-full flex items-center justify-center text-xl shadow-inner select-none shrink-0">
@@ -165,22 +173,22 @@
                 </div>
             </div>
 
-            <!-- CORE UTILITIES MATRIX -->
+            <!-- CORE UTILITIES INTERFACE -->
             <div class="grid grid-cols-3 gap-2 text-center text-[9.5px] font-black uppercase tracking-wide">
-                <button onclick="alert('Track locked.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition cursor-pointer flex flex-col items-center justify-center space-y-1"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
-                <button onclick="alert('Voucher download compiled.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition cursor-pointer flex flex-col items-center justify-center space-y-1"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
-                <button onclick="alert('Invitation string copied.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition cursor-pointer flex flex-col items-center justify-center space-y-1"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
+                <button onclick="alert('Environment tracking matrix is locked.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
+                <button onclick="alert('Secure result vouchers generated.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
+                <button onclick="alert('Invitation copied to terminal array.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
             </div>
 
-            <!-- FIXED & RESTORED: Main service tracks remain permanently visible -->
+            <!-- PREMIUM THREE-CARD SERVICE MATRIX (Always-On Layout Visibility Guard) -->
             <div class="space-y-2">
                 <label class="text-[9px] font-mono font-black uppercase tracking-widest text-slate-400 block px-1">Select Active Service Track</label>
                 <div class="flex space-x-3 overflow-x-auto pb-2 pt-0.5 px-1 scrollbar-none snap-x snap-mandatory w-full">
                     
                     <!-- iTest Track Card -->
-                    <div id="card-itest" onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[140px] bg-gradient-to-br from-white via-slate-50 to-blue-50/40 border border-slate-200 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
+                    <div id="card-itest" onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-blue-50/40 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-blue-500/10 text-fbBlue border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Direct</div>
-                        <div class="w-8 h-10 bg-white text-xs rounded-xl fill-none flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">🧬</div>
+                        <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">🧬</div>
                         <div class="space-y-0.5 mt-2">
                             <h3 class="text-[10px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">iTest Market</h3>
                             <p class="text-[8.5px] text-slate-500 leading-tight font-medium">Diagnostic laboratory orders.</p>
@@ -188,7 +196,7 @@
                     </div>
 
                     <!-- MindLink Track Card -->
-                    <div id="card-mindlink" onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[140px] bg-gradient-to-br from-white via-slate-50 to-purple-50/30 border border-slate-200 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
+                    <div id="card-mindlink" onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-purple-50/30 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-purple-500/10 text-purple-600 border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Private</div>
                         <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">🧠</div>
                         <div class="space-y-0.5 mt-2">
@@ -198,7 +206,7 @@
                     </div>
 
                     <!-- CareLive Track Card -->
-                    <div id="card-carelive" onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[140px] bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 border border-slate-200 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
+                    <div id="card-carelive" onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-emerald-500/10 text-emerald-600 border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Sandbox</div>
                         <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">📐</div>
                         <div class="space-y-0.5 mt-2">
@@ -209,10 +217,10 @@
                 </div>
             </div>
 
-            <!-- WORKFLOW DISPLAY ENGINE CONTAINER: Supports Swiping Interaction Routines -->
+            <!-- ACTIVE WORKFLOW EXPANSION PANEL SLOT -->
             <div id="workspace-execution-enclosure" class="hidden w-full flex-col space-y-4 animate-fadeIn" style="touch-action: pan-y;">
                 
-                <!-- UPGRADED PROGRESS PIPELINE BAR -->
+                <!-- PILL STYLE CONFIGURATOR STATUS STEPPER -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-3 flex flex-col space-y-2 shadow-sm">
                     <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden relative">
                         <div id="progress-bar-fill" class="bg-gradient-to-r from-fbBlue to-msgBlue h-full smooth-transition" style="width: 33.33%;"></div>
@@ -221,10 +229,9 @@
                 </div>
 
                 <div id="stage-1" class="border border-slate-200 bg-white rounded-3xl p-4 sm:p-5 shadow-sm space-y-4 relative">
-                    <!-- Swipe Dismiss Assist Label Badge -->
-                    <div class="hidden sm:flex absolute -top-2.5 left-6 bg-slate-800 text-white font-mono text-[8px] px-2 py-0.5 rounded-md shadow uppercase tracking-widest select-none">Swipe right or click close to go back</div>
+                    <div class="flex absolute -top-2.5 left-6 bg-slate-800 text-white font-mono text-[8px] px-2 py-0.5 rounded-md shadow uppercase tracking-widest select-none">Swipe right or click close to go back</div>
 
-                    <!-- SUB-PANE A: iTEST MARKETPLACE -->
+                    <!-- PANE 1: iTEST SELECTIONS -->
                     <div id="subpane-itest" class="hidden space-y-4">
                         <div class="flex space-x-1.5 bg-slate-100 border border-slate-200/60 p-1 rounded-xl">
                             <button type="button" id="subtab-btn-executive" onclick="window.toggleSubTab('executive')" class="flex-1 bg-white text-slate-900 border border-slate-200/30 text-[10px] font-black uppercase py-1.5 rounded-lg shadow-sm cursor-pointer">Executive</button>
@@ -279,14 +286,14 @@
                         </div>
                     </div>
 
-                    <!-- SUB-PANE B: MINDLINK VIEW -->
+                    <!-- PANE 2: MINDLINK SPECIALIST -->
                     <div id="subpane-mindlink" class="hidden text-center py-2 max-w-xs mx-auto space-y-3">
                         <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center text-base mx-auto border border-purple-100 animate-pulse">🧠</div>
                         <p class="text-[10.5px] text-slate-500 leading-relaxed">System parameters sync user sessions straight to credentialed therapists.</p>
                         <button type="button" onclick="window.queueAsset('MindLink Specialist Assignment', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer">Confirm Allocation Place</button>
                     </div>
 
-                    <!-- SUB-PANE C: CARELIVE VIEW -->
+                    <!-- PANE 3: CARELIVE WORKSPACE -->
                     <div id="subpane-carelive" class="hidden space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
                             <div class="sm:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-2 flex flex-col items-center justify-center shadow-inner">
@@ -329,7 +336,7 @@
                     <button type="button" onclick="window.goToStage(3)" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl font-mono tracking-wider cursor-pointer">Submit ➔</button>
                 </div>
 
-                <!-- STAGE 3 CARD: INVOICE SHEET -->
+                <!-- STAGE 3 CARD: INVOICE TRANSACTION SHEET -->
                 <div id="stage-3" class="hidden border border-slate-200 bg-white rounded-3xl p-5 text-center space-y-4 shadow-sm animate-fadeIn">
                     <div class="w-10 h-10 bg-blue-50 text-fbBlue rounded-full flex items-center justify-center text-base font-black mx-auto shadow-inner">✓</div>
                     <h2 class="text-xs font-black uppercase tracking-tight text-slate-900">Transient Token Hold Dispatched</h2>
@@ -346,10 +353,10 @@
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: MASTER PERSISTENT SUMMARY & SYSTEM UTILITIES (5/12 Real Estate) -->
+        <!-- RIGHT WORKSPACE COLUMN: Real-Time Manifest & Registers (5/12 Width Ratio) -->
         <div class="lg:col-span-5 space-y-4">
             
-            <!-- REAL-TIME ALLOCATION MANIFEST BLOCK -->
+            <!-- REAL-TIME MANIFEST SUMMARY PANEL -->
             <div id="sticky-summary-panel" class="border border-slate-200 bg-white rounded-3xl p-5 space-y-4 shadow-sm">
                 <h2 class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">Real-Time Allocation Manifest</h2>
                 <div id="manifest-items-list" class="space-y-1.5 max-h-[140px] overflow-y-auto scrollbar-none pr-0.5"></div>
@@ -359,7 +366,7 @@
                 </div>
             </div>
 
-            <!-- SYSTEM SETTINGS LIST TABLE -->
+            <!-- REGISTRATION LEDGER ENTRIES -->
             <div class="border border-slate-200 rounded-2xl overflow-hidden divide-y divide-slate-100 text-xs font-bold text-slate-700 shadow-sm bg-white">
                 <div class="p-3 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="alert('Voucher tracking logs synchronized.');">
                     <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg><span>Transaction Log Registry</span></div>
@@ -371,7 +378,7 @@
                 </div>
             </div>
 
-            <!-- SECURITY ASSURANCE BADGE CARD -->
+            <!-- SECURITY ASSURANCE WARNING CONTAINER -->
             <div class="bg-red-50 border border-red-100 rounded-2xl p-4 text-[10px] font-medium leading-normal text-red-600 flex items-start space-x-3 shadow-sm">
                 <svg class="w-4 h-4 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                 <p>High-Security Endpoint: Local screenshot captures and client hardware media streaming storage profiles are programmatically restricted inside this canvas matrix wrapper frame.</p>
@@ -379,9 +386,9 @@
         </div>
     </main>
 
-    <!-- Operational Legal Compliance Footing -->
+    <!-- Permanent Footer Frame -->
     <footer class="text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest py-6 flex-shrink-0">
-        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v5.5</span>
+        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v5.6</span>
     </footer>
 
     <!-- ========================================== -->
@@ -401,7 +408,6 @@
         
         let compiledManifestArray = [];
 
-        // SWIPE SYSTEM GESTURE MAP REGISTER VARIABLES
         let swipeXTouchStart = 0;
         let swipeXTouchEnd = 0;
 
@@ -428,7 +434,6 @@
             document.getElementById('acc-display-id').innerText = `WF-2026-${Math.floor(11111 + Math.random() * 88888)}`;
         }
 
-        // --- ENFORCING NATIVE SWIPE-TO-GO-BACK ROUTINES ---
         function setupHardwareSwipeGestureListeners() {
             const elementEnclosure = document.getElementById('workspace-execution-enclosure');
             
@@ -443,13 +448,11 @@
         }
 
         function evaluateSwipeActionVector() {
-            // Swipe right configuration logic trigger
             if (swipeXTouchEnd - swipeXTouchStart > 100) { 
                 window.returnToSelectionHub();
             }
         }
 
-        // --- GATE CREDENTIAL CHALLENGE HANDLERS ---
         window.submitPhoneVerification = function() {
             const num = document.getElementById('auth-phone').value.trim();
             if(!num || num.length < 8) { alert("Invalid registration phone format."); return; }
@@ -478,7 +481,7 @@
             const name = document.getElementById('profile-fullname').value.trim();
             const email = document.getElementById('profile-email').value.trim();
             const year = document.getElementById('profile-year').value;
-            if(!name || !email || !year || !userGender) { alert("All profile initialization configurations required."); return; }
+            if(!name || !email || !year || !userGender) { alert("All profile properties must be configured."); return; }
             
             userFullLegalName = name; userEmailAddress = email; userBirthYear = year;
             localStorage.setItem('wf_user_registered', 'true');
@@ -495,11 +498,9 @@
             setupHardwareSwipeGestureListeners();
         };
 
-        // --- TRACK SUBMISSION TUNNEL CONTROLS ---
         window.launchIsolatedTrack = function(trackKey) {
             activeMainTrack = trackKey;
             
-            // Highlight active selection card borders cleanly
             document.querySelectorAll("[id^='card-']").forEach(c => c.classList.remove('border-fbBlue', 'ring-2', 'ring-fbBlue/10'));
             document.getElementById(`card-${trackKey}`).classList.add('border-fbBlue', 'ring-2', 'ring-fbBlue/10');
             
@@ -581,7 +582,6 @@
             if(activeBtn) activeBtn.className = "border-2 border-fbBlue bg-blue-50/40 p-3 rounded-xl text-left focus:outline-none flex flex-col justify-center min-h-[60px] shadow-md cursor-pointer";
         };
 
-        // --- ENFORCING DISCREET DATA MASK SYSTEM LOOP ---
         window.toggleAnonymityEngine = function() {
             isAnonymityActive = !isAnonymityActive;
             const txt = document.getElementById('anon-text');
@@ -657,7 +657,6 @@
             const tracks = [1, 2, 3];
             let maxTracksCount = activeMainTrack === 'carelive' ? 3 : 2;
             
-            // Adjust dynamic custom pill loader layout fills cleanly
             const progressFill = document.getElementById('progress-bar-fill');
             if(progressFill) {
                 let percentFillVal = (stageNum / maxTracksCount) * 100;
