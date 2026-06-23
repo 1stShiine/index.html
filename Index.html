@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wellness Front™ | Premium Simulation & Allocation Engine</title>
+    <title>Wellness Front™ | Private Dashboard & Allocation Engine</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        fbBlue: '#1877F2',
+                        msgBlue: '#0084FF',
+                        msgLightBg: '#F0F2F5',
+                        msgCardBg: '#FFFFFF',
+                        msgHoverBlue: '#E7F3FF'
+                    },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     }
@@ -17,330 +25,369 @@
         }
     </script>
     <style>
-        .smooth-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .smooth-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         
-        /* 4-Zone Interactive Rectangular Target Styles */
+        /* 4-Zone Interactive Rectangular Target Styles (Light Scheme) */
         .zone-rect {
             cursor: pointer;
-            fill: rgba(255, 255, 255, 0.02);
-            stroke: rgba(255, 255, 255, 0.12);
+            fill: rgba(240, 242, 245, 0.4);
+            stroke: #D1D5DB;
             stroke-width: 1.5;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
         }
         .zone-rect:hover {
-            fill: rgba(16, 185, 129, 0.05);
-            stroke: #10B981;
+            fill: rgba(24, 119, 242, 0.05);
+            stroke: #1877F2;
         }
         .zone-rect-active {
-            fill: rgba(16, 185, 129, 0.15) !important;
-            stroke: #10B981 !important;
+            fill: rgba(24, 119, 242, 0.1) !important;
+            stroke: #1877F2 !important;
             stroke-width: 2.5;
         }
         .scrollbar-none::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="bg-[#080B16] text-slate-100 font-sans antialiased selection:bg-[#10B981] selection:text-slate-950 min-h-screen flex flex-col justify-between">
+<body class="bg-msgLightBg text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
 
-    <div id="auth-gate" class="fixed inset-0 bg-[#04060C]/98 backdrop-blur-2xl z-[100] flex items-center justify-center p-4 smooth-transition">
-        <div class="max-w-md w-full bg-[#101426] border border-slate-800/80 p-6 sm:p-8 rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] text-center">
-            <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-                <span class="text-xl text-emerald-400">🔐</span>
+    <!-- ========================================== -->
+    <!-- MAIN ACCOUNT DOOR ONBOARDING GATE (LIGHT)  -->
+    <!-- ========================================== -->
+    <div id="auth-gate" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] flex items-center justify-center p-4 smooth-transition">
+        <div class="max-w-md w-full bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl shadow-2xl text-center">
+            <div class="w-12 h-12 bg-fbBlue/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="text-xl text-fbBlue">🔐</span>
             </div>
-            <h1 class="text-sm font-black uppercase tracking-widest text-white mb-1">Platform Gateway Ingress</h1>
-            <p class="text-[11px] text-slate-400 mb-6 font-medium">Secure verification endpoint. Phone authorization mandatory.</p>
+            <h1 class="text-base font-black tracking-tight text-slate-900 mb-1">Platform Gateway Ingress</h1>
+            <p class="text-xs text-slate-500 mb-6 font-medium">Secure verification endpoint. Phone authorization mandatory.</p>
             
             <div class="space-y-4 text-left">
+                <!-- Step A: Phone Number Verification Challenge -->
                 <div id="phone-stage">
-                    <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Verified Phone Destination</label>
-                    <input type="tel" id="auth-phone" placeholder="+1 (555) 000-0000" class="w-full bg-[#090C16] border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 font-mono text-white mb-4 shadow-inner">
-                    <button onclick="window.submitPhoneVerification()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-[10px] uppercase tracking-widest py-3.5 rounded-xl transition shadow-lg shadow-emerald-500/10 cursor-pointer">Request Passing Token ➔</button>
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Verified Phone Destination</label>
+                    <input type="tel" id="auth-phone" placeholder="+1 (555) 000-0000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-fbBlue focus:bg-white text-slate-900 transition shadow-inner">
+                    <button onclick="window.submitPhoneVerification()" class="w-full bg-fbBlue hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl transition shadow-md mt-4 cursor-pointer">Request Passing Token ➔</button>
                 </div>
 
+                <!-- Step B: SMS Verification Simulated Entry -->
                 <div id="token-stage" class="hidden">
-                    <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Enter 6-Digit SMS Token</label>
-                    <input type="text" id="auth-token" placeholder="000000" maxlength="6" class="w-full bg-[#090C16] border border-slate-800 rounded-xl px-4 py-3 text-center text-lg tracking-[0.5em] focus:outline-none focus:border-emerald-500 font-mono text-white mb-4 shadow-inner">
-                    <button onclick="window.submitTokenVerification()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-[10px] uppercase tracking-widest py-3.5 rounded-xl transition shadow-lg cursor-pointer">Verify Instance Access</button>
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Enter 6-Digit SMS Token</label>
+                    <input type="text" id="auth-token" placeholder="000000" maxlength="6" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-center text-lg tracking-[0.5em] focus:outline-none focus:border-fbBlue focus:bg-white font-mono text-slate-900 transition shadow-inner">
+                    <button onclick="window.submitTokenVerification()" class="w-full bg-fbBlue hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl transition shadow-md cursor-pointer">Verify Instance Access</button>
                 </div>
 
-                <div id="profile-stage" class="hidden space-y-3.5">
+                <!-- Step C: Legal Onboarding Inputs -->
+                <div id="profile-stage" class="hidden space-y-4">
                     <div>
-                        <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1.5">Full Legal Name (ID Verification Anchor)</label>
-                        <input type="text" id="profile-fullname" placeholder="John Doe" class="w-full bg-[#090C16] border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 text-white shadow-inner mb-1">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Full Legal Name (ID Verification Anchor)</label>
+                        <input type="text" id="profile-fullname" placeholder="John Doe" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-fbBlue focus:bg-white text-slate-900 transition shadow-inner">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1.5">Year of Biological Birth (Year Only)</label>
-                        <input type="number" id="profile-year" placeholder="1995" min="1900" max="2026" class="w-full bg-[#090C16] border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 font-mono text-white shadow-inner">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Year of Biological Birth (Year Only)</label>
+                        <input type="number" id="profile-year" placeholder="1995" min="1900" max="2026" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-fbBlue focus:bg-white text-slate-900 font-mono transition shadow-inner">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Biological Gender Reference Frame</label>
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Biological Gender Reference Frame</label>
                         <div class="grid grid-cols-2 gap-2">
-                            <button type="button" onclick="window.setGenderFramework('male')" id="gender-male" class="bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Male Ranges</button>
-                            <button type="button" onclick="window.setGenderFramework('female')" id="gender-female" class="bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Female Ranges</button>
+                            <button type="button" onclick="window.setGenderFramework('male')" id="gender-male" class="bg-slate-50 border border-slate-200 text-slate-600 text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Male Ranges</button>
+                            <button type="button" onclick="window.setGenderFramework('female')" id="gender-female" class="bg-slate-50 border border-slate-200 text-slate-600 text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Female Ranges</button>
                         </div>
                     </div>
-                    <div class="border-t border-slate-800/80 pt-3">
-                        <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Target Profile Intent</label>
+                    <div class="border-t border-slate-100 pt-3">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Target Profile Intent</label>
                         <div class="grid grid-cols-2 gap-2">
-                            <button type="button" onclick="window.setIntent('Self')" id="intent-self" class="bg-[#090C16] border border-emerald-500 text-white text-[9px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer">For Myself</button>
-                            <button type="button" onclick="window.setIntent('Dependent')" id="intent-dep" class="bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer">For Dependent</button>
+                            <button type="button" onclick="window.setIntent('Self')" id="intent-self" class="bg-slate-50 border border-fbBlue text-fbBlue text-[10px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer">For Myself</button>
+                            <button type="button" onclick="window.setIntent('Dependent')" id="intent-dep" class="bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer">For Dependent</button>
                         </div>
                     </div>
-                    <button onclick="window.finalizeProfileGate()" class="w-full bg-white hover:bg-slate-100 text-slate-950 font-black text-[10px] uppercase tracking-widest py-3.5 rounded-xl transition mt-4 shadow-xl cursor-pointer">Register Core Profile</button>
+                    <button onclick="window.finalizeProfileGate()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition mt-4 shadow-lg cursor-pointer">Register Core Profile</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <header class="border-b border-slate-800/60 bg-[#0A0E1A] sticky top-0 z-50 px-4 py-3 shadow-md flex-shrink-0">
+    <!-- ========================================== -->
+    <!-- MASTER BRAND HEADER                        -->
+    <!-- ========================================== -->
+    <header class="border-b border-slate-200 bg-white sticky top-0 z-50 px-4 py-3 shadow-sm flex-shrink-0">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] animate-pulse"></span>
-                <span class="font-black tracking-wider text-xs uppercase text-white">
-                    Wellness Front<span class="text-emerald-500">™</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-fbBlue shadow-[0_0_8px_rgba(24,119,242,0.6)] animate-pulse"></span>
+                <span class="font-black tracking-wider text-sm uppercase text-slate-900">
+                    Wellness Front<span class="text-fbBlue">™</span>
                 </span>
             </div>
             
             <div class="flex items-center space-x-2">
-                <button type="button" id="exit-track-hub-btn" onclick="window.returnToSelectionHub()" class="hidden text-[8px] font-black uppercase tracking-wider text-slate-400 hover:text-white transition border border-slate-800 bg-[#05070F] px-3 py-1.5 rounded-full cursor-pointer font-mono">
+                <!-- Exit Active Track Switch Engine -->
+                <button type="button" id="exit-track-hub-btn" onclick="window.returnToSelectionHub()" class="hidden text-[10px] font-black uppercase tracking-wider text-slate-600 hover:text-slate-900 transition border border-slate-300 bg-white px-3 py-1.5 rounded-full shadow-sm cursor-pointer">
                     « Exit Path
                 </button>
+                <!-- Order-Level payload anonymity mask trigger -->
                 <div id="anonymity-container" class="smooth-transition hidden">
-                    <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-2 bg-[#05070F] border border-slate-800 px-3 py-1.5 rounded-full transition shadow-inner cursor-pointer hover:border-slate-700">
+                    <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full transition cursor-pointer hover:bg-slate-200">
                         <span id="anon-icon">🕵️</span>
-                        <span class="text-[8px] font-mono font-black uppercase tracking-widest text-slate-400" id="anon-text">Anon: OFF</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wide text-slate-600" id="anon-text">Anon: OFF</span>
                     </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="bg-[#0A0E1A]/40 border-b border-slate-900 px-4 py-2 text-center flex-shrink-0">
-        <span id="header-user-anchor" class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-500 select-none">
-            [ Account Owner Context Unallocated ]
-        </span>
+    <!-- Permanent Application-Level Owner Banner -->
+    <div class="bg-white border-b border-slate-100 px-4 py-2 flex items-center justify-center space-x-2 flex-shrink-0 shadow-inner">
+        <span class="text-[11px] font-bold tracking-wide text-slate-400 uppercase select-none">App Environment Secured:</span>
+        <span id="header-user-anchor" class="text-[11px] font-mono font-black uppercase text-slate-700">Unallocated</span>
     </div>
 
-    <section id="system-status-bar" class="hidden bg-[#090C16] border-b border-slate-900 py-2.5 px-4 flex-shrink-0 relative z-10 animate-fadeIn">
-        <div class="max-w-xl mx-auto flex items-center justify-center space-x-4 text-center text-[9px] font-black uppercase tracking-wider font-mono">
-            <span id="nav-step-1" class="text-emerald-400 transition-colors duration-200">01 / Setup</span>
-            <span class="text-slate-800">•</span>
-            <span id="nav-step-2" class="text-slate-600 transition-colors duration-200">02 / Review</span>
-            <span class="text-slate-800">•</span>
-            <span id="nav-step-3" class="text-slate-600 transition-colors duration-200">03 / Done</span>
+    <!-- ========================================== -->
+    <!-- STEP STATUS TIMELINE INDICATOR             -->
+    <!-- ========================================== -->
+    <section id="system-status-bar" class="hidden bg-white border-b border-slate-200 py-2.5 px-4 flex-shrink-0 relative z-10 animate-fadeIn">
+        <div class="max-w-xl mx-auto flex items-center justify-center space-x-6 text-center text-[10px] font-black uppercase tracking-wider font-mono">
+            <span id="nav-step-1" class="text-fbBlue transition-colors duration-200">01 / Setup</span>
+            <span class="text-slate-300">•</span>
+            <span id="nav-step-2" class="text-slate-400 transition-colors duration-200">02 / Review</span>
+            <span class="text-slate-300">•</span>
+            <span id="nav-step-3" class="text-slate-400 transition-colors duration-200">03 / Handshake</span>
         </div>
     </section>
 
-    <section id="workspace-selection-hub" class="hidden flex-grow bg-[#060811] flex-col justify-center items-center px-4 py-6 animate-fadeIn overflow-hidden">
-        <div class="w-full max-w-4xl space-y-6">
-            <div class="text-left px-2 space-y-1">
-                <span class="text-[9px] font-mono font-black tracking-widest text-emerald-400 uppercase">System Initialized</span>
-                <h2 class="text-base font-black uppercase tracking-tight text-white">Select Environment Track</h2>
+    <!-- ========================================== -->
+    <!-- PROPORTIONED MESSENGER-STYLE GRID HUB      -->
+    <!-- ========================================== -->
+    <section id="workspace-selection-hub" class="hidden flex-grow bg-msgLightBg flex-col justify-center items-center px-4 py-8 animate-fadeIn overflow-hidden">
+        <div class="w-full max-w-2xl space-y-6 text-center">
+            <div class="text-center space-y-1">
+                <span class="text-[10px] font-mono font-black tracking-widest text-fbBlue uppercase">System Initialized</span>
+                <h2 class="text-base font-black uppercase tracking-tight text-slate-900">Select Environment Track</h2>
             </div>
             
-            <div class="flex space-x-3 overflow-x-auto pb-4 pt-1 px-2 scrollbar-none snap-x snap-mandatory">
+            <!-- Proportioned Swipeable Layout Blocks (Matches 24623.jpg Proportions) -->
+            <div class="flex md:justify-center space-x-3 overflow-x-auto pb-4 pt-1 px-4 scrollbar-none snap-x snap-mandatory w-full">
                 
-                <div onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[240px] border border-slate-800 bg-[#0D1224] p-5 rounded-2xl cursor-pointer hover:border-emerald-500 transition flex flex-col justify-between min-h-[160px] shadow-xl relative">
-                    <span class="text-2xl block">🧬</span>
+                <!-- Track Card 1: iTest -->
+                <div onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[145px] bg-white border border-slate-200/80 p-4 rounded-xl cursor-pointer hover:border-fbBlue hover:shadow-md transition flex flex-col justify-between min-h-[165px] text-left relative shadow-sm group">
+                    <div class="w-9 h-9 bg-blue-50 text-base rounded-full flex items-center justify-center smooth-transition group-hover:scale-105">🧬</div>
                     <div class="space-y-0.5">
-                        <h3 class="text-[11px] font-black uppercase text-white tracking-wide">iTest Market</h3>
-                        <p class="text-[10px] text-slate-400 leading-normal font-medium">Direct diagnostic panels marketplace. Zero provider references required.</p>
+                        <h3 class="text-[11px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">iTest Market</h3>
+                        <p class="text-[9.5px] text-slate-500 leading-tight font-medium">Direct marketplace panel orders.</p>
                     </div>
                 </div>
 
-                <div onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[240px] border border-slate-800 bg-[#0D1224] p-5 rounded-2xl cursor-pointer hover:border-emerald-500 transition flex flex-col justify-between min-h-[160px] shadow-xl relative">
-                    <span class="text-2xl block">🧠</span>
+                <!-- Track Card 2: MindLink -->
+                <div onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[145px] bg-white border border-slate-200/80 p-4 rounded-xl cursor-pointer hover:border-fbBlue hover:shadow-md transition flex flex-col justify-between min-h-[165px] text-left relative shadow-sm group">
+                    <div class="w-9 h-9 bg-purple-50 text-base rounded-full flex items-center justify-center smooth-transition group-hover:scale-105">🧠</div>
                     <div class="space-y-0.5">
-                        <h3 class="text-[11px] font-black uppercase text-white tracking-wide">MindLink Portal</h3>
-                        <p class="text-[10px] text-slate-400 leading-normal font-medium">Immediate behavioral health routing engine for credentialed networks.</p>
+                        <h3 class="text-[11px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">MindLink</h3>
+                        <p class="text-[9.5px] text-slate-500 leading-tight font-medium">Behavioral therapy routing engine.</p>
                     </div>
                 </div>
 
-                <div onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[240px] border border-slate-800 bg-[#0D1224] p-5 rounded-2xl cursor-pointer hover:border-emerald-500 transition flex flex-col justify-between min-h-[160px] shadow-xl relative">
-                    <span class="text-2xl block">📐</span>
+                <!-- Track Card 3: CareLive -->
+                <div onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[145px] bg-white border border-slate-200/80 p-4 rounded-xl cursor-pointer hover:border-fbBlue hover:shadow-md transition flex flex-col justify-between min-h-[165px] text-left relative shadow-sm group">
+                    <div class="w-9 h-9 bg-emerald-50 text-base rounded-full flex items-center justify-center smooth-transition group-hover:scale-105">📐</div>
                     <div class="space-y-0.5">
-                        <h3 class="text-[11px] font-black uppercase text-white tracking-wide">CareLive Arena</h3>
-                        <p class="text-[10px] text-slate-400 leading-normal font-medium">Acute virtual workspace validation & passive setup preview sandbox.</p>
+                        <h3 class="text-[11px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">CareLive</h3>
+                        <p class="text-[9.5px] text-slate-500 leading-tight font-medium">Acute stream setup validation sandbox.</p>
                     </div>
                 </div>
 
             </div>
             
-            <p class="text-[9px] font-mono font-black text-slate-600 uppercase text-center tracking-widest animate-pulse select-none">Swipe horizontally to preview modules ↔</p>
+            <p class="text-[9px] font-mono font-black text-slate-400 uppercase tracking-widest animate-pulse select-none">Swipe horizontally to scroll tracks ↔</p>
         </div>
     </section>
 
-    <section id="workspace-execution-enclosure" class="hidden flex-grow bg-[#060811] px-4 py-4 relative z-10 animate-fadeIn min-h-0 overflow-y-auto scrollbar-none">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 items-start pb-28">
+    <!-- ========================================== -->
+    <!-- TUNNEL-VISION WORKSPACE WORKFLOW LAYER     -->
+    <!-- ========================================== -->
+    <section id="workspace-execution-enclosure" class="hidden flex-grow bg-msgLightBg px-4 py-4 relative z-10 animate-fadeIn min-h-0 overflow-y-auto scrollbar-none">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 items-start pb-24">
             
+            <!-- LEFT WORKSPACE AREA -->
             <div class="lg:col-span-7">
                 
-                <div id="stage-1" class="border border-slate-800/60 bg-[#0D1224] rounded-2xl p-4 sm:p-6 space-y-4 shadow-xl">
+                <!-- STAGE 1: SYSTEM CONTROLS -->
+                <div id="stage-1" class="border border-slate-200 bg-white rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm">
                     
+                    <!-- WORKFLOW A: iTEST MARKETPLACE MAPPED LISTS -->
                     <div id="subpane-itest" class="hidden space-y-4">
-                        <div class="flex space-x-1.5 bg-[#070911] border border-slate-800/80 p-1 rounded-xl">
-                            <button type="button" id="subtab-btn-executive" onclick="window.toggleSubTab('executive')" class="flex-1 bg-slate-800 text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer">Executive Panels</button>
-                            <button type="button" id="subtab-btn-corporate" onclick="window.toggleSubTab('corporate')" class="flex-1 text-slate-400 hover:text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer">Corporate Compliance</button>
+                        <!-- Horizontal Native Style Sub-Tabs Wrapper -->
+                        <div class="flex space-x-1.5 bg-slate-100 border border-slate-200/60 p-1 rounded-xl">
+                            <button type="button" id="subtab-btn-executive" onclick="window.toggleSubTab('executive')" class="flex-1 bg-white text-slate-900 border border-slate-200/30 text-[10px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer">Executive Panels</button>
+                            <button type="button" id="subtab-btn-corporate" onclick="window.toggleSubTab('corporate')" class="flex-1 text-slate-500 hover:text-slate-800 text-[10px] font-black uppercase py-2 rounded-lg transition cursor-pointer">Corporate Compliance</button>
                         </div>
 
+                        <!-- Executive Collection Menu Layout (Low Profile Stack Array) -->
                         <div id="market-grid-executive" class="space-y-2">
-                            <div class="border border-slate-800 bg-[#080B16] p-3.5 rounded-xl flex items-center justify-between shadow-sm">
+                            <div class="border border-slate-200/80 bg-white p-3.5 rounded-xl flex items-center justify-between shadow-sm">
                                 <div class="space-y-0.5 max-w-[70%]">
-                                    <h4 class="text-[11px] font-black uppercase text-white">The Core Baseline™</h4>
-                                    <p class="text-[10px] text-slate-400 leading-tight font-medium">CMP, CBC with Diff, Lipids, HbA1c, Vitamin D, TSH Base.</p>
+                                    <h4 class="text-xs font-black uppercase text-slate-900">The Core Baseline™</h4>
+                                    <p class="text-[10.5px] text-slate-500 leading-tight font-medium">CMP, CBC with Diff, Lipid Profiling, HbA1c, Vitamin D, TSH Base.</p>
                                 </div>
                                 <div class="text-right flex-shrink-0">
-                                    <span class="text-[10px] font-mono font-black text-emerald-400 block mb-1.5">$165.00</span>
-                                    <button type="button" onclick="window.queueAsset('Core Baseline', 165, 'lab')" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-[9px] font-black uppercase px-3 py-1.5 rounded-md transition cursor-pointer">Select</button>
+                                    <span class="text-xs font-mono font-black text-fbBlue block mb-1.5">$165.00</span>
+                                    <button type="button" onclick="window.queueAsset('Core Baseline', 165, 'lab')" class="bg-fbBlue hover:bg-blue-600 text-white text-[10px] font-black uppercase px-3 py-1.5 rounded-md transition cursor-pointer">Select</button>
                                 </div>
                             </div>
-                            <div class="border border-slate-800 bg-[#080B16] p-3.5 rounded-xl flex items-center justify-between shadow-sm">
+                            <div class="border border-slate-200/80 bg-white p-3.5 rounded-xl flex items-center justify-between shadow-sm">
                                 <div class="space-y-0.5 max-w-[70%]">
-                                    <h4 class="text-[11px] font-black uppercase text-white">Longevity Protocol™</h4>
-                                    <p class="text-[10px] text-slate-400 leading-tight font-medium">Core Baseline + Advanced Lipids (ApoB), Inflammation hs-CRP, Testosterone.</p>
+                                    <h4 class="text-xs font-black uppercase text-slate-900">Longevity Protocol™</h4>
+                                    <p class="text-[10.5px] text-slate-500 leading-tight font-medium">Core Baseline + Advanced Lipids (ApoB), Inflammation hs-CRP, Testosterone.</p>
                                 </div>
                                 <div class="text-right flex-shrink-0">
-                                    <span class="text-[10px] font-mono font-black text-emerald-400 block mb-1.5">$349.00</span>
-                                    <button type="button" onclick="window.queueAsset('Longevity Matrix', 349, 'lab')" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-[9px] font-black uppercase px-3 py-1.5 rounded-md transition cursor-pointer">Select</button>
+                                    <span class="text-xs font-mono font-black text-fbBlue block mb-1.5">$349.00</span>
+                                    <button type="button" onclick="window.queueAsset('Longevity Matrix', 349, 'lab')" class="bg-fbBlue hover:bg-blue-600 text-white text-[10px] font-black uppercase px-3 py-1.5 rounded-md transition cursor-pointer">Select</button>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Corporate Compliance Screen Options -->
                         <div id="market-grid-corporate" class="hidden space-y-2">
-                            <div class="border border-slate-800 bg-[#080B16] p-3.5 rounded-xl flex items-center justify-between shadow-sm border-l-2 border-cyan-500/40">
+                            <div class="border border-slate-200/80 bg-white p-3.5 rounded-xl flex items-center justify-between shadow-sm border-l-2 border-msgBlue">
                                 <div class="space-y-0.5 max-w-[70%]">
-                                    <h4 class="text-[11px] font-black uppercase text-cyan-400">Workplace Drug Screening</h4>
-                                    <p class="text-[10px] text-slate-400 leading-tight font-medium">Rapid workplace compliance testing. Cryptographic data masking parameters enabled.</p>
+                                    <h4 class="text-xs font-black uppercase text-msgBlue">Workplace Drug Screening</h4>
+                                    <p class="text-[10.5px] text-slate-500 leading-tight font-medium">Rapid workplace compliance testing. Cryptographic data masking parameters enabled.</p>
                                 </div>
                                 <div class="text-right flex-shrink-0">
-                                    <span class="text-[10px] font-mono font-black text-cyan-400 block mb-1.5">$85.00</span>
-                                    <button type="button" onclick="window.queueAsset('Workplace Drug Screen', 85, 'lab')" class="bg-cyan-600 hover:bg-cyan-500 text-slate-950 text-[9px] font-black uppercase px-3 py-1.5 rounded-md transition cursor-pointer">Select</button>
+                                    <span class="text-xs font-mono font-black text-msgBlue block mb-1.5">$85.00</span>
+                                    <button type="button" onclick="window.queueAsset('Workplace Drug Screen', 85, 'lab')" class="bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase px-3 py-1.5 rounded-md transition cursor-pointer">Select</button>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Fulfillment Preferences -->
                         <div class="space-y-2 pt-1">
-                            <label class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-500 block">Fulfillment Channels</label>
+                            <label class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 block">Fulfillment Collection Preference</label>
                             <div class="grid grid-cols-2 gap-2">
-                                <button type="button" id="btn-affiliate" onclick="window.setLogisticsChannel('affiliate')" class="border-2 border-emerald-500 bg-emerald-950/20 p-3 rounded-xl text-left hover:border-emerald-400 transition flex flex-col justify-center min-h-[70px] shadow-md cursor-pointer">
-                                    <span class="text-[11px] font-black uppercase text-white block">Affiliate Hub</span>
-                                    <span class="text-[8px] font-medium text-slate-400 uppercase mt-0.5 font-mono">Digital Token Hold</span>
+                                <button type="button" id="btn-affiliate" onclick="window.setLogisticsChannel('affiliate')" class="border-2 border-fbBlue bg-blue-50/40 p-3 rounded-xl text-left hover:border-fbBlue transition flex flex-col justify-center min-h-[65px] shadow-sm cursor-pointer">
+                                    <span class="text-xs font-black uppercase text-slate-900 block">Affiliate Hub Network</span>
+                                    <span class="text-[8.5px] font-medium text-slate-400 uppercase mt-0.5 font-mono">Digital Token Hold Link</span>
                                 </button>
-                                <button type="button" id="btn-shipping" onclick="window.setLogisticsChannel('shipping')" class="border border-slate-800 bg-[#070911] p-3 rounded-xl text-left hover:border-slate-700 transition flex flex-col justify-center min-h-[70px] shadow-sm cursor-pointer">
-                                    <span class="text-[11px] font-black uppercase text-white block">Kit Shipping</span>
-                                    <span class="text-[8px] font-medium text-slate-400 uppercase mt-0.5 font-mono">Mail-In System Box</span>
+                                <button type="button" id="btn-shipping" onclick="window.setLogisticsChannel('shipping')" class="border border-slate-200 bg-slate-50 p-3 rounded-xl text-left hover:border-slate-300 transition flex flex-col justify-center min-h-[65px] shadow-sm cursor-pointer">
+                                    <span class="text-xs font-black uppercase text-slate-900 block">Direct Kit Shipping</span>
+                                    <span class="text-[8.5px] font-medium text-slate-400 uppercase mt-0.5 font-mono">System Mail-In Dispatched</span>
                                 </button>
                             </div>
                         </div>
                     </div>
 
+                    <!-- WORKFLOW B: MINDLINK ROUTING BOX -->
                     <div id="subpane-mindlink" class="hidden text-center py-4 max-w-sm mx-auto space-y-3">
                         <span class="text-2xl block animate-pulse">🧠</span>
-                        <h3 class="text-xs font-black uppercase tracking-wider text-white">MindLink Specialist Portal</h3>
-                        <p class="text-[11px] text-slate-400 leading-normal">System verification channels connect users directly to licensed therapists. Full identity validation anchors are required on final handshake.</p>
-                        <button type="button" onclick="window.queueAsset('MindLink Network Allocation', 0, 'simulation')" class="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 text-[9px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Queue Specialist Target</button>
+                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-900">MindLink Portal</h3>
+                        <p class="text-[11px] text-slate-500 leading-relaxed">System parameters sync user sessions straight to licensed networks. Full legal name verification filters will analyze credentials on handshake.</p>
+                        <button type="button" onclick="window.queueAsset('MindLink Specialist Assignment', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Queue Specialist Target</button>
                     </div>
 
+                    <!-- WORKFLOW C: CARELIVE TUNNEL ARENA -->
                     <div id="subpane-carelive" class="hidden space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
-                            <div class="sm:col-span-5 bg-[#070911] border border-slate-800/80 p-3 rounded-xl flex flex-col items-center justify-center relative shadow-inner">
-                                <svg viewBox="0 0 160 380" class="w-full max-w-[120px] h-[260px]" id="rectangular-mesh">
-                                    <rect id="rect-head" x="10" y="10" width="140" height="75" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-head', 'Head & Neck Zone')" />
-                                    <text x="80" y="52" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Head & Neck</text>
+                            <!-- 4-Zone Matrix Canvas Box -->
+                            <div class="sm:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center justify-center relative shadow-inner">
+                                <svg viewBox="0 0 160 380" class="w-full max-w-[120px] h-[250px]" id="rectangular-mesh">
+                                    <rect id="rect-head" x="10" y="10" width="140" height="75" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-head', 'Head & Neck Section')" />
+                                    <text x="80" y="52" fill="#6B7280" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Head & Neck</text>
                                     
-                                    <rect id="rect-chest" x="10" y="95" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-chest', 'Anterior Chest Matrix')" />
-                                    <text x="80" y="142" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Chest Zone</text>
+                                    <rect id="rect-chest" x="10" y="95" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-chest', 'Anterior Chest Zone')" />
+                                    <text x="80" y="142" fill="#6B7280" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Chest Zone</text>
                                     
                                     <rect id="rect-abdomen" x="10" y="190" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-abdomen', 'Abdominal Segment')" />
-                                    <text x="80" y="237" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Abdominal</text>
+                                    <text x="80" y="237" fill="#6B7280" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Abdominal</text>
                                     
                                     <rect id="rect-legs" x="10" y="285" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-legs', 'Lower Extremities')" />
-                                    <text x="80" y="332" fill="#475569" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Legs / Distal</text>
+                                    <text x="80" y="332" fill="#6B7280" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Legs / Distal</text>
                                 </svg>
                             </div>
 
-                            <div class="sm:col-span-7 bg-[#05070F] border border-slate-900 rounded-xl p-4 flex flex-col justify-center items-center text-center min-h-[200px] shadow-inner">
-                                <div id="stream-placeholder" class="space-y-1">
+                            <!-- Passive Setup Stream Feed Monitor -->
+                            <div class="sm:col-span-7 bg-slate-900 border border-slate-950 rounded-xl p-4 flex flex-col justify-center items-center text-center min-h-[190px] shadow-inner relative">
+                                <div id="stream-placeholder" class="space-y-1 text-slate-400">
                                     <span class="text-xl block animate-pulse">📺</span>
-                                    <h4 class="text-[9px] font-mono font-black uppercase text-slate-500 tracking-wider">Media Sandbox</h4>
-                                    <p class="text-[10px] text-slate-400 max-w-[180px] mx-auto leading-normal">Select a core preference cell quadrant to update the background calibration video monitor.</p>
+                                    <h4 class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-500">Media Sandbox</h4>
+                                    <p class="text-[10px] text-slate-400 max-w-[170px] mx-auto leading-normal">Select a canvas quadrant cell to buffer the calibration streaming track snippet.</p>
                                 </div>
                                 <div id="stream-active-viewport" class="hidden w-full h-full flex flex-col items-center justify-center animate-fadeIn">
-                                    <span class="text-[9px] font-mono text-emerald-400 font-bold mb-1.5 uppercase tracking-widest" id="stream-label-out">Channel Configured</span>
-                                    <div class="w-full aspect-video bg-[#0A0E1A] rounded-xl border border-slate-800 flex items-center justify-center relative overflow-hidden">
-                                        <span class="text-[9px] font-mono text-slate-600 z-20 uppercase tracking-wide animate-pulse">[ Buffering Calibration Track ]</span>
+                                    <span class="text-[9px] font-mono text-fbBlue font-bold mb-1.5 uppercase tracking-widest" id="stream-label-out">Channel Configured</span>
+                                    <div class="w-full aspect-video bg-black rounded-lg border border-slate-800 flex items-center justify-center relative overflow-hidden">
+                                        <span class="text-[9px] font-mono text-slate-500 z-20 uppercase tracking-wide animate-pulse">[ Buffering Calibration Asset ]</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Wizard Pipeline Core Execution Action Button -->
                     <div class="pt-1">
-                        <button type="button" onclick="window.goToStage(2)" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-[10px] font-black uppercase tracking-wider py-3.5 rounded-xl transition shadow-lg font-mono tracking-widest cursor-pointer">
+                        <button type="button" onclick="window.goToStage(2)" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl transition shadow-md font-mono tracking-widest cursor-pointer">
                             Proceed to Calibration Pipeline ➔
                         </button>
                     </div>
                 </div>
 
-                <div id="stage-2" class="hidden border border-slate-200 bg-white text-slate-900 rounded-2xl p-4 sm:p-6 space-y-4 shadow-sm animate-fadeIn">
+                <!-- STAGE 2: PREVIEW CHECKLIST PANEL -->
+                <div id="stage-2" class="hidden border border-slate-200 bg-white text-slate-900 rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm animate-fadeIn">
                     <div class="flex justify-between items-end border-b border-slate-100 pb-3">
                         <div>
-                            <span class="text-[9px] font-mono font-black text-emerald-700 uppercase tracking-widest block mb-0.5">Stage 02 Parameters</span>
-                            <h2 class="text-sm font-black uppercase tracking-tight text-slate-900">Environment Verification</h2>
+                            <span class="text-[9px] font-mono font-black text-fbBlue uppercase tracking-widest block mb-0.5">Stage 02 Checklist</span>
+                            <h2 class="text-xs font-black uppercase tracking-tight text-slate-900">Environment Verification Preview</h2>
                         </div>
                         <button type="button" onclick="window.goToStage(1)" class="text-[10px] font-black text-slate-400 hover:text-slate-600 uppercase tracking-wider cursor-pointer font-mono">⇠ Back</button>
                     </div>
 
                     <div class="space-y-3">
-                        <p class="text-[11px] text-slate-600 font-medium leading-normal">
-                            Wellness Front™ reviews local terminal parameters prior to platform handoffs. Confirm your external variables to optimize the baseline communication link.
+                        <p class="text-[11px] text-slate-500 font-medium leading-normal">
+                            Wellness Front™ scans browser telemetry variables prior to platform integrations. Confirm your external parameters to align the baseline connectivity metrics.
                         </p>
                         
                         <div class="space-y-2 font-medium text-xs">
                             <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
                                 <div class="space-y-0.5">
                                     <span class="font-black text-slate-900 uppercase text-[9px] tracking-wide block">Ambient Lighting</span>
-                                    <p class="text-[10px] text-slate-500">Analyze illuminating face contours.</p>
+                                    <p class="text-[10px] text-slate-400">Analyze illuminating facial contrast clarity.</p>
                                 </div>
                                 <span class="text-emerald-600 font-mono font-black uppercase text-[9px] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Clear</span>
                             </div>
                             <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
                                 <div class="space-y-0.5">
                                     <span class="font-black text-slate-900 uppercase text-[9px] tracking-wide block">Device Camera Mount</span>
-                                    <p class="text-[10px] text-slate-500">Horizontal peripheral view matrix.</p>
+                                    <p class="text-[10px] text-slate-400">Horizontal eye-level field layout verified.</p>
                                 </div>
                                 <span class="text-emerald-600 font-mono font-black uppercase text-[9px] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Aligned</span>
                             </div>
                         </div>
                     </div>
 
-                    <button type="button" onclick="window.goToStage(3)" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-[10px] font-black uppercase tracking-wider py-3.5 rounded-xl transition shadow-md font-bold font-mono tracking-widest cursor-pointer">
-                        Execute Validation Handshake ➔
+                    <button type="button" onclick="window.goToStage(3)" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl transition shadow-md font-mono tracking-widest cursor-pointer">
+                        Execute Network Validation Handshake ➔
                     </button>
                 </div>
 
-                <div id="stage-3" class="hidden border border-slate-800 bg-[#0D1224] rounded-2xl p-6 text-center space-y-4 shadow-2xl animate-fadeIn">
-                    <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-full flex items-center justify-center text-lg font-black mx-auto shadow-sm select-none">
+                <!-- STAGE 3: DATA DESTRUCTION INVOICE RECEIPT -->
+                <div id="stage-3" class="hidden border border-slate-200 bg-white text-slate-900 rounded-2xl p-6 text-center space-y-4 shadow-sm animate-fadeIn">
+                    <div class="w-11 h-11 bg-blue-50 text-fbBlue rounded-full flex items-center justify-center text-lg font-black mx-auto shadow-sm select-none">
                         ✓
                     </div>
                     
                     <div class="space-y-1 max-w-sm mx-auto">
-                        <span class="text-[9px] font-mono font-black text-emerald-400 bg-emerald-950/40 border border-emerald-900/60 px-3 py-0.5 rounded-full uppercase tracking-wider inline-block">Allocation Complete</span>
-                        <h2 class="text-sm font-black uppercase tracking-tight text-white">Transient Token Hold Dispatched</h2>
-                        <p class="text-[11px] text-slate-400 font-medium leading-normal">
-                            Session parameters have synchronized securely out to independent nodes. Your local tracking cache matrix is prepared to trigger cache erasure routines.
+                        <span class="text-[9px] font-mono font-black text-fbBlue bg-blue-50 border border-blue-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-block">Allocation Complete</span>
+                        <h2 class="text-sm font-black uppercase tracking-tight text-slate-900">Transient Token Hold Dispatched</h2>
+                        <p class="text-[11px] text-slate-500 font-medium leading-normal">
+                            Session logs have dispatched out to processing server nodes. Your localized device caching layer is prepared to execute memory purge routines.
                         </p>
                     </div>
 
-                    <div class="bg-[#070911] border border-slate-800 rounded-xl p-4 text-left text-[11px] space-y-2 max-w-sm mx-auto font-medium shadow-inner">
-                        <div class="flex justify-between text-slate-500 text-[8px] uppercase font-mono font-black tracking-wider pb-1 border-b border-slate-800/80"><span>System Logs</span><span id="receipt-id-tag" class="text-slate-300 font-mono">--</span></div>
-                        <div class="flex justify-between text-slate-400"><span>Profile Owner Account:</span><span id="receipt-profile-name" class="text-white font-black uppercase font-mono tracking-wider">--</span></div>
-                        <div class="flex justify-between text-slate-400"><span>Target Track:</span><span id="receipt-track" class="text-white font-black uppercase font-mono tracking-wider">--</span></div>
-                        <div class="flex justify-between text-slate-400"><span>Fulfillment Logic:</span><span id="receipt-logistics" class="text-white font-black uppercase font-mono tracking-wider">--</span></div>
-                        <div class="flex justify-between text-slate-200 border-t border-slate-800/80 pt-1.5 font-black"><span>Settlement Hold Terms:</span><span id="receipt-net" class="text-emerald-400 text-xs font-mono font-black">--</span></div>
+                    <!-- Order-Level Decoupled Invoice Confirmation Block -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-[11px] space-y-2 max-w-sm mx-auto font-medium shadow-inner">
+                        <div class="flex justify-between text-slate-400 text-[8px] uppercase font-mono font-black tracking-wider pb-1 border-b border-slate-200"><span>System Logs</span><span id="receipt-id-tag" class="text-slate-600 font-mono">--</span></div>
+                        <div class="flex justify-between text-slate-600"><span>Profile Account Anchor:</span><span id="receipt-profile-name" class="text-slate-900 font-black uppercase font-mono tracking-wider">--</span></div>
+                        <div class="flex justify-between text-slate-600"><span>Target Track:</span><span id="receipt-track" class="text-slate-900 font-black uppercase font-mono tracking-wider">--</span></div>
+                        <div class="flex justify-between text-slate-600"><span>Fulfillment Logic:</span><span id="receipt-logistics" class="text-slate-900 font-black uppercase font-mono tracking-wider">--</span></div>
+                        <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Settlement Hold Terms:</span><span id="receipt-net" class="text-fbBlue text-xs font-mono font-black">--</span></div>
                     </div>
 
                     <div class="pt-1">
-                        <button type="button" onclick="window.triggerTransientPurgeAnnihilation()" class="w-full bg-white hover:bg-slate-100 text-slate-950 text-[9px] font-black uppercase tracking-widest py-3.5 rounded-xl transition shadow-lg cursor-pointer font-mono">
+                        <button type="button" onclick="window.triggerTransientPurgeAnnihilation()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[9px] font-black uppercase tracking-widest py-3.5 rounded-xl transition shadow-lg cursor-pointer font-mono">
                             Purge Local Device Cache Matrix ➔
                         </button>
                     </div>
@@ -348,28 +395,30 @@
 
             </div>
 
-            <div id="sticky-summary-panel" class="lg:col-span-5 border border-slate-800/60 bg-[#0D1224] rounded-2xl p-5 space-y-4 lg:sticky lg:top-24 shadow-2xl transition-all duration-300">
-                <h2 class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 border-b border-slate-800/80 pb-2">Real-Time Allocation Manifest</h2>
+            <!-- RIGHT AREA: REAL-TIME ACCUMULATOR COLUMN (SIDEBAR) -->
+            <div id="sticky-summary-panel" class="lg:col-span-5 border border-slate-200 bg-white rounded-2xl p-4 sm:p-5 space-y-4 lg:sticky lg:top-24 shadow-sm transition-all duration-300">
+                <h2 class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 border-b border-slate-200/80 pb-2">Real-Time Allocation Manifest</h2>
                 
                 <div class="space-y-4 font-medium text-xs">
-                    <div id="manifest-items-list" class="space-y-2 max-h-[140px] overflow-y-auto scrollbar-none pr-1">
-                        </div>
+                    <div id="manifest-items-list" class="space-y-1.5 max-h-[140px] overflow-y-auto scrollbar-none pr-1">
+                        <!-- Dynamic lines inject via runtime controllers -->
+                    </div>
 
-                    <div class="flex justify-between items-baseline border-t border-slate-800/80 pt-3">
+                    <div class="flex justify-between items-baseline border-t border-slate-200 pt-3">
                         <span class="font-black uppercase tracking-wider text-slate-400 text-[9px] font-mono">Authorized Hold Price:</span>
                         <div class="text-right">
-                            <span id="summary-total-price" class="text-xl font-black text-emerald-400 font-mono tracking-tight">$0.00</span>
-                            <span class="block text-[8px] font-mono font-black text-slate-500 uppercase tracking-widest pt-0.5">Transient Pre-Auth Secure</span>
+                            <span id="summary-total-price" class="text-xl font-black text-fbBlue font-mono tracking-tight">$0.00</span>
+                            <span class="block text-[8px] font-mono font-black text-slate-400 uppercase tracking-widest pt-0.5">Transient Pre-Auth Secure</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-[#05070F] border border-slate-900 rounded-xl p-3.5 space-y-2 text-[9px] leading-relaxed font-mono text-slate-400">
-                    <div class="font-bold text-slate-300 flex items-center space-x-1 uppercase text-[8px] tracking-wider">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-1.5 text-[9px] leading-relaxed font-mono text-slate-500">
+                    <div class="font-bold text-slate-700 flex items-center space-x-1 uppercase text-[8px] tracking-wider">
                         <span>📋 Asynchronous Compliance Frame</span>
                     </div>
-                    <p class="leading-normal font-medium text-slate-500">
-                        Wellness Front™ operates as an independent, non-diagnostic preview interface. Outbound matrices contain zero server-side diagnostic logs.
+                    <p class="leading-normal font-medium text-slate-400">
+                        Wellness Front™ maps preferences through independent pipeline layers. System configurations log zero permanent diagnostic tracks.
                     </p>
                 </div>
             </div>
@@ -377,13 +426,19 @@
         </div>
     </section>
 
-    <footer class="border-t border-slate-900 bg-[#0A0E1A] py-6 px-4 text-center text-slate-500 text-[8px] font-mono uppercase tracking-widest relative z-10 flex-shrink-0">
+    <!-- ========================================== -->
+    <!-- SECURE LIGHT MODE SYSTEM FOOTER            -->
+    <!-- ========================================== -->
+    <footer class="border-t border-slate-200 bg-white py-5 px-4 text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest relative z-10 flex-shrink-0">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <span>© 2026 Wellness Front™ Platforms. All Rights Reserved.</span>
-            <span>Decoupled Data Security Architecture • Build-Premium-v4.2</span>
+            <span>Decoupled Data Security Infrastructure • Build-Premium-Light-v4.5</span>
         </div>
     </footer>
 
+    <!-- ========================================== -->
+    <!-- SECURE ARCHITECTURAL SYSTEM LOGIC CORES    -->
+    <!-- ========================================== -->
     <script>
         let activeMainTrack = '';
         let currentSubTab = 'executive';
@@ -415,7 +470,7 @@
             if (displayHeaderLabel) displayHeaderLabel.innerText = `[ OWNER PROFILE: ${userFullLegalName.toUpperCase()} ]`;
         }
 
-        // --- ENTRANCE PROFILE GATE CONTROLS ---
+        // --- ENTRANCE VALIDATION ROUTINE CONTROLS ---
         window.submitPhoneVerification = function() {
             const num = document.getElementById('auth-phone').value.trim();
             if(!num || num.length < 8) { alert("Invalid registration phone format."); return; }
@@ -430,20 +485,20 @@
 
         window.setGenderFramework = function(genderKey) {
             userGender = genderKey;
-            document.getElementById('gender-male').className = genderKey === 'male' ? "bg-[#090C16] border-2 border-emerald-500 text-white text-[9px] font-black uppercase py-3 rounded-xl transition cursor-pointer shadow-md" : "bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-3 rounded-xl transition cursor-pointer";
-            document.getElementById('gender-female').className = genderKey === 'female' ? "bg-[#090C16] border-2 border-emerald-500 text-white text-[9px] font-black uppercase py-3 rounded-xl transition cursor-pointer shadow-md" : "bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-3 rounded-xl transition cursor-pointer";
+            document.getElementById('gender-male').className = genderKey === 'male' ? "bg-blue-50 border-2 border-fbBlue text-fbBlue text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer shadow-sm" : "bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer";
+            document.getElementById('gender-female').className = genderKey === 'female' ? "bg-blue-50 border-2 border-fbBlue text-fbBlue text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer shadow-sm" : "bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer";
         };
 
         window.setIntent = function(intent) {
             userProfileIntent = intent;
-            document.getElementById('intent-self').className = intent === 'Self' ? "bg-[#090C16] border border-emerald-500 text-white text-[9px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer" : "bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer";
-            document.getElementById('intent-dep').className = intent === 'Dependent' ? "bg-[#090C16] border border-emerald-500 text-white text-[9px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer" : "bg-[#090C16] border border-slate-800 text-slate-500 text-[9px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer";
+            document.getElementById('intent-self').className = intent === 'Self' ? "bg-blue-50 border-2 border-fbBlue text-fbBlue text-[10px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer" : "bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer";
+            document.getElementById('intent-dep').className = intent === 'Dependent' ? "bg-blue-50 border-2 border-fbBlue text-fbBlue text-[10px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer" : "bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer";
         };
 
         window.finalizeProfileGate = function() {
             const name = document.getElementById('profile-fullname').value.trim();
             const year = document.getElementById('profile-year').value;
-            if(!name || !year || !userGender) { alert("All initialization configurations require parameter inputs."); return; }
+            if(!name || !year || !userGender) { alert("All initialization items require parameter fields."); return; }
             
             userFullLegalName = name; userBirthYear = year;
             
@@ -459,7 +514,7 @@
             document.getElementById('workspace-selection-hub').classList.replace('hidden', 'flex');
         };
 
-        // --- HORIZONTAL SELECTION DASHBOARD MANAGER ---
+        // --- COMPACT SELECTOR SWITCH MANAGEMENT LOOPS ---
         window.launchIsolatedTrack = function(trackKey) {
             activeMainTrack = trackKey;
             
@@ -495,7 +550,7 @@
             document.getElementById('workspace-selection-hub').classList.replace('hidden', 'flex');
         };
 
-        // --- SUBPANE TAB AND CONTENT SWAP ROUTINES ---
+        // --- LAYER COMPONENT REFACTOR ROUTINES ---
         window.toggleSubTab = function(subKey) {
             currentSubTab = subKey;
             const btnExec = document.getElementById('subtab-btn-executive');
@@ -504,13 +559,13 @@
             const gridCorp = document.getElementById('market-grid-corporate');
 
             if(subKey === 'executive') {
-                if(btnExec) btnExec.className = "flex-1 bg-slate-800 text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
-                if(btnCorp) btnCorp.className = "flex-1 text-slate-400 hover:text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
+                if(btnExec) btnExec.className = "flex-1 bg-white text-slate-900 border border-slate-200/60 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
+                if(btnCorp) btnCorp.className = "flex-1 text-slate-500 hover:text-slate-800 text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
                 if(gridExec) gridExec.classList.remove('hidden');
                 if(gridCorp) gridCorp.classList.add('hidden');
             } else {
-                if(btnCorp) btnCorp.className = "flex-1 bg-slate-800 text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
-                if(btnExec) btnExec.className = "flex-1 text-slate-400 hover:text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
+                if(btnCorp) btnCorp.className = "flex-1 bg-white text-slate-900 border border-slate-200/60 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
+                if(btnExec) btnExec.className = "flex-1 text-slate-500 hover:text-slate-800 text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
                 if(gridCorp) gridCorp.classList.remove('hidden');
                 if(gridExec) gridExec.classList.add('hidden');
             }
@@ -521,14 +576,14 @@
             const btnAff = document.getElementById('btn-affiliate');
             const btnShip = document.getElementById('btn-shipping');
 
-            if(btnAff) btnAff.className = "border border-slate-800 bg-[#070911] p-3 rounded-xl text-left hover:border-slate-700 transition flex flex-col justify-center min-h-[70px] shadow-sm cursor-pointer";
-            if(btnShip) btnShip.className = "border border-slate-800 bg-[#070911] p-3 rounded-xl text-left hover:border-slate-700 transition flex flex-col justify-center min-h-[70px] shadow-sm cursor-pointer";
+            if(btnAff) btnAff.className = "border border-slate-200 bg-slate-50 p-3 rounded-xl text-left hover:border-slate-300 transition flex flex-col justify-center min-h-[65px] shadow-sm cursor-pointer";
+            if(btnShip) btnShip.className = "border border-slate-200 bg-slate-50 p-3 rounded-xl text-left hover:border-slate-300 transition flex flex-col justify-center min-h-[65px] shadow-sm cursor-pointer";
 
             const activeBtn = document.getElementById(`btn-${mode}`);
-            if(activeBtn) activeBtn.className = "border-2 border-emerald-500 bg-emerald-950/20 p-3 rounded-xl text-left focus:outline-none flex flex-col justify-center min-h-[70px] shadow-md cursor-pointer";
+            if(activeBtn) activeBtn.className = "border-2 border-fbBlue bg-blue-50/40 p-3 rounded-xl text-left focus:outline-none flex flex-col justify-center min-h-[65px] shadow-md cursor-pointer";
         };
 
-        // --- ORDER-LEVEL DECOUPLED DATA ANONYMITY LAYER ---
+        // --- ORDER-LEVEL DATA ANONYMITY CONFIG ---
         window.toggleAnonymityEngine = function() {
             isAnonymityActive = !isAnonymityActive;
             const txt = document.getElementById('anon-text');
@@ -536,12 +591,10 @@
 
             if(isAnonymityActive) {
                 txt.innerText = "Anon: LIVE";
-                txt.className = "text-[8px] font-mono font-black uppercase tracking-widest text-emerald-400";
-                if(btn) btn.className = "flex items-center space-x-2 bg-[#05070F] border border-emerald-500/40 px-3 py-1.5 rounded-full transition shadow-md cursor-pointer";
+                if(btn) btn.className = "flex items-center space-x-1.5 bg-blue-50 border border-fbBlue/40 px-3 py-1.5 rounded-full transition shadow-sm cursor-pointer";
             } else {
                 txt.innerText = "Anon: OFF";
-                txt.className = "text-[8px] font-mono font-black uppercase tracking-widest text-slate-400";
-                if(btn) btn.className = "flex items-center space-x-2 bg-[#05070F] border border-slate-800 px-3 py-1.5 rounded-full transition shadow-inner cursor-pointer hover:border-slate-700";
+                if(btn) btn.className = "flex items-center space-x-1.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full transition cursor-pointer hover:bg-slate-200";
             }
             renderPlatformManifestView();
         };
@@ -558,7 +611,7 @@
             window.queueAsset(label, 0, 'simulation');
         };
 
-        // --- MANIFEST HANDLING WITH DUPLICATION PREVENTER LOGIC ---
+        // --- MANIFEST CONTROLLERS (DUPLICATION STOPS ACTIVE) ---
         window.queueAsset = function(title, price, type) {
             if (compiledManifestArray.some(item => item.title === title)) return; 
             compiledManifestArray.push({ id: Date.now(), title: title, price: price, type: type });
@@ -570,36 +623,36 @@
             if(!box) return;
             box.innerHTML = "";
 
-            let sum = 0;
+            let total = 0;
             compiledManifestArray.forEach(item => {
-                sum += item.price;
+                total += item.price;
                 const row = document.createElement('div');
-                row.className = "bg-[#060811] border border-slate-900 p-3 rounded-xl flex justify-between items-center animate-fadeIn shadow-inner";
+                row.className = "bg-slate-50 border border-slate-200 p-3 rounded-xl flex justify-between items-center shadow-inner animate-fadeIn";
                 
-                // Mask identifier payloads strictly inside outbound order logs if anonymity is live
+                // Mask item labels strictly inside outbound order lines if anonymity toggle runs live
                 let visibleLabel = item.title;
                 if (isAnonymityActive && item.type === 'lab') {
-                    visibleLabel = `Cryptographic Specimen Bundle Token #AP-${Math.floor(21212 + Math.random() * 67676)}`;
+                    visibleLabel = `Cryptographic Specimen Hold Token #AP-${Math.floor(21212 + Math.random() * 67676)}`;
                 }
 
                 row.innerHTML = `
                     <div>
-                        <span class="text-[8px] font-mono font-black uppercase px-2 py-0.5 rounded ${item.type === 'lab' ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'}">${item.type.toUpperCase()} BOUND</span>
-                        <p class="text-[10px] font-mono font-bold text-slate-300 mt-1">"${visibleLabel}"</p>
+                        <span class="text-[8px] font-mono font-black uppercase px-2 py-0.5 rounded ${item.type === 'lab' ? 'bg-blue-50 text-fbBlue border border-fbBlue/20' : 'bg-slate-200 text-slate-700'}">${item.type.toUpperCase()} BOUND</span>
+                        <p class="text-[10px] font-mono font-bold text-slate-700 mt-1">"${visibleLabel}"</p>
                     </div>
-                    <button onclick="compiledManifestArray = compiledManifestArray.filter(i => i.id !== ${item.id}); renderPlatformManifestView();" class="text-slate-600 hover:text-red-400 font-bold pl-2 text-xs cursor-pointer">✕</button>
+                    <button onclick="compiledManifestArray = compiledManifestArray.filter(i => i.id !== ${item.id}); renderPlatformManifestView();" class="text-slate-400 hover:text-red-500 font-bold pl-2 text-xs cursor-pointer">✕</button>
                 `;
                 box.appendChild(row);
             });
 
             const displayPrice = document.getElementById('summary-total-price');
-            if(displayPrice) displayPrice.innerText = `$${sum.toFixed(2)}`;
+            if(displayPrice) displayPrice.innerText = `$${total.toFixed(2)}`;
         }
 
-        // --- SYSTEM WORKFLOW PIPELINE STAGE DRIVER ---
+        // --- STAGE PIPELINE FLOW INDICATORS ---
         window.goToStage = function(stageNum) {
             if (stageNum === 3 && compiledManifestArray.length === 0) {
-                alert("Workspace configuration logs empty. Allocate preference targets.");
+                alert("Manifest log arrays are unassigned. Choose system parameters.");
                 return;
             }
 
@@ -608,11 +661,11 @@
                 const panel = document.getElementById(`stage-${t}`);
                 if(panel) panel.classList.add('hidden');
 
-                const uiLabel = document.getElementById(`nav-step-${t}`);
-                if(uiLabel) {
-                    if (t === stageNum) uiLabel.className = "text-emerald-400 font-black";
-                    else if (t < stageNum) uiLabel.className = "text-slate-200 font-black";
-                    else uiLabel.className = "text-slate-600 font-normal";
+                const stepMarker = document.getElementById(`nav-step-${t}`);
+                if(stepMarker) {
+                    if (t === stageNum) stepMarker.className = "text-fbBlue font-black";
+                    else if (t < stageNum) stepMarker.className = "text-slate-900 font-black";
+                    else stepMarker.className = "text-slate-400 font-normal";
                 }
             });
 
@@ -622,10 +675,10 @@
             if (stageNum === 3) {
                 document.getElementById('receipt-id-tag').innerText = `WF-HASH-${Math.floor(10000 + Math.random() * 90000)}`;
                 document.getElementById('receipt-track').innerText = activeMainTrack.toUpperCase();
-                document.getElementById('receipt-logistics').innerText = activeMainTrack === 'itest' ? activeLogisticsChannel.toUpperCase() : 'DIRECT STREAM';
+                document.getElementById('receipt-logistics').innerText = activeMainTrack === 'itest' ? activeLogisticsChannel.toUpperCase() : 'CLOUD TERMINAL';
                 
-                // Mask account name on outbound invoice sheet strictly if the data anonymity engine runs live
-                document.getElementById('receipt-profile-name').innerText = isAnonymityActive ? "ANONYMIZED DISCREET ACQUISITION CODE HOLD" : userFullLegalName.toUpperCase();
+                // Mask legal name on outbound payload sheet ONLY if order anonymity filter is set live
+                document.getElementById('receipt-profile-name').innerText = isAnonymityActive ? "ANONYMIZED DISCREET DECOUPLED CODE HOLD" : userFullLegalName.toUpperCase();
                 document.getElementById('receipt-net').innerText = document.getElementById('summary-total-price').innerText;
                 
                 const summaryPanel = document.getElementById('sticky-summary-panel');
@@ -633,7 +686,7 @@
             }
         };
 
-        // --- HANDSHAKE COMPLETE AND CACHE DESTRUCTION METRIC ---
+        // --- HANDSHAKE EXECUTION AND TRANSIENT FLUSH ENGINE ---
         window.triggerTransientPurgeAnnihilation = function() {
             alert("TRANSIENT DATA BRIDGE HANDSHAKE: Local temporary session records completely wiped.");
             
@@ -646,7 +699,7 @@
             if(summaryPanel) summaryPanel.style.opacity = "1";
             renderPlatformManifestView();
             
-            // Rebound active user context cleanly back into the Horizontal Track Hub
+            // Rebound system status container paths safely into the Main Track Hub view screen
             document.getElementById('workspace-execution-enclosure').classList.add('hidden');
             document.getElementById('system-status-bar').classList.add('hidden');
             document.getElementById('exit-track-hub-btn').classList.add('hidden');
