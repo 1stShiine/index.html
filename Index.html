@@ -50,7 +50,7 @@
 <body class="bg-msgLightBg text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
 
     <!-- ========================================== -->
-    <!-- MAIN ACCOUNT DOOR ONBOARDING GATE (LIGHT)  -->
+    <!-- MAIN ACCOUNT DOOR ONBOARDING GATE          -->
     <!-- ========================================== -->
     <div id="auth-gate" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] flex items-center justify-center p-4 smooth-transition">
         <div class="max-w-md w-full bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl shadow-2xl text-center">
@@ -95,7 +95,7 @@
                     <div class="border-t border-slate-100 pt-3">
                         <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Target Profile Intent</label>
                         <div class="grid grid-cols-2 gap-2">
-                            <button type="button" onclick="window.setIntent('Self')" id="intent-self" class="bg-slate-50 border border-fbBlue text-fbBlue text-[10px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer">For Myself</button>
+                            <button type="button" onclick="window.setIntent('Self')" id="intent-self" class="bg-blue-50 border border-fbBlue text-fbBlue text-[10px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer">For Myself</button>
                             <button type="button" onclick="window.setIntent('Dependent')" id="intent-dep" class="bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-2.5 rounded-xl transition cursor-pointer">For Dependent</button>
                         </div>
                     </div>
@@ -108,18 +108,18 @@
     <!-- ========================================== -->
     <!-- MASTER BRAND HEADER                        -->
     <!-- ========================================== -->
-    <header class="border-b border-slate-200 bg-white sticky top-0 z-50 px-4 py-3 shadow-sm flex-shrink-0">
+    <header class="border-b border-slate-200 bg-white sticky top-0 z-50 px-4 py-2.5 shadow-sm flex-shrink-0">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <span class="w-2.5 h-2.5 rounded-full bg-fbBlue shadow-[0_0_8px_rgba(24,119,242,0.6)] animate-pulse"></span>
-                <span class="font-black tracking-wider text-sm uppercase text-slate-900">
+                <span class="font-black tracking-wider text-xs uppercase text-slate-900">
                     Wellness Front<span class="text-fbBlue">™</span>
                 </span>
             </div>
             
             <div class="flex items-center space-x-2">
                 <!-- Exit Active Track Switch Engine -->
-                <button type="button" id="exit-track-hub-btn" onclick="window.returnToSelectionHub()" class="hidden text-[10px] font-black uppercase tracking-wider text-slate-600 hover:text-slate-900 transition border border-slate-300 bg-white px-3 py-1.5 rounded-full shadow-sm cursor-pointer">
+                <button type="button" id="exit-track-hub-btn" onclick="window.returnToSelectionHub()" class="hidden text-[10px] font-black uppercase tracking-wider text-slate-600 hover:text-slate-900 transition border border-slate-300 bg-white px-3 py-1 rounded-full shadow-sm cursor-pointer">
                     « Exit Path
                 </button>
                 <!-- Order-Level payload anonymity mask trigger -->
@@ -134,15 +134,15 @@
     </header>
 
     <!-- Permanent Application-Level Owner Banner -->
-    <div class="bg-white border-b border-slate-100 px-4 py-2 flex items-center justify-center space-x-2 flex-shrink-0 shadow-inner">
-        <span class="text-[11px] font-bold tracking-wide text-slate-400 uppercase select-none">App Environment Secured:</span>
-        <span id="header-user-anchor" class="text-[11px] font-mono font-black uppercase text-slate-700">Unallocated</span>
+    <div class="bg-white border-b border-slate-100 px-4 py-1.5 flex items-center justify-center space-x-2 flex-shrink-0 shadow-inner">
+        <span class="text-[10px] font-bold tracking-wide text-slate-400 uppercase select-none">App Environment Secured:</span>
+        <span id="header-user-anchor" class="text-[10px] font-mono font-black uppercase text-slate-700">Unallocated</span>
     </div>
 
     <!-- ========================================== -->
     <!-- STEP STATUS TIMELINE INDICATOR             -->
     <!-- ========================================== -->
-    <section id="system-status-bar" class="hidden bg-white border-b border-slate-200 py-2.5 px-4 flex-shrink-0 relative z-10 animate-fadeIn">
+    <section id="system-status-bar" class="hidden bg-white border-b border-slate-200 py-2 px-4 flex-shrink-0 relative z-10 animate-fadeIn">
         <div class="max-w-xl mx-auto flex items-center justify-center space-x-6 text-center text-[10px] font-black uppercase tracking-wider font-mono">
             <span id="nav-step-1" class="text-fbBlue transition-colors duration-200">01 / Setup</span>
             <span class="text-slate-300">•</span>
@@ -153,48 +153,49 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- PROPORTIONED MESSENGER-STYLE GRID HUB      -->
+    <!-- PROPORTIONED ENGRAVED CAROUSEL HUB         -->
     <!-- ========================================== -->
-    <section id="workspace-selection-hub" class="hidden flex-grow bg-msgLightBg flex-col justify-center items-center px-4 py-8 animate-fadeIn overflow-hidden">
-        <div class="w-full max-w-2xl space-y-6 text-center">
-            <div class="text-center space-y-1">
-                <span class="text-[10px] font-mono font-black tracking-widest text-fbBlue uppercase">System Initialized</span>
-                <h2 class="text-base font-black uppercase tracking-tight text-slate-900">Select Environment Track</h2>
+    <section id="workspace-selection-hub" class="hidden flex-grow bg-msgLightBg flex-col justify-start pt-4 items-center px-4 animate-fadeIn overflow-hidden">
+        <div class="w-full max-w-2xl space-y-4">
+            <!-- AMENDED: Clean text headers optimized for crisp spacing metrics -->
+            <div class="text-center space-y-0.5">
+                <span class="text-[9px] font-mono font-black tracking-widest text-fbBlue uppercase">System Initialized</span>
+                <h2 class="text-sm font-black uppercase tracking-tight text-slate-900">Select Environment Track</h2>
             </div>
             
-            <!-- Proportioned Swipeable Layout Blocks (Matches 24623.jpg Proportions) -->
+            <!-- AMENDED: Engraved, tight portait card matrix distribution blocks -->
             <div class="flex md:justify-center space-x-3 overflow-x-auto pb-4 pt-1 px-4 scrollbar-none snap-x snap-mandatory w-full">
                 
                 <!-- Track Card 1: iTest -->
-                <div onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[145px] bg-white border border-slate-200/80 p-4 rounded-xl cursor-pointer hover:border-fbBlue hover:shadow-md transition flex flex-col justify-between min-h-[165px] text-left relative shadow-sm group">
-                    <div class="w-9 h-9 bg-blue-50 text-base rounded-full flex items-center justify-center smooth-transition group-hover:scale-105">🧬</div>
+                <div onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[140px] bg-slate-100/70 border border-slate-300/60 p-4 rounded-xl cursor-pointer hover:bg-white hover:border-fbBlue hover:shadow-md shadow-inner transition flex flex-col justify-between min-h-[160px] text-left group">
+                    <div class="w-8 h-8 bg-white text-xs rounded-full flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">🧬</div>
                     <div class="space-y-0.5">
-                        <h3 class="text-[11px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">iTest Market</h3>
-                        <p class="text-[9.5px] text-slate-500 leading-tight font-medium">Direct marketplace panel orders.</p>
+                        <h3 class="text-[10.5px] font-black uppercase text-slate-800 tracking-wide group-hover:text-fbBlue smooth-transition">iTest Market</h3>
+                        <p class="text-[9px] text-slate-500 leading-tight font-medium">Direct marketplace panel orders.</p>
                     </div>
                 </div>
 
                 <!-- Track Card 2: MindLink -->
-                <div onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[145px] bg-white border border-slate-200/80 p-4 rounded-xl cursor-pointer hover:border-fbBlue hover:shadow-md transition flex flex-col justify-between min-h-[165px] text-left relative shadow-sm group">
-                    <div class="w-9 h-9 bg-purple-50 text-base rounded-full flex items-center justify-center smooth-transition group-hover:scale-105">🧠</div>
+                <div onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[140px] bg-slate-100/70 border border-slate-300/60 p-4 rounded-xl cursor-pointer hover:bg-white hover:border-fbBlue hover:shadow-md shadow-inner transition flex flex-col justify-between min-h-[160px] text-left group">
+                    <div class="w-8 h-8 bg-white text-xs rounded-full flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">🧠</div>
                     <div class="space-y-0.5">
-                        <h3 class="text-[11px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">MindLink</h3>
-                        <p class="text-[9.5px] text-slate-500 leading-tight font-medium">Behavioral therapy routing engine.</p>
+                        <h3 class="text-[10.5px] font-black uppercase text-slate-800 tracking-wide group-hover:text-fbBlue smooth-transition">MindLink</h3>
+                        <p class="text-[9px] text-slate-500 leading-tight font-medium">Behavioral therapy routing engine.</p>
                     </div>
                 </div>
 
                 <!-- Track Card 3: CareLive -->
-                <div onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[145px] bg-white border border-slate-200/80 p-4 rounded-xl cursor-pointer hover:border-fbBlue hover:shadow-md transition flex flex-col justify-between min-h-[165px] text-left relative shadow-sm group">
-                    <div class="w-9 h-9 bg-emerald-50 text-base rounded-full flex items-center justify-center smooth-transition group-hover:scale-105">📐</div>
+                <div onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[140px] bg-slate-100/70 border border-slate-300/60 p-4 rounded-xl cursor-pointer hover:bg-white hover:border-fbBlue hover:shadow-md shadow-inner transition flex flex-col justify-between min-h-[160px] text-left group">
+                    <div class="w-8 h-8 bg-white text-xs rounded-full flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">📐</div>
                     <div class="space-y-0.5">
-                        <h3 class="text-[11px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">CareLive</h3>
-                        <p class="text-[9.5px] text-slate-500 leading-tight font-medium">Acute stream setup validation sandbox.</p>
+                        <h3 class="text-[10.5px] font-black uppercase text-slate-800 tracking-wide group-hover:text-fbBlue smooth-transition">CareLive</h3>
+                        <p class="text-[9px] text-slate-500 leading-tight font-medium">Acute stream setup validation sandbox.</p>
                     </div>
                 </div>
 
             </div>
             
-            <p class="text-[9px] font-mono font-black text-slate-400 uppercase tracking-widest animate-pulse select-none">Swipe horizontally to scroll tracks ↔</p>
+            <p class="text-[8.5px] font-mono font-black text-slate-400 uppercase text-center tracking-widest animate-pulse select-none">Swipe horizontally to scroll tracks ↔</p>
         </div>
     </section>
 
@@ -218,7 +219,7 @@
                             <button type="button" id="subtab-btn-corporate" onclick="window.toggleSubTab('corporate')" class="flex-1 text-slate-500 hover:text-slate-800 text-[10px] font-black uppercase py-2 rounded-lg transition cursor-pointer">Corporate Compliance</button>
                         </div>
 
-                        <!-- Executive Collection Menu Layout (Low Profile Stack Array) -->
+                        <!-- Executive Collection Menu Layout -->
                         <div id="market-grid-executive" class="space-y-2">
                             <div class="border border-slate-200/80 bg-white p-3.5 rounded-xl flex items-center justify-between shadow-sm">
                                 <div class="space-y-0.5 max-w-[70%]">
@@ -305,7 +306,7 @@
                                 <div id="stream-placeholder" class="space-y-1 text-slate-400">
                                     <span class="text-xl block animate-pulse">📺</span>
                                     <h4 class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-500">Media Sandbox</h4>
-                                    <p class="text-[10px] text-slate-400 max-w-[170px] mx-auto leading-normal">Select a canvas quadrant cell to buffer the calibration streaming track snippet.</p>
+                                    <p class="text-[10px] text-slate-400 max-w-[180px] mx-auto leading-normal">Select a canvas quadrant cell to update the background calibration video monitor.</p>
                                 </div>
                                 <div id="stream-active-viewport" class="hidden w-full h-full flex flex-col items-center justify-center animate-fadeIn">
                                     <span class="text-[9px] font-mono text-fbBlue font-bold mb-1.5 uppercase tracking-widest" id="stream-label-out">Channel Configured</span>
@@ -379,7 +380,7 @@
 
                     <!-- Order-Level Decoupled Invoice Confirmation Block -->
                     <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-[11px] space-y-2 max-w-sm mx-auto font-medium shadow-inner">
-                        <div class="flex justify-between text-slate-400 text-[8px] uppercase font-mono font-black tracking-wider pb-1 border-b border-slate-200"><span>System Logs</span><span id="receipt-id-tag" class="text-slate-600 font-mono">--</span></div>
+                        <div class="flex justify-between text-slate-400 text-[8px] uppercase font-mono font-black tracking-wider pb-1 border-b border-slate-200"><span>System Logs</span><span id="receipt-id-tag" class="text-slate-300 font-mono">--</span></div>
                         <div class="flex justify-between text-slate-600"><span>Profile Account Anchor:</span><span id="receipt-profile-name" class="text-slate-900 font-black uppercase font-mono tracking-wider">--</span></div>
                         <div class="flex justify-between text-slate-600"><span>Target Track:</span><span id="receipt-track" class="text-slate-900 font-black uppercase font-mono tracking-wider">--</span></div>
                         <div class="flex justify-between text-slate-600"><span>Fulfillment Logic:</span><span id="receipt-logistics" class="text-slate-900 font-black uppercase font-mono tracking-wider">--</span></div>
@@ -401,7 +402,7 @@
                 
                 <div class="space-y-4 font-medium text-xs">
                     <div id="manifest-items-list" class="space-y-1.5 max-h-[140px] overflow-y-auto scrollbar-none pr-1">
-                        <!-- Dynamic lines inject via runtime controllers -->
+                        <!-- Items update programmatically -->
                     </div>
 
                     <div class="flex justify-between items-baseline border-t border-slate-200 pt-3">
@@ -427,9 +428,9 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- SECURE LIGHT MODE SYSTEM FOOTER            -->
+    <!-- COMPLIANCE FOOTER                          -->
     <!-- ========================================== -->
-    <footer class="border-t border-slate-200 bg-white py-5 px-4 text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest relative z-10 flex-shrink-0">
+    <footer class="border-t border-slate-200 bg-white py-6 px-4 text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest relative z-10 flex-shrink-0">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <span>© 2026 Wellness Front™ Platforms. All Rights Reserved.</span>
             <span>Decoupled Data Security Infrastructure • Build-Premium-Light-v4.5</span>
@@ -437,7 +438,7 @@
     </footer>
 
     <!-- ========================================== -->
-    <!-- SECURE ARCHITECTURAL SYSTEM LOGIC CORES    -->
+    <!-- MASTER ARCHITECTURAL RUNTIME IMPLEMENTATION-->
     <!-- ========================================== -->
     <script>
         let activeMainTrack = '';
@@ -498,7 +499,7 @@
         window.finalizeProfileGate = function() {
             const name = document.getElementById('profile-fullname').value.trim();
             const year = document.getElementById('profile-year').value;
-            if(!name || !year || !userGender) { alert("All initialization items require parameter fields."); return; }
+            if(!name || !year || !userGender) { alert("All initialization configurations require parameter inputs."); return; }
             
             userFullLegalName = name; userBirthYear = year;
             
@@ -514,7 +515,7 @@
             document.getElementById('workspace-selection-hub').classList.replace('hidden', 'flex');
         };
 
-        // --- COMPACT SELECTOR SWITCH MANAGEMENT LOOPS ---
+        // --- HORIZONTAL SELECTION DASHBOARD MANAGER ---
         window.launchIsolatedTrack = function(trackKey) {
             activeMainTrack = trackKey;
             
@@ -550,7 +551,7 @@
             document.getElementById('workspace-selection-hub').classList.replace('hidden', 'flex');
         };
 
-        // --- LAYER COMPONENT REFACTOR ROUTINES ---
+        // --- SUBPANE TAB AND CONTENT SWAP ROUTINES ---
         window.toggleSubTab = function(subKey) {
             currentSubTab = subKey;
             const btnExec = document.getElementById('subtab-btn-executive');
@@ -560,7 +561,7 @@
 
             if(subKey === 'executive') {
                 if(btnExec) btnExec.className = "flex-1 bg-white text-slate-900 border border-slate-200/60 text-[9px] font-black uppercase py-2 rounded-lg transition shadow-sm cursor-pointer";
-                if(btnCorp) btnCorp.className = "flex-1 text-slate-500 hover:text-slate-800 text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
+                if(btnCorp) btnCorp.className = "flex-1 text-slate-400 hover:text-white text-[9px] font-black uppercase py-2 rounded-lg transition cursor-pointer";
                 if(gridExec) gridExec.classList.remove('hidden');
                 if(gridCorp) gridCorp.classList.add('hidden');
             } else {
@@ -629,7 +630,7 @@
                 const row = document.createElement('div');
                 row.className = "bg-slate-50 border border-slate-200 p-3 rounded-xl flex justify-between items-center shadow-inner animate-fadeIn";
                 
-                // Mask item labels strictly inside outbound order lines if anonymity toggle runs live
+                // Mask item labels strictly inside outbound order lines if anonymity is live
                 let visibleLabel = item.title;
                 if (isAnonymityActive && item.type === 'lab') {
                     visibleLabel = `Cryptographic Specimen Hold Token #AP-${Math.floor(21212 + Math.random() * 67676)}`;
@@ -649,7 +650,7 @@
             if(displayPrice) displayPrice.innerText = `$${total.toFixed(2)}`;
         }
 
-        // --- STAGE PIPELINE FLOW INDICATORS ---
+        // --- SYSTEM WORKFLOW PIPELINE STAGE DRIVER ---
         window.goToStage = function(stageNum) {
             if (stageNum === 3 && compiledManifestArray.length === 0) {
                 alert("Manifest log arrays are unassigned. Choose system parameters.");
@@ -677,7 +678,7 @@
                 document.getElementById('receipt-track').innerText = activeMainTrack.toUpperCase();
                 document.getElementById('receipt-logistics').innerText = activeMainTrack === 'itest' ? activeLogisticsChannel.toUpperCase() : 'CLOUD TERMINAL';
                 
-                // Mask legal name on outbound payload sheet ONLY if order anonymity filter is set live
+                // Mask account name on outbound invoice sheet strictly if the data anonymity engine runs live
                 document.getElementById('receipt-profile-name').innerText = isAnonymityActive ? "ANONYMIZED DISCREET DECOUPLED CODE HOLD" : userFullLegalName.toUpperCase();
                 document.getElementById('receipt-net').innerText = document.getElementById('summary-total-price').innerText;
                 
@@ -686,7 +687,7 @@
             }
         };
 
-        // --- HANDSHAKE EXECUTION AND TRANSIENT FLUSH ENGINE ---
+        // --- HANDSHAKE COMPLETE AND CACHE DESTRUCTION METRIC ---
         window.triggerTransientPurgeAnnihilation = function() {
             alert("TRANSIENT DATA BRIDGE HANDSHAKE: Local temporary session records completely wiped.");
             
