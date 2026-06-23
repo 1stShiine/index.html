@@ -24,32 +24,30 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
-        .macro-zone, .micro-piece { 
-            cursor: pointer; 
-            fill: rgba(255, 255, 255, 0.02); 
-            stroke: rgba(255, 255, 255, 0.15); 
-            stroke-width: 2; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Rectangular Canvas Matrix Layout Styles */
+        .zone-rect {
+            cursor: pointer;
+            fill: rgba(255, 255, 255, 0.02);
+            stroke: rgba(255, 255, 255, 0.12);
+            stroke-width: 1.5;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .macro-zone:hover, .micro-piece:hover { 
-            fill: rgba(16, 185, 129, 0.05); 
-            stroke: var(--accent); 
+        .zone-rect:hover {
+            fill: rgba(16, 185, 129, 0.04);
+            stroke: var(--accent);
         }
-        
-        .piece-active { 
-            stroke: var(--accent); 
-            stroke-width: 3; 
-            fill: var(--accent-glow);
+        .zone-rect-active {
+            fill: var(--accent-glow) !important;
+            stroke: var(--accent) !important;
+            stroke-width: 2.5;
         }
 
-        .ghosted { opacity: 0.15; pointer-events: none; }
         .scrollbar-none::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden relative">
 
-    <!-- PHASE 1: FULL SECURITY ENTRANCE GATE -->
+    <!-- PLATFORM ENTRY INITIALIZATION GATE -->
     <div id="auth-gate" class="fixed inset-0 bg-[#04060C]/98 backdrop-blur-2xl z-[100] flex items-center justify-center p-4 smooth-transition">
         <div class="max-w-md w-full glass-card p-8 rounded-3xl border border-slate-800 text-center">
             <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -58,12 +56,11 @@
             <h1 class="text-base font-black uppercase tracking-widest text-white mb-2">Platform Gateway Ingress</h1>
             <p class="text-xs text-slate-400 mb-6">Secure terminal validation. Phone registration required.</p>
             
-            <!-- Dynamic Authentication Forms -->
             <div id="auth-forms" class="space-y-4 text-left">
                 <div id="phone-stage">
                     <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Verified Phone Line</label>
                     <input type="tel" id="auth-phone" placeholder="+1 (555) 000-0000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 font-mono text-white mb-4">
-                    <button onclick="window.submitPhoneVerification()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-[10px] uppercase tracking-widest py-4 rounded-xl transition shadow-lg shadow-emerald-500/10">Request Passing Token ➔</button>
+                    <button onclick="window.submitPhoneVerification()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black text-[10px] uppercase tracking-widest py-4 rounded-xl transition shadow-lg">Request Passing Token ➔</button>
                 </div>
 
                 <div id="token-stage" class="hidden">
@@ -74,22 +71,22 @@
 
                 <div id="profile-stage" class="hidden space-y-4">
                     <div>
-                        <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1.5">Year of Biological Ingress (Birth Year)</label>
-                        <input type="number" id="profile-year" placeholder="1990" min="1900" max="2026" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 font-mono text-white">
+                        <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1.5">Year of Biological Birth (Year Only)</label>
+                        <input type="number" id="profile-year" placeholder="1995" min="1900" max="2026" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 font-mono text-white">
                     </div>
                     <div>
                         <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1.5">Biological Gender Reference Frame</label>
                         <select id="profile-gender" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 text-white">
-                            <option value="unassigned">Select Assignment Profile</option>
-                            <option value="male">Male baseline range parameters</option>
-                            <option value="female">Female baseline range parameters</option>
+                            <option value="unassigned">Select Target Framework</option>
+                            <option value="male">Male baseline reference ranges</option>
+                            <option value="female">Female baseline reference ranges</option>
                         </select>
                     </div>
                     <div class="border-t border-slate-800/80 pt-3">
                         <label class="block text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">Target Profile Intent</label>
                         <div class="grid grid-cols-2 gap-2">
                             <button onclick="window.setIntent('Self')" id="intent-self" class="bg-slate-900 border border-emerald-500/50 text-white text-[9px] font-black uppercase py-3 rounded-lg transition">For Myself</button>
-                            <button onclick="window.setIntent('Dependent')" id="intent-dep" class="bg-slate-900 border border-slate-800 text-slate-400 text-[9px] font-black uppercase py-3 rounded-lg transition">For Someone Else</button>
+                            <button onclick="window.setIntent('Dependent')" id="intent-dep" class="bg-slate-900 border border-slate-800 text-slate-400 text-[9px] font-black uppercase py-3 rounded-lg transition">For Dependent</button>
                         </div>
                     </div>
                     <button onclick="window.finalizeProfileGate()" class="w-full bg-white text-slate-950 font-black text-[10px] uppercase tracking-widest py-4 rounded-xl transition mt-4 shadow-lg">Unlock Workspace Canvas</button>
@@ -98,7 +95,7 @@
         </div>
     </div>
 
-    <!-- MAIN PLATFORM INTERFACE LAYOUT -->
+    <!-- MAIN PLATFORM CHASSIS HEADER -->
     <div id="master-header" class="flex-shrink-0 z-50 bg-inherit relative w-full">
         <header class="border-b border-slate-800/60 px-6 py-4">
             <div class="max-w-6xl mx-auto flex items-center justify-between">
@@ -106,7 +103,6 @@
                     <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.4)]"></span>
                     <span class="font-black tracking-widest text-xs uppercase text-white">Wellness Front™ Platform Engine</span>
                 </div>
-                <!-- Dynamic Discreet Anonymity Switch -->
                 <div id="anonymity-container" class="smooth-transition">
                     <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-2 bg-slate-950 border border-slate-800 px-4 py-2 rounded-full transition shadow-inner">
                         <span id="anon-icon">🕵️</span>
@@ -116,7 +112,7 @@
             </div>
         </header>
 
-        <!-- THREE-TRACK NAVIGATION TAB STRUCTURE -->
+        <!-- APPLICATION LAYER NAVIGATOR TABS -->
         <nav class="max-w-4xl mx-auto w-full px-4 py-3">
             <div class="grid grid-cols-3 gap-2 bg-[#0A0D1A] border border-slate-900 p-1.5 rounded-2xl shadow-inner">
                 <button onclick="window.switchPlatformTab(1)" id="tab-btn-1" class="bg-emerald-500/10 border border-emerald-500 text-emerald-400 flex flex-col items-center justify-center py-2.5 rounded-xl transition shadow-md">
@@ -132,95 +128,110 @@
         </nav>
     </div>
 
-    <!-- TRACK WORKSPACE CANVAS CONTAINERS -->
+    <!-- MAIN INTERACTIVE CANVAS FRAME -->
     <main class="flex-grow w-full max-w-6xl mx-auto flex flex-col h-full overflow-hidden relative p-4">
         
-        <!-- WORKSPACE 1: iTEST MARKETPLACE LAYER -->
-        <section id="pane-tab-1" class="h-full flex flex-col space-y-4 overflow-y-auto scrollbar-none pb-24">
-            <div class="flex items-center justify-between border-b border-slate-900 pb-2">
-                <h2 class="text-[10px] font-mono font-black uppercase tracking-widest text-slate-400">Direct Functional Diagnostics</h2>
-                <span class="text-[9px] font-bold text-emerald-400 font-mono">No Physician Visit Required</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-xs font-black uppercase text-white tracking-wider mb-1">Executive Longevity Panel</h3>
-                        <p class="text-[11px] text-slate-400 leading-relaxed mb-4">Complete cellular profiling, metabolic metrics, and core physiological biomarkers tracking analysis.</p>
-                    </div>
-                    <button onclick="window.queueLabAsset('Executive Longevity Panel Allocation', 420)" class="w-full bg-slate-900 border border-slate-800 hover:border-emerald-500 text-[9px] text-slate-300 hover:text-white font-black uppercase tracking-widest py-3 rounded-xl transition">Allocate Panel Portfolio ($420)</button>
+        <!-- WORKSPACE 1: iTEST EXPANDED CHANNELS -->
+        <section id="pane-tab-1" class="h-full flex flex-col space-y-6 overflow-y-auto scrollbar-none pb-24">
+            
+            <!-- Category A: Executive Testing Protocols -->
+            <div>
+                <div class="flex items-center justify-between border-b border-slate-900 pb-2 mb-3">
+                    <h2 class="text-[10px] font-mono font-black uppercase tracking-widest text-slate-400">Executive Diagnostics & Longevity Panels</h2>
                 </div>
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-xs font-black uppercase text-white tracking-wider mb-1">Occupational Compliance Screening</h3>
-                        <p class="text-[11px] text-slate-400 leading-relaxed mb-4">Fast-track direct employee occupational validation screening. Optimized for high-speed corporate reporting compliance loops.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xs font-black uppercase text-white tracking-wider mb-1">Advanced Biomarker Matrix</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed mb-4">Complete cardiovascular lipid profiles, deep metabolic markers, and foundational systemic metrics analysis.</p>
+                        </div>
+                        <button onclick="window.queueLabAsset('Advanced Biomarker Matrix Order', 290)" class="w-full bg-slate-900 border border-slate-800 hover:border-emerald-500 text-[9px] text-slate-300 hover:text-white font-black uppercase tracking-widest py-3 rounded-xl transition">Allocate Panel ($290)</button>
                     </div>
-                    <button onclick="window.queueLabAsset('Compliance Screening Ingress', 110)" class="w-full bg-slate-900 border border-slate-800 hover:border-emerald-500 text-[9px] text-slate-300 hover:text-white font-black uppercase tracking-widest py-3 rounded-xl transition">Allocate Screening ($110)</button>
+                    <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xs font-black uppercase text-white tracking-wider mb-1">Hormonal Blueprint Allocation</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed mb-4">Comprehensive profiling of biological endocrinology pathways, optimizing recovery and performance variables.</p>
+                        </div>
+                        <button onclick="window.queueLabAsset('Hormonal Blueprint Allocation Order', 340)" class="w-full bg-slate-900 border border-slate-800 hover:border-emerald-500 text-[9px] text-slate-300 hover:text-white font-black uppercase tracking-widest py-3 rounded-xl transition">Allocate Blueprint ($340)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category B: Occupational Screening Infrastructure -->
+            <div>
+                <div class="flex items-center justify-between border-b border-slate-900 pb-2 mb-3">
+                    <h2 class="text-[10px] font-mono font-black uppercase tracking-widest text-slate-400">Separated Corporate Screening & Drug Compliance</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="glass-card p-5 rounded-2xl flex flex-col justify-between border-l-2 border-cyan-500/30">
+                        <div>
+                            <h3 class="text-xs font-black uppercase text-cyan-400 tracking-wider mb-1">Standard Occupational Panel Screening</h3>
+                            <p class="text-[11px] text-slate-400 leading-relaxed mb-4">Rapid verification compliance testing for workplace onboarding pipelines and regulatory infrastructure mandates.</p>
+                        </div>
+                        <button onclick="window.queueLabAsset('Occupational Drug Screen Token', 85)" class="w-full bg-slate-950 border border-slate-800 hover:border-cyan-500 text-[9px] text-slate-400 hover:text-white font-black uppercase tracking-widest py-3 rounded-xl transition">Request Compliance Voucher ($85)</button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- WORKSPACE 2: MINDLINK ROUTING PORTAL -->
-        <section id="pane-tab-2" class="hidden h-full flex-col space-y-4 overflow-y-auto scrollbar-none pb-24">
-            <div class="flex items-center justify-between border-b border-slate-900 pb-2">
-                <h2 class="text-[10px] font-mono font-black uppercase tracking-widest text-slate-400">Behavioral Health Allocation</h2>
-                <span class="text-[9px] font-bold text-amber-500 font-mono">Verified Identity Credentials Required</span>
-            </div>
-            <div class="glass-card p-6 rounded-2xl text-center max-w-md mx-auto my-auto">
-                <span class="text-3xl block mb-3">🧠</span>
+        <!-- WORKSPACE 2: MINDLINK WORKSPACE -->
+        <section id="pane-tab-2" class="hidden h-full flex flex-col justify-center items-center">
+            <div class="glass-card p-8 rounded-3xl text-center max-w-md w-full">
+                <span class="text-3xl block mb-3 animate-pulse">🧠</span>
                 <h3 class="text-sm font-black uppercase tracking-wider text-white mb-2">Immediate Mental Health Connection</h3>
-                <p class="text-xs text-slate-400 leading-relaxed mb-6">License routing architecture maps verified instances straight to clinical therapists. Due to regulatory frameworks, true credentialed validation checks will process during network allocation handshake.</p>
-                <button onclick="alert('Initializing credential sync array... Please stand by.')" class="w-full bg-slate-900 border border-slate-800 text-[10px] text-slate-300 hover:text-white font-black uppercase tracking-widest py-4 rounded-xl transition">Initialize Immediate Match Engine</button>
+                <p class="text-xs text-slate-400 leading-relaxed mb-6">License routing channels map verified user instances directly to clinical mental health therapists. True identity records are mandatory during this matching handshake loop.</p>
+                <button onclick="alert('Initializing therapy stream interface...')" class="w-full bg-slate-900 border border-slate-800 text-[10px] text-slate-300 hover:text-white font-black uppercase tracking-widest py-4 rounded-xl transition">Open Professional Routing Sync</button>
             </div>
         </section>
 
-        <!-- WORKSPACE 3: CARELIVE PREVIEW ARENA (2D INTERACTIVE VECTOR MESH) -->
-        <section id="pane-tab-3" class="hidden h-full flex-col">
+        <!-- WORKSPACE 3: CARELIVE ARENA (RECTANGULAR 4-ZONE CANVAS LAYER) -->
+        <section id="pane-tab-3" class="hidden h-full flex flex-col">
             <div class="flex items-center justify-between border-b border-slate-900 pb-2 mb-4 flex-shrink-0">
                 <h2 class="text-[10px] font-mono font-black uppercase tracking-widest text-slate-400">Acute Telehealth Stream Preview</h2>
-                <div class="flex items-center space-x-2 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-md">
-                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-                    <span class="text-[8px] font-mono font-black text-red-400 uppercase tracking-wider">State Mandated Verification Required</span>
-                </div>
+                <span class="text-[8px] font-mono font-black bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-0.5 rounded uppercase">ID Verification Obligatory</span>
             </div>
 
             <div class="flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-0 relative w-full mb-16">
-                <!-- Vector Map Area -->
-                <div class="lg:col-span-5 glass-card rounded-3xl p-6 flex flex-col relative overflow-hidden items-center justify-center">
-                    <svg viewBox="0 0 200 450" class="w-full max-w-[220px] max-h-[380px]" id="human-svg">
-                        <g id="node-head" class="macro-zone" onclick="window.executePassiveMediaRouter('Cranial Section Selected', 'media/head_calib.mp4')">
-                            <path d="M 80 35 L 120 35 L 128 55 L 124 75 L 100 88 L 76 75 L 72 55 Z" />
-                        </g>
-                        <g id="node-torso" class="macro-zone" onclick="window.executePassiveMediaRouter('Core Torso Section Selected', 'media/torso_calib.mp4')">
-                            <path d="M 76 88 L 124 88 L 132 100 L 152 75 L 144 125 L 130 145 L 70 145 L 56 125 L 32 85 L 48 75 L 68 100 Z" />
-                        </g>
-                        <g id="node-pelvis" class="macro-zone" onclick="window.executePassiveMediaRouter('Pelvic Core Section Selected', 'media/pelvis_calib.mp4')">
-                            <path d="M 70 145 L 130 145 L 130 225 L 100 242 L 70 225 Z" />
-                        </g>
-                        <g id="node-legs" class="macro-zone" onclick="window.executePassiveMediaRouter('Distal Extremities Selected', 'media/legs_calib.mp4')">
-                            <path d="M 70 225 L 100 242 L 130 225 L 125 420 L 98 420 L 98 280 L 102 280 L 102 420 L 75 420 Z" />
-                        </g>
+                <!-- 4-Zone Bounding Geometry Matrix Box -->
+                <div class="lg:col-span-5 glass-card rounded-3xl p-4 flex flex-col justify-center items-center relative overflow-hidden">
+                    <span class="text-[9px] font-mono font-black text-slate-500 uppercase tracking-widest mb-3">Anatomical Preference Grid</span>
+                    <svg viewBox="0 0 160 380" class="w-full max-w-[180px] h-[340px]" id="rectangular-mesh">
+                        <!-- Head and Neck Zone -->
+                        <rect id="rect-head" x="10" y="10" width="140" height="75" rx="12" class="zone-rect" onclick="window.executePassiveMediaRouter('rect-head', 'Head & Neck Layout Selected')" />
+                        <text x="80" y="52" fill="#64748B" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Head & Neck</text>
+                        
+                        <!-- Chest Zone -->
+                        <rect id="rect-chest" x="10" y="95" width="140" height="85" rx="12" class="zone-rect" onclick="window.executePassiveMediaRouter('rect-chest', 'Anterior Chest Core Selected')" />
+                        <text x="80" y="142" fill="#64748B" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Chest Zone</text>
+                        
+                        <!-- Abdominal Zone -->
+                        <rect id="rect-abdomen" x="10" y="190" width="140" height="85" rx="12" class="zone-rect" onclick="window.executePassiveMediaRouter('rect-abdomen', 'Abdominal Core Region Selected')" />
+                        <text x="80" y="237" fill="#64748B" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Abdominal</text>
+                        
+                        <!-- Lower Extremities Zone -->
+                        <rect id="rect-legs" x="10" y="285" width="140" height="85" rx="12" class="zone-rect" onclick="window.executePassiveMediaRouter('rect-legs', 'Lower Extremities Selected')" />
+                        <text x="80" y="332" fill="#64748B" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase tracking-wider">Legs / Distal</text>
                     </svg>
                 </div>
 
-                <!-- Passive Media Buffering Feedback Pane -->
-                <div class="lg:col-span-7 glass-card rounded-3xl p-6 flex flex-col justify-center items-center relative text-center">
-                    <div id="media-feedback-placeholder" class="space-y-3">
-                        <span class="text-3xl block animate-bounce">📺</span>
-                        <h4 class="text-xs font-mono font-black uppercase text-slate-400">Anatomical Preference Engine</h4>
-                        <p class="text-[11px] text-slate-500 max-w-xs leading-relaxed">Select a grid segment on the canvas vector structure to route the passive environmental training stream placeholder.</p>
+                <!-- Streaming Target Context Pane -->
+                <div class="lg:col-span-7 glass-card rounded-3xl p-6 flex flex-col justify-center items-center text-center relative">
+                    <div id="media-feedback-placeholder" class="space-y-2">
+                        <span class="text-2xl block animate-pulse">📺</span>
+                        <h4 class="text-xs font-mono font-black uppercase text-slate-400">Video Buffering Frame</h4>
+                        <p class="text-[11px] text-slate-500 max-w-xs leading-relaxed">Isolate a geometric canvas quadrant block to silently queue up the background calibration preview streaming asset pipeline.</p>
                     </div>
-                    <div id="media-active-stream" class="hidden w-full h-full bg-slate-950/80 border border-slate-900 rounded-2xl flex flex-col items-center justify-center p-4 animate-fade-in">
-                        <span class="text-xs font-mono text-emerald-400 font-bold mb-2 uppercase tracking-widest" id="stream-label-display">Stream Configured</span>
-                        <div class="w-full aspect-video bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-center relative overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                            <span class="text-[10px] font-mono text-slate-500 z-20 uppercase animate-pulse">[ Buffering Modular Rehearsal Media Asset ]</span>
+                    <div id="media-active-stream" class="hidden w-full h-full flex flex-col items-center justify-center p-2 animate-fade-in">
+                        <span class="text-[10px] font-mono text-emerald-400 font-bold mb-2 uppercase tracking-widest" id="stream-label-display">Pipeline Engaged</span>
+                        <div class="w-full aspect-video bg-slate-950 rounded-2xl border border-slate-900 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-[9px] font-mono text-slate-500 uppercase animate-pulse">[ Rendering Passive Video Training Track ]</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TRANSACTION AND METADATA HANDSHAKE DOSSIER DRAWER -->
+        <!-- MANIFEST COMPILATION DOSSIER DRAWER -->
         <div id="dossier-drawer" class="absolute bottom-0 left-0 right-0 bg-[#070911]/95 border-t border-slate-800 backdrop-blur-2xl z-50 translate-y-[calc(100%-60px)] transition-transform duration-500 rounded-t-[2rem] shadow-[0_-20px_50px_rgba(0,0,0,0.9)]">
             <div onclick="window.toggleDossierView()" class="h-[60px] flex items-center justify-between px-8 cursor-pointer select-none">
                 <div class="flex items-center space-x-3">
@@ -235,26 +246,25 @@
                     <span class="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest">Aggregate Cost Evaluation</span>
                     <span id="manifest-total" class="text-base font-black text-emerald-400">$0</span>
                 </div>
-                <button onclick="window.executeHandshakePurge()" class="w-full bg-white hover:bg-slate-100 text-slate-950 font-black text-[10px] uppercase tracking-widest px-6 py-4 rounded-xl shadow-lg transition-all">Authorize Profile Allocation Handshake ➔</button>
+                <button onclick="window.executeHandshakePurge()" class="w-full bg-white text-slate-950 font-black text-[10px] uppercase tracking-widest px-6 py-4 rounded-xl shadow-lg transition-all">Authorize Profile Handshake ➔</button>
             </div>
         </div>
     </main>
 
-    <!-- CORE ARCHITECTURAL ENGINE RUNTIME -->
+    <!-- CORE INTERACTION JAVASCRIPT CONTROLS -->
     <script>
         let currentPhoneInstance = "", profileBirthYear = null, profileGender = "", profileIntent = "Self", isAnonymityActive = false, activeTab = 1, compiledManifest = [], isDossierOpen = false;
 
-        // --- AUTHENTICATION ENTRANCE CONTROLS ---
+        // --- AUTH SUBMISSION LOGIC ---
         window.submitPhoneVerification = function() {
-            const input = document.getElementById('auth-phone').value;
-            if(!input || input.length < 7) { alert("Invalid Phone Format."); return; }
-            currentPhoneInstance = input;
+            const tel = document.getElementById('auth-phone').value;
+            if(!tel || tel.length < 8) { alert("Invalid registration format."); return; }
+            currentPhoneInstance = tel;
             document.getElementById('phone-stage').classList.add('hidden');
             document.getElementById('token-stage').classList.remove('hidden');
         };
 
         window.submitTokenVerification = function() {
-            // Simulated validation pass
             document.getElementById('token-stage').classList.add('hidden');
             document.getElementById('profile-stage').classList.remove('hidden');
         };
@@ -268,21 +278,21 @@
         window.finalizeProfileGate = function() {
             const year = document.getElementById('profile-year').value;
             const gender = document.getElementById('profile-gender').value;
-            if(!year || gender === 'unassigned') { alert("All initialization parameter blocks must be structured."); return; }
+            if(!year || gender === 'unassigned') { alert("All core parameters must be assigned initialization fields."); return; }
             profileBirthYear = year; profileGender = gender;
             
             document.getElementById('auth-gate').classList.add('opacity-0', 'pointer-events-none');
             setTimeout(() => document.getElementById('auth-gate').classList.add('hidden'), 400);
         };
 
-        // --- ANONYMITY CRYPTOGRAPHIC LAYER ENGINE ---
+        // --- DATA ANONYMITY LAYER HANDLING ---
         window.toggleAnonymityEngine = function() {
             isAnonymityActive = !isAnonymityActive;
             const text = document.getElementById('anon-text');
             const btn = document.getElementById('anon-toggle-btn');
             
             if(isAnonymityActive) {
-                text.innerText = "ANONYMITY ENGINE: LIVE";
+                text.innerText = "ANONYMITY LAYER: LIVE";
                 text.className = "text-[9px] font-mono font-black uppercase tracking-widest text-emerald-400";
                 btn.classList.replace('border-slate-800', 'border-emerald-500/40');
             } else {
@@ -293,28 +303,30 @@
             renderSystemManifest();
         };
 
-        // --- TAB SELECTION SWAP EXECUTION ---
+        // --- TAB MANAGEMENT MATRIX ---
         window.switchPlatformTab = function(index) {
             activeTab = index;
             for(let i=1; i<=3; i++) {
-                document.getElementById('pane-tab-i' ? 'pane-tab-'+i : '').classList.add('hidden');
+                document.getElementById('pane-tab-'+i).classList.add('hidden');
                 document.getElementById('tab-btn-'+i).className = "border border-transparent text-slate-500 hover:text-slate-400 flex flex-col items-center justify-center py-2.5 rounded-xl transition";
             }
             document.getElementById('pane-tab-'+index).classList.replace('hidden', 'flex');
             document.getElementById('tab-btn-'+index).className = "bg-emerald-500/10 border border-emerald-500 text-emerald-400 flex flex-col items-center justify-center py-2.5 rounded-xl transition shadow-md";
             
-            // Contextual Anonymity Control Visibility Loop
+            // Limit anonymity toggle controls exclusively to iTest panel context
             document.getElementById('anonymity-container').style.opacity = index === 1 ? '1' : '0';
             document.getElementById('anonymity-container').style.pointerEvents = index === 1 ? 'auto' : 'none';
         };
 
-        // --- PASSIVE MEDIA STREAM ROUTING MATRIX ---
-        window.executePassiveMediaRouter = function(label, simulatedSrc) {
+        // --- RECTANGULAR GEOMETRY MEDIA ROUTER ENGINE ---
+        window.executePassiveMediaRouter = function(rectId, label) {
+            document.querySelectorAll('.zone-rect').forEach(r => r.classList.remove('zone-rect-active'));
+            document.getElementById(rectId).classList.add('zone-rect-active');
+            
             document.getElementById('media-feedback-placeholder').classList.add('hidden');
             document.getElementById('media-active-stream').classList.replace('hidden', 'flex');
             document.getElementById('stream-label-display').innerText = label;
             
-            // Queue manifest validation parameters silently
             if(!compiledManifest.some(i => i.title === label)) {
                 compiledManifest.push({ id: Date.now(), title: label, type: 'simulation', price: 0 });
                 renderSystemManifest();
@@ -327,49 +339,50 @@
             if(!isDossierOpen) window.toggleDossierView();
         };
 
-        // --- MANIFEST RENDERER & DECOUPLED TRANSIENT DATA PURGE ---
+        // --- TRANSIENT CACHE ERASURE AND SYSTEM PURGE ROUTINE ---
         function renderSystemManifest() {
-            const list = document.getElementById('dossier-list');
-            document.getElementById('dossier-text').innerText = `${compiledManifest.length} Parameters Bounded`;
+            const container = document.getElementById('dossier-list');
+            document.getElementById('dossier-text').innerText = `${compiledManifest.length} Elements Linked`;
             document.getElementById('dossier-indicator').className = compiledManifest.length > 0 ? "w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "w-2 h-2 rounded-full bg-slate-600";
             
-            let aggregate = 0; list.innerHTML = "";
+            let totalCost = 0; container.innerHTML = "";
             compiledManifest.forEach(item => {
-                aggregate += item.price;
+                totalCost += item.price;
                 const div = document.createElement('div');
                 div.className = "bg-slate-950 border border-slate-900 p-4 rounded-xl flex justify-between items-center shadow-inner animate-fade-in";
                 
-                let renderedTitle = item.title;
-                // Execute random tracking number overwrite if engine is live inside lab track
+                let visibleTitle = item.title;
+                // Replace identifying strings with pseudonyms if the anonymity layer is live inside the lab track
                 if(isAnonymityActive && item.type === 'lab') {
-                    renderedTitle = `Cryptographic Specimen Bundle Token #AP-${Math.floor(10000 + Math.random() * 90000)}`;
+                    visibleTitle = `Cryptographic Specimen Bundle Token #AP-${Math.floor(11111 + Math.random() * 88888)}`;
                 }
 
                 div.innerHTML = `
                     <div>
-                        <span class="text-[8px] font-mono font-black uppercase px-2 py-0.5 rounded ${item.type === 'lab' ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'}">${item.type.toUpperCase()} BOUND</span>
-                        <p class="text-xs font-mono font-bold text-slate-300 mt-2">"${renderedTitle}"</p>
+                        <span class="text-[8px] font-mono font-black uppercase px-2 py-0.5 rounded ${item.type === 'lab' ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'}">${item.type.toUpperCase()} SPECIFICATION</span>
+                        <p class="text-xs font-mono font-bold text-slate-400 mt-2">"${visibleTitle}"</p>
                     </div>
                     <button onclick="compiledManifest = compiledManifest.filter(i => i.id !== ${item.id}); renderSystemManifest();" class="text-slate-600 hover:text-red-400 text-sm font-bold pl-4">✕</button>
                 `;
-                list.appendChild(div);
+                container.appendChild(div);
             });
-            document.getElementById('manifest-total').innerText = `$${aggregate}`;
+            document.getElementById('manifest-total').innerText = `$${totalCost}`;
         }
 
         window.executeHandshakePurge = function() {
-            if(compiledManifest.length === 0) { alert("Manifest registries clear."); return; }
-            alert("TRANSIENT HANDSHAKE AUTHORIZED: Handoff package transmitted securely to outbound infrastructure network node.");
+            if(compiledManifest.length === 0) { alert("Manifest parameters clear."); return; }
+            alert("TRANSIENT HANDSHAKE EXECUTED: Outbound allocation token passed to core systems layer.");
             
-            // SYSTEM AMENDMENT ENFORCED: Complete local memory data annihilation routine
+            // Complete data destruction loop: purge local memory properties instantly
             compiledManifest = [];
             currentPhoneInstance = ""; profileBirthYear = null; profileGender = "";
             document.getElementById('media-active-stream').classList.replace('flex', 'hidden');
             document.getElementById('media-feedback-placeholder').classList.remove('hidden');
+            document.querySelectorAll('.zone-rect').forEach(r => r.classList.remove('zone-rect-active'));
             window.toggleDossierView();
             renderSystemManifest();
             
-            // Bounce application layer back to entrance lock gate
+            // Loop interface orientation straight back to the gateway screen
             document.getElementById('auth-gate').classList.remove('hidden', 'opacity-0', 'pointer-events-none');
             document.getElementById('phone-stage').classList.remove('hidden');
             document.getElementById('profile-stage').classList.add('hidden');
