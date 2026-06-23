@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wellness Front™ | Private Dashboard & Allocation Engine</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -46,6 +47,9 @@
 </head>
 <body class="bg-[#F4F6FA] text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between pb-8">
 
+    <!-- ========================================== -->
+    <!-- MAIN ACCOUNT DOOR ONBOARDING GATE          -->
+    <!-- ========================================== -->
     <div id="auth-gate" class="fixed inset-0 bg-slate-900/50 backdrop-blur-md z-[100] flex items-center justify-center p-4 smooth-transition">
         <div class="max-w-md w-full bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl shadow-2xl text-center">
             <div class="w-12 h-12 bg-fbBlue/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -100,6 +104,9 @@
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- MASTER BRAND HEADER                        -->
+    <!-- ========================================== -->
     <header class="border-b border-slate-200 bg-white sticky top-0 z-50 px-4 py-2.5 shadow-sm flex-shrink-0">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -114,14 +121,21 @@
         </div>
     </header>
 
+    <!-- ========================================== -->
+    <!-- UNIFIED RESPONSIVE COCKPIT LAYOUT CANVAS   -->
+    <!-- ========================================== -->
     <main class="max-w-md lg:max-w-7xl mx-auto w-full px-4 pt-4 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-5 items-start relative">
         
+        <!-- LEFT CONTROL WORKSPACE PANEL (7/12 Width Ratio) -->
         <div class="lg:col-span-7 space-y-4 relative min-h-[580px]">
             
+            <!-- MASTER HOMEPAGE COCKPIT VIEWPORT LAYER -->
             <div id="unified-homepage-cockpit-layer" class="space-y-4 block animate-fadeIn">
                 
+                <!-- BALANCED PROFILE HEADER CARD VIEW -->
                 <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-4 flex items-center justify-between">
                     
+                    <!-- Left Flex Side: Softer Premium Blue Identity Icon Block -->
                     <div class="flex items-center space-x-4 overflow-hidden">
                         <div class="w-12 h-12 bg-gradient-to-br from-[#5396F1] via-[#2A7CE6] to-[#0A54AF] rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(42,124,230,0.25)] select-none shrink-0 relative overflow-hidden">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/10"></div>
@@ -136,37 +150,44 @@
                         </div>
                     </div>
 
+                    <!-- Right Flex Side: Perfectly Balanced Inline Badge Controls Matrix -->
                     <div class="flex items-center space-x-2 border-l border-slate-100 pl-4 shrink-0">
-                        <div class="flex items-center space-x-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1.5 rounded-xl shadow-inner">
+                        <!-- Inline Counter Badge Sits Harmoniously on Same Plane -->
+                        <div class="flex items-center space-x-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1.5 rounded-xl shadow-inner" title="Asynchronous Inbox Channels Log">
                             <svg class="w-3.5 h-3.5 text-fbBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
-                            <span class="bg-fbBlue text-white font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                            <span class="bg-fbBlue text-white font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-sm">0</span>
                         </div>
 
-                        <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1 bg-white border border-slate-200 px-2.5 py-1.5 rounded-xl shadow-sm transition hover:bg-slate-50 cursor-pointer">
-                            <span id="anon-icon" class="text-[10px]">🔓</span>
-                            <span class="text-[9px] font-black uppercase text-slate-600 tracking-wide" id="anon-text">Discreet</span>
+                        <!-- AMENDED: Locker Icon Upgraded to Premium Inline Blue Background Theme -->
+                        <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1.5 bg-blue-50 border border-fbBlue/30 text-fbBlue px-3 py-1.5 rounded-xl shadow-sm transition hover:bg-fbBlue hover:text-white cursor-pointer" title="Mask Output Target Parameters">
+                            <span id="anon-icon" class="text-[10px] font-bold">🔓</span>
+                            <span class="text-[9px] font-black uppercase tracking-wide">Discreet</span>
                         </button>
                     </div>
                 </div>
 
+                <!-- PLATFORM QUICK ACCESS SHORTCUT BUTTON GRID -->
                 <div class="grid grid-cols-3 gap-2 text-center text-[9.5px] font-black uppercase tracking-wide">
-                    <button onclick="alert('Environment parameters are locked.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
+                    <button onclick="alert('Environment parameters are running lock patterns.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
                     <button onclick="alert('Secure payload diagnostic files generated.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
-                    <button onclick="alert('Invitation link string array buffered.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
+                    <button onclick="alert('Invitation link string array copied.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
                 </div>
 
+                <!-- AMENDED: Typographically Correct Lowercase "i" in iTest Core Matrix Strings -->
                 <div class="space-y-2">
                     <label class="text-[9px] font-mono font-black uppercase tracking-widest text-slate-400 block px-1">Select Active Service Track</label>
                     <div class="flex space-x-3 overflow-x-auto pb-2 pt-0.5 px-1 scrollbar-none snap-x snap-mandatory w-full">
-                        <div id="card-itest" onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-blue-50/40 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
+                        <!-- iTest Card option -->
+                        <div onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-blue-50/40 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
                             <div class="absolute top-0 right-0 bg-blue-500/10 text-fbBlue border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Direct</div>
                             <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">🧬</div>
                             <div class="space-y-0.5 mt-2">
-                                <h3 class="text-[10px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">iTest Market</h3>
+                                <h3 class="text-[10px] font-black tracking-wide text-slate-900 group-hover:text-fbBlue smooth-transition">iTest Market</h3>
                                 <p class="text-[8.5px] text-slate-500 leading-tight font-medium">Diagnostic laboratory orders.</p>
                             </div>
                         </div>
-                        <div id="card-mindlink" onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-purple-50/30 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
+                        <!-- MindLink Card option -->
+                        <div onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-purple-50/30 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
                             <div class="absolute top-0 right-0 bg-purple-500/10 text-purple-600 border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Private</div>
                             <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">🧠</div>
                             <div class="space-y-0.5 mt-2">
@@ -174,7 +195,8 @@
                                 <p class="text-[8.5px] text-slate-500 leading-tight font-medium">Encrypted therapist network sync.</p>
                             </div>
                         </div>
-                        <div id="card-carelive" onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 border border-slate-200 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
+                        <!-- CareLive Card option -->
+                        <div onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 border border-slate-200 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
                             <div class="absolute top-0 right-0 bg-emerald-500/10 text-emerald-600 border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Sandbox</div>
                             <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">📐</div>
                             <div class="space-y-0.5 mt-2">
@@ -186,17 +208,20 @@
                 </div>
             </div>
 
+            <!-- ========================================== -->
+            <!-- DEDICATED SEPARATE FULL WORKFLOW SCREEN    -->
+            <!-- ========================================== -->
+            <!-- FIXED STABILITY: Toggles fully out of cockpit container boundaries to secure layout memory loads -->
             <div id="workspace-execution-enclosure" class="hidden w-full flex-col space-y-4 animate-fadeIn" style="touch-action: pan-y;">
                 
-                <div class="bg-white border border-slate-200 rounded-3xl p-4 shadow-sm relative overflow-hidden">
-                    
+                <!-- UPGRADED CONNECTED NODES PROGRESS PIPELINE -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
                     <button type="button" onclick="window.returnToSelectionHub()" class="absolute top-3.5 right-4 w-7 h-7 bg-slate-100 hover:bg-red-50 hover:text-red-500 rounded-full flex items-center justify-center font-black text-xs text-slate-400 transition cursor-pointer shadow-sm border border-slate-200/40" title="Close Tracking Frame">✕</button>
                     
                     <div class="max-w-xs mx-auto flex items-center justify-between relative pt-3 pb-1">
                         <div class="absolute top-6 left-2 right-2 h-0.5 bg-slate-100 -z-0">
                             <div id="premium-track-line-progress" class="h-full bg-fbBlue smooth-transition" style="width: 0%;"></div>
                         </div>
-
                         <div class="flex flex-col items-center space-y-1 relative z-10">
                             <div id="step-node-1" class="w-6 h-6 rounded-full bg-fbBlue border-2 border-fbBlue flex items-center justify-center text-[10px] font-bold text-white shadow-sm smooth-transition">1</div>
                             <span id="step-label-1" class="text-[8px] font-mono font-black uppercase tracking-wider text-slate-800">Configure</span>
@@ -212,9 +237,12 @@
                     </div>
                 </div>
 
+                <!-- CONFIGURATOR MASTER WORKFLOW STAGES CONTAINER CHASSIS -->
+                <!-- FIXED ACCESSIBILITY: Elements are natively decoupled to guarantee items never drop hidden hooks -->
                 <div id="stage-1" class="border border-slate-200 bg-white rounded-3xl p-4 sm:p-5 shadow-sm space-y-4">
                     
-                    <div id="subpane-itest" class="hidden space-y-4">
+                    <!-- RESTORED FORMS: iTest MENU OPTIONS SELECTION SUB-TAB SHEETS -->
+                    <div id="subpane-itest" class="space-y-4">
                         <div class="flex space-x-1.5 bg-slate-100 border border-slate-200/60 p-1 rounded-xl">
                             <button type="button" id="subtab-btn-executive" onclick="window.toggleSubTab('executive')" class="flex-1 bg-white text-slate-900 border border-slate-200/30 text-[10px] font-black uppercase py-1.5 rounded-lg shadow-sm cursor-pointer">Executive</button>
                             <button type="button" id="subtab-btn-corporate" onclick="window.toggleSubTab('corporate')" class="flex-1 text-slate-400 hover:text-slate-800 text-[10px] font-black uppercase py-1.5 rounded-lg transition cursor-pointer">Corporate</button>
@@ -222,7 +250,7 @@
                         <div id="market-grid-executive" class="space-y-2">
                             <div class="border border-slate-100 bg-slate-50/50 p-3 rounded-xl flex items-center justify-between shadow-inner">
                                 <div class="space-y-0.5 max-w-[70%]">
-                                    <h4 class="text-xs font-black uppercase text-slate-900">The Core Baseline™</h4>
+                                    <h4 class="text-xs font-black text-slate-900 uppercase">The Core Baseline™</h4>
                                     <p class="text-[10px] text-slate-500 leading-tight font-medium">CMP, CBC, Lipid Panels, HbA1c, Vitamin D, TSH.</p>
                                 </div>
                                 <div class="text-right flex-shrink-0">
@@ -232,7 +260,7 @@
                             </div>
                             <div class="border border-slate-100 bg-slate-50/50 p-3 rounded-xl flex items-center justify-between shadow-inner">
                                 <div class="space-y-0.5 max-w-[70%]">
-                                    <h4 class="text-xs font-black uppercase text-slate-900">Longevity Protocol™</h4>
+                                    <h4 class="text-xs font-black text-slate-900 uppercase">Longevity Protocol™</h4>
                                     <p class="text-[10px] text-slate-500 leading-tight font-medium">Core Baseline + Advanced ApoB Lipids, hs-CRP, Testosterone Matrix.</p>
                                 </div>
                                 <div class="text-right flex-shrink-0">
@@ -268,13 +296,15 @@
                         </div>
                     </div>
 
-                    <div id="subpane-mindlink" class="hidden text-center py-2 max-w-xs mx-auto space-y-3">
+                    <!-- RESTORED FORMS: MindLink ENCRYPTED ROUTING INTERFACE -->
+                    <div id="subpane-mindlink" class="text-center py-2 max-w-xs mx-auto space-y-3">
                         <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center text-base mx-auto border border-purple-100 animate-pulse">🧠</div>
                         <p class="text-[10.5px] text-slate-500 leading-relaxed">System parameters sync user sessions straight to credentialed therapists.</p>
                         <button type="button" onclick="window.queueAsset('MindLink Specialist Assignment', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer">Confirm Allocation Place</button>
                     </div>
 
-                    <div id="subpane-carelive" class="hidden space-y-4">
+                    <!-- RESTORED FORMS: CareLive ANATOMICAL BODY ZONING FRAME -->
+                    <div id="subpane-carelive" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
                             <div class="sm:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-2 flex flex-col items-center justify-center shadow-inner">
                                 <svg viewBox="0 0 160 380" class="w-full max-w-[100px] h-[220px]" id="rectangular-mesh">
@@ -303,6 +333,7 @@
                     </div>
                 </div>
 
+                <!-- STAGE 2 CARD: HARDWARE LAB Preview -->
                 <div id="stage-2" class="hidden border border-slate-200 bg-white rounded-3xl p-4 space-y-4 shadow-sm animate-fadeIn">
                     <div class="flex justify-between items-end border-b border-slate-100 pb-2">
                         <h2 class="text-xs font-black uppercase text-slate-900">Environment Verification Preview</h2>
@@ -315,6 +346,7 @@
                     <button type="button" onclick="window.goToStage(3)" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl font-mono tracking-wider cursor-pointer">Submit ➔</button>
                 </div>
 
+                <!-- STAGE 3 CARD: FINAL INVOICES SHEET -->
                 <div id="stage-3" class="hidden border border-slate-200 bg-white rounded-3xl p-5 text-center space-y-4 shadow-sm animate-fadeIn">
                     <div class="w-10 h-10 bg-blue-50 text-fbBlue rounded-full flex items-center justify-center text-base font-black mx-auto shadow-inner">✓</div>
                     <h2 class="text-xs font-black uppercase tracking-tight text-slate-900">Transient Token Hold Dispatched</h2>
@@ -323,7 +355,7 @@
                         <div class="flex justify-between"><span>Account Profile Holder:</span><span id="receipt-profile-name" class="font-black">--</span></div>
                         <div class="flex justify-between"><span>Profile Intent Context:</span><span id="receipt-intent-view" class="font-bold text-fbBlue">--</span></div>
                         <div class="flex justify-between"><span>Active Track Code:</span><span id="receipt-track" class="font-black">--</span></div>
-                        <div class="flex justify-between"><span>Logistics Routing:</span><span id="receipt-logistics" class="font-black">--</span></div>
+                        <div class="flex justify-between"><span>Logistics Routing Framework:</span><span id="receipt-logistics" class="font-black">--</span></div>
                         <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Discreet Hold Terms:</span><span id="receipt-net" class="text-fbBlue font-mono font-black">--</span></div>
                     </div>
                     <button type="button" onclick="window.triggerTransientPurgeAnnihilation()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase tracking-wider py-3 rounded-xl font-mono cursor-pointer">Done</button>
@@ -331,6 +363,7 @@
             </div>
         </div>
 
+        <!-- RIGHT WORKSPACE COLUMN (5/12 Desktop Ratio Layout) -->
         <div id="dashboard-right-sidebar-layer" class="lg:col-span-5 space-y-4 block">
             <div id="sticky-summary-panel" class="border border-slate-200 bg-white rounded-3xl p-5 space-y-4 shadow-sm">
                 <h2 class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">Real-Time Allocation Manifest</h2>
@@ -347,22 +380,21 @@
                     <span class="text-[9.5px] font-mono text-slate-400">View Logs</span>
                 </div>
                 <div class="p-3 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="window.print();">
-                    <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4H7v4a2 2 0 002 2zM9 9V5a2 2 0 012-2h6a2 2 0 012 2v4H9z"/></svg><span>Print Hardcopy Diagnostic Record</span></div>
+                    <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4H7v4a2 2 0 002 2zM9 9V5a2 2 0 012-2h6a2 2 0 012 2v4H9z"/></svg><span>Print Hardcopy Record</span></div>
                     <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </div>
-            </div>
-
-            <div class="bg-red-50 border border-red-100 rounded-2xl p-4 text-[10px] font-medium leading-normal text-red-600 flex items-start space-x-3 shadow-sm">
-                <svg class="w-4 h-4 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                <p>High-Security Endpoint: Local screenshot captures and client hardware media streaming storage profiles are programmatically restricted inside this canvas matrix wrapper frame.</p>
             </div>
         </div>
     </main>
 
+    <!-- Footer Compliances -->
     <footer class="text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest py-6 flex-shrink-0">
-        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v6.0</span>
+        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v6.1</span>
     </footer>
 
+    <!-- ========================================== -->
+    <!-- SECURE INTERFACE RUNTIME SYSTEM LOGIC      -->
+    <!-- ========================================== -->
     <script>
         let activeMainTrack = '';
         let currentSubTab = 'executive';
@@ -402,11 +434,9 @@
 
         function setupHardwareSwipeGestureListeners() {
             const elementEnclosure = document.getElementById('workspace-execution-enclosure');
-            
             elementEnclosure.addEventListener('touchstart', (e) => {
                 swipeXTouchStart = e.changedTouches[0].screenX;
             }, { passive: true });
-
             elementEnclosure.addEventListener('touchend', (e) => {
                 swipeXTouchEnd = e.changedTouches[0].screenX;
                 evaluateSwipeActionVector();
@@ -464,30 +494,30 @@
             setupHardwareSwipeGestureListeners();
         };
 
-        // --- TRACK NAVIGATION STATE ROUTER SYSTEMS ---
+        // --- FIXED SEPARATE WORKSPACE RENDERING INTERFACE ---
         window.launchIsolatedTrack = function(trackKey) {
             activeMainTrack = trackKey;
             
             document.querySelectorAll("[id^='card-']").forEach(c => c.classList.remove('border-fbBlue', 'ring-2', 'ring-fbBlue/10'));
             document.getElementById(`card-${trackKey}`).classList.add('border-fbBlue', 'ring-2', 'ring-fbBlue/10');
             
-            // FIXED: Hide homepage elements to isolate workflow page views cleanly
+            // Swap core home cockpit layouts entirely to lock isolated standing pages
             document.getElementById('unified-homepage-cockpit-layer').classList.replace('block', 'hidden');
-            
             document.getElementById('workspace-execution-enclosure').classList.remove('hidden');
             document.getElementById('system-status-bar').classList.remove('hidden');
 
+            // Force visibility updates down to inner selection panes cleanly
             document.getElementById('subpane-itest').classList.add('hidden');
             document.getElementById('subpane-mindlink').classList.add('hidden');
             document.getElementById('subpane-carelive').classList.add('hidden');
-            document.getElementById(`subpane-${trackKey}`).classList.remove('hidden');
+            
+            const targetPane = document.getElementById(`subpane-${trackKey}`);
+            if (targetPane) targetPane.classList.remove('hidden');
 
             const masterBtn = document.getElementById('stage-1-master-btn');
-            
             const label2 = document.getElementById('step-label-2');
             const label3 = document.getElementById('step-label-3');
             const wrapper2 = document.getElementById('step-wrapper-2');
-            const wrapper3 = document.getElementById('step-wrapper-3');
 
             if(trackKey === 'itest') {
                 if(wrapper2) wrapper2.classList.add('hidden');
@@ -519,7 +549,7 @@
             document.getElementById('workspace-execution-enclosure').classList.add('hidden');
             document.getElementById('system-status-bar').classList.add('hidden');
             
-            // Restore homepage base layers back live
+            // Restore cockpit layers safely
             document.getElementById('unified-homepage-cockpit-layer').classList.replace('hidden', 'block');
             
             compiledManifestArray = [];
@@ -561,6 +591,7 @@
             if(activeBtn) activeBtn.className = "border-2 border-fbBlue bg-blue-50/40 p-3 rounded-xl text-left focus:outline-none flex flex-col justify-center min-h-[60px] shadow-md cursor-pointer";
         };
 
+        // FIXED: Locked dynamic padlock state hooks alongside direct blue highlight bindings
         window.toggleAnonymityEngine = function() {
             isAnonymityActive = !isAnonymityActive;
             const txt = document.getElementById('anon-text');
@@ -568,13 +599,11 @@
             const icon = document.getElementById('anon-icon');
 
             if(isAnonymityActive) {
-                txt.innerText = "Discreet";
                 icon.innerText = "🔒";
-                if(btn) btn.className = "flex items-center space-x-1 bg-blue-50 border border-fbBlue/40 px-2.5 py-1.5 rounded-xl shadow-sm cursor-pointer";
+                if(btn) btn.className = "flex items-center space-x-1.5 bg-fbBlue border border-fbBlue text-white px-3 py-1.5 rounded-xl shadow-sm cursor-pointer smooth-transition";
             } else {
-                txt.innerText = "Discreet";
                 icon.innerText = "🔓";
-                if(btn) btn.className = "flex items-center space-x-1 bg-white border border-slate-200 px-2.5 py-1.5 rounded-xl shadow-sm hover:bg-slate-50 cursor-pointer";
+                if(btn) btn.className = "flex items-center space-x-1.5 bg-blue-50 border border-fbBlue/30 text-fbBlue px-3 py-1.5 rounded-xl shadow-sm hover:bg-fbBlue hover:text-white cursor-pointer smooth-transition";
             }
             renderPlatformManifestView();
         };
