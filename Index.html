@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AccessPoint Dx | Direct Access Health Testing</title>
+    <title>Axis Point Premium | Direct Access Health Testing</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,30 +17,63 @@
             }
         }
     </script>
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F8FAFC;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 9999px;
+        }
+    </style>
 </head>
-<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased">
+<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-[#059669] selection:text-white">
 
+    <!-- ========================================================= -->
+    <!-- AXIS POINT PREMIUM DIRECT CONSUMER FUNNEL LAUNCH CANDIDATE -->
+    <!-- ========================================================= -->
     <div id="root">
+        
+        <!-- HEADER: CONSUMER BRAND LED STRATEGY -->
         <nav class="bg-[#2D313E] px-6 py-4 sticky top-0 z-50 shadow-sm">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
-                <span class="font-black tracking-wider text-sm uppercase text-white">
-                    AccessPoint<span class="text-[#059669]">Dx</span>
-                </span>
-                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-[#1F232E] border border-emerald-900 px-3 py-1.5 rounded-full select-none">
-                    Direct Access Testing
+                <div class="flex flex-col">
+                    <span class="font-black tracking-wider text-sm text-white uppercase">
+                        AXIS POINT <span class="text-[#059669]">PREMIUM</span>
+                    </span>
+                    <span class="text-[9px] font-medium tracking-wide text-slate-400">
+                        Powered by AccessPointDx Minnesota Laboratory Network
+                    </span>
+                </div>
+                <span class="text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-[#1F232E] border border-emerald-900 px-3 py-1.5 rounded-full select-none">
+                    Direct Access Portal
                 </span>
             </div>
         </nav>
 
-        <section class="bg-white py-12 border-b border-slate-200/60 relative overflow-hidden">
+        <!-- CONTEXT HERO: HIGH CONTRAST TEXT TYPOGRAPHY -->
+        <section class="bg-white py-12 sm:py-16 border-b border-slate-200/60 relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center px-6 space-y-3 relative z-10">
+                <span class="text-[11px] font-black tracking-widest text-[#059669] uppercase block">
+                    Premium Preventative Health Profiles
+                </span>
                 <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
                     Local Minnesota lab testing with results in 24–48 hours.
                 </h1>
-                <p class="text-slate-500 text-sm font-medium leading-relaxed max-w-xl mx-auto">
-                    Direct-access preventative health testing without insurance barriers. Clean, transparent pricing with all processing handled entirely in our local Minnesota reference laboratory.
+                <!-- Fixed: Darkened body copy text level matching text-slate-600 baseline -->
+                <p class="text-slate-600 text-sm font-medium leading-relaxed max-w-xl mx-auto">
+                    Direct-access health testing without insurance barriers. Clean, transparent pricing with all sample processing handled entirely in our local Minnesota reference laboratory.
                 </p>
-                <div class="pt-2 flex flex-wrap justify-center gap-6 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                <div class="pt-2 flex flex-wrap justify-center gap-6 text-xs font-bold text-slate-500 uppercase tracking-wider">
                     <span>✓ No Insurance Required</span>
                     <span>✓ Transparent Pricing</span>
                     <span>✓ Local Minnesota Processing</span>
@@ -47,53 +81,74 @@
             </div>
         </section>
 
+        <!-- CHECKOUT FUNNEL GRID INTERFACE -->
         <form id="checkout-form" class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start" novalidate>
             
+            <!-- LEFT INPUT STREAM -->
             <div class="lg:col-span-7 space-y-8">
                 
-                <div class="space-y-4">
-                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">1. Choose Your Health Panel</h2>
-                    <div id="panel-container" class="space-y-4" role="radiogroup" aria-label="Select health panel">
-                        </div>
+                <!-- POPULAR REASONS PRE-SUMMARY STRIP -->
+                <div class="p-5 bg-[#F8FAFC] rounded-2xl border border-slate-100 space-y-3">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">Popular reasons people test:</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-slate-600">
+                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Cholesterol levels & heart health baseline</span></div>
+                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Energy balance evaluation & fatigue concerns</span></div>
+                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Hormone tracking & metric measurement</span></div>
+                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Fitness, recovery & proactive wellness monitoring</span></div>
+                    </div>
                 </div>
 
+                <!-- STEP 1: CHOOSE HEALTH PANEL -->
                 <div class="space-y-4">
-                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">2. Choose Collection Method</h2>
+                    <!-- Fixed: Darkened step label text-slate-500 for enhanced desktop readability contrast -->
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-500">1. Choose Your Health Panel</h2>
+                    <div id="panel-container" class="space-y-4" role="radiogroup" aria-label="Select health panel">
+                        <!-- Dynamic State Cards Mount Natively Downstream -->
+                    </div>
+                </div>
+
+                <!-- STEP 2: COLLECTION LOGISTICS -->
+                <div class="space-y-4">
+                    <!-- Fixed: Darkened step label text-slate-500 -->
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-500">2. Choose Collection Method</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" role="radiogroup" aria-label="Select collection method">
                         <button type="button" id="btn-walkin" aria-checked="true" class="p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 border-[#059669] bg-emerald-50/10 font-bold focus:outline-none">
                             <span class="text-xs font-black uppercase tracking-wide text-slate-800 block">Local Clinic Walk-In</span>
-                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Visit an authorized area location ($0)</span>
+                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Visit an authorized area location ($0)</span>
                         </button>
                         <button type="button" id="btn-mobile" aria-checked="false" class="p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 border-slate-200/80 bg-white hover:bg-slate-50 focus:outline-none">
                             <span class="text-xs font-black uppercase tracking-wide text-slate-800 block">Private Mobile Collection</span>
-                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Home or office collection across the Twin Cities (+$65)</span>
+                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Home or office collection across the Twin Cities (+$65)</span>
                         </button>
                     </div>
 
+                    <!-- ZIP Code Toggle Panel -->
                     <div id="zip-panel" class="hidden p-5 bg-slate-50 rounded-2xl border border-slate-200/50 space-y-2 animate-fadeIn">
-                        <label for="input-zip" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Enter Collection ZIP Code</label>
+                        <label for="input-zip" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Enter Collection ZIP Code</label>
                         <input type="text" id="input-zip" inputmode="numeric" pattern="[0-9]*" maxLength="5" placeholder="55401" aria-describedby="error-zip" class="w-32 bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] transition shadow-sm" />
                         <p id="error-zip" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                     </div>
                 </div>
 
+                <!-- STEP 3: ACCOUNT IDENTIFIER FIELDS -->
                 <div class="space-y-4">
-                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">3. Personal Information</h2>
+                    <!-- Fixed: Darkened step label text-slate-500 -->
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-500">3. Personal Information</h2>
                     <div class="grid grid-cols-1 gap-4 bg-white p-6 rounded-3xl border border-slate-200/60 shadow-sm">
                         <div class="space-y-1">
-                            <label models="input-name" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Your Full Name</label>
+                            <label for="input-name" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Your Full Name</label>
                             <input type="text" id="input-name" placeholder="John Doe" aria-describedby="error-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
                             <p id="error-name" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="space-y-1">
-                                <label models="input-email" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Email Address</label>
+                                <label for="input-email" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Email Address</label>
                                 <input type="email" id="input-email" placeholder="name@example.com" aria-describedby="error-email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
                                 <p id="error-email" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                             </div>
                             <div class="space-y-1">
-                                <label models="input-phone" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Phone Number</label>
+                                <label for="input-phone" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Phone Number</label>
                                 <input type="tel" id="input-phone" placeholder="(555) 000-0000" aria-describedby="error-phone" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
                                 <p id="error-phone" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                             </div>
@@ -103,8 +158,9 @@
 
             </div>
 
+            <!-- RIGHT COLUMN: FIXED STICKY SUMMARY CARD -->
             <div class="lg:col-span-5 bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 space-y-6 lg:sticky lg:top-[120px]">
-                <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 border-b pb-4">Order Summary</h3>
+                <h3 class="text-xs font-black uppercase tracking-widest text-slate-500 border-b pb-4">Order Summary</h3>
                 
                 <div class="space-y-4 font-semibold text-xs sm:text-sm">
                     <div class="flex justify-between items-center text-slate-500">
@@ -125,22 +181,26 @@
                     <div class="flex justify-between items-end pt-5 border-t border-slate-100">
                         <div class="space-y-0.5">
                             <span class="text-[10px] font-black uppercase tracking-wider text-slate-800 block">Total Due</span>
-                            <span class="text-[9px] text-slate-400 block uppercase font-medium leading-none tracking-normal">Direct Out-Of-Pocket Cost</span>
+                            <span class="text-[9px] text-slate-500 block uppercase font-medium leading-none tracking-normal">Direct Out-Of-Pocket Cost</span>
                         </div>
                         <span id="summary-total" class="text-3xl font-black text-[#059669] tracking-tight">--</span>
                     </div>
 
+                    <!-- LOCALIZED MINNESOTA PROOF BOX -->
                     <div class="rounded-xl bg-emerald-50/40 p-4 text-xs border border-emerald-100/30">
-                        <span class="font-bold text-[#059669] block">The Minnesota Lab Advantage</span>
-                        <p class="text-slate-500 font-medium mt-1.5 normal-case leading-relaxed">
+                        <!-- Fixed: Cleaned title to Local Minnesota Advantage -->
+                        <span class="font-bold text-[#059669] block">Local Minnesota Advantage</span>
+                        <p class="text-slate-600 font-medium mt-1.5 normal-case leading-relaxed">
                             Your sample is processed entirely inside our local Minnesota reference facility. We do not batch, route, or ship samples out of state, ensuring rapid turnaround and continuous specimen integrity.
                         </p>
                     </div>
                 </div>
 
+                <!-- VALUE CONTEXT EXPECTATION CHECKLIST -->
                 <div class="rounded-2xl bg-slate-50 p-4 text-xs font-bold text-slate-600 space-y-2 border border-slate-100">
-                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Complete secure checkout</span></div>
-                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Schedule collection appointment online</span></div>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-1">What Happens Next</span>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Choose your appointment time</span></div>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Visit our clinic or schedule metro mobile collection</span></div>
                     <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Samples processed entirely in Minnesota</span></div>
                     <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Results secure online within 24–48 hours</span></div>
                 </div>
@@ -154,18 +214,22 @@
 
         </form>
 
+        <!-- WELLNESS LEGAL GUARDRAD DISCLAIMER -->
         <section class="max-w-4xl mx-auto px-6 pb-12 pt-6">
             <div class="text-center border-t border-slate-200/60 pt-6 space-y-2">
                 <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Important Information</span>
-                <p class="text-[10px] text-slate-400 font-medium leading-relaxed">
+                <p class="text-[10px] text-slate-500 font-medium leading-relaxed">
                     AccessPoint Dx provides direct-access laboratory testing services for informational and wellness purposes. Testing is not intended to replace medical care, diagnosis, or treatment from your healthcare provider.
                 </p>
             </div>
         </section>
     </div>
 
+    <!-- ========================================== -->
+    <!-- LIGHTWEIGHT CLIENT CONTROLLER LOGIC ENGINE -->
+    <!-- ========================================== -->
     <script>
-        // Cleaned Business Dictionary Table Lookups
+        // Clean Dictionary Lookups
         const PANELS = {
             essential: {
                 id: "essential",
@@ -190,13 +254,15 @@
             }
         };
 
-        // Flat Application Variables State
+        const MOBILE_COLLECTION_FEE = 65;
+
+        // Reactive Functional Active App State
         const state = {
             selectedPanel: "essential",
             collectionMethod: "walkin"
         };
 
-        // Dom References Registry
+        // Cache DOM Hook Targets
         const elements = {
             form: document.getElementById('checkout-form'),
             panelContainer: document.getElementById('panel-container'),
@@ -242,13 +308,14 @@
                     `;
                 });
 
+                // Fixed: Appended explicit currency unit dollar sign symbol ($) prefix to the layout fee string fields
                 card.innerHTML = `
                     <div class="flex justify-between items-center">
                         <div>
                             <h3 class="text-base font-black text-slate-900 tracking-tight">${panel.name}</h3>
                             <p class="text-xs text-slate-500 mt-0.5 font-medium leading-relaxed">${panel.description}</p>
                         </div>
-                        <span class="text-sm font-black text-[#059669] whitespace-nowrap ml-4">${panel.price}</span>
+                        <span class="text-sm font-black text-[#059669] whitespace-nowrap ml-4">$${panel.price}</span>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100/70 flex flex-wrap gap-x-6 gap-y-1.5 text-[11px] font-bold text-slate-600">
                         ${highlightsHtml}
@@ -269,7 +336,7 @@
             elements.btnWalkin.addEventListener('click', () => updateCollectionStrategy('walkin'));
             elements.btnMobile.addEventListener('click', () => updateCollectionStrategy('mobile'));
             
-            // Clean Input Masks
+            // Clean caret formatting input mask loops
             elements.inputPhone.addEventListener('input', e => {
                 const numbers = e.target.value.replace(/\D/g, '').slice(0, 10);
                 let formatted = '';
@@ -317,7 +384,6 @@
         function validateAndProcessHandoff(e) {
             e.preventDefault();
             
-            // Clear errors
             ['errorName', 'errorEmail', 'errorPhone', 'errorZip'].forEach(k => elements[k].className = "hidden");
 
             const errorQueue = [];
@@ -355,8 +421,8 @@
                 }
             };
 
-            console.log('[AccessPoint Dx Production Payload Hub Engine]', finalPayload);
-            alert(`Redirecting to payment/scheduling gateway session...`);
+            console.log('[Axis Point Premium Checkout Data Object Dispatched]', finalPayload);
+            alert(`Redirecting securely down automated payment gateway session pipeline nodes...`);
         }
     </script>
 </body>
