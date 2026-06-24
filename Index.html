@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axis Point Premium | Direct Access Health Testing</title>
-    <!-- Tailwind CSS CDN -->
+    <title>AccessPoint Dx | Direct Access Health Testing</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -17,137 +16,85 @@
             }
         }
     </script>
-    <style>
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none !important;
-                transition: none !important;
-            }
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #F8FAFC;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #CBD5E1;
-            border-radius: 9999px;
-        }
-    </style>
 </head>
-<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-[#059669] selection:text-white">
+<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased">
 
-    <!-- ========================================== -->
-    <!-- AXIS POINT PREMIUM INTEGRATED RUNTIME VIEW -->
-    <!-- ========================================== -->
     <div id="root">
-        <!-- PREMIUM NAVBAR -->
         <nav class="bg-[#2D313E] px-6 py-4 sticky top-0 z-50 shadow-sm">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 <span class="font-black tracking-wider text-sm uppercase text-white">
                     AccessPoint<span class="text-[#059669]">Dx</span>
                 </span>
                 <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-[#1F232E] border border-emerald-900 px-3 py-1.5 rounded-full select-none">
-                    Axis Point Premium
+                    Direct Access Testing
                 </span>
             </div>
         </nav>
 
-        {/* LOCAL ADVANTAGE HERO SECTION */}
-        <section class="bg-white py-12 sm:py-16 border-b border-slate-200/60 relative overflow-hidden">
-            <div class="max-w-3xl mx-auto text-center px-6 space-y-4 relative z-10">
-                <span class="text-[11px] font-black tracking-widest text-[#059669] uppercase block">
-                    Advanced Health & Biomarker Testing
-                </span>
+        <section class="bg-white py-12 border-b border-slate-200/60 relative overflow-hidden">
+            <div class="max-w-3xl mx-auto text-center px-6 space-y-3 relative z-10">
                 <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-                    Faster answers through a local Minnesota testing network.
+                    Local Minnesota lab testing with results in 24–48 hours.
                 </h1>
                 <p class="text-slate-500 text-sm font-medium leading-relaxed max-w-xl mx-auto">
-                    Preventative health testing without insurance barriers. Unlike systems that send samples across multiple facilities or out of state, our Minnesota-based network keeps processing closer to home — helping reduce delays and deliver most results within 24–48 hours.
+                    Direct-access preventative health testing without insurance barriers. Clean, transparent pricing with all processing handled entirely in our local Minnesota reference laboratory.
                 </p>
-                
-                {/* TRUST Mark VALUE STRIP */}
-                <div class="pt-2 flex flex-wrap justify-center gap-6 text-xs font-bold text-slate-500">
-                    <span>✓ Local Processing. Faster Results.</span>
-                    <span>✓ Most Results Available Within 24–48 Hours</span>
-                    <span>✓ Secure Online Results Delivery</span>
+                <div class="pt-2 flex flex-wrap justify-center gap-6 text-xs font-bold text-slate-400 uppercase tracking-wider">
                     <span>✓ No Insurance Required</span>
+                    <span>✓ Transparent Pricing</span>
+                    <span>✓ Local Minnesota Processing</span>
                 </div>
             </div>
         </section>
 
-        {/* COMBINED CHECKOUT INTERACTIVE FUNNEL */}
-        <form id="checkout-form" class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <form id="checkout-form" class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start" novalidate>
             
-            <!-- LEFT COMPONENT COLUMN -->
             <div class="lg:col-span-7 space-y-8">
                 
-                <!-- POPULAR INTENT TRIGGERS STRIP -->
-                <div class="p-5 bg-[#F8FAFC] rounded-2xl border border-slate-100 space-y-3">
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block">Popular reasons people test:</span>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-slate-600">
-                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Cholesterol levels & heart health baseline</span></div>
-                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Energy balance evaluation & fatigue concerns</span></div>
-                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Hormone tracking & metric measurement</span></div>
-                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Fitness, recovery & proactive wellness monitoring</span></div>
-                    </div>
-                </div>
-
-                <!-- BLOCK 1: SELECT YOUR TESTING PANEL -->
                 <div class="space-y-4">
-                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">1. Select Your Health Panel</h2>
-                    <div id="panel-cards-container" class="space-y-4">
-                        <!-- Dynamic State-Driven Cards Mount Natively Here -->
-                    </div>
-                </div>
-
-                <!-- BLOCK 2: CONCIERGE COLLECTION METHOD SELECTION -->
-                <div class="space-y-4">
-                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">2. Private Collection Options</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <button type="button" id="btn-walkin" class="p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 border-[#059669] bg-emerald-50/10 font-bold">
-                            <span class="text-xs font-black uppercase tracking-wide text-slate-800 block">Local Clinic Collection</span>
-                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Visit a nearby collection location</span>
-                        </button>
-                        <button type="button" id="btn-mobile" class="p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 border-slate-200/80 bg-white hover:bg-slate-50">
-                            <span class="text-xs font-black uppercase tracking-wide text-slate-800 block">Private Mobile Collection</span>
-                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Fast home or office collection across the Twin Cities • Additional Minnesota locations available</span>
-                        </button>
-                    </div>
-
-                    <!-- ZIP entry container drawer -->
-                    <div id="mobile-zip-panel" class="hidden p-5 bg-slate-50 rounded-2xl border border-slate-200/50 space-y-3">
-                        <p class="text-[11px] font-bold text-slate-400 tracking-wide leading-relaxed">
-                            Enter your ZIP code to confirm collection availability. Most mobile appointments are fulfilled throughout the Twin Cities metro, with additional Minnesota scheduling available when needed.
-                        </p>
-                        <div class="space-y-1">
-                            <label for="input-zip" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Collection ZIP Code</label>
-                            <input type="text" id="input-zip" maxLength="5" placeholder="55401" class="w-32 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
-                            <p id="error-zip" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">1. Choose Your Health Panel</h2>
+                    <div id="panel-container" class="space-y-4" role="radiogroup" aria-label="Select health panel">
                         </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">2. Choose Collection Method</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" role="radiogroup" aria-label="Select collection method">
+                        <button type="button" id="btn-walkin" aria-checked="true" class="p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 border-[#059669] bg-emerald-50/10 font-bold focus:outline-none">
+                            <span class="text-xs font-black uppercase tracking-wide text-slate-800 block">Local Clinic Walk-In</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Visit an authorized area location ($0)</span>
+                        </button>
+                        <button type="button" id="btn-mobile" aria-checked="false" class="p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 border-slate-200/80 bg-white hover:bg-slate-50 focus:outline-none">
+                            <span class="text-xs font-black uppercase tracking-wide text-slate-800 block">Private Mobile Collection</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Home or office collection across the Twin Cities (+$65)</span>
+                        </button>
+                    </div>
+
+                    <div id="zip-panel" class="hidden p-5 bg-slate-50 rounded-2xl border border-slate-200/50 space-y-2 animate-fadeIn">
+                        <label for="input-zip" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Enter Collection ZIP Code</label>
+                        <input type="text" id="input-zip" inputmode="numeric" pattern="[0-9]*" maxLength="5" placeholder="55401" aria-describedby="error-zip" class="w-32 bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] transition shadow-sm" />
+                        <p id="error-zip" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                     </div>
                 </div>
 
-                <!-- BLOCK 3: PATIENT CONTACT INFORMATION -->
                 <div class="space-y-4">
-                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">3. Contact Details</h2>
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">3. Personal Information</h2>
                     <div class="grid grid-cols-1 gap-4 bg-white p-6 rounded-3xl border border-slate-200/60 shadow-sm">
                         <div class="space-y-1">
-                            <label for="input-name" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Your Full Name</label>
-                            <input type="text" id="input-name" placeholder="John Doe" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
+                            <label models="input-name" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Your Full Name</label>
+                            <input type="text" id="input-name" placeholder="John Doe" aria-describedby="error-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
                             <p id="error-name" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="space-y-1">
-                                <label mapping="input-email" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Email Address</label>
-                                <input type="email" id="input-email" placeholder="name@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
+                                <label models="input-email" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Email Address</label>
+                                <input type="email" id="input-email" placeholder="name@example.com" aria-describedby="error-email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
                                 <p id="error-email" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                             </div>
                             <div class="space-y-1">
-                                <label mapping="input-phone" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Phone Number</label>
-                                <input type="tel" id="input-phone" placeholder="(555) 000-0000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
+                                <label models="input-phone" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Phone Number</label>
+                                <input type="tel" id="input-phone" placeholder="(555) 000-0000" aria-describedby="error-phone" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
                                 <p id="error-phone" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                             </div>
                         </div>
@@ -156,19 +103,18 @@
 
             </div>
 
-            <!-- RIGHT COLUMN: STICKY ORDER SUMMARY MODULE CONTAINER -->
             <div class="lg:col-span-5 bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 space-y-6 lg:sticky lg:top-[120px]">
                 <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 border-b pb-4">Order Summary</h3>
                 
                 <div class="space-y-4 font-semibold text-xs sm:text-sm">
                     <div class="flex justify-between items-center text-slate-500">
                         <span>Selected Panel:</span>
-                        <span id="summary-panel-name" class="font-black text-slate-900 uppercase tracking-tight">--</span>
+                        <span id="summary-name" class="font-black text-slate-900 uppercase tracking-tight">--</span>
                     </div>
                     
                     <div class="flex justify-between items-center text-slate-500">
                         <span>Laboratory Processing Fee:</span>
-                        <span id="summary-base-price" class="text-slate-900">--</span>
+                        <span id="summary-price" class="text-slate-900">--</span>
                     </div>
                     
                     <div id="summary-mobile-row" class="hidden justify-between text-slate-500">
@@ -179,39 +125,35 @@
                     <div class="flex justify-between items-end pt-5 border-t border-slate-100">
                         <div class="space-y-0.5">
                             <span class="text-[10px] font-black uppercase tracking-wider text-slate-800 block">Total Due</span>
-                            <span class="text-[9px] text-slate-400 block uppercase font-medium leading-none tracking-normal">Includes laboratory processing fees</span>
+                            <span class="text-[9px] text-slate-400 block uppercase font-medium leading-none tracking-normal">Direct Out-Of-Pocket Cost</span>
                         </div>
-                        <span id="summary-grand-total" class="text-3xl font-black text-[#059669] tracking-tight">--</span>
+                        <span id="summary-total" class="text-3xl font-black text-[#059669] tracking-tight">--</span>
                     </div>
 
-                    <!-- PROOF VALUE PROPOSITION COMPONENT -->
                     <div class="rounded-xl bg-emerald-50/40 p-4 text-xs border border-emerald-100/30">
-                        <span class="font-bold text-[#059669] block">Why local processing matters</span>
-                        <p class="text-slate-500 font-medium mt-2 normal-case leading-relaxed">
-                            Many testing systems rely on samples moving across multiple facilities before processing begins. Keeping samples within our Minnesota network helps reduce transport delays and supports faster result delivery.
+                        <span class="font-bold text-[#059669] block">The Minnesota Lab Advantage</span>
+                        <p class="text-slate-500 font-medium mt-1.5 normal-case leading-relaxed">
+                            Your sample is processed entirely inside our local Minnesota reference facility. We do not batch, route, or ship samples out of state, ensuring rapid turnaround and continuous specimen integrity.
                         </p>
                     </div>
                 </div>
 
-                <!-- WHAT HAPPENS NEXT CERTAINTY BOX -->
                 <div class="rounded-2xl bg-slate-50 p-4 text-xs font-bold text-slate-600 space-y-2 border border-slate-100">
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">What Happens Next</span>
-                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Choose your appointment time</span></div>
-                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Visit our clinic or schedule metro mobile collection</span></div>
-                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Samples stay within our Minnesota processing network</span></div>
-                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Most results available within 24–48 hours</span></div>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Complete secure checkout</span></div>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Schedule collection appointment online</span></div>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Samples processed entirely in Minnesota</span></div>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Results secure online within 24–48 hours</span></div>
                 </div>
 
                 <div class="pt-2">
                     <button type="submit" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4.5 rounded-full transition text-center block shadow-[0_8px_20px_rgba(5,150,105,0.2)] font-bold cursor-pointer">
-                        Secure My Testing Appointment ➔
+                        Continue to Scheduling ➔
                     </button>
                 </div>
             </div>
 
         </form>
 
-        <!-- CLINICAL DATA LAUNCH DISCLAIMER FOOTER -->
         <section class="max-w-4xl mx-auto px-6 pb-12 pt-6">
             <div class="text-center border-t border-slate-200/60 pt-6 space-y-2">
                 <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Important Information</span>
@@ -222,55 +164,49 @@
         </section>
     </div>
 
-    <!-- ========================================== -->
-    <!-- DECOUPLED CLIENT RUNTIME CONTROLLER STATE  -->
-    <!-- ========================================== -->
     <script>
-        // Centralized Plain-Language Outcomes Data Schema Dictionary
-        const DIAGNOSTIC_PANELS = {
+        // Cleaned Business Dictionary Table Lookups
+        const PANELS = {
             essential: {
                 id: "essential",
                 name: "Essential Health Panel",
                 price: 165,
                 description: "Your essential baseline health profile checking standard wellness indicators.",
-                focusHighlights: ["Heart Health", "Blood Sugar", "Liver + Kidney Function"]
+                highlights: ["Heart Health", "Blood Sugar", "Liver + Kidney Function"]
             },
             metabolic: {
                 id: "metabolic",
                 name: "Metabolic Health Panel",
                 price: 245,
                 description: "An expanded evaluation tracing fuel tracking, cellular energy, and metabolic efficiency.",
-                focusHighlights: ["Everything in Foundation", "Fasting Insulin", "Iron Storage Levels"]
+                highlights: ["Everything in Essential", "Fasting Insulin", "Iron Storage Levels"]
             },
             advanced: {
                 id: "advanced",
                 name: "Advanced Heart & Hormone Panel",
                 price: 349,
                 description: "Our most comprehensive look at active hormone balances and deeper heart risk tracking.",
-                focusHighlights: ["Everything in Energy", "Advanced Heart Risk (ApoB)", "Testosterone Profile"]
+                highlights: ["Everything in Metabolic", "Advanced Heart Risk (ApoB)", "Testosterone Profile"]
             }
         };
 
-        // Static Pricing Rule Target Constant
-        const MOBILE_COLLECTION_FEE = 65;
-
-        // Reactive Application State
+        // Flat Application Variables State
         const state = {
             selectedPanel: "essential",
             collectionMethod: "walkin"
         };
 
-        // Cached Global Elements Registry Cache
+        // Dom References Registry
         const elements = {
             form: document.getElementById('checkout-form'),
-            panelContainer: document.getElementById('panel-cards-container'),
+            panelContainer: document.getElementById('panel-container'),
             btnWalkin: document.getElementById('btn-walkin'),
             btnMobile: document.getElementById('btn-mobile'),
-            zipPanel: document.getElementById('mobile-zip-panel'),
-            summaryPanelName: document.getElementById('summary-panel-name'),
-            summaryBasePrice: document.getElementById('summary-base-price'),
+            zipPanel: document.getElementById('zip-panel'),
+            summaryName: document.getElementById('summary-name'),
+            summaryPrice: document.getElementById('summary-price'),
             summaryMobileRow: document.getElementById('summary-mobile-row'),
-            summaryGrandTotal: document.getElementById('summary-grand-total'),
+            summaryTotal: document.getElementById('summary-total'),
             inputName: document.getElementById('input-name'),
             inputEmail: document.getElementById('input-email'),
             inputPhone: document.getElementById('input-phone'),
@@ -281,24 +217,23 @@
             errorZip: document.getElementById('error-zip')
         };
 
-        // DOM Life-Cycle Init Event
         document.addEventListener('DOMContentLoaded', () => {
-            renderPanelSelectionCards();
-            bindUserInteractionEvents();
-            evaluatePricingPipeline();
+            renderPanelCards();
+            bindInteractionListeners();
+            calculateTotals();
         });
 
-        function renderPanelSelectionCards() {
+        function renderPanelCards() {
             elements.panelContainer.innerHTML = "";
-            Object.values(DIAGNOSTIC_PANELS).forEach(panel => {
+            Object.values(PANELS).forEach(panel => {
                 const isSelected = state.selectedPanel === panel.id;
-                
-                const card = document.createElement('div');
-                card.className = `border-2 p-5 sm:p-6 rounded-3xl cursor-pointer transition-all ${isSelected ? 'border-[#059669] bg-emerald-50/10 shadow-sm' : 'border-slate-200/80 bg-white hover:border-slate-300'}`;
-                card.setAttribute('data-panel-id', panel.id);
+                const card = document.createElement('button');
+                card.type = "button";
+                card.setAttribute('aria-checked', isSelected ? "true" : "false");
+                card.className = `w-full text-left block border-2 p-5 rounded-3xl cursor-pointer transition-all focus:outline-none ${isSelected ? 'border-[#059669] bg-emerald-50/10 shadow-sm' : 'border-slate-200/80 bg-white hover:border-slate-300'}`;
                 
                 let highlightsHtml = "";
-                panel.focusHighlights.forEach(hl => {
+                panel.highlights.forEach(hl => {
                     highlightsHtml += `
                         <div class="flex items-center space-x-1.5">
                             <span class="text-emerald-500 text-xs">✦</span>
@@ -322,24 +257,41 @@
 
                 card.addEventListener('click', () => {
                     state.selectedPanel = panel.id;
-                    renderPanelSelectionCards();
-                    evaluatePricingPipeline();
+                    renderPanelCards();
+                    calculateTotals();
                 });
 
                 elements.panelContainer.appendChild(card);
             });
         }
 
-        function bindUserInteractionEvents() {
+        function bindInteractionListeners() {
             elements.btnWalkin.addEventListener('click', () => updateCollectionStrategy('walkin'));
             elements.btnMobile.addEventListener('click', () => updateCollectionStrategy('mobile'));
-            elements.form.addEventListener('submit', validateAndSubmitPayloadPipeline);
+            
+            // Clean Input Masks
+            elements.inputPhone.addEventListener('input', e => {
+                const numbers = e.target.value.replace(/\D/g, '').slice(0, 10);
+                let formatted = '';
+                if (numbers.length > 0) {
+                    if (numbers.length <= 3) formatted = numbers;
+                    else if (numbers.length <= 6) formatted = `(${numbers.slice(0, 3)}) ${numbers.slice(3)}`;
+                    else formatted = `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6)}`;
+                }
+                e.target.value = formatted;
+            });
+
+            elements.inputZip.addEventListener('input', e => {
+                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+            });
+
+            elements.form.addEventListener('submit', validateAndProcessHandoff);
         }
 
         function updateCollectionStrategy(method) {
             state.collectionMethod = method;
-            
             const isWalkin = method === 'walkin';
+            
             elements.btnWalkin.className = `p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 ${isWalkin ? 'border-[#059669] bg-emerald-50/10 font-bold' : 'border-slate-200/80 bg-white hover:bg-slate-50'}`;
             elements.btnMobile.className = `p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 ${!isWalkin ? 'border-[#059669] bg-emerald-50/10 font-bold' : 'border-slate-200/80 bg-white hover:bg-slate-50'}`;
             
@@ -348,79 +300,63 @@
                 elements.inputZip.value = "";
                 elements.errorZip.className = "hidden";
             }
-            evaluatePricingPipeline();
+            calculateTotals();
         }
 
-        function evaluatePricingPipeline() {
-            const panelConfig = DIAGNOSTIC_PANELS[state.selectedPanel];
+        function calculateTotals() {
+            const panel = PANELS[state.selectedPanel];
             const isMobile = state.collectionMethod === 'mobile';
-            const extraFee = isMobile ? MOBILE_COLLECTION_FEE : 0;
-            const absoluteTotal = panelConfig.price + extraFee;
+            const total = panel.price + (isMobile ? 65 : 0);
 
-            elements.summaryPanelName.innerText = panelConfig.name;
-            elements.summaryBasePrice.innerText = `$${panelConfig.price.toFixed(2)}`;
-            elements.summaryMobileRow.classList.toggle('hidden', !isMobile);
-            elements.summaryGrandTotal.innerText = `$${absoluteTotal.toFixed(2)}`;
+            elements.summaryName.innerText = panel.name;
+            elements.summaryPrice.innerText = `$${panel.price.toFixed(2)}`;
+            elements.summaryMobileRow.className = isMobile ? 'flex justify-between text-slate-500 animate-fadeIn' : 'hidden';
+            elements.summaryTotal.innerText = `$${total.toFixed(2)}`;
         }
 
-        function validateAndSubmitPayloadPipeline(e) {
+        function validateAndProcessHandoff(e) {
             e.preventDefault();
             
-            elements.errorName.className = "hidden";
-            elements.errorEmail.className = "hidden";
-            elements.errorPhone.className = "hidden";
-            elements.errorZip.className = "hidden";
+            // Clear errors
+            ['errorName', 'errorEmail', 'errorPhone', 'errorZip'].forEach(k => elements[k].className = "hidden");
 
-            let valid = true;
-
+            const errorQueue = [];
+            
             if (!elements.inputName.value.trim()) {
-                elements.errorName.innerText = "Please enter your full name.";
-                elements.errorName.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block";
-                elements.inputName.focus();
-                valid = false;
+                errorQueue.push({ el: elements.inputName, err: elements.errorName, txt: 'Please enter your full name.' });
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(elements.inputEmail.value.trim())) {
+                errorQueue.push({ el: elements.inputEmail, err: elements.errorEmail, txt: 'Please enter a valid email address.' });
+            }
+            if (!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(elements.inputPhone.value.trim())) {
+                errorQueue.push({ el: elements.inputPhone, err: elements.errorPhone, txt: 'Please enter a valid 10-digit phone number.' });
+            }
+            if (state.collectionMethod === 'mobile' && !/^\d{5}$/.test(elements.inputZip.value.trim())) {
+                errorQueue.push({ el: elements.inputZip, err: elements.errorZip, txt: 'Please enter a valid 5-digit ZIP code.' });
             }
 
-            const emailVal = elements.inputEmail.value.trim();
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-                elements.errorEmail.innerText = "Please enter a valid email address.";
-                elements.errorEmail.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block";
-                if(valid) { elements.inputEmail.focus(); valid = false; }
+            if (errorQueue.length > 0) {
+                errorQueue.forEach(item => {
+                    item.err.innerText = item.txt;
+                    item.err.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block animate-fadeIn";
+                });
+                errorQueue[0].el.focus();
+                return;
             }
 
-            const phoneVal = elements.inputPhone.value.trim();
-            if (!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phoneVal)) {
-                elements.errorPhone.innerText = "Please enter a valid 10-digit phone number.";
-                elements.errorPhone.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block";
-                if(valid) { elements.inputPhone.focus(); valid = false; }
-            }
-
-            if (state.collectionMethod === 'mobile') {
-                const zipVal = elements.inputZip.value.trim();
-                if (!/^\d{5}$/.test(zipVal)) {
-                    elements.errorZip.innerText = "Please enter a valid 5-digit ZIP code.";
-                    elements.errorZip.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block";
-                    if(valid) { elements.inputZip.focus(); valid = false; }
-                }
-            }
-
-            if (!valid) return;
-
-            const panelConfig = DIAGNOSTIC_PANELS[state.selectedPanel];
             const finalPayload = {
                 panelId: state.selectedPanel,
-                panelName: panelConfig.name,
-                collection: state.collectionMethod,
-                zipCode: state.collectionMethod === 'mobile' ? elements.inputZip.value.trim() : null,
+                collectionType: state.collectionMethod,
+                postalCode: state.collectionMethod === 'mobile' ? elements.inputZip.value.trim() : null,
                 patient: {
                     name: elements.inputName.value.trim(),
-                    email: emailVal,
-                    phone: phoneVal
-                },
-                totalDue: panelConfig.price + (state.collectionMethod === 'mobile' ? MOBILE_COLLECTION_FEE : 0)
+                    email: elements.inputEmail.value.trim(),
+                    phone: elements.inputPhone.value.trim()
+                }
             };
 
-            console.log('[AccessPoint Dx Framework Terminal Logs] Final Tokenized Checkout Model Sent:', finalPayload);
-            alert(`Redirecting to secure billing and scheduling nodes...\n\nSelected Panel: ${finalPayload.panelName}\nTotal Amount: $${finalPayload.totalDue.toFixed(2)}`);
+            console.log('[AccessPoint Dx Production Payload Hub Engine]', finalPayload);
+            alert(`Redirecting to payment/scheduling gateway session...`);
         }
     </script>
 </body>
