@@ -3,20 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wellness Front™ | Private Dashboard & Allocation Engine</title>
+    <title>Axis Point Premium | Direct Access Health Testing</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        fbBlue: '#1877F2',
-                        msgBlue: '#0084FF',
-                        msgLightBg: '#F0F2F5',
-                        msgCardBg: '#FFFFFF',
-                        msgHoverBlue: '#E7F3FF'
-                    },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     }
@@ -25,716 +18,410 @@
         }
     </script>
     <style>
-        .scrollbar-none::-webkit-scrollbar { display: none; }
-        .smooth-transition { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
-        .zone-rect {
-            cursor: pointer;
-            fill: rgba(240, 242, 245, 0.4);
-            stroke: #D1D5DB;
-            stroke-width: 1.5;
-            transition: all 0.2s ease;
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
         }
-        .zone-rect:hover {
-            fill: rgba(24, 119, 242, 0.05);
-            stroke: #1877F2;
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
         }
-        .zone-rect-active {
-            fill: rgba(24, 119, 242, 0.1) !important;
-            stroke: #1877F2 !important;
-            stroke-width: 2.5;
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F8FAFC;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 9999px;
         }
     </style>
 </head>
-<body class="bg-[#F4F6FA] text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between pb-8">
+<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-[#059669] selection:text-white">
 
     <!-- ========================================== -->
-    <!-- MAIN ACCOUNT DOOR ONBOARDING GATE          -->
+    <!-- AXIS POINT PREMIUM INTEGRATED RUNTIME VIEW -->
     <!-- ========================================== -->
-    <div id="auth-gate" class="fixed inset-0 bg-slate-900/50 backdrop-blur-md z-[100] flex items-center justify-center p-4 smooth-transition">
-        <div class="max-w-md w-full bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl shadow-2xl text-center">
-            <div class="w-12 h-12 bg-fbBlue/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-6 h-6 text-fbBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+    <div id="root">
+        <!-- PREMIUM NAVBAR -->
+        <nav class="bg-[#2D313E] px-6 py-4 sticky top-0 z-50 shadow-sm">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <span class="font-black tracking-wider text-sm uppercase text-white">
+                    AccessPoint<span class="text-[#059669]">Dx</span>
+                </span>
+                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-[#1F232E] border border-emerald-900 px-3 py-1.5 rounded-full select-none">
+                    Axis Point Premium
+                </span>
             </div>
-            <h1 class="text-base font-black tracking-tight text-slate-900 mb-1">Platform Gateway Ingress</h1>
-            <p class="text-xs text-slate-500 mb-6 font-medium">Secure verification endpoint. Phone authorization mandatory.</p>
+        </nav>
+
+        {/* LOCAL ADVANTAGE HERO SECTION */}
+        <section class="bg-white py-12 sm:py-16 border-b border-slate-200/60 relative overflow-hidden">
+            <div class="max-w-3xl mx-auto text-center px-6 space-y-4 relative z-10">
+                <span class="text-[11px] font-black tracking-widest text-[#059669] uppercase block">
+                    Advanced Health & Biomarker Testing
+                </span>
+                <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                    Faster answers through a local Minnesota testing network.
+                </h1>
+                <p class="text-slate-500 text-sm font-medium leading-relaxed max-w-xl mx-auto">
+                    Preventative health testing without insurance barriers. Unlike systems that send samples across multiple facilities or out of state, our Minnesota-based network keeps processing closer to home — helping reduce delays and deliver most results within 24–48 hours.
+                </p>
+                
+                {/* TRUST Mark VALUE STRIP */}
+                <div class="pt-2 flex flex-wrap justify-center gap-6 text-xs font-bold text-slate-500">
+                    <span>✓ Local Processing. Faster Results.</span>
+                    <span>✓ Most Results Available Within 24–48 Hours</span>
+                    <span>✓ Secure Online Results Delivery</span>
+                    <span>✓ No Insurance Required</span>
+                </div>
+            </div>
+        </section>
+
+        {/* COMBINED CHECKOUT INTERACTIVE FUNNEL */}
+        <form id="checkout-form" class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
-            <div class="space-y-4 text-left">
-                <!-- Step A: Phone Number Input Stage -->
-                <div id="phone-stage" class="block">
-                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Verified Phone Destination</label>
-                    <input type="tel" id="auth-phone" placeholder="+1 (555) 000-0000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-fbBlue focus:bg-white text-slate-900 transition shadow-inner">
-                    <button onclick="window.submitPhoneVerification()" class="w-full bg-fbBlue hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl transition shadow-md mt-4 cursor-pointer">Request Passing Token ➔</button>
+            <!-- LEFT COMPONENT COLUMN -->
+            <div class="lg:col-span-7 space-y-8">
+                
+                <!-- POPULAR INTENT TRIGGERS STRIP -->
+                <div class="p-5 bg-[#F8FAFC] rounded-2xl border border-slate-100 space-y-3">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block">Popular reasons people test:</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-slate-600">
+                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Cholesterol levels & heart health baseline</span></div>
+                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Energy balance evaluation & fatigue concerns</span></div>
+                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Hormone tracking & metric measurement</span></div>
+                        <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Fitness, recovery & proactive wellness monitoring</span></div>
+                    </div>
                 </div>
 
-                <!-- Step B: Token Verification Code Input Stage -->
-                <div id="token-stage" class="hidden">
-                    <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Enter 6-Digit SMS Token</label>
-                    <input type="text" id="auth-token" placeholder="000000" maxlength="6" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-center text-lg tracking-[0.5em] focus:outline-none focus:border-fbBlue focus:bg-white font-mono text-slate-900 transition shadow-inner">
-                    <button onclick="window.submitTokenVerification()" class="w-full bg-fbBlue hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl transition shadow-md mt-4 cursor-pointer">Verify Instance Access</button>
+                <!-- BLOCK 1: SELECT YOUR TESTING PANEL -->
+                <div class="space-y-4">
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">1. Select Your Health Panel</h2>
+                    <div id="panel-cards-container" class="space-y-4">
+                        <!-- Dynamic State-Driven Cards Mount Natively Here -->
+                    </div>
                 </div>
 
-                <!-- Step C: Legal Profile Setup Fields -->
-                <div id="profile-stage" class="hidden space-y-4">
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Full Legal Name (ID Verification Anchor)</label>
-                        <input type="text" id="profile-fullname" placeholder="John Doe" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-fbBlue focus:bg-white text-slate-900 transition shadow-inner">
+                <!-- BLOCK 2: CONCIERGE COLLECTION METHOD SELECTION -->
+                <div class="space-y-4">
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">2. Private Collection Options</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button type="button" id="btn-walkin" class="p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 border-[#059669] bg-emerald-50/10 font-bold">
+                            <span class="text-xs font-black uppercase tracking-wide text-slate-800 block">Local Clinic Collection</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Visit a nearby collection location</span>
+                        </button>
+                        <button type="button" id="btn-mobile" class="p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 border-slate-200/80 bg-white hover:bg-slate-50">
+                            <span class="text-xs font-black uppercase tracking-wide text-slate-800 block">Private Mobile Collection</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Fast home or office collection across the Twin Cities • Additional Minnesota locations available</span>
+                        </button>
                     </div>
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Email Address</label>
-                        <input type="email" id="profile-email" placeholder="john.doe@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-fbBlue focus:bg-white text-slate-900 transition shadow-inner">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Year of Biological Birth (Year Only)</label>
-                        <input type="number" id="profile-year" placeholder="1995" min="1900" max="2026" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-fbBlue focus:bg-white text-slate-900 font-mono transition shadow-inner">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Biological Gender Reference Frame</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button type="button" onclick="window.setGenderFramework('male')" id="gender-male" class="bg-slate-50 border border-slate-200 text-slate-600 text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Male Ranges</button>
-                            <button type="button" onclick="window.setGenderFramework('female')" id="gender-female" class="bg-slate-50 border border-slate-200 text-slate-600 text-[10px] font-black uppercase py-3 rounded-xl transition cursor-pointer">Female Ranges</button>
+
+                    <!-- ZIP entry container drawer -->
+                    <div id="mobile-zip-panel" class="hidden p-5 bg-slate-50 rounded-2xl border border-slate-200/50 space-y-3">
+                        <p class="text-[11px] font-bold text-slate-400 tracking-wide leading-relaxed">
+                            Enter your ZIP code to confirm collection availability. Most mobile appointments are fulfilled throughout the Twin Cities metro, with additional Minnesota scheduling available when needed.
+                        </p>
+                        <div class="space-y-1">
+                            <label for="input-zip" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Collection ZIP Code</label>
+                            <input type="text" id="input-zip" maxLength="5" placeholder="55401" class="w-32 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
+                            <p id="error-zip" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                         </div>
                     </div>
-                    <div class="border-t border-slate-100 pt-3">
-                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Target Profile Intent</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button type="button" onclick="window.setIntent('Self')" id="intent-self" class="bg-blue-50 border border-fbBlue text-fbBlue text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer">For Myself</button>
-                            <button type="button" onclick="window.setIntent('Dependent')" id="intent-dep" class="bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer">For Dependent</button>
+                </div>
+
+                <!-- BLOCK 3: PATIENT CONTACT INFORMATION -->
+                <div class="space-y-4">
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-400">3. Contact Details</h2>
+                    <div class="grid grid-cols-1 gap-4 bg-white p-6 rounded-3xl border border-slate-200/60 shadow-sm">
+                        <div class="space-y-1">
+                            <label for="input-name" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Your Full Name</label>
+                            <input type="text" id="input-name" placeholder="John Doe" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
+                            <p id="error-name" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label mapping="input-email" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Email Address</label>
+                                <input type="email" id="input-email" placeholder="name@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
+                                <p id="error-email" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
+                            </div>
+                            <div class="space-y-1">
+                                <label mapping="input-phone" class="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-1">Phone Number</label>
+                                <input type="tel" id="input-phone" placeholder="(555) 000-0000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
+                                <p id="error-phone" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
+                            </div>
                         </div>
                     </div>
-                    <button onclick="window.finalizeProfileGate()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition mt-4 shadow-lg cursor-pointer">Register Core Profile</button>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: STICKY ORDER SUMMARY MODULE CONTAINER -->
+            <div class="lg:col-span-5 bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 space-y-6 lg:sticky lg:top-[120px]">
+                <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 border-b pb-4">Order Summary</h3>
+                
+                <div class="space-y-4 font-semibold text-xs sm:text-sm">
+                    <div class="flex justify-between items-center text-slate-500">
+                        <span>Selected Panel:</span>
+                        <span id="summary-panel-name" class="font-black text-slate-900 uppercase tracking-tight">--</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-slate-500">
+                        <span>Laboratory Processing Fee:</span>
+                        <span id="summary-base-price" class="text-slate-900">--</span>
+                    </div>
+                    
+                    <div id="summary-mobile-row" class="hidden justify-between text-slate-500">
+                        <span>Mobile Collection Surcharge:</span>
+                        <span class="text-slate-900">$65.00</span>
+                    </div>
+
+                    <div class="flex justify-between items-end pt-5 border-t border-slate-100">
+                        <div class="space-y-0.5">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-slate-800 block">Total Due</span>
+                            <span class="text-[9px] text-slate-400 block uppercase font-medium leading-none tracking-normal">Includes laboratory processing fees</span>
+                        </div>
+                        <span id="summary-grand-total" class="text-3xl font-black text-[#059669] tracking-tight">--</span>
+                    </div>
+
+                    <!-- PROOF VALUE PROPOSITION COMPONENT -->
+                    <div class="rounded-xl bg-emerald-50/40 p-4 text-xs border border-emerald-100/30">
+                        <span class="font-bold text-[#059669] block">Why local processing matters</span>
+                        <p class="text-slate-500 font-medium mt-2 normal-case leading-relaxed">
+                            Many testing systems rely on samples moving across multiple facilities before processing begins. Keeping samples within our Minnesota network helps reduce transport delays and supports faster result delivery.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- WHAT HAPPENS NEXT CERTAINTY BOX -->
+                <div class="rounded-2xl bg-slate-50 p-4 text-xs font-bold text-slate-600 space-y-2 border border-slate-100">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">What Happens Next</span>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Choose your appointment time</span></div>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Visit our clinic or schedule metro mobile collection</span></div>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Samples stay within our Minnesota processing network</span></div>
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Most results available within 24–48 hours</span></div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4.5 rounded-full transition text-center block shadow-[0_8px_20px_rgba(5,150,105,0.2)] font-bold cursor-pointer">
+                        Secure My Testing Appointment ➔
+                    </button>
                 </div>
             </div>
-        </div>
+
+        </form>
+
+        <!-- CLINICAL DATA LAUNCH DISCLAIMER FOOTER -->
+        <section class="max-w-4xl mx-auto px-6 pb-12 pt-6">
+            <div class="text-center border-t border-slate-200/60 pt-6 space-y-2">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Important Information</span>
+                <p class="text-[10px] text-slate-400 font-medium leading-relaxed">
+                    AccessPoint Dx provides direct-access laboratory testing services for informational and wellness purposes. Testing is not intended to replace medical care, diagnosis, or treatment from your healthcare provider.
+                </p>
+            </div>
+        </section>
     </div>
 
     <!-- ========================================== -->
-    <!-- MASTER BRAND HEADER                        -->
-    <!-- ========================================== -->
-    <header class="border-b border-slate-200 bg-white sticky top-0 z-50 px-4 py-2.5 shadow-sm flex-shrink-0">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <span class="w-2.5 h-2.5 rounded-full bg-fbBlue shadow-[0_0_8px_rgba(24,119,242,0.6)] animate-pulse"></span>
-                <span class="font-black tracking-wider text-xs uppercase text-slate-900">
-                    Wellness Front<span class="text-fbBlue">™</span>
-                </span>
-            </div>
-            <div class="text-[10px] font-mono font-black text-slate-400 uppercase select-none tracking-wider">
-                Dashboard Node Secure
-            </div>
-        </div>
-    </header>
-
-    <!-- ========================================== -->
-    <!-- UNIFIED RESPONSIVE COCKPIT LAYOUT CANVAS   -->
-    <!-- ========================================== -->
-    <main class="max-w-md lg:max-w-7xl mx-auto w-full px-4 pt-4 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-5 items-start relative">
-        
-        <!-- LEFT CONTROL WORKSPACE PANEL (7/12 Width Ratio) -->
-        <div class="lg:col-span-7 space-y-4 relative min-h-[580px]">
-            
-            <!-- MASTER HOMEPAGE COCKPIT VIEWPORT LAYER -->
-            <div id="unified-homepage-cockpit-layer" class="space-y-4 block animate-fadeIn">
-                
-                <!-- BALANCED PROFILE HEADER CARD VIEW -->
-                <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-4 flex items-center justify-between">
-                    
-                    <!-- Left Flex Side: Softer Premium Blue Identity Icon Block -->
-                    <div class="flex items-center space-x-4 overflow-hidden">
-                        <div class="w-12 h-12 bg-gradient-to-br from-[#5396F1] via-[#2A7CE6] to-[#0A54AF] rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(42,124,230,0.25)] select-none shrink-0 relative overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/10"></div>
-                            <svg class="w-5 h-5 text-white drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.15)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.67-5-3.33-8-3z"/></svg>
-                        </div>
-                        <div class="space-y-0.5 overflow-hidden">
-                            <h2 id="acc-display-name" class="text-xs font-black text-slate-900 uppercase tracking-wide truncate">--</h2>
-                            <div class="flex flex-col text-[9.5px] text-slate-500 font-mono font-medium leading-tight">
-                                <span class="truncate">ID: <span id="acc-display-id" class="text-slate-800 font-bold">--</span></span>
-                                <span id="acc-display-email" class="text-slate-400 truncate">--</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Flex Side: Inline Badge Controls Matrix -->
-                    <div class="flex items-center space-x-2 border-l border-slate-100 pl-4 shrink-0">
-                        <!-- Inline Counter Badge Sits Harmoniously on Same Plane -->
-                        <div class="flex items-center space-x-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1.5 rounded-xl shadow-inner" title="Asynchronous Inbox Channels Log">
-                            <svg class="w-3.5 h-3.5 text-fbBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
-                            <span class="bg-fbBlue text-white font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-sm">0</span>
-                        </div>
-
-                        <!-- Blue Padlock Toggle Button -->
-                        <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1 bg-white border border-slate-200 px-2.5 py-1.5 rounded-xl shadow-sm transition hover:bg-slate-50 cursor-pointer">
-                            <span id="anon-icon" class="text-[11px] font-bold text-fbBlue">🔓</span>
-                            <span class="text-[9.5px] font-black uppercase tracking-wide text-slate-600">Discreet</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- QUICK ACCESS UTILITY GRID -->
-                <div class="grid grid-cols-3 gap-2 text-center text-[9.5px] font-black uppercase tracking-wide">
-                    <button onclick="alert('Environment parameters are running lock patterns.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
-                    <button onclick="alert('Secure payload results generated.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
-                    <button onclick="alert('Invitation link string array copied.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
-                </div>
-
-                <!-- ACTIVE SERVICE TRACKS SELECTION ROW -->
-                <div class="space-y-2">
-                    <label class="text-[9px] font-mono font-black uppercase tracking-widest text-slate-400 block px-1">Select Active Service Track</label>
-                    <div class="flex space-x-3 overflow-x-auto pb-2 pt-0.5 px-1 scrollbar-none snap-x snap-mandatory w-full">
-                        <!-- iTest Card option -->
-                        <div id="card-itest" onclick="window.launchIsolatedTrack('itest')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-blue-50/40 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
-                            <div class="absolute top-0 right-0 bg-blue-500/10 text-fbBlue border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Direct</div>
-                            <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">🧬</div>
-                            <div class="space-y-0.5 mt-2">
-                                <h3 class="text-[10px] font-black tracking-wide text-slate-900 group-hover:text-fbBlue smooth-transition">iTest Market</h3>
-                                <p class="text-[8.5px] text-slate-500 leading-tight font-medium">Diagnostic laboratory orders.</p>
-                            </div>
-                        </div>
-                        <!-- MindLink Card option -->
-                        <div id="card-mindlink" onclick="window.launchIsolatedTrack('mindlink')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-purple-50/30 border border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
-                            <div class="absolute top-0 right-0 bg-purple-500/10 text-purple-600 border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Private</div>
-                            <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">🧠</div>
-                            <div class="space-y-0.5 mt-2">
-                                <h3 class="text-[10px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">MindLink</h3>
-                                <p class="text-[8.5px] text-slate-500 leading-tight font-medium">Encrypted therapist network sync.</p>
-                            </div>
-                        </div>
-                        <!-- CareLive Card option -->
-                        <div id="card-carelive" onclick="window.launchIsolatedTrack('carelive')" class="snap-center shrink-0 w-[135px] bg-gradient-to-br from-white via-slate-50 to-emerald-50/30 border border-slate-200 p-4 rounded-2xl cursor-pointer hover:border-fbBlue hover:shadow-md smooth-transition shadow-sm flex flex-col justify-between min-h-[175px] text-left group relative overflow-hidden">
-                            <div class="absolute top-0 right-0 bg-emerald-500/10 text-emerald-600 border-b border-l border-slate-200/60 font-mono text-[6.5px] font-black uppercase px-1.5 py-0.5 rounded-bl-md">Sandbox</div>
-                            <div class="w-8 h-10 bg-white text-xs rounded-xl flex items-center justify-center border border-slate-200/80 shadow-sm group-hover:scale-105 transition-transform">📐</div>
-                            <div class="space-y-0.5 mt-2">
-                                <h3 class="text-[10px] font-black uppercase text-slate-900 tracking-wide group-hover:text-fbBlue smooth-transition">CareLive</h3>
-                                <p class="text-[8.5px] text-slate-500 leading-tight font-medium">Virtual visit setup validation.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ========================================== -->
-            <!-- DEDICATED SEPARATE FULL WORKFLOW SCREEN    -->
-            <!-- ========================================== -->
-            <div id="workspace-execution-enclosure" class="hidden w-full flex-col space-y-4 animate-fadeIn" style="touch-action: pan-y;">
-                
-                <!-- CONNECTED PROGRESS STEPPER HEADER BOX -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
-                    <button type="button" onclick="window.returnToSelectionHub()" class="absolute top-3.5 right-4 w-7 h-7 bg-slate-100 hover:bg-red-50 hover:text-red-500 rounded-full flex items-center justify-center font-black text-xs text-slate-400 transition cursor-pointer shadow-sm border border-slate-200/40" title="Close Workspace">✕</button>
-                    
-                    <div class="max-w-xs mx-auto flex items-center justify-between relative pt-3 pb-1">
-                        <div class="absolute top-6 left-2 right-2 h-0.5 bg-slate-100 -z-0">
-                            <div id="premium-track-line-progress" class="h-full bg-fbBlue smooth-transition" style="width: 0%;"></div>
-                        </div>
-                        <div class="flex flex-col items-center space-y-1 relative z-10">
-                            <div id="step-node-1" class="w-6 h-6 rounded-full bg-fbBlue border-2 border-fbBlue flex items-center justify-center text-[10px] font-bold text-white shadow-sm smooth-transition">1</div>
-                            <span id="step-label-1" class="text-[8px] font-mono font-black uppercase tracking-wider text-slate-800">Configure</span>
-                        </div>
-                        <div id="step-wrapper-2" class="flex flex-col items-center space-y-1 relative z-10">
-                            <div id="step-node-2" class="w-6 h-6 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-400 smooth-transition">2</div>
-                            <span id="step-label-2" class="text-[8px] font-mono font-black uppercase tracking-wider text-slate-400">Verify</span>
-                        </div>
-                        <div id="step-wrapper-3" class="flex flex-col items-center space-y-1 relative z-10">
-                            <div id="step-node-3" class="w-6 h-6 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-400 smooth-transition">3</div>
-                            <span id="step-label-3" class="text-[8px] font-mono font-black uppercase tracking-wider text-slate-400">Complete</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- STAGE 1 COMPONENT WORKSPACE -->
-                <div id="stage-1" class="border border-slate-200 bg-white rounded-3xl p-4 sm:p-5 shadow-sm space-y-4">
-                    
-                    <!-- iTest SUB-PANE -->
-                    <div id="subpane-itest" class="hidden space-y-4">
-                        <div class="flex space-x-1.5 bg-slate-100 border border-slate-200/60 p-1 rounded-xl">
-                            <button type="button" id="subtab-btn-executive" onclick="window.toggleSubTab('executive')" class="flex-1 bg-white text-slate-900 border border-slate-200/30 text-[10px] font-black uppercase py-1.5 rounded-lg shadow-sm cursor-pointer">Executive</button>
-                            <button type="button" id="subtab-btn-corporate" onclick="window.toggleSubTab('corporate')" class="flex-1 text-slate-400 hover:text-slate-800 text-[10px] font-black uppercase py-1.5 rounded-lg transition cursor-pointer">Corporate</button>
-                        </div>
-                        <div id="market-grid-executive" class="space-y-2">
-                            <div class="border border-slate-100 bg-slate-50/50 p-3 rounded-xl flex items-center justify-between shadow-inner">
-                                <div class="space-y-0.5 max-w-[70%]">
-                                    <h4 class="text-xs font-black text-slate-900 uppercase">The Core Baseline™</h4>
-                                    <p class="text-[10px] text-slate-500 leading-tight font-medium">CMP, CBC, Lipid Panels, HbA1c, Vitamin D, TSH.</p>
-                                </div>
-                                <div class="text-right flex-shrink-0">
-                                    <span class="text-xs font-mono font-black text-fbBlue block mb-1">$165.00</span>
-                                    <button type="button" onclick="window.queueAsset('Core Baseline', 165, 'lab')" class="bg-fbBlue hover:bg-blue-600 text-white text-[9.5px] font-black uppercase px-2.5 py-1.5 rounded-md cursor-pointer">Select</button>
-                                </div>
-                            </div>
-                            <div class="border border-slate-100 bg-slate-50/50 p-3 rounded-xl flex items-center justify-between shadow-inner">
-                                <div class="space-y-0.5 max-w-[70%]">
-                                    <h4 class="text-xs font-black text-slate-900 uppercase">Longevity Protocol™</h4>
-                                    <p class="text-[10px] text-slate-500 leading-tight font-medium">Core Baseline + Advanced ApoB Lipids, hs-CRP, Testosterone Matrix.</p>
-                                </div>
-                                <div class="text-right flex-shrink-0">
-                                    <span class="text-xs font-mono font-black text-fbBlue block mb-1">$349.00</span>
-                                    <button type="button" onclick="window.queueAsset('Longevity Matrix', 349, 'lab')" class="bg-fbBlue hover:bg-blue-600 text-white text-[9.5px] font-black uppercase px-2.5 py-1.5 rounded-md cursor-pointer">Select</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="market-grid-corporate" class="hidden space-y-2">
-                            <div class="border border-slate-200 bg-white p-3 rounded-xl flex items-center justify-between border-l-2 border-msgBlue shadow-sm">
-                                <div class="space-y-0.5 max-w-[70%]">
-                                    <h4 class="text-xs font-black uppercase text-msgBlue">Workplace Screening</h4>
-                                    <p class="text-[10px] text-slate-500 leading-tight font-medium">Rapid compliance drug panels hold token deployment.</p>
-                                </div>
-                                <div class="text-right flex-shrink-0">
-                                    <span class="text-xs font-mono font-black text-msgBlue block mb-1">$85.00</span>
-                                    <button type="button" onclick="window.queueAsset('Workplace Drug Screen', 85, 'lab')" class="bg-slate-900 hover:bg-slate-800 text-white text-[9.5px] font-black uppercase px-2.5 py-1.5 rounded-md cursor-pointer">Select</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="space-y-1.5">
-                            <label class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 block">Fulfillment Logistics Option</label>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button type="button" id="btn-affiliate" onclick="window.setLogisticsChannel('affiliate')" class="border-2 border-fbBlue bg-blue-50/40 p-3 rounded-xl text-left flex flex-col justify-center min-h-[60px] cursor-pointer">
-                                    <span class="text-xs font-black uppercase text-slate-900 block">Affiliate Hub</span>
-                                    <span class="text-[8px] font-medium text-slate-400 uppercase font-mono mt-0.5">Token hold link</span>
-                                </button>
-                                <button type="button" id="btn-shipping" onclick="window.setLogisticsChannel('shipping')" class="border border-slate-200 bg-slate-50 p-3 rounded-xl text-left flex flex-col justify-center min-h-[60px] cursor-pointer">
-                                    <span class="text-xs font-black uppercase text-slate-900 block">Kit Shipping</span>
-                                    <span class="text-[8px] font-medium text-slate-400 uppercase font-mono mt-0.5">Mail-in box system</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MindLink SUB-PANE -->
-                    <div id="subpane-mindlink" class="hidden text-center py-2 max-w-xs mx-auto space-y-3">
-                        <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center text-base mx-auto border border-purple-100 animate-pulse">🧠</div>
-                        <p class="text-[10.5px] text-slate-500 leading-relaxed">System parameters sync user sessions straight to credentialed therapists.</p>
-                        <button type="button" onclick="window.queueAsset('MindLink Specialist Assignment', 0, 'simulation')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer">Confirm Allocation Place</button>
-                    </div>
-
-                    <!-- CareLive SUB-PANE -->
-                    <div id="subpane-carelive" class="hidden space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
-                            <div class="sm:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-2 flex flex-col items-center justify-center shadow-inner">
-                                <svg viewBox="0 0 160 380" class="w-full max-w-[100px] h-[220px]" id="rectangular-mesh">
-                                    <rect id="rect-head" x="10" y="10" width="140" height="75" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-head', 'Head & Neck Zone')" />
-                                    <text x="80" y="52" fill="#6B7280" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase">Head / Neck</text>
-                                    <rect id="rect-chest" x="10" y="95" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-chest', 'Anterior Chest')" />
-                                    <text x="80" y="142" fill="#6B7280" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase">Chest</text>
-                                    <rect id="rect-abdomen" x="10" y="190" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-abdomen', 'Abdominal Matrix')" />
-                                    <text x="80" y="237" fill="#6B7280" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase">Abdomen</text>
-                                    <rect id="rect-legs" x="10" y="285" width="140" height="85" rx="12" class="zone-rect" onclick="window.triggerPassiveVideoBuffer('rect-legs', 'Lower Extremities')" />
-                                    <text x="80" y="332" fill="#6B7280" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" class="pointer-events-none uppercase">Legs</text>
-                                </svg>
-                            </div>
-                            <div class="sm:col-span-7 bg-slate-900 border border-slate-950 rounded-xl p-3 flex flex-col justify-center items-center text-center min-h-[150px] relative">
-                                <div id="stream-placeholder" class="text-slate-400 space-y-0.5"><span class="text-xl block">📺</span><p class="text-[9px]">Select target area mesh segment grid context.</p></div>
-                                <div id="stream-active-viewport" class="hidden w-full h-full flex flex-col items-center justify-center animate-fadeIn">
-                                    <span class="text-[9px] font-mono text-fbBlue font-bold mb-1 uppercase" id="stream-label-out">Configured</span>
-                                    <div class="w-full aspect-video bg-black rounded border border-slate-800 flex items-center justify-center"><span class="text-[9px] font-mono text-slate-500 animate-pulse">[ Capture Ready ]</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-1">
-                        <button type="button" id="stage-1-master-btn" onclick="window.handleStage1Submission()" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl shadow-md font-mono tracking-widest cursor-pointer">Proceed ➔</button>
-                    </div>
-                </div>
-
-                <!-- STAGE 2: CAMERA CHECK -->
-                <div id="stage-2" class="hidden border border-slate-200 bg-white rounded-3xl p-4 space-y-4 shadow-sm animate-fadeIn">
-                    <div class="flex justify-between items-end border-b border-slate-100 pb-2">
-                        <h2 class="text-xs font-black uppercase text-slate-900">Environment Verification Preview</h2>
-                        <button type="button" onclick="window.goToStage(1)" class="text-[10px] font-black text-slate-400 hover:text-slate-600 uppercase font-mono">Back</button>
-                    </div>
-                    <div class="space-y-1.5 text-xs font-medium">
-                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between"><span>Ambient Facetime Lighting Scan</span><span class="text-emerald-600 font-mono text-[9px] bg-emerald-50 px-2 rounded border border-emerald-100">Clear</span></div>
-                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between"><span>WebRTC Camera Hardware Position</span><span class="text-emerald-600 font-mono text-[9px] bg-emerald-50 px-2 rounded border border-emerald-100">Aligned</span></div>
-                    </div>
-                    <button type="button" onclick="window.goToStage(3)" class="w-full bg-fbBlue hover:bg-blue-600 text-white text-[11px] font-black uppercase py-3.5 rounded-xl font-mono tracking-wider cursor-pointer">Submit ➔</button>
-                </div>
-
-                <!-- STAGE 3: COMPLETE -->
-                <div id="stage-3" class="hidden border border-slate-200 bg-white rounded-3xl p-5 text-center space-y-4 shadow-sm animate-fadeIn">
-                    <div class="w-10 h-10 bg-blue-50 text-fbBlue rounded-full flex items-center justify-center text-base font-black mx-auto shadow-inner">✓</div>
-                    <h2 class="text-xs font-black uppercase tracking-tight text-slate-900">Transient Token Hold Dispatched</h2>
-                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-left text-[10.5px] space-y-2 font-medium shadow-inner">
-                        <div class="flex justify-between text-slate-400 text-[8px] font-mono font-black pb-1 border-b border-slate-200"><span>System Logs</span><span id="receipt-id-tag">--</span></div>
-                        <div class="flex justify-between"><span>Account Profile Holder:</span><span id="receipt-profile-name" class="font-black">--</span></div>
-                        <div class="flex justify-between"><span>Profile Intent Context:</span><span id="receipt-intent-view" class="font-bold text-fbBlue">--</span></div>
-                        <div class="flex justify-between"><span>Active Track Code:</span><span id="receipt-track" class="font-black">--</span></div>
-                        <div class="flex justify-between"><span>Logistics Routing:</span><span id="receipt-logistics" class="font-black">--</span></div>
-                        <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Discreet Hold Terms:</span><span id="receipt-net" class="text-fbBlue font-mono font-black">--</span></div>
-                    </div>
-                    <button type="button" onclick="window.triggerTransientPurgeAnnihilation()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase tracking-wider py-3 rounded-xl font-mono cursor-pointer">Done</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- RIGHT WORKSPACE COLUMN (5/12 Desktop Grid Ratio) -->
-        <div id="dashboard-right-sidebar-layer" class="lg:col-span-5 space-y-4 block">
-            <div id="sticky-summary-panel" class="border border-slate-200 bg-white rounded-3xl p-5 space-y-4 shadow-sm">
-                <h2 class="text-[9px] font-mono font-black uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2">Real-Time Allocation Manifest</h2>
-                <div id="manifest-items-list" class="space-y-1.5 max-h-[140px] overflow-y-auto scrollbar-none pr-0.5"></div>
-                <div class="flex justify-between items-baseline border-t border-slate-100 pt-3">
-                    <span class="font-black uppercase text-[8.5px] font-mono text-slate-400">Authorized Hold Price:</span>
-                    <span id="summary-total-price" class="text-xl font-black text-fbBlue font-mono">$0.00</span>
-                </div>
-            </div>
-
-            <div class="border border-slate-200 rounded-2xl overflow-hidden divide-y divide-slate-100 text-xs font-bold text-slate-700 shadow-sm bg-white">
-                <div class="p-3 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="alert('Voucher tracking logs synchronized.');">
-                    <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg><span>Transaction Log Registry</span></div>
-                    <span class="text-[9.5px] font-mono text-slate-400">View Logs</span>
-                </div>
-                <div class="p-3 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="window.print();">
-                    <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4H7v4a2 2 0 002 2zM9 9V5a2 2 0 012-2h6a2 2 0 012 2v4H9z"/></svg><span>Print Hardcopy Record</span></div>
-                    <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest py-6 flex-shrink-0">
-        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v6.5</span>
-    </footer>
-
-    <!-- ========================================== -->
-    <!-- SECURE INTERFACE RUNTIME SYSTEM LOGIC      -->
+    <!-- DECOUPLED CLIENT RUNTIME CONTROLLER STATE  -->
     <!-- ========================================== -->
     <script>
-        let activeMainTrack = '';
-        let currentSubTab = 'executive';
-        let activeLogisticsChannel = 'affiliate';
-        let isAnonymityActive = false;
-        
-        let userFullLegalName = "";
-        let userEmailAddress = "";
-        let userBirthYear = null;
-        let userGender = "";
-        let userProfileIntent = "Self";
-        
-        let compiledManifestArray = [];
-
-        let swipeXTouchStart = 0;
-        let swipeXTouchEnd = 0;
-
-        window.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('wf_user_registered') === 'true') {
-                userFullLegalName = localStorage.getItem('wf_user_fullname');
-                userEmailAddress = localStorage.getItem('wf_user_email') || "not.allocated@endpoint.com";
-                userBirthYear = localStorage.getItem('wf_user_birthyear');
-                userGender = localStorage.getItem('wf_user_gender');
-                userProfileIntent = localStorage.getItem('wf_user_intent') || "Self";
-                
-                const gate = document.getElementById('auth-gate');
-                if(gate) gate.classList.add('hidden', 'opacity-0', 'pointer-events-none');
-                hydrateUserHeadersAndContext();
-                setupHardwareSwipeGestureListeners();
+        // Centralized Plain-Language Outcomes Data Schema Dictionary
+        const DIAGNOSTIC_PANELS = {
+            essential: {
+                id: "essential",
+                name: "Essential Health Panel",
+                price: 165,
+                description: "Your essential baseline health profile checking standard wellness indicators.",
+                focusHighlights: ["Heart Health", "Blood Sugar", "Liver + Kidney Function"]
+            },
+            metabolic: {
+                id: "metabolic",
+                name: "Metabolic Health Panel",
+                price: 245,
+                description: "An expanded evaluation tracing fuel tracking, cellular energy, and metabolic efficiency.",
+                focusHighlights: ["Everything in Foundation", "Fasting Insulin", "Iron Storage Levels"]
+            },
+            advanced: {
+                id: "advanced",
+                name: "Advanced Heart & Hormone Panel",
+                price: 349,
+                description: "Our most comprehensive look at active hormone balances and deeper heart risk tracking.",
+                focusHighlights: ["Everything in Energy", "Advanced Heart Risk (ApoB)", "Testosterone Profile"]
             }
+        };
+
+        // Static Pricing Rule Target Constant
+        const MOBILE_COLLECTION_FEE = 65;
+
+        // Reactive Application State
+        const state = {
+            selectedPanel: "essential",
+            collectionMethod: "walkin"
+        };
+
+        // Cached Global Elements Registry Cache
+        const elements = {
+            form: document.getElementById('checkout-form'),
+            panelContainer: document.getElementById('panel-cards-container'),
+            btnWalkin: document.getElementById('btn-walkin'),
+            btnMobile: document.getElementById('btn-mobile'),
+            zipPanel: document.getElementById('mobile-zip-panel'),
+            summaryPanelName: document.getElementById('summary-panel-name'),
+            summaryBasePrice: document.getElementById('summary-base-price'),
+            summaryMobileRow: document.getElementById('summary-mobile-row'),
+            summaryGrandTotal: document.getElementById('summary-grand-total'),
+            inputName: document.getElementById('input-name'),
+            inputEmail: document.getElementById('input-email'),
+            inputPhone: document.getElementById('input-phone'),
+            inputZip: document.getElementById('input-zip'),
+            errorName: document.getElementById('error-name'),
+            errorEmail: document.getElementById('error-email'),
+            errorPhone: document.getElementById('error-phone'),
+            errorZip: document.getElementById('error-zip')
+        };
+
+        // DOM Life-Cycle Init Event
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPanelSelectionCards();
+            bindUserInteractionEvents();
+            evaluatePricingPipeline();
         });
 
-        function hydrateUserHeadersAndContext() {
-            const anchor = document.getElementById('header-user-anchor');
-            if(anchor && userFullLegalName) anchor.innerText = userFullLegalName.toUpperCase();
-            
-            const dName = document.getElementById('acc-display-name');
-            if(dName) dName.innerText = userFullLegalName;
-            
-            const dEmail = document.getElementById('acc-display-email');
-            if(dEmail) dEmail.innerText = userEmailAddress;
-            
-            const dId = document.getElementById('acc-display-id');
-            if(dId) dId.innerText = `WF-2026-${Math.floor(11111 + Math.random() * 88888)}`;
-        }
-
-        function setupHardwareSwipeGestureListeners() {
-            const elementEnclosure = document.getElementById('workspace-execution-enclosure');
-            if (elementEnclosure) {
-                elementEnclosure.addEventListener('touchstart', (e) => {
-                    if(e.changedTouches && e.changedTouches[0]) swipeXTouchStart = e.changedTouches[0].screenX;
-                }, { passive: true });
-                elementEnclosure.addEventListener('touchend', (e) => {
-                    if(e.changedTouches && e.changedTouches[0]) swipeXTouchEnd = e.changedTouches[0].screenX;
-                    evaluateSwipeActionVector();
-                }, { passive: true });
-            }
-        }
-
-        function evaluateSwipeActionVector() {
-            if (swipeXTouchEnd - swipeXTouchStart > 100) { 
-                window.returnToSelectionHub();
-            }
-        }
-
-        // --- FIXED FORMS STATE ADVANCEMENT SWITCH LOGIC ---
-        window.submitPhoneVerification = function() {
-            const num = document.getElementById('auth-phone').value.trim();
-            if(!num || num.length < 8) { alert("Invalid phone format."); return; }
-            document.getElementById('phone-stage').style.display = 'none';
-            document.getElementById('token-stage').classList.remove('hidden');
-            document.getElementById('token-stage').style.display = 'block';
-        };
-
-        window.submitTokenVerification = function() {
-            const tokenInput = document.getElementById('auth-token').value.trim();
-            if(!tokenInput || tokenInput.length < 4) { alert("Invalid token code entry."); return; }
-            document.getElementById('token-stage').style.display = 'none';
-            document.getElementById('profile-stage').classList.remove('hidden');
-            document.getElementById('profile-stage').style.display = 'block';
-        };
-
-        window.setGenderFramework = function(genderKey) {
-            userGender = genderKey;
-            document.getElementById('gender-male').className = genderKey === 'male' ? "bg-blue-50 border-2 border-fbBlue text-fbBlue text-[10px] font-black uppercase py-3 rounded-xl shadow-sm cursor-pointer" : "bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-3 rounded-xl cursor-pointer";
-            document.getElementById('gender-female').className = genderKey === 'female' ? "bg-blue-50 border-2 border-fbBlue text-fbBlue text-[10px] font-black uppercase py-3 rounded-xl shadow-sm cursor-pointer" : "bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-3 rounded-xl cursor-pointer";
-        };
-
-        window.setIntent = function(intent) {
-            userProfileIntent = intent;
-            document.getElementById('intent-self').className = intent === 'Self' ? "bg-blue-50 border-2 border-fbBlue text-fbBlue text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer" : "bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer";
-            document.getElementById('intent-dep').className = intent === 'Dependent' ? "bg-blue-50 border-2 border-fbBlue text-fbBlue text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer" : "bg-slate-50 border border-slate-200 text-slate-500 text-[10px] font-black uppercase py-2.5 rounded-xl cursor-pointer";
-        };
-
-        window.finalizeProfileGate = function() {
-            const name = document.getElementById('profile-fullname').value.trim();
-            const email = document.getElementById('profile-email').value.trim();
-            const year = document.getElementById('profile-year').value;
-            if(!name || !email || !year || !userGender) { alert("All fields must be configured."); return; }
-            
-            userFullLegalName = name; userEmailAddress = email; userBirthYear = year;
-            localStorage.setItem('wf_user_registered', 'true');
-            localStorage.setItem('wf_user_fullname', userFullLegalName);
-            localStorage.setItem('wf_user_email', userEmailAddress);
-            localStorage.setItem('wf_user_birthyear', userBirthYear);
-            localStorage.setItem('wf_user_gender', userGender);
-            localStorage.setItem('wf_user_intent', userProfileIntent);
-            
-            const gate = document.getElementById('auth-gate');
-            if(gate) {
-                gate.classList.add('opacity-0', 'pointer-events-none');
-                setTimeout(() => gate.classList.add('hidden'), 400);
-            }
-            
-            hydrateUserHeadersAndContext();
-            setupHardwareSwipeGestureListeners();
-        };
-
-        window.launchIsolatedTrack = function(trackKey) {
-            activeMainTrack = trackKey;
-            
-            document.querySelectorAll("[id^='card-']").forEach(c => c.classList.remove('border-fbBlue', 'ring-2', 'ring-fbBlue/10'));
-            const activeCard = document.getElementById(`card-${trackKey}`);
-            if(activeCard) activeCard.classList.add('border-fbBlue', 'ring-2', 'ring-fbBlue/10');
-            
-            document.getElementById('unified-homepage-cockpit-layer').classList.replace('block', 'hidden');
-            document.getElementById('workspace-execution-enclosure').classList.remove('hidden');
-
-            document.getElementById('subpane-itest').classList.add('hidden');
-            document.getElementById('subpane-itest').style.display = 'none';
-            document.getElementById('subpane-mindlink').classList.add('hidden');
-            document.getElementById('subpane-mindlink').style.display = 'none';
-            document.getElementById('subpane-carelive').classList.add('hidden');
-            document.getElementById('subpane-carelive').style.display = 'none';
-            
-            const targetPane = document.getElementById(`subpane-${trackKey}`);
-            if (targetPane) {
-                targetPane.style.display = 'block';
-                targetPane.classList.remove('hidden');
-            }
-
-            const masterBtn = document.getElementById('stage-1-master-btn');
-            const label2 = document.getElementById('step-label-2');
-            const label3 = document.getElementById('step-label-3');
-            const wrapper2 = document.getElementById('step-wrapper-2');
-
-            if(trackKey === 'itest') {
-                if(wrapper2) wrapper2.classList.add('hidden');
-                if(label3) label3.innerText = "Checkout";
-                if(masterBtn) masterBtn.innerText = "Proceed to Checkout ➔";
-                window.toggleSubTab('executive'); 
-            } else if(trackKey === 'mindlink') {
-                if(wrapper2) wrapper2.classList.add('hidden');
-                if(label3) label3.innerText = "Done";
-                if(masterBtn) masterBtn.innerText = "Proceed to Checkout ➔";
-            } else if(trackKey === 'carelive') {
-                if(wrapper2) wrapper2.classList.remove('hidden');
-                if(label2) label2.innerText = "Verify";
-                if(label3) label3.innerText = "Submit";
-                if(masterBtn) masterBtn.innerText = "Proceed to Camera Check ➔";
-            }
-            goToStage(1);
-        };
-
-        window.handleStage1Submission = function() {
-            if(activeMainTrack === 'carelive') goToStage(2); 
-            else goToStage(3); 
-        };
-
-        window.returnToSelectionHub = function() {
-            activeMainTrack = '';
-            document.querySelectorAll("[id^='card-']").forEach(c => c.classList.remove('border-fbBlue', 'ring-2', 'ring-fbBlue/10'));
-            
-            document.getElementById('workspace-execution-enclosure').classList.add('hidden');
-            document.getElementById('unified-homepage-cockpit-layer').classList.replace('hidden', 'block');
-            
-            compiledManifestArray = [];
-            document.getElementById('stream-active-viewport').classList.replace('hidden', 'flex');
-            document.getElementById('stream-placeholder').classList.remove('hidden');
-            renderPlatformManifestView();
-        };
-
-        window.toggleSubTab = function(subKey) {
-            currentSubTab = subKey;
-            const btnExec = document.getElementById('subtab-btn-executive');
-            const btnCorp = document.getElementById('subtab-btn-corporate');
-            const gridExec = document.getElementById('market-grid-executive');
-            const gridCorp = document.getElementById('market-grid-corporate');
-
-            if(subKey === 'executive') {
-                if(btnExec) btnExec.className = "flex-1 bg-white text-slate-900 border border-slate-200/30 text-[10px] font-black uppercase py-1.5 rounded-lg shadow-sm cursor-pointer";
-                if(btnCorp) btnCorp.className = "flex-1 text-slate-400 hover:text-slate-800 text-[10px] font-black uppercase py-1.5 rounded-lg transition";
-                if(gridExec) gridExec.classList.remove('hidden');
-                if(gridCorp) gridCorp.classList.add('hidden');
-            } else {
-                if(btnCorp) btnCorp.className = "flex-1 bg-white text-slate-900 border border-slate-200/30 text-[10px] font-black uppercase py-1.5 rounded-lg shadow-sm cursor-pointer";
-                if(btnExec) btnExec.className = "flex-1 text-slate-400 hover:text-slate-800 text-[10px] font-black uppercase py-1.5 rounded-lg transition";
-                if(gridCorp) gridCorp.classList.remove('hidden');
-                if(gridExec) gridExec.classList.add('hidden');
-            }
-        };
-
-        window.setLogisticsChannel = function(mode) {
-            activeLogisticsChannel = mode;
-            const btnAff = document.getElementById('btn-affiliate');
-            const btnShip = document.getElementById('btn-shipping');
-
-            btnAff.className = "border border-slate-200 bg-slate-50 p-3 rounded-xl text-left flex flex-col justify-center min-h-[60px] cursor-pointer";
-            btnShip.className = "border border-slate-200 bg-slate-50 p-3 rounded-xl text-left flex flex-col justify-center min-h-[60px] cursor-pointer";
-
-            const activeBtn = document.getElementById(`btn-${mode}`);
-            if(activeBtn) activeBtn.className = "border-2 border-fbBlue bg-blue-50/40 p-3 rounded-xl text-left focus:outline-none flex flex-col justify-center min-h-[60px] shadow-md cursor-pointer";
-        };
-
-        window.toggleAnonymityEngine = function() {
-            isAnonymityActive = !isAnonymityActive;
-            const icon = document.getElementById('anon-icon');
-
-            if(isAnonymityActive) {
-                icon.innerText = "🔒";
-                icon.className = "text-[11px] text-fbBlue font-bold smooth-transition scale-110";
-            } else {
-                icon.innerText = "🔓";
-                icon.className = "text-[11px] text-fbBlue font-bold smooth-transition";
-            }
-            renderPlatformManifestView();
-        };
-
-        window.triggerPassiveVideoBuffer = function(rectId, label) {
-            document.querySelectorAll('.zone-rect').forEach(r => r.classList.remove('zone-rect-active'));
-            const rect = document.getElementById(rectId);
-            if(rect) rect.classList.add('zone-rect-active');
-
-            document.getElementById('stream-placeholder').classList.add('hidden');
-            document.getElementById('stream-active-viewport').classList.replace('hidden', 'flex');
-            document.getElementById('stream-label-out').innerText = `CALIBRATING: ${label}`;
-
-            window.queueAsset(label, 0, 'simulation');
-        };
-
-        window.queueAsset = function(title, price, type) {
-            if (compiledManifestArray.some(item => item.title === title)) return; 
-            compiledManifestArray.push({ id: Date.now(), title: title, price: price, type: type });
-            renderPlatformManifestView();
-        };
-
-        function renderPlatformManifestView() {
-            const box = document.getElementById('manifest-items-list');
-            if(!box) return;
-            box.innerHTML = "";
-
-            let total = 0;
-            compiledManifestArray.forEach(item => {
-                total += item.price;
-                const row = document.createElement('div');
-                row.className = "bg-slate-50 border border-slate-200 p-3 rounded-xl flex justify-between items-center shadow-inner animate-fadeIn";
+        function renderPanelSelectionCards() {
+            elements.panelContainer.innerHTML = "";
+            Object.values(DIAGNOSTIC_PANELS).forEach(panel => {
+                const isSelected = state.selectedPanel === panel.id;
                 
-                let visibleLabel = item.title;
-                if (isAnonymityActive && item.type === 'lab') {
-                    visibleLabel = `Cryptographic Mask Token Hold #AP-${Math.floor(21212 + Math.random() * 67676)}`;
-                }
+                const card = document.createElement('div');
+                card.className = `border-2 p-5 sm:p-6 rounded-3xl cursor-pointer transition-all ${isSelected ? 'border-[#059669] bg-emerald-50/10 shadow-sm' : 'border-slate-200/80 bg-white hover:border-slate-300'}`;
+                card.setAttribute('data-panel-id', panel.id);
+                
+                let highlightsHtml = "";
+                panel.focusHighlights.forEach(hl => {
+                    highlightsHtml += `
+                        <div class="flex items-center space-x-1.5">
+                            <span class="text-emerald-500 text-xs">✦</span>
+                            <span>${hl}</span>
+                        </div>
+                    `;
+                });
 
-                row.innerHTML = `
-                    <div>
-                        <span class="text-[8px] font-mono font-black uppercase px-2 py-0.5 rounded ${item.type === 'lab' ? 'bg-blue-50 text-fbBlue border border-fbBlue/20' : 'bg-slate-200 text-slate-700'}">iTest BOUND</span>
-                        <p class="text-[10px] font-mono font-bold text-slate-700 mt-1">"${visibleLabel}"</p>
+                card.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-base font-black text-slate-900 tracking-tight">${panel.name}</h3>
+                            <p class="text-xs text-slate-500 mt-0.5 font-medium leading-relaxed">${panel.description}</p>
+                        </div>
+                        <span class="text-sm font-black text-[#059669] whitespace-nowrap ml-4">${panel.price}</span>
                     </div>
-                    <button onclick="compiledManifestArray = compiledManifestArray.filter(i => i.id !== ${item.id}); renderPlatformManifestView();" class="text-slate-400 hover:text-red-500 font-bold pl-2 text-xs cursor-pointer">✕</button>
+                    <div class="mt-4 pt-3 border-t border-slate-100/70 flex flex-wrap gap-x-6 gap-y-1.5 text-[11px] font-bold text-slate-600">
+                        ${highlightsHtml}
+                    </div>
                 `;
-                box.appendChild(row);
-            });
 
-            const displayPrice = document.getElementById('summary-total-price');
-            if(displayPrice) displayPrice.innerText = `$${total.toFixed(2)}`;
+                card.addEventListener('click', () => {
+                    state.selectedPanel = panel.id;
+                    renderPanelSelectionCards();
+                    evaluatePricingPipeline();
+                });
+
+                elements.panelContainer.appendChild(card);
+            });
         }
 
-        window.goToStage = function(stageNum) {
-            if (stageNum === 3 && compiledManifestArray.length === 0) {
-                alert("Manifest allocations are empty. Select preference targets.");
-                return;
-            }
+        function bindUserInteractionEvents() {
+            elements.btnWalkin.addEventListener('click', () => updateCollectionStrategy('walkin'));
+            elements.btnMobile.addEventListener('click', () => updateCollectionStrategy('mobile'));
+            elements.form.addEventListener('submit', validateAndSubmitPayloadPipeline);
+        }
 
-            const tracks = [1, 2, 3];
-            let totalStepsCount = activeMainTrack === 'carelive' ? 3 : 2;
+        function updateCollectionStrategy(method) {
+            state.collectionMethod = method;
             
-            const progressLineFill = document.getElementById('premium-track-line-progress');
-            if(progressLineFill) {
-                let fillWeight = stageNum === 1 ? 0 : (stageNum === 2 ? 50 : 100);
-                if(totalStepsCount === 2 && stageNum === 3) fillWeight = 100;
-                progressLineFill.style.width = `${fillWeight}%`;
+            const isWalkin = method === 'walkin';
+            elements.btnWalkin.className = `p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 ${isWalkin ? 'border-[#059669] bg-emerald-50/10 font-bold' : 'border-slate-200/80 bg-white hover:bg-slate-50'}`;
+            elements.btnMobile.className = `p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 ${!isWalkin ? 'border-[#059669] bg-emerald-50/10 font-bold' : 'border-slate-200/80 bg-white hover:bg-slate-50'}`;
+            
+            elements.zipPanel.classList.toggle('hidden', isWalkin);
+            if(isWalkin) {
+                elements.inputZip.value = "";
+                elements.errorZip.className = "hidden";
+            }
+            evaluatePricingPipeline();
+        }
+
+        function evaluatePricingPipeline() {
+            const panelConfig = DIAGNOSTIC_PANELS[state.selectedPanel];
+            const isMobile = state.collectionMethod === 'mobile';
+            const extraFee = isMobile ? MOBILE_COLLECTION_FEE : 0;
+            const absoluteTotal = panelConfig.price + extraFee;
+
+            elements.summaryPanelName.innerText = panelConfig.name;
+            elements.summaryBasePrice.innerText = `$${panelConfig.price.toFixed(2)}`;
+            elements.summaryMobileRow.classList.toggle('hidden', !isMobile);
+            elements.summaryGrandTotal.innerText = `$${absoluteTotal.toFixed(2)}`;
+        }
+
+        function validateAndSubmitPayloadPipeline(e) {
+            e.preventDefault();
+            
+            elements.errorName.className = "hidden";
+            elements.errorEmail.className = "hidden";
+            elements.errorPhone.className = "hidden";
+            elements.errorZip.className = "hidden";
+
+            let valid = true;
+
+            if (!elements.inputName.value.trim()) {
+                elements.errorName.innerText = "Please enter your full name.";
+                elements.errorName.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block";
+                elements.inputName.focus();
+                valid = false;
             }
 
-            tracks.forEach(t => {
-                const innerPanel = document.getElementById(`stage-${t}`);
-                if(innerPanel) innerPanel.classList.add('hidden');
+            const emailVal = elements.inputEmail.value.trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+                elements.errorEmail.innerText = "Please enter a valid email address.";
+                elements.errorEmail.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block";
+                if(valid) { elements.inputEmail.focus(); valid = false; }
+            }
 
-                const nodeCircle = document.getElementById(`step-node-${t}`);
-                if(nodeCircle) {
-                    if (t === stageNum) {
-                        nodeCircle.className = "w-6 h-6 rounded-full bg-fbBlue border-2 border-fbBlue flex items-center justify-center text-[10px] font-bold text-white shadow-sm smooth-transition";
-                        nodeCircle.innerHTML = t;
-                    } else if (t < stageNum) {
-                        nodeCircle.className = "w-6 h-6 rounded-full bg-emerald-500 border-2 border-emerald-500 flex items-center justify-center text-[10px] font-bold text-white shadow-sm smooth-transition";
-                        nodeCircle.innerHTML = "✓"; 
-                    } else {
-                        nodeCircle.className = "w-6 h-6 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-400 smooth-transition";
-                        nodeCircle.innerHTML = t;
-                    }
+            const phoneVal = elements.inputPhone.value.trim();
+            if (!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phoneVal)) {
+                elements.errorPhone.innerText = "Please enter a valid 10-digit phone number.";
+                elements.errorPhone.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block";
+                if(valid) { elements.inputPhone.focus(); valid = false; }
+            }
+
+            if (state.collectionMethod === 'mobile') {
+                const zipVal = elements.inputZip.value.trim();
+                if (!/^\d{5}$/.test(zipVal)) {
+                    elements.errorZip.innerText = "Please enter a valid 5-digit ZIP code.";
+                    elements.errorZip.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block";
+                    if(valid) { elements.inputZip.focus(); valid = false; }
                 }
-            });
-
-            const targetPanel = document.getElementById(`stage-${stageNum}`);
-            if(targetPanel) targetPanel.classList.remove('hidden');
-
-            if (stageNum === 3) {
-                document.getElementById('receipt-id-tag').innerText = `WF-HASH-${Math.floor(10000 + Math.random() * 90000)}`;
-                document.getElementById('receipt-track').innerText = activeMainTrack.toUpperCase();
-                document.getElementById('receipt-logistics').innerText = activeMainTrack === 'itest' ? activeLogisticsChannel.toUpperCase() : 'CLOUD TERMINAL';
-                document.getElementById('receipt-profile-name').innerText = isAnonymityActive ? "ANONYMIZED DISCREET DECOUPLED CODE HOLD" : userFullLegalName.toUpperCase();
-                document.getElementById('receipt-intent-view').innerText = `FOR ${userProfileIntent.toUpperCase()}`;
-                document.getElementById('receipt-net').innerText = document.getElementById('summary-total-price').innerText;
-                
-                const summaryPanel = document.getElementById('sticky-summary-panel');
-                if(summaryPanel) summaryPanel.style.opacity = "0.15";
             }
-        };
 
-        window.triggerTransientPurgeAnnihilation = function() {
-            alert("TRANSIENT DATA BRIDGE HANDSHAKE: Local temporary session records completely wiped.");
-            compiledManifestArray = [];
-            document.getElementById('stream-active-viewport').classList.replace('hidden', 'flex');
-            document.getElementById('stream-placeholder').classList.remove('hidden');
-            
-            const summaryPanel = document.getElementById('sticky-summary-panel');
-            if(summaryPanel) summaryPanel.style.opacity = "1";
-            renderPlatformManifestView();
-            
-            window.returnToSelectionHub();
-        };
+            if (!valid) return;
+
+            const panelConfig = DIAGNOSTIC_PANELS[state.selectedPanel];
+            const finalPayload = {
+                panelId: state.selectedPanel,
+                panelName: panelConfig.name,
+                collection: state.collectionMethod,
+                zipCode: state.collectionMethod === 'mobile' ? elements.inputZip.value.trim() : null,
+                patient: {
+                    name: elements.inputName.value.trim(),
+                    email: emailVal,
+                    phone: phoneVal
+                },
+                totalDue: panelConfig.price + (state.collectionMethod === 'mobile' ? MOBILE_COLLECTION_FEE : 0)
+            };
+
+            console.log('[AccessPoint Dx Framework Terminal Logs] Final Tokenized Checkout Model Sent:', finalPayload);
+            alert(`Redirecting to secure billing and scheduling nodes...\n\nSelected Panel: ${finalPayload.panelName}\nTotal Amount: $${finalPayload.totalDue.toFixed(2)}`);
+        }
     </script>
 </body>
 </html>
