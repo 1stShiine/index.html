@@ -137,22 +137,22 @@
                     </div>
 
                     <div class="flex items-center space-x-2 border-l border-slate-100 pl-4 shrink-0">
-                        <div class="flex items-center space-x-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1.5 rounded-xl shadow-inner">
+                        <div class="flex items-center space-x-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1.5 rounded-xl shadow-inner" title="Asynchronous Inbox Channels Log">
                             <svg class="w-3.5 h-3.5 text-fbBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
                             <span class="bg-fbBlue text-white font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-sm">0</span>
                         </div>
 
-                        <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1 bg-white border border-slate-200 px-2.5 py-1.5 rounded-xl shadow-sm transition hover:bg-slate-50 cursor-pointer">
-                            <span id="anon-icon" class="text-[11px] font-bold text-fbBlue">🔓</span>
+                        <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1.5 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl shadow-sm transition hover:bg-slate-100 cursor-pointer" title="Toggle Discreet Data Layer">
+                            <span id="anon-icon" class="text-[11px] text-fbBlue font-bold smooth-transition">🔓</span>
                             <span class="text-[9.5px] font-black uppercase tracking-wide text-slate-600">Discreet</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-3 gap-2 text-center text-[9.5px] font-black uppercase tracking-wide">
-                    <button onclick="alert('Environment parameters are locked.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
+                    <button onclick="alert('Environment parameters are running lock patterns.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
                     <button onclick="alert('Secure payload results generated.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
-                    <button onclick="alert('Invitation link string array copied.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
+                    <button onclick="alert('Invitation link copied.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
                 </div>
 
                 <div class="space-y-2">
@@ -188,7 +188,7 @@
 
             <div id="workspace-execution-enclosure" class="hidden w-full flex-col space-y-4 animate-fadeIn" style="touch-action: pan-y;">
                 
-                <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
+                <div class="bg-white border border-slate-200 rounded-3xl p-4 shadow-sm relative overflow-hidden">
                     <button type="button" onclick="window.returnToSelectionHub()" class="absolute top-3.5 right-4 w-7 h-7 bg-slate-100 hover:bg-red-50 hover:text-red-500 rounded-full flex items-center justify-center font-black text-xs text-slate-400 transition cursor-pointer shadow-sm border border-slate-200/40" title="Close Workspace">✕</button>
                     
                     <div class="max-w-xs mx-auto flex items-center justify-between relative pt-3 pb-1">
@@ -321,7 +321,7 @@
                         <div class="flex justify-between"><span>Account Profile Holder:</span><span id="receipt-profile-name" class="font-black">--</span></div>
                         <div class="flex justify-between"><span>Profile Intent Context:</span><span id="receipt-intent-view" class="font-bold text-fbBlue">--</span></div>
                         <div class="flex justify-between"><span>Active Track Code:</span><span id="receipt-track" class="font-black">--</span></div>
-                        <div class="flex justify-between"><span>Logistics Routing Framework:</span><span id="receipt-logistics" class="font-black">--</span></div>
+                        <div class="flex justify-between"><span>Logistics Routing:</span><span id="receipt-logistics" class="font-black">--</span></div>
                         <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Discreet hold terms:</span><span id="receipt-net" class="text-fbBlue font-mono font-black">--</span></div>
                     </div>
                     <button type="button" onclick="window.triggerTransientPurgeAnnihilation()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase tracking-wider py-3 rounded-xl font-mono cursor-pointer">Done</button>
@@ -345,7 +345,7 @@
                     <span class="text-[9.5px] font-mono text-slate-400">View Logs</span>
                 </div>
                 <div class="p-3 bg-white hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="window.print();">
-                    <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4H7v4a2 2 0 002 2zM9 9V5a2 2 0 012-2h6a2 2 0 012 2v4H9z"/></svg><span>Print Hardcopy Record</span></div>
+                    <div class="flex items-center space-x-3"><svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4H7v4a2 2 0 002 2zM9 9V5a2 2 0 012-2h6a2 2 0 012 2v4H9z"/></svg><span>Print Hardcopy Diagnostic Record</span></div>
                     <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </div>
             </div>
@@ -353,7 +353,7 @@
     </main>
 
     <footer class="text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest py-6 flex-shrink-0">
-        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v6.3</span>
+        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v6.2</span>
     </footer>
 
     <script>
@@ -455,7 +455,7 @@
             setupHardwareSwipeGestureListeners();
         };
 
-        // --- AMENDED: Fixed script logic syntax error ---
+        // --- FIXED SUBPANE SYSTEM INITIALIZER OVERRIDES ---
         window.launchIsolatedTrack = function(trackKey) {
             activeMainTrack = trackKey;
             
@@ -467,13 +467,16 @@
             document.getElementById('workspace-execution-enclosure').classList.remove('hidden');
             document.getElementById('system-status-bar').classList.remove('hidden');
 
-            // AMENDED: Restored explicit view visibility mappings cleanly
-            document.getElementById('subpane-itest').classList.add('hidden');
-            document.getElementById('subpane-mindlink').classList.add('hidden');
-            document.getElementById('subpane-carelive').classList.add('hidden');
+            // AMENDED: Explicit view configuration state prevents components from dropping hidden hooks
+            document.getElementById('subpane-itest').style.display = 'none';
+            document.getElementById('subpane-mindlink').style.style = 'none';
+            document.getElementById('subpane-mindlink').className = 'hidden';
+            document.getElementById('subpane-carelive').style.display = 'none';
+            document.getElementById('subpane-carelive').className = 'hidden';
             
             const targetPane = document.getElementById(`subpane-${trackKey}`);
             if (targetPane) {
+                targetPane.style.display = 'block';
                 targetPane.classList.remove('hidden');
             }
 
@@ -518,6 +521,7 @@
             compiledManifestArray = [];
             document.getElementById('stream-active-viewport').classList.replace('hidden', 'flex');
             document.getElementById('stream-placeholder').classList.remove('hidden');
+            document.querySelectorAll('.zone-rect').forEach(r => r.classList.remove('zone-rect-active'));
             renderPlatformManifestView();
         };
 
@@ -553,6 +557,7 @@
             if(activeBtn) activeBtn.className = "border-2 border-fbBlue bg-blue-50/40 p-3 rounded-xl text-left focus:outline-none flex flex-col justify-center min-h-[60px] shadow-md cursor-pointer";
         };
 
+        // AMENDED: Toggling Discreet flips icon element configurations natively with flat blue stroke filters
         window.toggleAnonymityEngine = function() {
             isAnonymityActive = !isAnonymityActive;
             const btn = document.getElementById('anon-toggle-btn');
@@ -636,18 +641,11 @@
                 const innerPanel = document.getElementById(`stage-${t}`);
                 if(innerPanel) innerPanel.classList.add('hidden');
 
-                const nodeCircle = document.getElementById(`step-node-${t}`);
-                if(nodeCircle) {
-                    if (t === stageNum) {
-                        nodeCircle.className = "w-6 h-6 rounded-full bg-fbBlue border-2 border-fbBlue flex items-center justify-center text-[10px] font-bold text-white shadow-sm smooth-transition";
-                        nodeCircle.innerHTML = t;
-                    } else if (t < stageNum) {
-                        nodeCircle.className = "w-6 h-6 rounded-full bg-emerald-500 border-2 border-emerald-500 flex items-center justify-center text-[10px] font-bold text-white shadow-sm smooth-transition";
-                        nodeCircle.innerHTML = "✓"; 
-                    } else {
-                        nodeCircle.className = "w-6 h-6 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-400 smooth-transition";
-                        nodeCircle.innerHTML = t;
-                    }
+                const stepMarker = document.getElementById(`nav-step-${t}`);
+                if(stepMarker) {
+                    if (t === stageNum) stepMarker.className = "text-fbBlue font-black";
+                    else if (t < stageNum) stepMarker.className = "text-slate-900 font-black";
+                    else stepMarker.className = "text-slate-400 font-normal";
                 }
             });
 
