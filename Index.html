@@ -55,7 +55,7 @@
             <p class="text-xs text-slate-500 mb-6 font-medium">Secure verification endpoint. Phone authorization mandatory.</p>
             
             <div class="space-y-4 text-left">
-                <div id="phone-stage" class="block">
+                <div id="phone-stage">
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Verified Phone Destination</label>
                     <input type="tel" id="auth-phone" placeholder="+1 (555) 000-0000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-fbBlue focus:bg-white text-slate-900 transition shadow-inner">
                     <button onclick="window.submitPhoneVerification()" class="w-full bg-fbBlue hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl transition shadow-md mt-4 cursor-pointer">Request Passing Token ➔</button>
@@ -64,7 +64,7 @@
                 <div id="token-stage" class="hidden">
                     <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Enter 6-Digit SMS Token</label>
                     <input type="text" id="auth-token" placeholder="000000" maxlength="6" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-center text-lg tracking-[0.5em] focus:outline-none focus:border-fbBlue focus:bg-white font-mono text-slate-900 transition shadow-inner">
-                    <button onclick="window.submitTokenVerification()" class="w-full bg-fbBlue hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl transition shadow-md mt-4 cursor-pointer">Verify Instance Access</button>
+                    <button onclick="window.submitTokenVerification()" class="w-full bg-fbBlue hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl transition shadow-md cursor-pointer">Verify Instance Access</button>
                 </div>
 
                 <div id="profile-stage" class="hidden space-y-4">
@@ -137,21 +137,21 @@
                     </div>
 
                     <div class="flex items-center space-x-2 border-l border-slate-100 pl-4 shrink-0">
-                        <div class="flex items-center space-x-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1.5 rounded-xl shadow-inner" title="Asynchronous Inbox Channels Log">
+                        <div class="flex items-center space-x-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1.5 rounded-xl shadow-inner">
                             <svg class="w-3.5 h-3.5 text-fbBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
                             <span class="bg-fbBlue text-white font-mono text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-sm">0</span>
                         </div>
 
-                        <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1.5 bg-slate-50 border border-fbBlue/30 text-fbBlue px-3 py-1.5 rounded-xl shadow-sm transition hover:bg-slate-100 cursor-pointer" title="Toggle Discreet Data Layer">
-                            <span id="anon-icon" class="text-[11px] text-fbBlue font-bold smooth-transition">🔓</span>
+                        <button onclick="window.toggleAnonymityEngine()" id="anon-toggle-btn" class="flex items-center space-x-1 bg-white border border-slate-200 px-2.5 py-1.5 rounded-xl shadow-sm transition hover:bg-slate-50 cursor-pointer">
+                            <span id="anon-icon" class="text-[11px] font-bold text-fbBlue">🔓</span>
                             <span class="text-[9.5px] font-black uppercase tracking-wide text-slate-600">Discreet</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-3 gap-2 text-center text-[9.5px] font-black uppercase tracking-wide">
-                    <button onclick="alert('Environment parameters are running lock patterns.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
-                    <button onclick="alert('Secure payload diagnostic files generated.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
+                    <button onclick="alert('Environment parameters are locked.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Current Track</span></button>
+                    <button onclick="alert('Secure payload results generated.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1m-6 10a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"/></svg><span>Share Results</span></button>
                     <button onclick="alert('Invitation link string array copied.');" class="bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl shadow-sm hover:bg-slate-50 transition flex flex-col items-center justify-center space-y-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Invite Member</span></button>
                 </div>
 
@@ -321,8 +321,8 @@
                         <div class="flex justify-between"><span>Account Profile Holder:</span><span id="receipt-profile-name" class="font-black">--</span></div>
                         <div class="flex justify-between"><span>Profile Intent Context:</span><span id="receipt-intent-view" class="font-bold text-fbBlue">--</span></div>
                         <div class="flex justify-between"><span>Active Track Code:</span><span id="receipt-track" class="font-black">--</span></div>
-                        <div class="flex justify-between"><span>Logistics Routing:</span><span id="receipt-logistics" class="font-black">--</span></div>
-                        <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Discreet Hold Terms:</span><span id="receipt-net" class="text-fbBlue font-mono font-black">--</span></div>
+                        <div class="flex justify-between"><span>Logistics Routing Framework:</span><span id="receipt-logistics" class="font-black">--</span></div>
+                        <div class="flex justify-between text-slate-800 border-t border-slate-200 pt-1.5 font-black"><span>Discreet hold terms:</span><span id="receipt-net" class="text-fbBlue font-mono font-black">--</span></div>
                     </div>
                     <button type="button" onclick="window.triggerTransientPurgeAnnihilation()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase tracking-wider py-3 rounded-xl font-mono cursor-pointer">Done</button>
                 </div>
@@ -353,7 +353,7 @@
     </main>
 
     <footer class="text-center text-slate-400 text-[8px] font-mono uppercase tracking-widest py-6 flex-shrink-0">
-        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v6.4</span>
+        <span>© 2026 Wellness Front™ Platforms • Build-Premium-Cockpit-v6.3</span>
     </footer>
 
     <script>
@@ -395,15 +395,13 @@
 
         function setupHardwareSwipeGestureListeners() {
             const elementEnclosure = document.getElementById('workspace-execution-enclosure');
-            if(elementEnclosure) {
-                elementEnclosure.addEventListener('touchstart', (e) => {
-                    swipeXTouchStart = e.changedTouches[0].screenX;
-                }, { passive: true });
-                elementEnclosure.addEventListener('touchend', (e) => {
-                    swipeXTouchEnd = e.changedTouches[0].screenX;
-                    evaluateSwipeActionVector();
-                }, { passive: true });
-            }
+            elementEnclosure.addEventListener('touchstart', (e) => {
+                swipeXTouchStart = e.changedTouches[0].screenX;
+            }, { passive: true });
+            elementEnclosure.addEventListener('touchend', (e) => {
+                swipeXTouchEnd = e.changedTouches[0].screenX;
+                evaluateSwipeActionVector();
+            }, { passive: true });
         }
 
         function evaluateSwipeActionVector() {
@@ -412,20 +410,16 @@
             }
         }
 
-        // --- AMENDED FIX: Phone verification form hides Step A and forces open Step B safely ---
         window.submitPhoneVerification = function() {
             const num = document.getElementById('auth-phone').value.trim();
-            if(!num || num.length < 8) { alert("Invalid phone format properties."); return; }
-            document.getElementById('phone-stage').classList.replace('block', 'hidden');
-            document.getElementById('token-stage').classList.replace('hidden', 'block');
+            if(!num || num.length < 8) { alert("Invalid phone format."); return; }
+            document.getElementById('phone-stage').classList.add('hidden');
+            document.getElementById('token-stage').classList.remove('hidden');
         };
 
-        // --- AMENDED FIX: Token verification form hides Step B and forces open Profile inputs ---
         window.submitTokenVerification = function() {
-            const tokenInput = document.getElementById('auth-token').value.trim();
-            if(!tokenInput || tokenInput.length < 4) { alert("Invalid secure validation token entry."); return; }
-            document.getElementById('token-stage').classList.replace('block', 'hidden');
-            document.getElementById('profile-stage').classList.replace('hidden', 'block');
+            document.getElementById('token-stage').classList.add('hidden');
+            document.getElementById('profile-stage').classList.remove('hidden');
         };
 
         window.setGenderFramework = function(genderKey) {
@@ -444,7 +438,7 @@
             const name = document.getElementById('profile-fullname').value.trim();
             const email = document.getElementById('profile-email').value.trim();
             const year = document.getElementById('profile-year').value;
-            if(!name || !email || !year || !userGender) { alert("All initialization profile configurations required."); return; }
+            if(!name || !email || !year || !userGender) { alert("All initialization variables required."); return; }
             
             userFullLegalName = name; userEmailAddress = email; userBirthYear = year;
             localStorage.setItem('wf_user_registered', 'true');
@@ -461,16 +455,19 @@
             setupHardwareSwipeGestureListeners();
         };
 
+        // --- AMENDED: Fixed script logic syntax error ---
         window.launchIsolatedTrack = function(trackKey) {
             activeMainTrack = trackKey;
             
             document.querySelectorAll("[id^='card-']").forEach(c => c.classList.remove('border-fbBlue', 'ring-2', 'ring-fbBlue/10'));
             document.getElementById(`card-${trackKey}`).classList.add('border-fbBlue', 'ring-2', 'ring-fbBlue/10');
             
+            // Swap core home cockpit layouts entirely to lock isolated standing pages
             document.getElementById('unified-homepage-cockpit-layer').classList.replace('block', 'hidden');
             document.getElementById('workspace-execution-enclosure').classList.remove('hidden');
             document.getElementById('system-status-bar').classList.remove('hidden');
 
+            // AMENDED: Restored explicit view visibility mappings cleanly
             document.getElementById('subpane-itest').classList.add('hidden');
             document.getElementById('subpane-mindlink').classList.add('hidden');
             document.getElementById('subpane-carelive').classList.add('hidden');
@@ -515,6 +512,7 @@
             document.getElementById('workspace-execution-enclosure').classList.add('hidden');
             document.getElementById('system-status-bar').classList.add('hidden');
             
+            // Restore cockpit layers safely
             document.getElementById('unified-homepage-cockpit-layer').classList.replace('hidden', 'block');
             
             compiledManifestArray = [];
@@ -674,6 +672,7 @@
             compiledManifestArray = [];
             document.getElementById('stream-active-viewport').classList.replace('hidden', 'flex');
             document.getElementById('stream-placeholder').classList.remove('hidden');
+            document.querySelectorAll('.zone-rect').forEach(r => r.classList.remove('zone-rect-active'));
             
             const summaryPanel = document.getElementById('sticky-summary-panel');
             if(summaryPanel) summaryPanel.style.opacity = "1";
