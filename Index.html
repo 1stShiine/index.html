@@ -34,6 +34,12 @@
             background: #CBD5E1;
             border-radius: 9999px;
         }
+        /* Sub-3% opacity structural alignment grid for medical credibility depth */
+        .diagnostic-pattern {
+            background-color: #ffffff;
+            background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
     </style>
 </head>
 <body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-[#059669] selection:text-white">
@@ -50,33 +56,35 @@
                     <span class="font-black tracking-wider text-sm text-white uppercase">
                         AXIS POINT <span class="text-[#059669]">PREMIUM</span>
                     </span>
-                    <span class="text-[9px] font-medium tracking-wide text-slate-400">
+                    <span class="text-[9px] font-medium tracking-wide text-slate-400 mt-0.5">
                         Powered by AccessPointDx Minnesota Laboratory Network
                     </span>
                 </div>
                 <span class="text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-[#1F232E] border border-emerald-900 px-3 py-1.5 rounded-full select-none">
-                    Direct Access Portal
+                    PATIENT PORTAL
                 </span>
             </div>
         </nav>
 
-        <!-- CONTEXT HERO: HIGH CONTRAST TEXT TYPOGRAPHY -->
-        <section class="bg-white py-12 sm:py-16 border-b border-slate-200/60 relative overflow-hidden">
+        <!-- HERO SECTION: COMPRESSED VERTICAL WHITESPACE & REFINED COPYS -->
+        <section class="diagnostic-pattern pt-8 pb-10 sm:pt-10 sm:pb-12 border-b border-slate-200/60 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-white/20 to-white/90 z-0"></div>
             <div class="max-w-3xl mx-auto text-center px-6 space-y-3 relative z-10">
                 <span class="text-[11px] font-black tracking-widest text-[#059669] uppercase block">
-                    Premium Preventative Health Profiles
+                    LOCAL TESTING. PREMIUM CARE.
                 </span>
+                <!-- Tightened Hero Promise Around Core Differentiator -->
                 <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-                    Local Minnesota lab testing with results in 24–48 hours.
+                    Faster answers through a local Minnesota laboratory network.
                 </h1>
-                <!-- Fixed: Darkened body copy text level matching text-slate-600 baseline -->
+                <!-- Refined Operational Safety Subtext -->
                 <p class="text-slate-600 text-sm font-medium leading-relaxed max-w-xl mx-auto">
-                    Direct-access health testing without insurance barriers. Clean, transparent pricing with all sample processing handled entirely in our local Minnesota reference laboratory.
+                    Samples processed within our Minnesota laboratory network, with many routine tests available within 24 hours and most results delivered within 24–48 hours.
                 </p>
-                <div class="pt-2 flex flex-wrap justify-center gap-6 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                    <span>✓ No Insurance Required</span>
-                    <span>✓ Transparent Pricing</span>
-                    <span>✓ Local Minnesota Processing</span>
+                <div class="pt-1 flex flex-wrap justify-center gap-6 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                    <span>✓ CLIA Certified</span>
+                    <span>✓ Secure Results</span>
+                    <span>✓ Minnesota Laboratory Network</span>
                 </div>
             </div>
         </section>
@@ -87,7 +95,7 @@
             <!-- LEFT INPUT STREAM -->
             <div class="lg:col-span-7 space-y-8">
                 
-                <!-- POPULAR REASONS PRE-SUMMARY STRIP -->
+                <!-- POPULAR REASONS SECTION -->
                 <div class="p-5 bg-[#F8FAFC] rounded-2xl border border-slate-100 space-y-3">
                     <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">Popular reasons people test:</span>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-slate-600">
@@ -98,19 +106,17 @@
                     </div>
                 </div>
 
-                <!-- STEP 1: CHOOSE HEALTH PANEL -->
+                <!-- STEP 1: PANEL SELECTION -->
                 <div class="space-y-4">
-                    <!-- Fixed: Darkened step label text-slate-500 for enhanced desktop readability contrast -->
-                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-500">1. Choose Your Health Panel</h2>
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-600">1. Choose Your Health Panel</h2>
                     <div id="panel-container" class="space-y-4" role="radiogroup" aria-label="Select health panel">
-                        <!-- Dynamic State Cards Mount Natively Downstream -->
+                        <!-- Rendered via runtime script dynamically -->
                     </div>
                 </div>
 
-                <!-- STEP 2: COLLECTION LOGISTICS -->
+                <!-- STEP 2: COLLECTION METHOD SELECTION -->
                 <div class="space-y-4">
-                    <!-- Fixed: Darkened step label text-slate-500 -->
-                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-500">2. Choose Collection Method</h2>
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-600">2. Choose Collection Method</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" role="radiogroup" aria-label="Select collection method">
                         <button type="button" id="btn-walkin" aria-checked="true" class="p-5 rounded-3xl text-left transition flex flex-col justify-center min-h-[90px] shadow-sm cursor-pointer space-y-0.5 border-2 border-[#059669] bg-emerald-50/10 font-bold focus:outline-none">
                             <span class="text-xs font-black uppercase tracking-wide text-slate-800 block">Local Clinic Walk-In</span>
@@ -122,7 +128,7 @@
                         </button>
                     </div>
 
-                    <!-- ZIP Code Toggle Panel -->
+                    <!-- ZIP Code Input Module -->
                     <div id="zip-panel" class="hidden p-5 bg-slate-50 rounded-2xl border border-slate-200/50 space-y-2 animate-fadeIn">
                         <label for="input-zip" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Enter Collection ZIP Code</label>
                         <input type="text" id="input-zip" inputmode="numeric" pattern="[0-9]*" maxLength="5" placeholder="55401" aria-describedby="error-zip" class="w-32 bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] transition shadow-sm" />
@@ -130,14 +136,14 @@
                     </div>
                 </div>
 
-                <!-- STEP 3: ACCOUNT IDENTIFIER FIELDS -->
+                <!-- STEP 3: PERSONAL INFORMATION -->
                 <div class="space-y-4">
-                    <!-- Fixed: Darkened step label text-slate-500 -->
-                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-500">3. Personal Information</h2>
+                    <h2 class="text-xs font-black uppercase tracking-widest text-slate-600">3. Personal Information</h2>
                     <div class="grid grid-cols-1 gap-4 bg-white p-6 rounded-3xl border border-slate-200/60 shadow-sm">
                         <div class="space-y-1">
-                            <label for="input-name" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Your Full Name</label>
-                            <input type="text" id="input-name" placeholder="John Doe" aria-describedby="error-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
+                            <label for="input-name" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Name</label>
+                            <!-- Updated Placeholder format away from fake name values -->
+                            <input type="text" id="input-name" placeholder="Full Name" aria-describedby="error-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
                             <p id="error-name" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                         </div>
 
@@ -158,7 +164,7 @@
 
             </div>
 
-            <!-- RIGHT COLUMN: FIXED STICKY SUMMARY CARD -->
+            <!-- RIGHT COLUMN: STICKY ORDER SUMMARY CARDS -->
             <div class="lg:col-span-5 bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 space-y-6 lg:sticky lg:top-[120px]">
                 <h3 class="text-xs font-black uppercase tracking-widest text-slate-500 border-b pb-4">Order Summary</h3>
                 
@@ -181,26 +187,27 @@
                     <div class="flex justify-between items-end pt-5 border-t border-slate-100">
                         <div class="space-y-0.5">
                             <span class="text-[10px] font-black uppercase tracking-wider text-slate-800 block">Total Due</span>
-                            <span class="text-[9px] text-slate-500 block uppercase font-medium leading-none tracking-normal">Direct Out-Of-Pocket Cost</span>
+                            <span class="text-[9px] text-slate-500 block uppercase font-medium leading-none tracking-normal">No Insurance Billing</span>
                         </div>
                         <span id="summary-total" class="text-3xl font-black text-[#059669] tracking-tight">--</span>
                     </div>
 
-                    <!-- LOCALIZED MINNESOTA PROOF BOX -->
+                    <!-- MINNESOTA LABORATORY ADVANTAGE PROOF CONTAINER -->
                     <div class="rounded-xl bg-emerald-50/40 p-4 text-xs border border-emerald-100/30">
-                        <!-- Fixed: Cleaned title to Local Minnesota Advantage -->
                         <span class="font-bold text-[#059669] block">Local Minnesota Advantage</span>
+                        <!-- Streamlined Proof Messaging Text Copy -->
                         <p class="text-slate-600 font-medium mt-1.5 normal-case leading-relaxed">
-                            Your sample is processed entirely inside our local Minnesota reference facility. We do not batch, route, or ship samples out of state, ensuring rapid turnaround and continuous specimen integrity.
+                            Samples remain within our Minnesota laboratory network to support faster turnaround and reduced transport delays.
                         </p>
                     </div>
                 </div>
 
-                <!-- VALUE CONTEXT EXPECTATION CHECKLIST -->
+                <!-- SYSTEM EXPECTATION FLOW CHECKLIST -->
                 <div class="rounded-2xl bg-slate-50 p-4 text-xs font-bold text-slate-600 space-y-2 border border-slate-100">
-                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-1">What Happens Next</span>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">What Happens Next</span>
                     <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Choose your appointment time</span></div>
-                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Visit our clinic or schedule metro mobile collection</span></div>
+                    <!-- Refined location-flexible checkpoint list item -->
+                    <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Visit a local collection site or schedule mobile collection</span></div>
                     <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Samples processed entirely in Minnesota</span></div>
                     <div class="flex items-center space-x-2"><span class="text-emerald-500">✓</span> <span>Results secure online within 24–48 hours</span></div>
                 </div>
@@ -214,7 +221,7 @@
 
         </form>
 
-        <!-- WELLNESS LEGAL GUARDRAD DISCLAIMER -->
+        <!-- WELLNESS STATUTORY BOUNDARY FOOTER -->
         <section class="max-w-4xl mx-auto px-6 pb-12 pt-6">
             <div class="text-center border-t border-slate-200/60 pt-6 space-y-2">
                 <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Important Information</span>
@@ -226,10 +233,9 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- LIGHTWEIGHT CLIENT CONTROLLER LOGIC ENGINE -->
+    <!-- LIGHTWEIGHT FRONTEND RUNTIME ENVIRONMENT   -->
     <!-- ========================================== -->
     <script>
-        // Clean Dictionary Lookups
         const PANELS = {
             essential: {
                 id: "essential",
@@ -256,19 +262,17 @@
 
         const MOBILE_COLLECTION_FEE = 65;
 
-        // Reactive Functional Active App State
         const state = {
             selectedPanel: "essential",
             collectionMethod: "walkin"
         };
 
-        // Cache DOM Hook Targets
         const elements = {
             form: document.getElementById('checkout-form'),
             panelContainer: document.getElementById('panel-container'),
             btnWalkin: document.getElementById('btn-walkin'),
             btnMobile: document.getElementById('btn-mobile'),
-            zipPanel: document.getElementById('zip-panel'),
+            zipPanel: document.getElementById('mobile-zip-panel'),
             summaryName: document.getElementById('summary-name'),
             summaryPrice: document.getElementById('summary-price'),
             summaryMobileRow: document.getElementById('summary-mobile-row'),
@@ -308,12 +312,11 @@
                     `;
                 });
 
-                // Fixed: Appended explicit currency unit dollar sign symbol ($) prefix to the layout fee string fields
                 card.innerHTML = `
                     <div class="flex justify-between items-center">
                         <div>
                             <h3 class="text-base font-black text-slate-900 tracking-tight">${panel.name}</h3>
-                            <p class="text-xs text-slate-500 mt-0.5 font-medium leading-relaxed">${panel.description}</p>
+                            <p class="text-xs text-slate-600 mt-0.5 font-medium leading-relaxed">${panel.description}</p>
                         </div>
                         <span class="text-sm font-black text-[#059669] whitespace-nowrap ml-4">$${panel.price}</span>
                     </div>
@@ -336,7 +339,6 @@
             elements.btnWalkin.addEventListener('click', () => updateCollectionStrategy('walkin'));
             elements.btnMobile.addEventListener('click', () => updateCollectionStrategy('mobile'));
             
-            // Clean caret formatting input mask loops
             elements.inputPhone.addEventListener('input', e => {
                 const numbers = e.target.value.replace(/\D/g, '').slice(0, 10);
                 let formatted = '';
