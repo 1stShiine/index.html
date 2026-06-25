@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axis Point Premium™ | Direct Access Health Testing</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif']
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
-        };
+        }
     </script>
-
     <style>
         @media (prefers-reduced-motion: reduce) {
             * {
@@ -254,7 +252,7 @@
                                 Your secure testing profile
                             </span>
                             <p class="leading-relaxed">
-                                We’ll use this information to confirm your appointment, send secure result access, and help you return later without starting over. Password setup is optional after checkout.
+                                We’ll use this information to confirm your order, send secure result access, and help you return later without starting over. Password setup is optional after checkout.
                             </p>
                         </div>
 
@@ -281,7 +279,7 @@
                                 </label>
                                 <input type="tel" id="input-phone" autocomplete="tel" placeholder="Phone number" aria-describedby="error-phone phone-help" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
                                 <p id="phone-help" class="text-[10px] text-slate-400 pt-0.5 pl-1">
-                                    A verification code will be requested before secure checkout.
+                                    A verification code will be sent to this number before secure checkout.
                                 </p>
                                 <p id="error-phone" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
                             </div>
@@ -388,12 +386,29 @@
                     </div>
                 </div>
 
+                <div id="checkout-ready-panel" class="hidden rounded-2xl bg-emerald-50 border border-emerald-100 p-4 text-xs font-medium text-slate-600 space-y-3 animate-fadeIn">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block">
+                        Checkout Session Ready
+                    </span>
+                    <p>
+                        Your Axis Point Premium testing order is ready for secure payment and scheduling.
+                    </p>
+                    <div class="grid grid-cols-2 gap-2 text-[11px]">
+                        <span class="font-bold text-slate-700">Profile:</span>
+                        <span id="ready-profile" class="text-slate-600">--</span>
+                        <span class="font-bold text-slate-700">Collection:</span>
+                        <span id="ready-collection" class="text-slate-600">--</span>
+                        <span class="font-bold text-slate-700">Patient:</span>
+                        <span id="ready-patient" class="text-slate-600">--</span>
+                    </div>
+                </div>
+
                 <div class="pt-2 space-y-3">
-                    <button type="submit" id="btn-submit" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-full transition text-center block shadow-[0_8px_20px_rgba(5,150,105,0.2)] font-bold cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed">
+                    <button type="submit" id="btn-submit" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-full transition text-center block shadow-[0_8px_20px_rgba(5,150,105,0.2)] font-bold cursor-pointer">
                         Reserve My Testing Appointment ➔
                     </button>
 
-                    <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 select-none">
+                    <div class="flex justify-center items-center gap-x-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 select-none">
                         <span>✓ Secure Payment</span>
                         <span>•</span>
                         <span>✓ HIPAA Protected</span>
@@ -451,12 +466,6 @@
             kit: 15
         };
 
-        const COLLECTION_LABELS = {
-            walkin: "Local Collection Site",
-            mobile: "Private Mobile Collection",
-            kit: "At-Home Collection Kit"
-        };
-
         const METRO_SERVICED_ZIPS = [
             "55401", "55402", "55403", "55404", "55405", "55406", "55407", "55408",
             "55101", "55102", "55103", "55104"
@@ -465,9 +474,7 @@
         const state = {
             selectedPanel: "essential",
             collectionMethod: "walkin",
-            verificationStatus: "not_started",
-            verificationSessionId: null,
-            verifiedProfileToken: null
+            verificationStatus: "not_started"
         };
 
         const elements = {
@@ -485,6 +492,11 @@
             shippingPanel: document.getElementById('shipping-panel'),
             verificationPanel: document.getElementById('verification-panel'),
             verificationMessage: document.getElementById('verification-message'),
+
+            checkoutReadyPanel: document.getElementById('checkout-ready-panel'),
+            readyProfile: document.getElementById('ready-profile'),
+            readyCollection: document.getElementById('ready-collection'),
+            readyPatient: document.getElementById('ready-patient'),
 
             summaryName: document.getElementById('summary-name'),
             summaryPrice: document.getElementById('summary-price'),
@@ -600,10 +612,9 @@
             elements.btnMobile.addEventListener('click', () => updateCollectionStrategy('mobile'));
             elements.btnKit.addEventListener('click', () => updateCollectionStrategy('kit'));
 
-            elements.btnResendCode.addEventListener('click', async () => {
+            elements.btnResendCode.addEventListener('click', () => {
                 if (elements.btnResendCode.disabled) return;
-                clearErrorStates();
-                await sendPhoneVerificationCode(true);
+                sendPhoneVerificationCode(true);
             });
 
             elements.inputPhone.addEventListener('input', e => {
@@ -659,20 +670,10 @@
             elements.zipPanel.classList.toggle('hidden', method !== 'mobile');
             elements.shippingPanel.classList.toggle('hidden', method !== 'kit');
 
-            [
-                elements.inputName,
-                elements.inputEmail,
-                elements.inputPhone,
-                elements.inputZip,
-                elements.shipAddress1,
-                elements.shipCity,
-                elements.shipZip,
-                elements.inputCode
-            ].forEach(field => field.removeAttribute('aria-invalid'));
+            clearErrorStates();
 
             if (method !== 'mobile') {
                 elements.inputZip.value = "";
-                elements.errorZip.className = "hidden";
             }
 
             if (method !== 'kit') {
@@ -681,9 +682,6 @@
                 elements.shipAddress2.value = "";
                 elements.shipCity.value = "";
                 elements.shipZip.value = "";
-                elements.errorShipAddress1.className = "hidden";
-                elements.errorShipCity.className = "hidden";
-                elements.errorShipZip.className = "hidden";
             }
 
             calculateTotals();
@@ -714,10 +712,9 @@
 
         function resetVerificationState() {
             state.verificationStatus = "not_started";
-            state.verificationSessionId = null;
-            state.verifiedProfileToken = null;
             elements.inputCode.value = "";
             elements.verificationPanel.classList.add('hidden');
+            elements.checkoutReadyPanel.classList.add('hidden');
             elements.btnSubmit.innerText = "Reserve My Testing Appointment ➔";
         }
 
@@ -731,8 +728,8 @@
                 'errorShipAddress1',
                 'errorShipCity',
                 'errorShipZip'
-            ].forEach(key => {
-                elements[key].className = "hidden";
+            ].forEach(k => {
+                elements[k].className = "hidden";
             });
 
             [
@@ -779,7 +776,6 @@
             }
 
             const strictNanpPattern = /^\(?([2-9][0-9]{2})\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4})$/;
-
             if (!strictNanpPattern.test(elements.inputPhone.value.trim())) {
                 errorQueue.push({
                     el: elements.inputPhone,
@@ -801,7 +797,7 @@
                     errorQueue.push({
                         el: elements.inputZip,
                         err: elements.errorZip,
-                        txt: 'Private mobile collection is currently restricted to the Twin Cities metro region.'
+                        txt: 'Private mobile collection is not available in your ZIP code yet. We can update you once mobile collection expands to your area, or you may choose another testing option.'
                     });
                 }
             }
@@ -845,24 +841,9 @@
             return errorQueue;
         }
 
-        function generateOrderReference() {
-            const now = new Date();
-            const dateStamp = now.toISOString().slice(0, 10).replaceAll('-', '');
-            const randomPart = Math.random().toString(36).slice(2, 8).toUpperCase();
-            return `APP-${dateStamp}-${randomPart}`;
-        }
+        function sendPhoneVerificationCode(isResend = false) {
+            clearErrorStates();
 
-        function buildProfilePayload() {
-            return {
-                name: elements.inputName.value.trim(),
-                email: elements.inputEmail.value.trim(),
-                phone: elements.inputPhone.value.trim(),
-                passwordSetupMode: "optional_later",
-                profileType: "axis_point_premium_direct_access"
-            };
-        }
-
-        async function sendPhoneVerificationCode(isResend = false) {
             if (isResend) {
                 elements.btnResendCode.disabled = true;
                 elements.btnResendCode.innerText = "Sending...";
@@ -871,28 +852,27 @@
                 elements.btnSubmit.innerText = "Sending Verification Code...";
             }
 
-            await new Promise(resolve => setTimeout(resolve, 600));
+            window.setTimeout(() => {
+                state.verificationStatus = "code_sent";
 
-            state.verificationStatus = "code_sent";
-            state.verificationSessionId = `verify_${Date.now()}`;
+                elements.verificationPanel.classList.remove('hidden');
+                elements.verificationMessage.innerText = `Enter any 6-digit code sent to ${elements.inputPhone.value.trim()} to continue.`;
+                elements.inputCode.focus();
 
-            elements.verificationPanel.classList.remove('hidden');
-            elements.verificationMessage.innerText = `Enter the 6-digit code sent to ${elements.inputPhone.value.trim()} to continue.`;
-            elements.inputCode.focus();
-
-            if (isResend) {
-                elements.btnResendCode.innerText = "Code Sent ✓";
-                setTimeout(() => {
-                    elements.btnResendCode.innerText = "Resend Code";
-                    elements.btnResendCode.disabled = false;
-                }, 5000);
-            } else {
-                elements.btnSubmit.disabled = false;
-                elements.btnSubmit.innerText = "Verify Phone & Continue ➔";
-            }
+                if (isResend) {
+                    elements.btnResendCode.innerText = "Code Sent ✓";
+                    window.setTimeout(() => {
+                        elements.btnResendCode.innerText = "Resend Code";
+                        elements.btnResendCode.disabled = false;
+                    }, 2000);
+                } else {
+                    elements.btnSubmit.disabled = false;
+                    elements.btnSubmit.innerText = "Verify Phone & Continue ➔";
+                }
+            }, 700);
         }
 
-        async function verifyPhoneCode() {
+        function verifyPhoneCode() {
             const code = elements.inputCode.value.trim();
 
             if (!/^\d{6}$/.test(code)) {
@@ -904,50 +884,51 @@
                 return false;
             }
 
-            elements.btnSubmit.disabled = true;
-            elements.btnSubmit.innerText = "Verifying Phone...";
-
-            await new Promise(resolve => setTimeout(resolve, 500));
-
             state.verificationStatus = "verified";
-            state.verifiedProfileToken = `profile_${Date.now()}`;
-
             return true;
         }
 
-        function buildCompletedOrderPayload() {
+        function getCollectionLabel(method) {
+            if (method === "mobile") return "Private Mobile Collection";
+            if (method === "kit") return "At-Home Collection Kit";
+            return "Local Collection Site";
+        }
+
+        function getOrderStatus(method) {
+            if (method === "kit") return "Kit shipment pending";
+            if (method === "mobile") return "Mobile collection pending";
+            return "Appointment pending";
+        }
+
+        function generateReferenceId() {
+            const date = new Date();
+            const y = date.getFullYear().toString().slice(-2);
+            const m = String(date.getMonth() + 1).padStart(2, "0");
+            const d = String(date.getDate()).padStart(2, "0");
+            const random = Math.floor(1000 + Math.random() * 9000);
+            return `APDX-${y}${m}${d}-${random}`;
+        }
+
+        function buildOrderPayload() {
             const panel = PANELS[state.selectedPanel];
-            const method = state.collectionMethod;
-            const extraFee = STATE_FEES[method];
+            const extraFee = STATE_FEES[state.collectionMethod];
             const total = panel.price + extraFee;
+            const now = new Date();
 
             return {
-                orderReference: generateOrderReference(),
-                submittedAt: new Date().toISOString(),
-
-                profile: {
-                    verified: true,
-                    profileToken: state.verifiedProfileToken,
-                    passwordSetupMode: "optional_later",
-                    type: "axis_point_premium_direct_access"
-                },
-
-                panel: {
-                    id: panel.id,
-                    name: panel.name,
-                    clinicalRef: panel.clinicalRef,
-                    price: panel.price,
-                    description: panel.description,
-                    highlights: panel.highlights
-                },
-
-                collection: {
-                    type: method,
-                    label: COLLECTION_LABELS[method],
-                    serviceZip: method === 'mobile' ? elements.inputZip.value.trim() : null
-                },
-
-                shipping: method === 'kit'
+                referenceId: generateReferenceId(),
+                createdAt: now.toISOString(),
+                brand: "Axis Point Premium",
+                poweredBy: "Access Point Dx",
+                panelId: state.selectedPanel,
+                profileName: panel.name,
+                profileDescription: panel.description,
+                collectionType: state.collectionMethod,
+                collectionLabel: getCollectionLabel(state.collectionMethod),
+                serviceZip: state.collectionMethod === 'mobile'
+                    ? elements.inputZip.value.trim()
+                    : null,
+                shipping: state.collectionMethod === 'kit'
                     ? {
                         recipientName: elements.shipRecipient.value.trim() || elements.inputName.value.trim(),
                         address1: elements.shipAddress1.value.trim(),
@@ -957,45 +938,61 @@
                         postalCode: elements.shipZip.value.trim()
                     }
                     : null,
-
                 patient: {
                     name: elements.inputName.value.trim(),
                     email: elements.inputEmail.value.trim(),
                     phone: elements.inputPhone.value.trim()
                 },
-
-                payment: {
-                    status: "checkout_ready",
-                    subtotal: panel.price,
+                pricing: {
+                    profileCost: panel.price,
                     logisticsFee: extraFee,
-                    total: total,
-                    currency: "USD",
-                    insuranceBilling: false
+                    totalDue: total
                 },
-
                 status: {
+                    payment: "Ready for secure checkout",
                     order: "Submitted",
-                    transaction: "Checkout session ready",
-                    collection: method === "kit" ? "Kit instructions pending" : "Appointment scheduling pending",
-                    results: "Not ready"
-                }
+                    collection: getOrderStatus(state.collectionMethod),
+                    results: "Not ready yet"
+                },
+                milestones: [
+                    {
+                        label: "Profile created",
+                        complete: true
+                    },
+                    {
+                        label: "Phone verified",
+                        complete: true
+                    },
+                    {
+                        label: "Order submitted",
+                        complete: true
+                    },
+                    {
+                        label: state.collectionMethod === "kit" ? "Kit instructions pending" : "Collection appointment pending",
+                        complete: false
+                    },
+                    {
+                        label: "Results ready",
+                        complete: false
+                    }
+                ],
+                passwordSetupMode: "optional_later"
             };
         }
 
-        async function submitCheckoutPayload(finalPayload) {
-            elements.btnSubmit.disabled = true;
-            elements.btnSubmit.innerText = "Checkout Session Ready ✓";
+        function showCheckoutReady(order) {
+            elements.readyProfile.innerText = order.profileName;
+            elements.readyCollection.innerText = order.collectionLabel;
+            elements.readyPatient.innerText = order.patient.name;
+            elements.checkoutReadyPanel.classList.remove('hidden');
+        }
 
-            sessionStorage.setItem("axisPointCompletedOrder", JSON.stringify(finalPayload));
-            sessionStorage.setItem("axisPointCheckoutPayload", JSON.stringify(finalPayload));
-
-            await new Promise(resolve => setTimeout(resolve, 700));
-
+        function redirectToProfile() {
             window.location.href = "testing-profile.html";
         }
 
-        async function validateAndProcessHandoff(event) {
-            event.preventDefault();
+        async function validateAndProcessHandoff(e) {
+            e.preventDefault();
             clearErrorStates();
 
             const errorQueue = collectValidationErrors();
@@ -1006,17 +1003,25 @@
             }
 
             if (state.verificationStatus === "not_started") {
-                await sendPhoneVerificationCode(false);
+                sendPhoneVerificationCode(false);
                 return;
             }
 
             if (state.verificationStatus === "code_sent") {
-                const verified = await verifyPhoneCode();
+                const verified = verifyPhoneCode();
                 if (!verified) return;
             }
 
-            const completedOrderPayload = buildCompletedOrderPayload();
-            await submitCheckoutPayload(completedOrderPayload);
+            const order = buildOrderPayload();
+
+            localStorage.setItem("axisPointLatestOrder", JSON.stringify(order));
+
+            showCheckoutReady(order);
+
+            elements.btnSubmit.disabled = true;
+            elements.btnSubmit.innerText = "Checkout Session Ready ✓";
+
+            window.setTimeout(redirectToProfile, 900);
         }
     </script>
 </body>
