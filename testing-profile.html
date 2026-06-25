@@ -1,1 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axis Point Premium™ | Testing Profile</title>
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.25s ease-out forwards;
+        }
+
+        .diagnostic-pattern {
+            background-color: #ffffff;
+            background-image:
+                linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+                linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-[#059669] selection:text-white">
+
+    <div id="root">
+
+        <nav class="bg-[#2D313E] px-6 py-4 sticky top-0 z-50 shadow-sm">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                <div class="flex flex-col">
+                    <span class="font-black tracking-wider text-sm text-white uppercase">
+                        AXIS POINT <span class="text-[#059669]">PREMIUM™</span>
+                    </span>
+                    <span class="text-[10px] font-semibold tracking-wide text-slate-300 mt-0.5">
+                        Powered by Access Point Dx | Minnesota-Based Laboratory Services
+                    </span>
+                </div>
+
+                <a href="Index.html" class="text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-[#1F232E] border border-emerald-900 px-4 py-1.5 rounded-full transition-all hover:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 select-none whitespace-nowrap">
+                    New Order
+                </a>
+            </div>
+        </nav>
+
+        <section class="diagnostic-pattern pt-8 pb-10 sm:pt-10 sm:pb-12 border-b border-slate-200/60 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-white/20 to-white/90 z-0"></div>
+
+            <div class="max-w-3xl mx-auto text-center px-6 space-y-3 relative z-10">
+                <div class="inline-flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] font-black uppercase tracking-widest text-slate-500 bg-slate-100 px-4 py-1.5 rounded-full mx-auto">
+                    <span>✦ Secure Testing Profile</span>
+                    <span class="text-slate-300">|</span>
+                    <span>✦ Order Status Tracking</span>
+                </div>
+
+                <span class="text-[11px] font-black tracking-widest text-[#059669] uppercase block">
+                    Submitted. Organized. Ready for Next Steps.
+                </span>
+
+                <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight pt-1">
+                    Your Axis Point Premium testing profile.
+                </h1>
+
+                <p class="text-slate-600 text-sm font-medium leading-relaxed max-w-xl mx-auto">
+                    Review your testing order, reference number, selected collection method, and next-step status. Your profile can later support password setup, secure result access, and future testing history.
+                </p>
+            </div>
+        </section>
+
+        <main id="profile-root" class="max-w-6xl mx-auto px-6 py-12">
+            <section id="empty-state" class="hidden max-w-2xl mx-auto bg-white border border-slate-200/70 rounded-[2rem] shadow-sm p-8 text-center space-y-4">
+                <div class="w-14 h-14 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mx-auto text-2xl font-black">
+                    !
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tight">
+                        No active testing profile found.
+                    </h2>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                        This page needs an order from the Axis Point Premium checkout page. Start a new testing order to generate your profile.
+                    </p>
+                </div>
+
+                <a href="Index.html" class="inline-flex items-center justify-center bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest px-6 py-3 rounded-full transition shadow-[0_8px_20px_rgba(5,150,105,0.2)]">
+                    Start Testing Order
+                </a>
+            </section>
+
+            <section id="profile-content" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-start animate-fadeIn">
+
+                <div class="lg:col-span-7 space-y-8">
+
+                    <div class="bg-white border border-slate-200/70 rounded-[2rem] shadow-sm p-8 space-y-6">
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 border-b border-slate-100 pb-5">
+                            <div>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-1">
+                                    Testing Profile
+                                </span>
+                                <h2 id="profile-patient-name" class="text-2xl font-black text-slate-900 tracking-tight">
+                                    --
+                                </h2>
+                                <p id="profile-contact" class="text-sm text-slate-500 font-medium mt-1">
+                                    --
+                                </p>
+                            </div>
+
+                            <div class="rounded-2xl bg-emerald-50 border border-emerald-100 px-4 py-3 text-left sm:text-right">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block">
+                                    Reference ID
+                                </span>
+                                <span id="profile-reference" class="text-sm font-black text-slate-900 tracking-wide">
+                                    --
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="rounded-2xl bg-slate-50 border border-slate-100 p-5">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block">
+                                    Selected Profile
+                                </span>
+                                <p id="profile-panel-name" class="text-base font-black text-slate-900 mt-1">
+                                    --
+                                </p>
+                                <p id="profile-panel-ref" class="text-xs font-bold text-slate-400 uppercase tracking-wide mt-1">
+                                    --
+                                </p>
+                            </div>
+
+                            <div class="rounded-2xl bg-slate-50 border border-slate-100 p-5">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block">
+                                    Collection Method
+                                </span>
+                                <p id="profile-collection-label" class="text-base font-black text-slate-900 mt-1">
+                                    --
+                                </p>
+                                <p id="profile-collection-detail" class="text-xs font-medium text-slate-500 mt-1">
+                                    --
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="rounded-2xl bg-slate-50 border border-slate-100 p-5 space-y-3">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block">
+                                Transaction Summary
+                            </span>
+
+                            <div class="space-y-3 text-sm font-semibold text-slate-600">
+                                <div class="flex justify-between gap-4">
+                                    <span>Health Profile Cost</span>
+                                    <span id="summary-subtotal" class="text-slate-900">--</span>
+                                </div>
+
+                                <div class="flex justify-between gap-4">
+                                    <span id="summary-logistics-label">Logistics Fee</span>
+                                    <span id="summary-logistics-fee" class="text-slate-900">--</span>
+                                </div>
+
+                                <div class="flex justify-between gap-4 border-t border-slate-200 pt-3">
+                                    <span class="font-black text-slate-900 uppercase text-xs tracking-wider">Total</span>
+                                    <span id="summary-total" class="text-[#059669] text-xl font-black">--</span>
+                                </div>
+
+                                <div class="flex justify-between gap-4 text-xs">
+                                    <span>Insurance Billing</span>
+                                    <span class="text-slate-900">No insurance billing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="shipping-block" class="hidden rounded-2xl bg-slate-50 border border-slate-100 p-5 space-y-2">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block">
+                                Kit Shipping Address
+                            </span>
+                            <p id="shipping-address" class="text-sm font-semibold text-slate-700 leading-relaxed">
+                                --
+                            </p>
+                        </div>
+
+                        <div class="rounded-2xl bg-emerald-50/40 border border-emerald-100 p-5 space-y-2">
+                            <span class="font-bold text-[#059669] block">
+                                Local Minnesota Advantage
+                            </span>
+                            <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                                Samples are processed within the Access Point Dx Minnesota laboratory network, helping reduce transport delays and support faster turnaround for routine testing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200/70 rounded-[2rem] shadow-sm p-8 space-y-5">
+                        <div class="flex items-start justify-between gap-4 border-b border-slate-100 pb-5">
+                            <div>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block">
+                                    Profile Access
+                                </span>
+                                <h3 class="text-xl font-black text-slate-900 tracking-tight mt-1">
+                                    Optional password setup later
+                                </h3>
+                                <p class="text-sm text-slate-600 font-medium leading-relaxed mt-2">
+                                    A simple profile has been created from your verified phone number and contact information. You can later add a password for easier return access.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold text-slate-600">
+                            <div class="rounded-xl bg-slate-50 border border-slate-100 p-4">
+                                <span class="text-[#059669] block mb-1">✓ Verified Phone</span>
+                                <span id="verified-phone">--</span>
+                            </div>
+
+                            <div class="rounded-xl bg-slate-50 border border-slate-100 p-4">
+                                <span class="text-[#059669] block mb-1">✓ Secure Result Access</span>
+                                <span>Enabled after lab release</span>
+                            </div>
+
+                            <div class="rounded-xl bg-slate-50 border border-slate-100 p-4">
+                                <span class="text-[#059669] block mb-1">✓ Password</span>
+                                <span>Optional later</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="lg:col-span-5 bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 space-y-6 lg:sticky lg:top-[120px]">
+                    <h3 class="text-xs font-black uppercase tracking-widest text-slate-500 border-b pb-4">
+                        Order Status
+                    </h3>
+
+                    <div class="rounded-xl bg-emerald-50/40 p-4 border border-emerald-100/40">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block">
+                            Current Status
+                        </span>
+                        <p id="current-status" class="text-xl font-black text-slate-900 mt-1">
+                            --
+                        </p>
+                        <p id="submitted-date" class="text-xs text-slate-500 font-medium mt-1">
+                            --
+                        </p>
+                    </div>
+
+                    <div class="rounded-2xl bg-slate-50 p-5 text-sm font-bold text-slate-600 space-y-4 border border-slate-100">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">
+                            Milestone Tracker
+                        </span>
+
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-[#059669] text-white flex items-center justify-center text-xs font-black shrink-0">✓</span>
+                                <div>
+                                    <p class="text-slate-900">Phone verified</p>
+                                    <p class="text-xs text-slate-500 font-medium">Profile access started</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-[#059669] text-white flex items-center justify-center text-xs font-black shrink-0">✓</span>
+                                <div>
+                                    <p class="text-slate-900">Order submitted</p>
+                                    <p class="text-xs text-slate-500 font-medium">Reference ID generated</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-emerald-100 text-[#059669] flex items-center justify-center text-xs font-black shrink-0">•</span>
+                                <div>
+                                    <p class="text-slate-900">Secure checkout / scheduling</p>
+                                    <p id="next-step-copy" class="text-xs text-slate-500 font-medium">Next step pending</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-black shrink-0">•</span>
+                                <div>
+                                    <p class="text-slate-500">Sample received</p>
+                                    <p class="text-xs text-slate-400 font-medium">Updates after collection</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-black shrink-0">•</span>
+                                <div>
+                                    <p class="text-slate-500">Processing</p>
+                                    <p class="text-xs text-slate-400 font-medium">Routine testing begins after sample receipt</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-black shrink-0">•</span>
+                                <div>
+                                    <p class="text-slate-500">Results ready</p>
+                                    <p class="text-xs text-slate-400 font-medium">Secure portal delivery</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <button type="button" id="btn-view-results" disabled class="w-full bg-slate-200 text-slate-400 text-xs font-black uppercase tracking-widest py-4 rounded-full cursor-not-allowed">
+                            Results Not Ready
+                        </button>
+
+                        <button type="button" id="btn-print" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-full transition shadow-[0_8px_20px_rgba(5,150,105,0.2)]">
+                            Print / Save Summary
+                        </button>
+
+                        <a href="Index.html" class="w-full block text-center bg-white border border-slate-200 hover:border-emerald-300 text-slate-600 hover:text-[#059669] text-xs font-black uppercase tracking-widest py-4 rounded-full transition">
+                            Start Another Order
+                        </a>
+                    </div>
+
+                    <div class="text-[10px] text-slate-400 font-medium leading-relaxed border-t border-slate-100 pt-4">
+                        This profile summary is for order tracking and secure access preparation. Final reporting, clinical interpretation, and result release depend on lab processing and applicable testing workflow.
+                    </div>
+                </aside>
+            </section>
+        </main>
+
+        <section class="max-w-4xl mx-auto px-6 pb-12 pt-6">
+            <div class="text-center border-t border-slate-200/60 pt-6 space-y-2">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block">
+                    Important Information
+                </span>
+                <p class="text-[10px] text-slate-500 font-medium leading-relaxed">
+                    AccessPoint Dx provides direct-access laboratory testing services for informational and wellness purposes. Testing is not intended to replace medical care, diagnosis, or treatment from your healthcare provider.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const elements = {
+            emptyState: document.getElementById('empty-state'),
+            profileContent: document.getElementById('profile-content'),
+
+            patientName: document.getElementById('profile-patient-name'),
+            contact: document.getElementById('profile-contact'),
+            reference: document.getElementById('profile-reference'),
+
+            panelName: document.getElementById('profile-panel-name'),
+            panelRef: document.getElementById('profile-panel-ref'),
+
+            collectionLabel: document.getElementById('profile-collection-label'),
+            collectionDetail: document.getElementById('profile-collection-detail'),
+
+            summarySubtotal: document.getElementById('summary-subtotal'),
+            summaryLogisticsLabel: document.getElementById('summary-logistics-label'),
+            summaryLogisticsFee: document.getElementById('summary-logistics-fee'),
+            summaryTotal: document.getElementById('summary-total'),
+
+            shippingBlock: document.getElementById('shipping-block'),
+            shippingAddress: document.getElementById('shipping-address'),
+
+            verifiedPhone: document.getElementById('verified-phone'),
+
+            currentStatus: document.getElementById('current-status'),
+            submittedDate: document.getElementById('submitted-date'),
+            nextStepCopy: document.getElementById('next-step-copy'),
+
+            btnPrint: document.getElementById('btn-print')
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const order = loadOrder();
+
+            if (!order) {
+                showEmptyState();
+                return;
+            }
+
+            renderOrderProfile(order);
+            bindActions();
+        });
+
+        function loadOrder() {
+            const primary = sessionStorage.getItem("axisPointCompletedOrder");
+            const fallback = sessionStorage.getItem("axisPointCheckoutPayload");
+            const raw = primary || fallback;
+
+            if (!raw) return null;
+
+            try {
+                return JSON.parse(raw);
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function showEmptyState() {
+            elements.emptyState.classList.remove('hidden');
+            elements.profileContent.classList.add('hidden');
+        }
+
+        function formatCurrency(value) {
+            const numeric = Number(value || 0);
+            return `$${numeric.toFixed(2)}`;
+        }
+
+        function formatDate(isoValue) {
+            if (!isoValue) return "--";
+
+            const date = new Date(isoValue);
+
+            if (Number.isNaN(date.getTime())) {
+                return "--";
+            }
+
+            return date.toLocaleString(undefined, {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+                hour: "numeric",
+                minute: "2-digit"
+            });
+        }
+
+        function renderOrderProfile(order) {
+            elements.emptyState.classList.add('hidden');
+            elements.profileContent.classList.remove('hidden');
+
+            const patient = order.patient || {};
+            const panel = order.panel || {};
+            const collection = order.collection || {};
+            const payment = order.payment || {};
+            const status = order.status || {};
+
+            elements.patientName.textContent = patient.name || "Axis Point Premium Patient";
+            elements.contact.textContent = [patient.email, patient.phone].filter(Boolean).join(" • ") || "--";
+            elements.reference.textContent = order.orderReference || "--";
+
+            elements.panelName.textContent = panel.name || "--";
+            elements.panelRef.textContent = panel.clinicalRef || "Direct-access wellness testing";
+
+            elements.collectionLabel.textContent = collection.label || "--";
+            elements.collectionDetail.textContent = buildCollectionDetail(order);
+
+            elements.summarySubtotal.textContent = formatCurrency(payment.subtotal);
+            elements.summaryLogisticsLabel.textContent = collection.type === "mobile"
+                ? "Mobile Collection Surcharge"
+                : collection.type === "kit"
+                    ? "At-Home Kit Surcharge"
+                    : "Logistics Fee";
+
+            elements.summaryLogisticsFee.textContent = formatCurrency(payment.logisticsFee);
+            elements.summaryTotal.textContent = formatCurrency(payment.total);
+
+            elements.verifiedPhone.textContent = patient.phone || "--";
+
+            elements.currentStatus.textContent = status.transaction || "Submitted";
+            elements.submittedDate.textContent = `Submitted ${formatDate(order.submittedAt)}`;
+
+            elements.nextStepCopy.textContent = collection.type === "kit"
+                ? "Receive kit instructions and shipping updates"
+                : "Choose your appointment time";
+
+            renderShipping(order);
+        }
+
+        function buildCollectionDetail(order) {
+            const collection = order.collection || {};
+
+            if (collection.type === "mobile") {
+                return collection.serviceZip
+                    ? `Service ZIP: ${collection.serviceZip}`
+                    : "Twin Cities metro service area";
+            }
+
+            if (collection.type === "kit") {
+                return "Kit shipping address collected";
+            }
+
+            return "Local collection appointment pending";
+        }
+
+        function renderShipping(order) {
+            if (!order.shipping) {
+                elements.shippingBlock.classList.add('hidden');
+                return;
+            }
+
+            const shipping = order.shipping;
+
+            const line1 = shipping.recipientName || order.patient?.name || "";
+            const line2 = shipping.address1 || "";
+            const line3 = shipping.address2 ? `${shipping.address2}` : "";
+            const line4 = [shipping.city, shipping.state, shipping.postalCode].filter(Boolean).join(", ");
+
+            elements.shippingAddress.innerHTML = [line1, line2, line3, line4]
+                .filter(Boolean)
+                .map(line => `<span class="block">${escapeHtml(line)}</span>`)
+                .join("");
+
+            elements.shippingBlock.classList.remove('hidden');
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+        function bindActions() {
+            elements.btnPrint.addEventListener('click', () => {
+                window.print();
+            });
+        }
+    </script>
+</body>
+</html>
