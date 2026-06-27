@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axis Point Premium™ | Direct Access Health Testing</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,6 +17,7 @@
             }
         }
     </script>
+
     <style>
         @media (prefers-reduced-motion: reduce) {
             * {
@@ -252,7 +254,7 @@
                                 Your secure testing profile
                             </span>
                             <p class="leading-relaxed">
-                                We’ll use this information to confirm your order, send secure result access, and help you return later without starting over. Password setup is optional after checkout.
+                                We’ll use this information to confirm your appointment, support accurate lab processing, send secure result access, and help you return later without starting over. Password setup is optional after checkout.
                             </p>
                         </div>
 
@@ -262,6 +264,34 @@
                             </label>
                             <input type="text" id="input-name" autocomplete="name" placeholder="Full name" aria-describedby="error-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
                             <p id="error-name" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label for="input-dob" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">
+                                    Date of Birth
+                                </label>
+                                <input type="date" id="input-dob" autocomplete="bday" aria-describedby="error-dob dob-help" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition" />
+                                <p id="dob-help" class="text-[10px] text-slate-400 pt-0.5 pl-1">
+                                    Used for identity matching and lab processing.
+                                </p>
+                                <p id="error-dob" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
+                            </div>
+
+                            <div class="space-y-1">
+                                <label for="input-sex" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">
+                                    Sex Used for Lab Reference Ranges
+                                </label>
+                                <select id="input-sex" aria-describedby="error-sex sex-help" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                                    <option value="">Select one</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                </select>
+                                <p id="sex-help" class="text-[10px] text-slate-400 pt-0.5 pl-1">
+                                    This helps the lab apply appropriate reference ranges.
+                                </p>
+                                <p id="error-sex" class="hidden text-xs font-bold text-rose-500 pt-0.5 pl-1"></p>
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -386,25 +416,35 @@
                     </div>
                 </div>
 
-                <div id="checkout-ready-panel" class="hidden rounded-2xl bg-emerald-50 border border-emerald-100 p-4 text-xs font-medium text-slate-600 space-y-3 animate-fadeIn">
-                    <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block">
-                        Checkout Session Ready
+                <div class="rounded-2xl border border-slate-200/70 bg-white p-4 space-y-3">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">
+                        Required Acknowledgements
                     </span>
-                    <p>
-                        Your Axis Point Premium testing order is ready for secure payment and scheduling.
-                    </p>
-                    <div class="grid grid-cols-2 gap-2 text-[11px]">
-                        <span class="font-bold text-slate-700">Profile:</span>
-                        <span id="ready-profile" class="text-slate-600">--</span>
-                        <span class="font-bold text-slate-700">Collection:</span>
-                        <span id="ready-collection" class="text-slate-600">--</span>
-                        <span class="font-bold text-slate-700">Patient:</span>
-                        <span id="ready-patient" class="text-slate-600">--</span>
-                    </div>
+
+                    <label class="flex items-start gap-3 text-xs font-medium text-slate-600 leading-relaxed cursor-pointer">
+                        <input id="consent-terms" type="checkbox" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#059669] focus:ring-[#059669]" />
+                        <span>
+                            I agree to the
+                            <a href="terms.html" class="text-[#059669] font-bold hover:underline">Terms of Service</a>,
+                            <a href="privacy-policy.html" class="text-[#059669] font-bold hover:underline">Privacy Policy</a>, and
+                            <a href="refund-policy.html" class="text-[#059669] font-bold hover:underline">Refund Policy</a>.
+                        </span>
+                    </label>
+
+                    <label class="flex items-start gap-3 text-xs font-medium text-slate-600 leading-relaxed cursor-pointer">
+                        <input id="consent-hipaa" type="checkbox" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#059669] focus:ring-[#059669]" />
+                        <span>
+                            I acknowledge the
+                            <a href="hipaa-notice.html" class="text-[#059669] font-bold hover:underline">HIPAA Notice of Privacy Practices</a>
+                            and consent to this Direct Access Testing.
+                        </span>
+                    </label>
+
+                    <p id="error-consent" class="hidden text-xs font-bold text-rose-500 pt-0.5"></p>
                 </div>
 
                 <div class="pt-2 space-y-3">
-                    <button type="submit" id="btn-submit" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-full transition text-center block shadow-[0_8px_20px_rgba(5,150,105,0.2)] font-bold cursor-pointer">
+                    <button type="submit" id="btn-submit" class="w-full bg-[#059669] hover:bg-emerald-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white text-xs font-black uppercase tracking-widest py-4 rounded-full transition text-center block shadow-[0_8px_20px_rgba(5,150,105,0.2)] cursor-pointer">
                         Reserve My Testing Appointment ➔
                     </button>
 
@@ -426,7 +466,7 @@
                     Important Information
                 </span>
                 <p class="text-[10px] text-slate-500 font-medium leading-relaxed">
-                    AccessPoint Dx provides direct-access laboratory testing services for informational and wellness purposes. Testing is not intended to replace medical care, diagnosis, or treatment from your healthcare provider.
+                    Access Point Dx provides direct-access laboratory testing services for informational and wellness purposes. Testing is not intended to replace medical care, diagnosis, or treatment from your healthcare provider.
                 </p>
             </div>
         </section>
@@ -466,6 +506,12 @@
             kit: 15
         };
 
+        const COLLECTION_LABELS = {
+            walkin: "Local Collection Site",
+            mobile: "Private Mobile Collection",
+            kit: "At-Home Collection Kit"
+        };
+
         const METRO_SERVICED_ZIPS = [
             "55401", "55402", "55403", "55404", "55405", "55406", "55407", "55408",
             "55101", "55102", "55103", "55104"
@@ -474,7 +520,9 @@
         const state = {
             selectedPanel: "essential",
             collectionMethod: "walkin",
-            verificationStatus: "not_started"
+            verificationStatus: "not_started",
+            verificationCode: "123456",
+            verifiedProfileToken: null
         };
 
         const elements = {
@@ -493,11 +541,6 @@
             verificationPanel: document.getElementById('verification-panel'),
             verificationMessage: document.getElementById('verification-message'),
 
-            checkoutReadyPanel: document.getElementById('checkout-ready-panel'),
-            readyProfile: document.getElementById('ready-profile'),
-            readyCollection: document.getElementById('ready-collection'),
-            readyPatient: document.getElementById('ready-patient'),
-
             summaryName: document.getElementById('summary-name'),
             summaryPrice: document.getElementById('summary-price'),
             summaryLogisticsRow: document.getElementById('summary-logistics-row'),
@@ -506,6 +549,8 @@
             summaryTotal: document.getElementById('summary-total'),
 
             inputName: document.getElementById('input-name'),
+            inputDob: document.getElementById('input-dob'),
+            inputSex: document.getElementById('input-sex'),
             inputEmail: document.getElementById('input-email'),
             inputPhone: document.getElementById('input-phone'),
             inputZip: document.getElementById('input-zip'),
@@ -518,14 +563,20 @@
             shipState: document.getElementById('ship-state'),
             shipZip: document.getElementById('ship-zip'),
 
+            consentTerms: document.getElementById('consent-terms'),
+            consentHipaa: document.getElementById('consent-hipaa'),
+
             errorName: document.getElementById('error-name'),
+            errorDob: document.getElementById('error-dob'),
+            errorSex: document.getElementById('error-sex'),
             errorEmail: document.getElementById('error-email'),
             errorPhone: document.getElementById('error-phone'),
             errorZip: document.getElementById('error-zip'),
             errorCode: document.getElementById('error-code'),
             errorShipAddress1: document.getElementById('error-ship-address1'),
             errorShipCity: document.getElementById('error-ship-city'),
-            errorShipZip: document.getElementById('error-ship-zip')
+            errorShipZip: document.getElementById('error-ship-zip'),
+            errorConsent: document.getElementById('error-consent')
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -613,8 +664,11 @@
             elements.btnKit.addEventListener('click', () => updateCollectionStrategy('kit'));
 
             elements.btnResendCode.addEventListener('click', () => {
-                if (elements.btnResendCode.disabled) return;
-                sendPhoneVerificationCode(true);
+                clearErrorStates();
+                state.verificationStatus = "code_sent";
+                elements.verificationPanel.classList.remove('hidden');
+                elements.verificationMessage.innerText = `Enter the 6-digit code sent to ${elements.inputPhone.value.trim()} to continue.`;
+                elements.inputCode.focus();
             });
 
             elements.inputPhone.addEventListener('input', e => {
@@ -635,8 +689,10 @@
                 resetVerificationState();
             });
 
-            elements.inputEmail.addEventListener('input', resetVerificationState);
-            elements.inputName.addEventListener('input', resetVerificationState);
+            [elements.inputName, elements.inputDob, elements.inputSex, elements.inputEmail].forEach(field => {
+                field.addEventListener('input', resetVerificationState);
+                field.addEventListener('change', resetVerificationState);
+            });
 
             elements.inputZip.addEventListener('input', e => {
                 e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
@@ -670,10 +726,24 @@
             elements.zipPanel.classList.toggle('hidden', method !== 'mobile');
             elements.shippingPanel.classList.toggle('hidden', method !== 'kit');
 
-            clearErrorStates();
+            const fields = [
+                elements.inputName,
+                elements.inputDob,
+                elements.inputSex,
+                elements.inputEmail,
+                elements.inputPhone,
+                elements.inputZip,
+                elements.shipAddress1,
+                elements.shipCity,
+                elements.shipZip,
+                elements.inputCode
+            ];
+
+            fields.forEach(f => f.removeAttribute('aria-invalid'));
 
             if (method !== 'mobile') {
                 elements.inputZip.value = "";
+                elements.errorZip.className = "hidden";
             }
 
             if (method !== 'kit') {
@@ -682,6 +752,9 @@
                 elements.shipAddress2.value = "";
                 elements.shipCity.value = "";
                 elements.shipZip.value = "";
+                elements.errorShipAddress1.className = "hidden";
+                elements.errorShipCity.className = "hidden";
+                elements.errorShipZip.className = "hidden";
             }
 
             calculateTotals();
@@ -712,28 +785,33 @@
 
         function resetVerificationState() {
             state.verificationStatus = "not_started";
+            state.verifiedProfileToken = null;
             elements.inputCode.value = "";
             elements.verificationPanel.classList.add('hidden');
-            elements.checkoutReadyPanel.classList.add('hidden');
             elements.btnSubmit.innerText = "Reserve My Testing Appointment ➔";
         }
 
         function clearErrorStates() {
             [
                 'errorName',
+                'errorDob',
+                'errorSex',
                 'errorEmail',
                 'errorPhone',
                 'errorZip',
                 'errorCode',
                 'errorShipAddress1',
                 'errorShipCity',
-                'errorShipZip'
+                'errorShipZip',
+                'errorConsent'
             ].forEach(k => {
                 elements[k].className = "hidden";
             });
 
             [
                 elements.inputName,
+                elements.inputDob,
+                elements.inputSex,
                 elements.inputEmail,
                 elements.inputPhone,
                 elements.inputZip,
@@ -748,12 +826,27 @@
             errorQueue.forEach(item => {
                 item.err.innerText = item.txt;
                 item.err.className = "text-xs font-bold text-rose-500 pt-0.5 pl-1 block animate-fadeIn";
-                item.el.setAttribute('aria-invalid', 'true');
+                if (item.el) item.el.setAttribute('aria-invalid', 'true');
             });
 
-            if (errorQueue[0]) {
+            if (errorQueue[0] && errorQueue[0].el) {
                 errorQueue[0].el.focus();
             }
+        }
+
+        function isValidAdultDob(dobString) {
+            if (!dobString) return false;
+
+            const dob = new Date(`${dobString}T00:00:00`);
+            const today = new Date();
+
+            if (Number.isNaN(dob.getTime())) return false;
+            if (dob > today) return false;
+
+            const ageDate = new Date(today - dob);
+            const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+            return age >= 18;
         }
 
         function collectValidationErrors() {
@@ -764,6 +857,22 @@
                     el: elements.inputName,
                     err: elements.errorName,
                     txt: 'Please enter your full name.'
+                });
+            }
+
+            if (!isValidAdultDob(elements.inputDob.value.trim())) {
+                errorQueue.push({
+                    el: elements.inputDob,
+                    err: elements.errorDob,
+                    txt: 'Please enter a valid date of birth. Direct-access orders must be placed by adults 18 or older.'
+                });
+            }
+
+            if (!elements.inputSex.value.trim()) {
+                errorQueue.push({
+                    el: elements.inputSex,
+                    err: elements.errorSex,
+                    txt: 'Please select the sex used for lab reference ranges.'
                 });
             }
 
@@ -797,7 +906,7 @@
                     errorQueue.push({
                         el: elements.inputZip,
                         err: elements.errorZip,
-                        txt: 'Private mobile collection is not available in your ZIP code yet. We can update you once mobile collection expands to your area, or you may choose another testing option.'
+                        txt: 'Private mobile collection is not available in your area yet. We’ll update you once service reaches your ZIP code. You can choose a local collection site or at-home kit if eligible.'
                     });
                 }
             }
@@ -838,38 +947,30 @@
                 }
             }
 
+            if (!elements.consentTerms.checked || !elements.consentHipaa.checked) {
+                errorQueue.push({
+                    el: null,
+                    err: elements.errorConsent,
+                    txt: 'Please complete both required acknowledgements before continuing.'
+                });
+            }
+
             return errorQueue;
         }
 
-        function sendPhoneVerificationCode(isResend = false) {
-            clearErrorStates();
+        function sendPhoneVerificationCode() {
+            state.verificationStatus = "code_sent";
+            elements.verificationPanel.classList.remove('hidden');
+            elements.verificationMessage.innerText = `Enter the 6-digit code sent to ${elements.inputPhone.value.trim()} to continue.`;
+            elements.btnSubmit.innerText = "Verify Phone & Continue ➔";
+            elements.inputCode.focus();
 
-            if (isResend) {
-                elements.btnResendCode.disabled = true;
-                elements.btnResendCode.innerText = "Sending...";
-            } else {
-                elements.btnSubmit.disabled = true;
-                elements.btnSubmit.innerText = "Sending Verification Code...";
-            }
-
-            window.setTimeout(() => {
-                state.verificationStatus = "code_sent";
-
-                elements.verificationPanel.classList.remove('hidden');
-                elements.verificationMessage.innerText = `Enter any 6-digit code sent to ${elements.inputPhone.value.trim()} to continue.`;
-                elements.inputCode.focus();
-
-                if (isResend) {
-                    elements.btnResendCode.innerText = "Code Sent ✓";
-                    window.setTimeout(() => {
-                        elements.btnResendCode.innerText = "Resend Code";
-                        elements.btnResendCode.disabled = false;
-                    }, 2000);
-                } else {
-                    elements.btnSubmit.disabled = false;
-                    elements.btnSubmit.innerText = "Verify Phone & Continue ➔";
-                }
-            }, 700);
+            /*
+                Static GitHub Pages testing note:
+                This prototype accepts 123456 as the verification code.
+                In production, replace this with Supabase Auth, Twilio Verify,
+                or another backend verification provider.
+            */
         }
 
         function verifyPhoneCode() {
@@ -884,50 +985,69 @@
                 return false;
             }
 
+            if (code !== state.verificationCode) {
+                showErrors([{
+                    el: elements.inputCode,
+                    err: elements.errorCode,
+                    txt: 'That code could not be verified. For this internal test version, use 123456.'
+                }]);
+                return false;
+            }
+
             state.verificationStatus = "verified";
+            state.verifiedProfileToken = `AXP-PROFILE-${Date.now()}`;
             return true;
         }
 
-        function getCollectionLabel(method) {
-            if (method === "mobile") return "Private Mobile Collection";
-            if (method === "kit") return "At-Home Collection Kit";
-            return "Local Collection Site";
-        }
-
-        function getOrderStatus(method) {
-            if (method === "kit") return "Kit shipment pending";
-            if (method === "mobile") return "Mobile collection pending";
-            return "Appointment pending";
-        }
-
         function generateReferenceId() {
-            const date = new Date();
-            const y = date.getFullYear().toString().slice(-2);
-            const m = String(date.getMonth() + 1).padStart(2, "0");
-            const d = String(date.getDate()).padStart(2, "0");
-            const random = Math.floor(1000 + Math.random() * 9000);
-            return `APDX-${y}${m}${d}-${random}`;
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const random = Math.random().toString(16).substring(2, 6).toUpperCase();
+
+            return `AXP-${yyyy}${mm}${dd}-${random}`;
         }
 
-        function buildOrderPayload() {
+        function buildCheckoutPayload() {
             const panel = PANELS[state.selectedPanel];
             const extraFee = STATE_FEES[state.collectionMethod];
             const total = panel.price + extraFee;
-            const now = new Date();
+            const nowIso = new Date().toISOString();
 
             return {
                 referenceId: generateReferenceId(),
-                createdAt: now.toISOString(),
-                brand: "Axis Point Premium",
-                poweredBy: "Access Point Dx",
-                panelId: state.selectedPanel,
-                profileName: panel.name,
-                profileDescription: panel.description,
-                collectionType: state.collectionMethod,
-                collectionLabel: getCollectionLabel(state.collectionMethod),
-                serviceZip: state.collectionMethod === 'mobile'
-                    ? elements.inputZip.value.trim()
-                    : null,
+                createdAt: nowIso,
+
+                patient: {
+                    name: elements.inputName.value.trim(),
+                    dateOfBirth: elements.inputDob.value.trim(),
+                    sexForReferenceRanges: elements.inputSex.value.trim(),
+                    email: elements.inputEmail.value.trim(),
+                    phone: elements.inputPhone.value.trim()
+                },
+
+                profile: {
+                    verified: true,
+                    profileToken: state.verifiedProfileToken,
+                    passwordSetupMode: "optional_later"
+                },
+
+                panel: {
+                    id: panel.id,
+                    name: panel.name,
+                    clinicalRef: panel.clinicalRef,
+                    price: panel.price
+                },
+
+                collection: {
+                    type: state.collectionMethod,
+                    label: COLLECTION_LABELS[state.collectionMethod],
+                    serviceZip: state.collectionMethod === 'mobile'
+                        ? elements.inputZip.value.trim()
+                        : null
+                },
+
                 shipping: state.collectionMethod === 'kit'
                     ? {
                         recipientName: elements.shipRecipient.value.trim() || elements.inputName.value.trim(),
@@ -938,57 +1058,90 @@
                         postalCode: elements.shipZip.value.trim()
                     }
                     : null,
-                patient: {
-                    name: elements.inputName.value.trim(),
-                    email: elements.inputEmail.value.trim(),
-                    phone: elements.inputPhone.value.trim()
-                },
-                pricing: {
-                    profileCost: panel.price,
+
+                payment: {
+                    status: "paid",
+                    subtotal: panel.price,
                     logisticsFee: extraFee,
-                    totalDue: total
+                    total: total,
+                    currency: "USD"
                 },
+
                 status: {
-                    payment: "Ready for secure checkout",
-                    order: "Submitted",
-                    collection: getOrderStatus(state.collectionMethod),
-                    results: "Not ready yet"
+                    orderStatus: "submitted",
+                    resultStatus: "not_ready",
+                    lisAccessionId: null,
+                    accessionedAt: null
                 },
-                milestones: [
+
+                consents: {
+                    termsAccepted: elements.consentTerms.checked,
+                    termsAcceptedAt: nowIso,
+                    privacyAcknowledged: elements.consentTerms.checked,
+                    privacyAcknowledgedAt: nowIso,
+                    refundPolicyAccepted: elements.consentTerms.checked,
+                    refundPolicyAcceptedAt: nowIso,
+                    hipaaNppAcknowledged: elements.consentHipaa.checked,
+                    hipaaNppAcknowledgedAt: nowIso,
+                    directAccessTestingConsent: elements.consentHipaa.checked,
+                    directAccessTestingConsentAt: nowIso
+                },
+
+                timeline: [
                     {
-                        label: "Profile created",
-                        complete: true
-                    },
-                    {
-                        label: "Phone verified",
-                        complete: true
-                    },
-                    {
+                        key: "order_submitted",
                         label: "Order submitted",
+                        timestamp: nowIso,
                         complete: true
                     },
                     {
-                        label: state.collectionMethod === "kit" ? "Kit instructions pending" : "Collection appointment pending",
+                        key: "phone_verified",
+                        label: "Phone verified",
+                        timestamp: nowIso,
+                        complete: true
+                    },
+                    {
+                        key: "payment_received",
+                        label: "Payment received",
+                        timestamp: nowIso,
+                        complete: true
+                    },
+                    {
+                        key: "lis_accessioned",
+                        label: "Prepared for laboratory accessioning",
+                        timestamp: null,
                         complete: false
                     },
                     {
+                        key: "collection_or_kit",
+                        label: state.collectionMethod === "kit"
+                            ? "Kit instructions / shipping pending"
+                            : state.collectionMethod === "mobile"
+                                ? "Mobile collection scheduling pending"
+                                : "Local collection ready",
+                        timestamp: state.collectionMethod === "walkin" ? nowIso : null,
+                        complete: state.collectionMethod === "walkin"
+                    },
+                    {
+                        key: "sample_received",
+                        label: "Sample received",
+                        timestamp: null,
+                        complete: false
+                    },
+                    {
+                        key: "processing",
+                        label: "Processing",
+                        timestamp: null,
+                        complete: false
+                    },
+                    {
+                        key: "results_ready",
                         label: "Results ready",
+                        timestamp: null,
                         complete: false
                     }
-                ],
-                passwordSetupMode: "optional_later"
+                ]
             };
-        }
-
-        function showCheckoutReady(order) {
-            elements.readyProfile.innerText = order.profileName;
-            elements.readyCollection.innerText = order.collectionLabel;
-            elements.readyPatient.innerText = order.patient.name;
-            elements.checkoutReadyPanel.classList.remove('hidden');
-        }
-
-        function redirectToProfile() {
-            window.location.href = "testing-profile.html";
         }
 
         async function validateAndProcessHandoff(e) {
@@ -1003,7 +1156,7 @@
             }
 
             if (state.verificationStatus === "not_started") {
-                sendPhoneVerificationCode(false);
+                sendPhoneVerificationCode();
                 return;
             }
 
@@ -1012,16 +1165,16 @@
                 if (!verified) return;
             }
 
-            const order = buildOrderPayload();
+            const finalPayload = buildCheckoutPayload();
 
-            localStorage.setItem("axisPointLatestOrder", JSON.stringify(order));
-
-            showCheckoutReady(order);
+            localStorage.setItem('axisPointPremiumOrder', JSON.stringify(finalPayload));
 
             elements.btnSubmit.disabled = true;
-            elements.btnSubmit.innerText = "Checkout Session Ready ✓";
+            elements.btnSubmit.innerText = "Checkout Session Ready...";
 
-            window.setTimeout(redirectToProfile, 900);
+            setTimeout(() => {
+                window.location.href = "testing-profile.html";
+            }, 900);
         }
     </script>
 </body>
