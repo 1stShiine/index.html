@@ -66,7 +66,7 @@
                     </span>
                 </div>
 
-                <a href="Index.html" class="text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-[#1F232E] border border-emerald-900 px-4 py-1.5 rounded-full transition-all hover:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 select-none whitespace-nowrap">
+                <a href="index.html" class="text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-[#1F232E] border border-emerald-900 px-4 py-1.5 rounded-full transition-all hover:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 select-none whitespace-nowrap">
                     New Order
                 </a>
             </div>
@@ -105,7 +105,7 @@
                 <p class="text-sm text-slate-600 mt-2 leading-relaxed">
                     Please start from the Axis Point Premium testing page and complete the order flow.
                 </p>
-                <a href="Index.html" class="inline-flex mt-6 bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest px-8 py-4 rounded-full transition shadow-[0_8px_20px_rgba(5,150,105,0.2)]">
+                <a href="index.html" class="inline-flex mt-6 bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest px-8 py-4 rounded-full transition shadow-[0_8px_20px_rgba(5,150,105,0.2)]">
                     Start Testing Order
                 </a>
             </section>
@@ -324,7 +324,7 @@
                 </div>
 
                 <div class="pt-2 space-y-3">
-                    <a href="Index.html" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-full transition text-center block shadow-[0_8px_20px_rgba(5,150,105,0.2)]">
+                    <a href="index.html" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-full transition text-center block shadow-[0_8px_20px_rgba(5,150,105,0.2)]">
                         Start Another Order
                     </a>
 
@@ -630,6 +630,7 @@
         function formatDate(dateString) {
             if (!dateString || dateString === "--") return "--";
 
+            // Support YYYY-MM-DD coming from payload
             const date = new Date(`${dateString}T00:00:00`);
 
             if (Number.isNaN(date.getTime())) return "--";
