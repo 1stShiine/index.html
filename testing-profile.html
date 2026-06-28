@@ -98,7 +98,19 @@
 
         <main class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
-            <section class="lg:col-span-7 space-y-8">
+            <section id="empty-state" class="hidden lg:col-span-12 bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm text-center">
+                <h2 class="text-xl font-black text-slate-900 tracking-tight">
+                    No testing profile found.
+                </h2>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Please start from the Axis Point Premium testing page and complete the order flow.
+                </p>
+                <a href="Index.html" class="inline-flex mt-6 bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest px-8 py-4 rounded-full transition shadow-[0_8px_20px_rgba(5,150,105,0.2)]">
+                    Start Testing Order
+                </a>
+            </section>
+
+            <section id="profile-view" class="hidden lg:col-span-7 space-y-8 animate-fadeIn w-full">
 
                 <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 sm:p-8 space-y-6">
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 border-b border-slate-100 pb-6">
@@ -277,15 +289,14 @@
 
             </section>
 
-            <aside class="lg:col-span-5 bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 space-y-6 lg:sticky lg:top-[120px]">
+            <aside id="profile-sidebar" class="hidden lg:col-span-5 bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 space-y-6 lg:sticky lg:top-[120px] animate-fadeIn w-full">
 
                 <h3 class="text-xs font-black uppercase tracking-widest text-slate-500 border-b pb-4">
                     Status Timeline
                 </h3>
 
                 <div id="timeline-container" class="space-y-4">
-                    <!-- Rendered by JavaScript -->
-                </div>
+                    </div>
 
                 <div class="rounded-2xl bg-slate-50 p-4 text-xs font-bold text-slate-600 space-y-2 border border-slate-100">
                     <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-1">
@@ -317,7 +328,7 @@
                         Start Another Order
                     </a>
 
-                    <button id="btn-clear-demo" type="button" class="w-full bg-white hover:bg-slate-50 text-slate-500 border border-slate-200 text-xs font-black uppercase tracking-widest py-4 rounded-full transition text-center block">
+                    <button id="btn-clear-demo" type="button" class="w-full bg-white hover:bg-slate-50 text-slate-500 border border-slate-200 text-xs font-black uppercase tracking-widest py-4 rounded-full transition text-center block focus:outline-none">
                         Clear This Test Profile
                     </button>
                 </div>
@@ -341,7 +352,7 @@
             referenceId: "AXP-PENDING",
             createdAt: new Date().toISOString(),
             patient: {
-                name: "Testing Profile Not Found",
+                name: "--",
                 dateOfBirth: "--",
                 sexForReferenceRanges: "--",
                 email: "--",
@@ -379,17 +390,14 @@
                 hipaaNppAcknowledged: false,
                 directAccessTestingConsent: false
             },
-            timeline: [
-                {
-                    key: "order_missing",
-                    label: "No order data found",
-                    timestamp: null,
-                    complete: false
-                }
-            ]
+            timeline: []
         };
 
         const elements = {
+            emptyState: document.getElementById('empty-state'),
+            profileView: document.getElementById('profile-view'),
+            profileSidebar: document.getElementById('profile-sidebar'),
+
             headerStatus: document.getElementById('header-status'),
 
             profileName: document.getElementById('profile-name'),
@@ -420,31 +428,31 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            const order = loadOrder();
-            renderProfile(order);
-            bindActions();
+            const savedOrderRaw = localStorage.getItem("axisPointPremiumOrder");
+
+            if (!savedOrderRaw) {
+                showEmptyState();
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(savedOrderRaw);
+                const order = deepMerge(DEFAULT_ORDER, parsed);
+                renderProfile(order);
+                bindActions();
+            } catch (error) {
+                console.error("Order payload parse failed:", error);
+                showEmptyState();
+            }
         });
 
-        function loadOrder() {
-            try {
-                const savedOrderRaw = localStorage.getItem("axisPointPremiumOrder");
-
-                if (!savedOrderRaw) {
-                    return DEFAULT_ORDER;
-                }
-
-                const parsed = JSON.parse(savedOrderRaw);
-                return deepMerge(DEFAULT_ORDER, parsed);
-            } catch (error) {
-                return DEFAULT_ORDER;
-            }
+        function showEmptyState() {
+            elements.profileView.classList.add("hidden");
+            elements.profileSidebar.classList.add("hidden");
+            elements.emptyState.classList.remove("hidden");
         }
 
         function deepMerge(base, override) {
-            if (Array.isArray(override)) {
-                return override;
-            }
-
             const output = { ...base };
 
             Object.keys(override || {}).forEach(key => {
@@ -463,55 +471,25 @@
         }
 
         function renderProfile(order) {
-            elements.profileName.innerText = order.patient && order.patient.name
-                ? order.patient.name
-                : "--";
+            elements.emptyState.classList.add("hidden");
+            elements.profileView.classList.remove("hidden");
+            elements.profileSidebar.classList.remove("hidden");
 
+            elements.profileName.innerText = order.patient.name || "--";
             elements.profileReference.innerText = `Reference ID: ${order.referenceId || "--"}`;
+            elements.profileDob.innerText = formatDate(order.patient.dateOfBirth);
+            elements.profileSex.innerText = formatSex(order.patient.sexForReferenceRanges);
+            elements.profileEmail.innerText = order.patient.email || "--";
+            elements.profilePhone.innerText = order.patient.phone || "--";
 
-            elements.profileDob.innerText = order.patient && order.patient.dateOfBirth
-                ? formatDate(order.patient.dateOfBirth)
-                : "--";
+            elements.orderPanel.innerText = order.panel.name || "--";
+            elements.orderCollection.innerText = order.collection.label || "--";
+            elements.paymentStatus.innerText = formatStatus(order.payment.status);
+            elements.paymentTotal.innerText = formatCurrency(order.payment.total, order.payment.currency);
+            elements.orderStatus.innerText = formatStatus(order.status.orderStatus);
+            elements.resultStatus.innerText = formatStatus(order.status.resultStatus);
 
-            elements.profileSex.innerText = order.patient && order.patient.sexForReferenceRanges
-                ? formatSex(order.patient.sexForReferenceRanges)
-                : "--";
-
-            elements.profileEmail.innerText = order.patient && order.patient.email
-                ? order.patient.email
-                : "--";
-
-            elements.profilePhone.innerText = order.patient && order.patient.phone
-                ? order.patient.phone
-                : "--";
-
-            elements.orderPanel.innerText = order.panel && order.panel.name
-                ? order.panel.name
-                : "--";
-
-            elements.orderCollection.innerText = order.collection && order.collection.label
-                ? order.collection.label
-                : "--";
-
-            elements.paymentStatus.innerText = order.payment && order.payment.status
-                ? formatStatus(order.payment.status)
-                : "--";
-
-            elements.paymentTotal.innerText = order.payment && typeof order.payment.total !== "undefined"
-                ? formatCurrency(order.payment.total, order.payment.currency)
-                : "--";
-
-            elements.orderStatus.innerText = order.status && order.status.orderStatus
-                ? formatStatus(order.status.orderStatus)
-                : "--";
-
-            elements.headerStatus.innerText = order.status && order.status.orderStatus
-                ? formatStatus(order.status.orderStatus)
-                : "Submitted";
-
-            elements.resultStatus.innerText = order.status && order.status.resultStatus
-                ? formatStatus(order.status.resultStatus)
-                : "--";
+            elements.headerStatus.innerText = formatStatus(order.status.orderStatus);
 
             renderCollectionDetail(order);
             renderLisStatus(order);
@@ -521,11 +499,6 @@
         }
 
         function renderCollectionDetail(order) {
-            if (!order.collection || !order.collection.type || order.collection.type === "--") {
-                elements.collectionDetailBox.classList.add('hidden');
-                return;
-            }
-
             const type = order.collection.type;
 
             if (type === "mobile") {
@@ -560,7 +533,7 @@
         }
 
         function renderLisStatus(order) {
-            if (order.status && order.status.lisAccessionId) {
+            if (order.status.lisAccessionId) {
                 elements.lisStatus.innerText = `Accessioned in StratusDx: ${order.status.lisAccessionId}`;
                 return;
             }
@@ -570,13 +543,11 @@
 
         function renderConsentStatus(order) {
             const termsComplete =
-                order.consents &&
                 order.consents.termsAccepted &&
                 order.consents.privacyAcknowledged &&
                 order.consents.refundPolicyAccepted;
 
             const hipaaComplete =
-                order.consents &&
                 order.consents.hipaaNppAcknowledged &&
                 order.consents.directAccessTestingConsent;
 
@@ -589,6 +560,14 @@
 
         function renderTimeline(timeline) {
             elements.timelineContainer.innerHTML = "";
+
+            if (!timeline || timeline.length === 0) {
+                const emptyMsg = document.createElement('p');
+                emptyMsg.className = "text-xs text-slate-400 font-medium";
+                emptyMsg.innerText = "No timeline events available.";
+                elements.timelineContainer.appendChild(emptyMsg);
+                return;
+            }
 
             timeline.forEach(item => {
                 const row = document.createElement('div');
@@ -607,7 +586,7 @@
                 label.className = item.complete
                     ? "text-xs font-black text-slate-800 uppercase tracking-wide"
                     : "text-xs font-black text-slate-400 uppercase tracking-wide";
-                label.textContent = item.label || "--";
+                label.textContent = item.label;
 
                 const timestamp = document.createElement('p');
                 timestamp.className = "text-[10px] font-medium text-slate-400 mt-0.5";
@@ -624,13 +603,11 @@
         }
 
         function renderResultsButton(order) {
-            const ready =
-                order.status &&
-                (order.status.resultStatus === "ready" || order.status.resultStatus === "released");
+            const ready = order.status.resultStatus === "ready" || order.status.resultStatus === "released";
 
             if (ready) {
                 elements.btnViewResults.disabled = false;
-                elements.btnViewResults.className = "w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-full transition cursor-pointer";
+                elements.btnViewResults.className = "w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-full transition cursor-pointer shadow-[0_8px_20px_rgba(5,150,105,0.2)]";
                 elements.btnViewResults.innerText = "View Results Securely";
             } else {
                 elements.btnViewResults.disabled = true;
@@ -683,14 +660,14 @@
         function formatSex(value) {
             if (!value || value === "--") return "--";
 
-            if (value === "female") return "Female";
-            if (value === "male") return "Male";
+            if (value.toLowerCase() === "female") return "Female";
+            if (value.toLowerCase() === "male") return "Male";
 
             return value;
         }
 
         function formatStatus(value) {
-            if (!value) return "--";
+            if (!value || value === "--") return "--";
 
             return value
                 .replace(/_/g, " ")
