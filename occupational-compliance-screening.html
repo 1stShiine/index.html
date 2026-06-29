@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Occupational & Compliance Screening | AccessPoint Dx</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        .page-reveal {
+            animation: pageReveal 0.35s ease-out both;
+        }
+
+        @keyframes pageReveal {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lift-card {
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+        }
+
+        .lift-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .diagnostic-grid {
+            background-color: #ffffff;
+            background-image:
+                linear-gradient(to right, rgba(226, 232, 240, 0.72) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(226, 232, 240, 0.72) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        .drawer-backdrop {
+            transition: opacity 0.2s ease;
+        }
+
+        .drawer-panel {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8FAFC] text-[#0A192F] antialiased selection:bg-[#059669]/10 overflow-x-hidden">
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[500] focus:bg-[#059669] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-xs focus:font-black focus:uppercase focus:tracking-wider">
+        Skip to main content
+    </a>
+
+    <div class="bg-[#0A192F] text-white text-[11px] font-medium border-b border-slate-800">
+        <div class="max-w-7xl mx-auto h-11 px-6 flex items-center justify-between">
+            <div class="flex items-center space-x-6 min-w-0">
+                <span class="flex items-center space-x-2 text-slate-300 min-w-0">
+                    <span class="w-2 h-2 rounded-full bg-[#059669] animate-pulse shrink-0"></span>
+                    <span class="truncate">Occupational screening and compliance support</span>
+                </span>
+                <span class="hidden md:flex items-center space-x-2 text-slate-300">
+                    <span class="text-[#059669]">✓</span>
+                    <span>Separate pathway from clinical care and wellness testing</span>
+                </span>
+            </div>
+
+            <a href="index.html" class="hidden sm:inline-flex text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition">
+                AccessPoint Dx Home
+            </a>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200/70 shadow-sm">
+        <div class="max-w-7xl mx-auto h-24 px-6 flex items-center justify-between">
+
+            <a href="index.html" class="flex items-center space-x-3 group" aria-label="AccessPoint Dx homepage">
+                <svg class="w-11 h-11 shrink-0" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <polyline points="45,15 15,15 15,85 45,85" fill="none" stroke="#0A192F" stroke-width="6" stroke-linecap="square"/>
+                    <circle cx="26" cy="52" r="4" fill="#0A192F"/>
+                    <path d="M45 85 L75 85 Q 85 85 85 75 L85 70 Q 85 65 75 65 L65 65" fill="#059669"/>
+                    <path d="M65 65 Q 85 65 85 45 Q 85 30 70 30" fill="none" stroke="#059669" stroke-width="9" stroke-linecap="round"/>
+                    <line x1="72" y1="30" x2="52" y2="52" stroke="#059669" stroke-width="10" stroke-linecap="round"/>
+                </svg>
+
+                <div class="flex flex-col">
+                    <div class="text-[20px] sm:text-[22px] font-black tracking-tight leading-none">
+                        AccessPoint <span class="text-[#059669]">Dx</span>
+                    </div>
+                    <span class="text-[7.5px] sm:text-[8.5px] font-bold tracking-[0.2em] text-[#059669] uppercase mt-1.5">
+                        Diagnostics Without Barriers
+                    </span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center space-x-8 text-xs font-bold tracking-wide text-slate-600" aria-label="Main navigation">
+                <a href="index.html" class="hover:text-[#059669] transition">Home</a>
+                <a href="provider-partnerships.html" class="hover:text-[#059669] transition">Provider Partnerships</a>
+                <a href="direct-access-testing.html" class="hover:text-[#059669] transition">Axis Point Premium™</a>
+                <a href="occupational-compliance-screening.html" class="text-[#059669] border-b-2 border-[#059669] pb-1">Occupational Screening</a>
+                <a href="#contact-section" class="hover:text-[#059669] transition">Contact</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <a href="#screening-intake" class="hidden sm:inline-flex bg-[#059669] hover:bg-emerald-700 text-white text-[11px] font-black uppercase tracking-wider px-5 py-3 rounded-xl transition shadow-sm">
+                    Request Screening Review
+                </a>
+
+                <button id="mobileMenuButton" type="button" class="lg:hidden p-2 rounded-xl border border-slate-200 bg-white text-[#0A192F] focus:outline-none focus:ring-2 focus:ring-[#059669]/30" aria-label="Open menu" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobileDrawer" class="hidden fixed inset-0 z-[300]" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div id="drawerBackdrop" class="drawer-backdrop absolute inset-0 bg-slate-950/60 opacity-0 backdrop-blur-sm"></div>
+
+        <nav id="drawerPanel" class="drawer-panel absolute top-0 bottom-0 right-0 w-[84%] max-w-sm bg-white shadow-2xl p-6 transform translate-x-full flex flex-col justify-between">
+            <div class="space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <span class="text-xs font-black uppercase tracking-wider text-[#0A192F]">Navigation</span>
+                    <button id="closeDrawerButton" type="button" class="text-xs font-black uppercase tracking-wider text-slate-400 hover:text-red-500">
+                        Close ✕
+                    </button>
+                </div>
+
+                <div class="flex flex-col space-y-2 text-xs font-black uppercase tracking-wider text-slate-600">
+                    <a href="index.html" class="p-3 rounded-xl hover:bg-slate-50">Home</a>
+                    <a href="provider-partnerships.html" class="p-3 rounded-xl hover:bg-slate-50">Provider Partnerships</a>
+                    <a href="direct-access-testing.html" class="p-3 rounded-xl hover:bg-slate-50">Axis Point Premium™</a>
+                    <a href="occupational-compliance-screening.html" class="p-3 rounded-xl bg-emerald-50/60 text-[#059669]">Occupational Screening</a>
+                    <a href="#contact-section" class="p-3 rounded-xl hover:bg-slate-50">Contact</a>
+                </div>
+            </div>
+
+            <a href="#screening-intake" class="w-full text-center bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider py-4 rounded-2xl transition">
+                Request Screening Review
+            </a>
+        </nav>
+    </div>
+
+    <main id="main-content" class="page-reveal">
+
+        <section class="diagnostic-grid relative overflow-hidden border-b border-slate-200/70">
+            <div class="absolute inset-0 bg-gradient-to-b from-white/72 via-white/92 to-[#F8FAFC]"></div>
+
+            <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-14 lg:pt-20 lg:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 shadow-sm">
+                        <span class="w-2 h-2 bg-[#059669] rounded-full"></span>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">Occupational & Compliance Screening</span>
+                    </div>
+
+                    <h1 class="text-[42px] sm:text-[54px] lg:text-[64px] font-black tracking-[-0.045em] leading-[0.95] text-[#0A192F]">
+                        Workforce screening
+                        <span class="block text-[#059669]">with clear boundaries.</span>
+                    </h1>
+
+                    <p class="max-w-2xl text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+                        AccessPoint Dx supports employers, workforce programs, public-sector entities, and organizations needing drug screening, compliance testing, collection coordination, or chain-of-custody support — kept separate from clinical provider relationships and personal wellness testing.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <a href="#screening-intake" class="inline-flex justify-center items-center bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider px-6 py-4 rounded-xl transition shadow-sm">
+                            Request Screening Review ➔
+                        </a>
+                        <a href="index.html" class="inline-flex justify-center items-center bg-white hover:bg-slate-50 border border-slate-200 text-[#0A192F] text-xs font-black uppercase tracking-wider px-6 py-4 rounded-xl transition shadow-sm">
+                            View All Pathways
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="bg-[#0A192F] text-white border border-slate-800 rounded-[2rem] shadow-xl p-6 sm:p-7 space-y-5">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 block mb-1">
+                                    Screening Model
+                                </span>
+                                <h2 class="text-2xl font-black tracking-tight">
+                                    Built for documented workflows.
+                                </h2>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-white text-[#0A192F] flex items-center justify-center text-xl shrink-0">
+                                🛡️
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 text-xs font-semibold text-slate-300 leading-relaxed">
+                            <div class="flex gap-3 bg-white/5 border border-white/10 rounded-2xl p-4">
+                                <span class="text-emerald-400 font-black">✓</span>
+                                <span>Drug screening and compliance testing coordination.</span>
+                            </div>
+                            <div class="flex gap-3 bg-white/5 border border-white/10 rounded-2xl p-4">
+                                <span class="text-emerald-400 font-black">✓</span>
+                                <span>Collection planning for employer and program needs.</span>
+                            </div>
+                            <div class="flex gap-3 bg-white/5 border border-white/10 rounded-2xl p-4">
+                                <span class="text-emerald-400 font-black">✓</span>
+                                <span>Chain-of-custody support and auditable process documentation.</span>
+                            </div>
+                        </div>
+
+                        <p class="text-[10.5px] text-slate-400 font-medium leading-relaxed border-t border-white/10 pt-4">
+                            Occupational screening is not positioned as medical diagnosis or treatment. Employer and compliance workflows remain distinct from personal wellness testing and provider-directed clinical care.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+            <div class="max-w-2xl mb-10 space-y-3">
+                <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block">
+                    Who this pathway supports
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F]">
+                    Screening support for organizations with operational requirements.
+                </h2>
+                <p class="text-sm font-medium leading-relaxed text-slate-600">
+                    This pathway is built for organizations that need screening coordination, documentation, reporting structure, and process clarity — not clinical replacement or consumer wellness positioning.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <div class="lift-card bg-white border border-slate-200 rounded-[1.75rem] p-6 shadow-sm hover:shadow-xl hover:border-[#059669]">
+                    <div class="w-12 h-12 rounded-2xl bg-[#0A192F] text-white flex items-center justify-center mb-7 text-xl">
+                        🏢
+                    </div>
+                    <h3 class="text-xl font-black tracking-tight text-[#0A192F] leading-snug">
+                        Employers & HR Teams
+                    </h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed mt-5">
+                        Screening coordination for organizations needing structured employee testing, onboarding checks, or workplace compliance support.
+                    </p>
+                </div>
+
+                <div class="lift-card bg-white border border-slate-200 rounded-[1.75rem] p-6 shadow-sm hover:shadow-xl hover:border-[#059669]">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 text-[#059669] flex items-center justify-center mb-7 text-xl">
+                        🚚
+                    </div>
+                    <h3 class="text-xl font-black tracking-tight text-[#0A192F] leading-snug">
+                        Safety-Sensitive Workforces
+                    </h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed mt-5">
+                        Support for transportation, construction, manufacturing, field operations, and other roles where documentation and timing matter.
+                    </p>
+                </div>
+
+                <div class="lift-card bg-white border border-slate-200 rounded-[1.75rem] p-6 shadow-sm hover:shadow-xl hover:border-[#059669]">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200 text-[#059669] flex items-center justify-center mb-7 text-xl">
+                        🏛️
+                    </div>
+                    <h3 class="text-xl font-black tracking-tight text-[#0A192F] leading-snug">
+                        Public-Sector Programs
+                    </h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed mt-5">
+                        Coordination for municipal, agency, and public program screening workflows that require auditable process support.
+                    </p>
+                </div>
+
+                <div class="lift-card bg-white border border-slate-200 rounded-[1.75rem] p-6 shadow-sm hover:shadow-xl hover:border-[#059669]">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200 text-[#059669] flex items-center justify-center mb-7 text-xl">
+                        📋
+                    </div>
+                    <h3 class="text-xl font-black tracking-tight text-[#0A192F] leading-snug">
+                        Program Administrators
+                    </h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed mt-5">
+                        Support for teams building screening programs, reviewing vendor options, or standardizing collection and reporting procedures.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 pb-16 lg:pb-20">
+            <div class="bg-white border border-slate-200 rounded-[2rem] shadow-sm p-7 sm:p-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    <div class="lg:col-span-4 space-y-3">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block">
+                            Screening categories
+                        </span>
+                        <h2 class="text-3xl font-black tracking-tight text-[#0A192F]">
+                            Organized for real-world compliance workflows.
+                        </h2>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                            The page should stay high-level until specific service details, collection rules, and regulatory requirements are finalized.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="lift-card border border-slate-200 rounded-2xl p-5 hover:border-[#059669] hover:shadow-lg bg-slate-50/50">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-3">Drug Screening</span>
+                            <h3 class="text-lg font-black text-[#0A192F] tracking-tight">Workplace and program testing</h3>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed mt-3">
+                                Support for drug screening workflows, collection coordination, and documentation needs based on organizational requirements.
+                            </p>
+                        </div>
+
+                        <div class="lift-card border border-slate-200 rounded-2xl p-5 hover:border-[#059669] hover:shadow-lg bg-slate-50/50">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-3">Chain of Custody</span>
+                            <h3 class="text-lg font-black text-[#0A192F] tracking-tight">Auditable collection handling</h3>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed mt-3">
+                                Collection and process documentation designed to support clear handoffs, accountability, and record consistency.
+                            </p>
+                        </div>
+
+                        <div class="lift-card border border-slate-200 rounded-2xl p-5 hover:border-[#059669] hover:shadow-lg bg-slate-50/50">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-3">Collection Coordination</span>
+                            <h3 class="text-lg font-black text-[#0A192F] tracking-tight">Local collection planning</h3>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed mt-3">
+                                Screening workflow planning for employer sites, program locations, or designated collection points where appropriate.
+                            </p>
+                        </div>
+
+                        <div class="lift-card border border-slate-200 rounded-2xl p-5 hover:border-[#059669] hover:shadow-lg bg-slate-50/50">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-3">Compliance Support</span>
+                            <h3 class="text-lg font-black text-[#0A192F] tracking-tight">Program documentation review</h3>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed mt-3">
+                                Support for organizations evaluating screening structure, reporting expectations, and operational documentation needs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 pb-16 lg:pb-20">
+            <div class="max-w-3xl mb-10 space-y-3">
+                <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block">
+                    Clear pathway separation
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F]">
+                    Occupational workflows stay separate from care relationships.
+                </h2>
+                <p class="text-sm font-medium leading-relaxed text-slate-600">
+                    This message helps reassure providers and consumers that occupational screening is a distinct operational pathway.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lift-card bg-white border-2 border-slate-200 rounded-[1.75rem] p-6 hover:shadow-xl hover:border-[#059669]">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-6">
+                        Not Provider Care
+                    </span>
+                    <h3 class="text-2xl font-black tracking-tight text-[#0A192F] leading-snug">
+                        Not a clinical relationship.
+                    </h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed mt-5">
+                        Occupational screening does not replace diagnosis, treatment, medical advice, or a provider-patient relationship.
+                    </p>
+                </div>
+
+                <div class="lift-card bg-white border-2 border-slate-200 rounded-[1.75rem] p-6 hover:shadow-xl hover:border-[#059669]">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-6">
+                        Not Wellness DTC
+                    </span>
+                    <h3 class="text-2xl font-black tracking-tight text-[#0A192F] leading-snug">
+                        Not personal preventive testing.
+                    </h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed mt-5">
+                        Compliance screening is separate from Axis Point Premium™ direct-access wellness and preventive testing.
+                    </p>
+                </div>
+
+                <div class="lift-card bg-white border-2 border-slate-200 rounded-[1.75rem] p-6 hover:shadow-xl hover:border-[#059669]">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-6">
+                        Operational Purpose
+                    </span>
+                    <h3 class="text-2xl font-black tracking-tight text-[#0A192F] leading-snug">
+                        Built for documented requirements.
+                    </h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed mt-5">
+                        The goal is process clarity: collections, documentation, screening coordination, and appropriate reporting workflows.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="screening-intake" class="max-w-7xl mx-auto px-6 pb-16 lg:pb-20">
+            <div class="bg-white border border-slate-200 rounded-[2rem] shadow-sm p-7 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block">
+                        Screening review
+                    </span>
+                    <h2 class="text-3xl font-black tracking-tight text-[#0A192F]">
+                        Start with your organization’s screening needs.
+                    </h2>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                        This first step should collect only basic organizational information and screening interests. Specific program rules, regulatory requirements, and collection details can be reviewed in the next step.
+                    </p>
+
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-[11px] font-semibold text-amber-900 leading-relaxed">
+                        <strong>Demo notice:</strong> This static GitHub Pages form does not send information yet. It only previews the intended workflow.
+                    </div>
+                </div>
+
+                <form class="lg:col-span-7 space-y-4" onsubmit="handleScreeningForm(event)">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label for="organizationName" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">
+                                Organization
+                            </label>
+                            <input id="organizationName" type="text" required placeholder="Organization name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="contactName" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">
+                                Contact Name
+                            </label>
+                            <input id="contactName" type="text" required placeholder="Primary contact" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label for="contactEmail" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">
+                                Email
+                            </label>
+                            <input id="contactEmail" type="email" required placeholder="name@organization.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="organizationType" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">
+                                Organization Type
+                            </label>
+                            <select id="organizationType" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                                <option value="" disabled selected>Select organization type</option>
+                                <option value="employer-hr">Employer / HR Team</option>
+                                <option value="safety-sensitive">Safety-Sensitive Workforce</option>
+                                <option value="public-sector">Public-Sector Program</option>
+                                <option value="program-admin">Program Administrator</option>
+                                <option value="other">Other Organization</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label for="screeningNeeds" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">
+                            Screening Interest
+                        </label>
+                        <select id="screeningNeeds" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                            <option value="" disabled selected>Select primary interest</option>
+                            <option value="drug-screening">Drug Screening</option>
+                            <option value="chain-of-custody">Chain-of-Custody Support</option>
+                            <option value="collection-coordination">Collection Coordination</option>
+                            <option value="compliance-program-review">Compliance Program Review</option>
+                            <option value="multiple-not-sure">Multiple / Not Sure Yet</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label for="needsSummary" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">
+                            What are you trying to coordinate?
+                        </label>
+                        <textarea id="needsSummary" rows="4" placeholder="Employee screening, collection needs, documentation requirements, chain-of-custody support, public program screening, or vendor comparison..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#059669] focus:bg-white transition resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full sm:w-auto bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest px-7 py-4 rounded-xl transition shadow-sm">
+                        Submit Screening Review ➔
+                    </button>
+
+                    <p id="formMessage" class="hidden text-xs font-bold text-[#059669] pt-2">
+                        Screening review captured for demo. In production, this will connect to your form/email workflow.
+                    </p>
+                </form>
+            </div>
+        </section>
+
+        <section id="contact-section" class="bg-[#0A192F] text-white">
+            <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+                <div class="space-y-2">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 block">
+                        AccessPoint Dx
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-black tracking-tight">
+                        Occupational screening where required.
+                    </h2>
+                    <p class="text-sm text-slate-400 font-medium max-w-2xl leading-relaxed">
+                        Provider-first laboratory infrastructure. Consumer-access testing where appropriate. Occupational screening where required. One local lab partner — separate pathways, clear boundaries.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="index.html" class="inline-flex justify-center items-center bg-white text-[#0A192F] hover:bg-slate-100 text-xs font-black uppercase tracking-widest px-6 py-4 rounded-xl transition">
+                        Return Home
+                    </a>
+                    <a href="#screening-intake" class="inline-flex justify-center items-center bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest px-6 py-4 rounded-xl transition">
+                        Request Review
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-[250] bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl shadow-xl px-3 py-2 flex items-center gap-4 text-xs">
+        <a href="index.html" class="text-[#059669] hover:scale-110 transition" title="Home" aria-label="Home">⌂</a>
+        <button type="button" onclick="history.back()" class="text-slate-500 hover:text-[#059669] hover:scale-110 transition font-bold" title="Back" aria-label="Back">←</button>
+        <button type="button" onclick="history.forward()" class="text-slate-500 hover:text-[#059669] hover:scale-110 transition font-bold" title="Forward" aria-label="Forward">→</button>
+        <button type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-slate-500 hover:text-[#059669] hover:scale-110 transition font-bold" title="Top" aria-label="Scroll to top">↑</button>
+    </div>
+
+    <footer class="bg-[#081526] text-slate-500 text-[10px] font-bold uppercase tracking-wider pb-24 pt-6">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <span>© 2026 AccessPoint Dx. All rights reserved.</span>
+            <div class="flex gap-4">
+                <a href="privacy-policy.html" class="hover:text-slate-300 transition">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-slate-300 transition">Terms</a>
+                <a href="hipaa-notice.html" class="hover:text-slate-300 transition">HIPAA Notice</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const drawerBackdrop = document.getElementById('drawerBackdrop');
+        const drawerPanel = document.getElementById('drawerPanel');
+        const closeDrawerButton = document.getElementById('closeDrawerButton');
+
+        function openDrawer() {
+            mobileDrawer.classList.remove('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', 'true');
+
+            setTimeout(() => {
+                drawerBackdrop.classList.remove('opacity-0');
+                drawerBackdrop.classList.add('opacity-100');
+                drawerPanel.classList.remove('translate-x-full');
+            }, 10);
+
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            drawerBackdrop.classList.remove('opacity-100');
+            drawerBackdrop.classList.add('opacity-0');
+            drawerPanel.classList.add('translate-x-full');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+
+            setTimeout(() => {
+                mobileDrawer.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 220);
+        }
+
+        mobileMenuButton.addEventListener('click', openDrawer);
+        closeDrawerButton.addEventListener('click', closeDrawer);
+        drawerBackdrop.addEventListener('click', closeDrawer);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !mobileDrawer.classList.contains('hidden')) {
+                closeDrawer();
+            }
+
+            if (event.altKey && event.key.toLowerCase() === 'h') {
+                event.preventDefault();
+                window.location.href = 'index.html';
+            }
+        });
+
+        document.querySelectorAll('#mobileDrawer a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (link.getAttribute('href').startsWith('#')) {
+                    closeDrawer();
+                }
+            });
+        });
+
+        function handleScreeningForm(event) {
+            event.preventDefault();
+
+            const formMessage = document.getElementById('formMessage');
+            formMessage.classList.remove('hidden');
+
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+
+            button.textContent = 'Review Captured ✓';
+            button.disabled = true;
+            button.classList.add('opacity-80');
+
+            const payload = {
+                organizationName: document.getElementById('organizationName').value.trim(),
+                contactName: document.getElementById('contactName').value.trim(),
+                contactEmail: document.getElementById('contactEmail').value.trim(),
+                organizationType: document.getElementById('organizationType').value,
+                screeningNeeds: document.getElementById('screeningNeeds').value,
+                needsSummary: document.getElementById('needsSummary').value.trim(),
+                submittedAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('apdxOccupationalScreeningDemoRequest', JSON.stringify(payload));
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+                button.classList.remove('opacity-80');
+            }, 1800);
+        }
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.addEventListener('touchstart', (event) => {
+            if (!event.changedTouches || event.changedTouches.length === 0) return;
+            touchStartX = event.changedTouches[0].screenX;
+            touchStartY = event.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (event) => {
+            if (!event.changedTouches || event.changedTouches.length === 0) return;
+
+            const touchEndX = event.changedTouches[0].screenX;
+            const touchEndY = event.changedTouches[0].screenY;
+
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = Math.abs(touchEndY - touchStartY);
+
+            if (deltaY > 80) return;
+
+            if (deltaX > 120 && touchStartX < 35) {
+                history.back();
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
