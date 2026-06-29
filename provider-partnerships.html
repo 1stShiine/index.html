@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Partnerships | AccessPoint Dx</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .diagnostic-pattern {
+            background-color: #ffffff;
+            background-image:
+                linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+                linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        .soft-glow {
+            box-shadow: 0 20px 70px rgba(15, 23, 42, 0.08);
+        }
+
+        .lift-card {
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        }
+
+        .lift-card:hover {
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-[#0A192F] antialiased selection:bg-[#059669]/10">
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[999] focus:bg-[#059669] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-xs focus:font-black focus:uppercase">
+        Skip to main content
+    </a>
+
+    <div class="bg-[#0A192F] text-white text-[11px] font-medium border-b border-slate-800">
+        <div class="max-w-7xl mx-auto h-11 px-6 flex items-center justify-between">
+            <div class="flex items-center gap-5 overflow-hidden">
+                <span class="flex items-center gap-2 text-slate-300 whitespace-nowrap">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                    Provider-First Laboratory Partnerships
+                </span>
+                <span class="hidden sm:flex items-center gap-2 text-slate-300 whitespace-nowrap">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                    Minnesota-Centered Support
+                </span>
+            </div>
+
+            <a href="#provider-review" class="bg-[#059669] hover:bg-emerald-700 text-white font-black px-3 py-1.5 rounded-lg text-[10px] tracking-wider transition uppercase whitespace-nowrap">
+                Request Review →
+            </a>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group" aria-label="AccessPoint Dx home">
+                <svg class="w-11 h-11 shrink-0" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <polyline points="45,15 15,15 15,85 45,85" fill="none" stroke="#0A192F" stroke-width="6" stroke-linecap="square"/>
+                    <circle cx="26" cy="52" r="4" fill="#0A192F"/>
+                    <path d="M45 85 L75 85 Q 85 85 85 75 L85 70 Q 85 65 75 65 L65 65" fill="#059669"/>
+                    <path d="M65 65 Q 85 65 85 45 Q 85 30 70 30" fill="none" stroke="#059669" stroke-width="9" stroke-linecap="round"/>
+                    <line x1="72" y1="30" x2="52" y2="52" stroke="#059669" stroke-width="10" stroke-linecap="round"/>
+                </svg>
+
+                <div class="flex flex-col justify-center">
+                    <div class="text-[20px] sm:text-[22px] font-black tracking-tight text-[#0A192F] leading-none">
+                        AccessPoint <span class="text-[#059669]">Dx</span>
+                    </div>
+                    <span class="text-[7.5px] sm:text-[8.5px] font-bold tracking-[0.2em] text-[#059669] uppercase mt-1.5">
+                        Diagnostics Without Barriers
+                    </span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-9 text-xs font-black tracking-[0.08em] text-slate-700">
+                <a href="index.html" class="hover:text-[#059669] transition">Home</a>
+                <a href="#who-we-support" class="hover:text-[#059669] transition">Who We Support</a>
+                <a href="#local-partner" class="hover:text-[#059669] transition">Why Local</a>
+                <a href="#integration" class="hover:text-[#059669] transition">Integration</a>
+                <a href="#boundaries" class="hover:text-[#059669] transition">Care Boundaries</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="direct-access-testing.html" class="border border-slate-300 hover:border-[#059669] text-[#0A192F] px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition">
+                    Axis Point Premium™
+                </a>
+                <a href="#provider-review" class="bg-[#0A192F] hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition">
+                    Provider Review →
+                </a>
+            </div>
+
+            <button id="mobileMenuButton" class="lg:hidden p-2 rounded-xl hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#059669]/20" aria-label="Open mobile menu" aria-expanded="false">
+                <svg class="w-7 h-7 text-[#0A192F]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-100 bg-white shadow-xl">
+            <nav class="px-6 py-6 space-y-4 text-xs font-black uppercase tracking-wider text-slate-700">
+                <a href="index.html" class="block hover:text-[#059669] transition">Home</a>
+                <a href="#who-we-support" class="block hover:text-[#059669] transition">Who We Support</a>
+                <a href="#local-partner" class="block hover:text-[#059669] transition">Why Local</a>
+                <a href="#integration" class="block hover:text-[#059669] transition">Integration</a>
+                <a href="#boundaries" class="block hover:text-[#059669] transition">Care Boundaries</a>
+                <a href="direct-access-testing.html" class="block hover:text-[#059669] transition">Axis Point Premium™</a>
+                <a href="occupational-compliance-screening.html" class="block hover:text-[#059669] transition">Occupational Screening</a>
+                <a href="#provider-review" class="block text-[#059669] transition">Request Provider Review</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <section class="diagnostic-pattern relative overflow-hidden border-b border-slate-100">
+            <div class="absolute inset-0 bg-gradient-to-b from-white/50 via-white/80 to-white"></div>
+
+            <div class="relative max-w-7xl mx-auto px-6 pt-14 pb-16 lg:pt-20 lg:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-7">
+                    <div class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-[#059669]"></span>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                            Provider-first. Locally grounded.
+                        </span>
+                    </div>
+
+                    <div class="space-y-5">
+                        <h1 class="text-[42px] sm:text-[56px] lg:text-[68px] font-black tracking-[-0.055em] leading-[0.94] text-[#0A192F]">
+                            A local laboratory partner for Minnesota providers.
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-slate-600 font-medium leading-relaxed max-w-2xl">
+                            AccessPoint Dx supports clinics, specialty practices, long-term care, and healthcare organizations with local lab partnership pathways, test menu access, onboarding support, and integration-readiness coordination.
+                        </p>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 soft-glow max-w-2xl">
+                        <p class="text-sm sm:text-base font-black text-[#0A192F] leading-relaxed">
+                            Built to support local care teams —
+                            <span class="text-[#059669]"> not replace them.</span>
+                        </p>
+                        <p class="text-xs text-slate-500 font-medium leading-relaxed mt-2">
+                            Consumer-access testing and occupational screening remain separate pathways with clear boundaries, so provider relationships stay protected.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="#provider-review" class="inline-flex items-center justify-center bg-[#059669] hover:bg-emerald-700 text-white px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition shadow-[0_8px_20px_rgba(5,150,105,0.18)]">
+                            Request Partnership Review →
+                        </a>
+
+                        <a href="#who-we-support" class="inline-flex items-center justify-center bg-white border border-slate-300 hover:border-[#059669] text-[#0A192F] px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition">
+                            See Who We Support
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="bg-white border border-slate-200 rounded-[2rem] p-6 soft-glow">
+                        <div class="bg-[#0A192F] rounded-[1.5rem] p-6 text-white space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400">Provider Model</span>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">MN</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+                                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">Partnership</span>
+                                    <p class="text-sm font-bold">A local diagnostic partner for care organizations seeking responsive support.</p>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+                                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">Access</span>
+                                    <p class="text-sm font-bold">Test menu visibility, onboarding guidance, and appropriate service review.</p>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+                                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">Coordination</span>
+                                    <p class="text-sm font-bold">Integration-readiness and workflow handoff to the right technical partners.</p>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 border-t border-white/10 text-[11px] text-slate-400 font-medium leading-relaxed">
+                                Provider conversations should begin with relationship fit, menu needs, logistics, and interface readiness — not a public workflow portal.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="who-we-support" class="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="text-[10px] font-black tracking-widest text-[#059669] uppercase">
+                    Who We Support
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F]">
+                    Built for care environments that need responsive lab support.
+                </h2>
+                <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                    The provider pathway focuses on relationship, onboarding, and coordination — not public access to clinical workflows.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="lift-card bg-white border border-slate-200 rounded-[1.75rem] p-6 shadow-sm hover:shadow-xl hover:border-[#059669]">
+                    <div class="w-11 h-11 rounded-2xl bg-[#0A192F] text-white flex items-center justify-center text-xl mb-5">🩺</div>
+                    <h3 class="text-lg font-black tracking-tight text-[#0A192F] mb-3">Clinics & Specialty Practices</h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                        Local lab partnership support for practices seeking responsive diagnostics, menu review, and onboarding alignment.
+                    </p>
+                </div>
+
+                <div class="lift-card bg-white border border-slate-200 rounded-[1.75rem] p-6 shadow-sm hover:shadow-xl hover:border-[#059669]">
+                    <div class="w-11 h-11 rounded-2xl bg-emerald-50 text-[#059669] border border-emerald-100 flex items-center justify-center text-xl mb-5">🏥</div>
+                    <h3 class="text-lg font-black tracking-tight text-[#0A192F] mb-3">Long-Term Care & Hospice</h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                        Coordination support for care settings that depend on predictable specimen handling and timely communication.
+                    </p>
+                </div>
+
+                <div class="lift-card bg-white border border-slate-200 rounded-[1.75rem] p-6 shadow-sm hover:shadow-xl hover:border-[#059669]">
+                    <div class="w-11 h-11 rounded-2xl bg-slate-100 text-[#0A192F] border border-slate-200 flex items-center justify-center text-xl mb-5">🧪</div>
+                    <h3 class="text-lg font-black tracking-tight text-[#0A192F] mb-3">Healthcare Organizations & Programs</h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                        Support for organizations evaluating local laboratory options, test menus, and collection coordination.
+                    </p>
+                </div>
+
+                <div class="lift-card bg-white border border-slate-200 rounded-[1.75rem] p-6 shadow-sm hover:shadow-xl hover:border-[#059669]">
+                    <div class="w-11 h-11 rounded-2xl bg-slate-100 text-[#0A192F] border border-slate-200 flex items-center justify-center text-xl mb-5">🔗</div>
+                    <h3 class="text-lg font-black tracking-tight text-[#0A192F] mb-3">Integration-Ready Teams</h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                        Coordination for practices that need EHR connectivity review, middleware readiness, or structured technical intake.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="local-partner" class="bg-slate-50 border-y border-slate-200/70 py-16 lg:py-20">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-5">
+                    <span class="text-[10px] font-black tracking-widest text-[#059669] uppercase block mb-3">
+                        Why Local Partnership Matters
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F] leading-tight">
+                        Local support can reduce friction between collection, communication, and clinical follow-up.
+                    </h2>
+                </div>
+
+                <div class="lg:col-span-7 space-y-5">
+                    <p class="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+                        Many care teams rely on national laboratory channels that can feel distant from day-to-day clinical operations. AccessPoint Dx is positioned around local responsiveness, direct communication pathways, and a partnership model that supports the provider’s role in patient care.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-2">Closer support</span>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed">
+                                A Minnesota-centered model can simplify communication and relationship-building.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-2">Cleaner onboarding</span>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed">
+                                Provider intake can focus on menu needs, logistics, and integration readiness.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-2">Protected trust</span>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed">
+                                Consumer and occupational pathways remain separate from provider partnership workflows.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="integration" class="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                <div class="lg:col-span-5 space-y-5">
+                    <span class="text-[10px] font-black tracking-widest text-[#059669] uppercase">
+                        Integration-Readiness Coordination
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F] leading-tight">
+                        We help collect the right information before technical handoff.
+                    </h2>
+                    <p class="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+                        Provider integration should not begin with vague forms. AccessPoint Dx can guide structured intake around systems, ordering needs, result delivery, contacts, and technical readiness before coordination with middleware or LIS partners.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="bg-[#0A192F] text-white rounded-[2rem] p-7 soft-glow">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="border border-white/10 rounded-2xl p-5">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 block mb-2">Systems</span>
+                                <p class="text-sm text-slate-300 font-medium leading-relaxed">
+                                    EHR, practice management, middleware, and existing lab connectivity details.
+                                </p>
+                            </div>
+
+                            <div class="border border-white/10 rounded-2xl p-5">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 block mb-2">Ordering</span>
+                                <p class="text-sm text-slate-300 font-medium leading-relaxed">
+                                    Test menu needs, ordering workflow, specimen types, and reporting expectations.
+                                </p>
+                            </div>
+
+                            <div class="border border-white/10 rounded-2xl p-5">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 block mb-2">Contacts</span>
+                                <p class="text-sm text-slate-300 font-medium leading-relaxed">
+                                    Clinical, administrative, billing, and technical contacts for implementation.
+                                </p>
+                            </div>
+
+                            <div class="border border-white/10 rounded-2xl p-5">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 block mb-2">Handoff</span>
+                                <p class="text-sm text-slate-300 font-medium leading-relaxed">
+                                    Structured coordination with the technical team once the provider fit is clear.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-6 border-t border-white/10">
+                            <p class="text-xs text-slate-400 font-medium leading-relaxed">
+                                This page is not intended to function as a live provider portal. It is the relationship and intake layer before deeper operational setup.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="boundaries" class="bg-slate-50 border-y border-slate-200/70 py-16 lg:py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="max-w-3xl mb-10 space-y-3">
+                    <span class="text-[10px] font-black tracking-widest text-[#059669] uppercase">
+                        Clear Boundaries
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F] leading-tight">
+                        Separate pathways protect provider trust.
+                    </h2>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                        AccessPoint Dx can support provider partnerships, direct-access wellness testing, and occupational screening without mixing the purpose of each pathway.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lift-card bg-white border-2 border-slate-200 rounded-[1.75rem] p-6 hover:shadow-xl hover:border-[#059669]">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-3">Provider Partnerships</span>
+                        <h3 class="text-xl font-black tracking-tight text-[#0A192F] mb-3">Clinical relationship first.</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                            Provider partnerships focus on lab relationship, testing access, onboarding, logistics, and integration readiness.
+                        </p>
+                    </div>
+
+                    <div class="lift-card bg-white border-2 border-slate-200 rounded-[1.75rem] p-6 hover:shadow-xl hover:border-[#059669]">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-3">Axis Point Premium™</span>
+                        <h3 class="text-xl font-black tracking-tight text-[#0A192F] mb-3">Consumer access where appropriate.</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                            Direct-access testing is positioned for appropriate self-pay wellness and preventive testing, with reports designed to support follow-up with local providers when needed.
+                        </p>
+                    </div>
+
+                    <div class="lift-card bg-white border-2 border-slate-200 rounded-[1.75rem] p-6 hover:shadow-xl hover:border-[#059669]">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-3">Occupational Screening</span>
+                        <h3 class="text-xl font-black tracking-tight text-[#0A192F] mb-3">Compliance workflows stay separate.</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                            Employer and public-sector screening should remain distinct from patient-provider clinical relationships and personal wellness testing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="provider-review" class="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-[10px] font-black tracking-widest text-[#059669] uppercase">
+                        Request Provider Partnership Review
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F] leading-tight">
+                        Start with basic public practice information.
+                    </h2>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                        This demo form is a front-end placeholder for GitHub Pages. In production, this should connect to a secure CRM, form backend, or intake workflow before any sensitive information is collected.
+                    </p>
+
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-xs text-amber-900 font-medium leading-relaxed">
+                        <strong>Important:</strong> Do not submit patient information, PHI, or confidential clinical data through this static demo form.
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <form id="providerForm" class="bg-white border border-slate-200 rounded-[2rem] p-6 sm:p-8 shadow-sm space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label for="practiceName" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Practice / Organization Name</label>
+                                <input id="practiceName" type="text" required placeholder="Example Clinic" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                            </div>
+
+                            <div class="space-y-1">
+                                <label for="contactName" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Contact Name</label>
+                                <input id="contactName" type="text" required placeholder="Full name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label for="contactEmail" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Email</label>
+                                <input id="contactEmail" type="email" required placeholder="name@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                            </div>
+
+                            <div class="space-y-1">
+                                <label for="organizationType" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">Organization Type</label>
+                                <select id="organizationType" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition">
+                                    <option>Clinic / Specialty Practice</option>
+                                    <option>Long-Term Care</option>
+                                    <option>Hospice / Home Care</option>
+                                    <option>Healthcare Organizations & Programs</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="providerNeed" class="text-[10px] font-black uppercase tracking-widest text-slate-500 block ml-1">What are you looking for?</label>
+                            <textarea id="providerNeed" rows="5" placeholder="Briefly describe test menu needs, integration interest, courier/logistics needs, or onboarding questions." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 rounded-xl transition shadow-[0_8px_20px_rgba(5,150,105,0.18)]">
+                            Submit Provider Review Request →
+                        </button>
+
+                        <p id="formSuccess" class="hidden text-xs font-bold text-[#059669] bg-emerald-50 border border-emerald-100 rounded-xl p-4">
+                            Demo request captured locally. In production, this would be routed to the AccessPoint Dx provider intake team.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 pb-16 lg:pb-20">
+            <div class="bg-gradient-to-r from-slate-900 to-[#0A192F] rounded-[2rem] p-8 sm:p-10 text-white flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div class="space-y-2 max-w-2xl">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 block">
+                        Explore other AccessPoint Dx pathways
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-black tracking-tight">
+                        Different needs deserve separate doors.
+                    </h2>
+                    <p class="text-sm text-slate-300 font-medium leading-relaxed">
+                        Consumers can use Axis Point Premium™ for appropriate self-pay testing, while employers can use a separate occupational screening pathway.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row lg:flex-col gap-3 min-w-full sm:min-w-0 lg:min-w-[260px]">
+                    <a href="direct-access-testing.html" class="bg-white hover:bg-slate-100 text-[#0A192F] text-xs font-black uppercase tracking-widest py-4 px-6 rounded-xl text-center transition">
+                        Axis Point Premium™
+                    </a>
+                    <a href="occupational-compliance-screening.html" class="border border-white/20 hover:bg-white/10 text-white text-xs font-black uppercase tracking-widest py-4 px-6 rounded-xl text-center transition">
+                        Occupational Screening
+                    </a>
+                    <a href="index.html" class="border border-white/20 hover:bg-white/10 text-white text-xs font-black uppercase tracking-widest py-4 px-6 rounded-xl text-center transition">
+                        Back to Homepage
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-slate-200 p-1.5 rounded-2xl shadow-xl flex items-center z-[250] select-none text-xs">
+        <div class="hidden md:flex items-center gap-4 px-2">
+            <a href="index.html" class="text-[#059669] text-sm hover:scale-110 transition" title="Home">⌂</a>
+            <button onclick="history.back()" class="text-slate-500 font-black hover:text-[#059669] transition" title="Back">←</button>
+            <button onclick="history.forward()" class="text-slate-500 font-black hover:text-[#059669] transition" title="Forward">→</button>
+            <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="text-slate-500 font-black hover:text-[#059669] transition" title="Top">↑</button>
+        </div>
+
+        <div class="md:hidden flex items-center gap-3 px-1.5 py-0.5">
+            <a href="index.html" class="text-[#059669] text-xs">⌂</a>
+            <button onclick="history.back()" class="text-slate-500 font-black">←</button>
+            <button onclick="history.forward()" class="text-slate-500 font-black">→</button>
+            <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="text-slate-500 font-black">↑</button>
+        </div>
+    </div>
+
+    <footer id="footer-anchor" class="bg-[#0A192F] text-white pt-14 pb-24 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 space-y-10">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-800 pb-10">
+                <div>
+                    <h3 class="text-2xl sm:text-3xl font-black tracking-tight">
+                        AccessPoint <span class="text-[#059669]">Dx</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 font-medium mt-2 max-w-xl leading-relaxed">
+                        Minnesota-centered laboratory services supporting provider partnerships, direct-access testing where appropriate, and occupational screening where required.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="#provider-review" class="bg-[#059669] hover:bg-emerald-700 text-white px-6 py-3.5 rounded-xl text-xs font-black uppercase tracking-widest text-center transition">
+                        Provider Review
+                    </a>
+                    <a href="index.html" class="border border-slate-700 hover:bg-slate-800 text-white px-6 py-3.5 rounded-xl text-xs font-black uppercase tracking-widest text-center transition">
+                        Homepage
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-[11px]">
+                <div class="space-y-3">
+                    <h4 class="font-black tracking-widest text-white uppercase text-[10px]">Pathways</h4>
+                    <ul class="space-y-2 text-slate-400 font-medium">
+                        <li><a href="provider-partnerships.html" class="text-white font-bold pointer-events-none">Provider Partnerships</a></li>
+                        <li><a href="direct-access-testing.html" class="hover:text-white transition">Axis Point Premium™</a></li>
+                        <li><a href="occupational-compliance-screening.html" class="hover:text-white transition">Occupational Screening</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-black tracking-widest text-white uppercase text-[10px]">Provider</h4>
+                    <ul class="space-y-2 text-slate-400 font-medium">
+                        <li><a href="#who-we-support" class="hover:text-white transition">Who We Support</a></li>
+                        <li><a href="#integration" class="hover:text-white transition">Integration Readiness</a></li>
+                        <li><a href="#provider-review" class="hover:text-white transition">Request Review</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-black tracking-widest text-white uppercase text-[10px]">Legal</h4>
+                    <ul class="space-y-2 text-slate-400 font-medium">
+                        <li><a href="privacy-policy.html" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition">Terms</a></li>
+                        <li><a href="refund-policy.html" class="hover:text-white transition">Refund Policy</a></li>
+                        <li><a href="hipaa-notice.html" class="hover:text-white transition">HIPAA Notice</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-black tracking-widest text-white uppercase text-[10px]">Contact</h4>
+                    <ul class="space-y-2 text-slate-400 font-medium">
+                        <li>Minneapolis, Minnesota</li>
+                        <li>info@accesspointdx.com</li>
+                        <li>Phone coming soon</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-[10px] text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4 font-bold uppercase tracking-wider">
+                <div>© 2026 AccessPoint Dx. All rights reserved.</div>
+                <div>Provider-first laboratory infrastructure</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const providerForm = document.getElementById('providerForm');
+            const formSuccess = document.getElementById('formSuccess');
+
+            // Add lift-card classes to the dynamically rendered sections if needed, though they are hard-coded above.
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isOpen = !mobileMenu.classList.contains('hidden');
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
+                });
+
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+
+            if (providerForm) {
+                providerForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+
+                    const payload = {
+                        practiceName: document.getElementById('practiceName').value.trim(),
+                        contactName: document.getElementById('contactName').value.trim(),
+                        contactEmail: document.getElementById('contactEmail').value.trim(),
+                        organizationType: document.getElementById('organizationType').value,
+                        providerNeed: document.getElementById('providerNeed').value.trim(),
+                        createdAt: new Date().toISOString()
+                    };
+
+                    localStorage.setItem('apdxProviderReviewDemo', JSON.stringify(payload));
+                    formSuccess.classList.remove('hidden');
+                    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
+
+            document.addEventListener('keydown', (event) => {
+                if (event.altKey && event.key.toLowerCase() === 'h') {
+                    event.preventDefault();
+                    window.location.href = 'index.html';
+                }
+
+                if (event.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenuButton.focus();
+                }
+            });
+
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', (event) => {
+                touchStartX = event.changedTouches[0].screenX;
+            }, { passive: true });
+
+            document.addEventListener('touchend', (event) => {
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipeGesture();
+            }, { passive: true });
+
+            function handleSwipeGesture() {
+                const distance = touchEndX - touchStartX;
+                const threshold = 120;
+
+                if (Math.abs(distance) < threshold) return;
+
+                if (distance > 0 && window.history.length > 1) {
+                    history.back();
+                }
+            }
+
+            try {
+                const pageHistory = JSON.parse(localStorage.getItem('apdx_site_history') || '[]');
+                const currentPage = {
+                    file: 'provider-partnerships.html',
+                    name: 'Provider Partnerships',
+                    visitedAt: new Date().toISOString()
+                };
+
+                const updatedHistory = pageHistory
+                    .filter(item => item.file !== currentPage.file)
+                    .slice(0, 5);
+
+                updatedHistory.unshift(currentPage);
+                localStorage.setItem('apdx_site_history', JSON.stringify(updatedHistory));
+            } catch (error) {
+                console.warn('History tracking unavailable:', error);
+            }
+        });
+    </script>
+</body>
+</html>
