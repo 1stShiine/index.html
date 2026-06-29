@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use | AccessPoint Dx</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        .page-reveal {
+            animation: pageReveal 0.35s ease-out both;
+        }
+
+        @keyframes pageReveal {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .diagnostic-grid {
+            background-color: #ffffff;
+            background-image:
+                linear-gradient(to right, rgba(226, 232, 240, 0.72) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(226, 232, 240, 0.72) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        .drawer-backdrop {
+            transition: opacity 0.2s ease;
+        }
+
+        .drawer-panel {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .policy-card h2 {
+            font-size: 1rem;
+            font-weight: 900;
+            color: #0A192F;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.75rem;
+        }
+
+        .policy-card p,
+        .policy-card li {
+            font-size: 0.875rem;
+            line-height: 1.75;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .policy-card ul {
+            margin-top: 0.75rem;
+            padding-left: 1.25rem;
+            list-style-type: disc;
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8FAFC] text-[#0A192F] antialiased selection:bg-[#059669]/10 overflow-x-hidden">
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[500] focus:bg-[#059669] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-xs focus:font-black focus:uppercase focus:tracking-wider">
+        Skip to main content
+    </a>
+
+    <!-- TOP BAR -->
+    <div class="bg-[#0A192F] text-white text-[11px] font-medium border-b border-slate-800">
+        <div class="max-w-7xl mx-auto h-11 px-6 flex items-center justify-between">
+            <div class="flex items-center space-x-6 min-w-0">
+                <span class="flex items-center space-x-2 text-slate-300 min-w-0">
+                    <span class="w-2 h-2 rounded-full bg-[#059669] animate-pulse shrink-0"></span>
+                    <span class="truncate">Terms for website and service workflows</span>
+                </span>
+                <span class="hidden md:flex items-center space-x-2 text-slate-300">
+                    <span class="text-[#059669]">✓</span>
+                    <span>AccessPoint Dx website terms</span>
+                </span>
+            </div>
+
+            <a href="index.html" class="hidden sm:inline-flex text-[10px] font-black uppercase tracking-wider text-slate-300 hover:text-white transition">
+                AccessPoint Dx Home
+            </a>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200/70 shadow-sm">
+        <div class="max-w-7xl mx-auto h-24 px-6 flex items-center justify-between">
+
+            <a href="index.html" class="flex items-center space-x-3 group" aria-label="AccessPoint Dx homepage">
+                <svg class="w-11 h-11 shrink-0" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <polyline points="45,15 15,15 15,85 45,85" fill="none" stroke="#0A192F" stroke-width="6" stroke-linecap="square"/>
+                    <circle cx="26" cy="52" r="4" fill="#0A192F"/>
+                    <path d="M45 85 L75 85 Q 85 85 85 75 L85 70 Q 85 65 75 65 L65 65" fill="#059669"/>
+                    <path d="M65 65 Q 85 65 85 45 Q 85 30 70 30" fill="none" stroke="#059669" stroke-width="9" stroke-linecap="round"/>
+                    <line x1="72" y1="30" x2="52" y2="52" stroke="#059669" stroke-width="10" stroke-linecap="round"/>
+                </svg>
+
+                <div class="flex flex-col">
+                    <div class="text-[20px] sm:text-[22px] font-black tracking-tight leading-none">
+                        AccessPoint <span class="text-[#059669]">Dx</span>
+                    </div>
+                    <span class="text-[7.5px] sm:text-[8.5px] font-bold tracking-[0.2em] text-[#059669] uppercase mt-1.5">
+                        Diagnostics Without Barriers
+                    </span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center space-x-8 text-xs font-bold tracking-wide text-slate-600" aria-label="Main navigation">
+                <a href="index.html" class="hover:text-[#059669] transition">Home</a>
+                <a href="provider-partnerships.html" class="hover:text-[#059669] transition">Provider Partnerships</a>
+                <a href="direct-access-testing.html" class="hover:text-[#059669] transition">Axis Point Premium™</a>
+                <a href="occupational-compliance-screening.html" class="hover:text-[#059669] transition">Occupational Screening</a>
+                <a href="terms.html" class="text-[#059669] border-b-2 border-[#059669] pb-1">Terms</a>
+            </nav>
+
+            <button id="mobileMenuButton" type="button" class="lg:hidden p-2 rounded-xl border border-slate-200 bg-white text-[#0A192F] focus:outline-none focus:ring-2 focus:ring-[#059669]/30" aria-label="Open menu" aria-expanded="false">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE DRAWER -->
+    <div id="mobileDrawer" class="hidden fixed inset-0 z-[300]" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div id="drawerBackdrop" class="drawer-backdrop absolute inset-0 bg-slate-950/60 opacity-0 backdrop-blur-sm"></div>
+
+        <nav id="drawerPanel" class="drawer-panel absolute top-0 bottom-0 right-0 w-[84%] max-w-sm bg-white shadow-2xl p-6 transform translate-x-full flex flex-col justify-between">
+            <div class="space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <span class="text-xs font-black uppercase tracking-wider text-[#0A192F]">Navigation</span>
+                    <button id="closeDrawerButton" type="button" class="text-xs font-black uppercase tracking-wider text-slate-400 hover:text-red-500">
+                        Close ✕
+                    </button>
+                </div>
+
+                <div class="flex flex-col space-y-2 text-xs font-black uppercase tracking-wider text-slate-600">
+                    <a href="index.html" class="p-3 rounded-xl hover:bg-slate-50">Home</a>
+                    <a href="provider-partnerships.html" class="p-3 rounded-xl hover:bg-slate-50">Provider Partnerships</a>
+                    <a href="direct-access-testing.html" class="p-3 rounded-xl hover:bg-slate-50">Axis Point Premium™</a>
+                    <a href="occupational-compliance-screening.html" class="p-3 rounded-xl hover:bg-slate-50">Occupational Screening</a>
+                    <a href="privacy-policy.html" class="p-3 rounded-xl hover:bg-slate-50">Privacy Policy</a>
+                    <a href="terms.html" class="p-3 rounded-xl bg-emerald-50/60 text-[#059669]">Terms</a>
+                    <a href="refund-policy.html" class="p-3 rounded-xl hover:bg-slate-50">Refund Policy</a>
+                    <a href="hipaa-notice.html" class="p-3 rounded-xl hover:bg-slate-50">HIPAA Notice</a>
+                </div>
+            </div>
+
+            <a href="index.html" class="w-full text-center bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-wider py-4 rounded-2xl transition">
+                Return Home
+            </a>
+        </nav>
+    </div>
+
+    <main id="main-content" class="page-reveal">
+
+        <!-- HERO -->
+        <section class="diagnostic-grid relative overflow-hidden border-b border-slate-200/70">
+            <div class="absolute inset-0 bg-gradient-to-b from-white/72 via-white/92 to-[#F8FAFC]"></div>
+
+            <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-14 lg:pt-20 lg:pb-20">
+                <div class="max-w-3xl space-y-5">
+                    <div class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 shadow-sm">
+                        <span class="w-2 h-2 bg-[#059669] rounded-full"></span>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">Terms of Use</span>
+                    </div>
+
+                    <h1 class="text-[42px] sm:text-[54px] lg:text-[64px] font-black tracking-[-0.045em] leading-[0.95] text-[#0A192F]">
+                        Terms for using
+                        <span class="block text-[#059669]">AccessPoint Dx online services.</span>
+                    </h1>
+
+                    <p class="max-w-2xl text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+                        These Terms of Use explain the rules for using this website, submitting inquiries, and interacting with AccessPoint Dx prototype service workflows.
+                    </p>
+
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-[11px] font-semibold text-amber-900 leading-relaxed max-w-2xl">
+                        <strong>Draft notice:</strong> This page is provided as practical website terms language for your prototype. It should be reviewed by qualified legal counsel before production use.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TERMS CONTENT -->
+        <section class="max-w-5xl mx-auto px-6 py-12 lg:py-16">
+            <div class="bg-white border border-slate-200 rounded-[2rem] shadow-sm p-6 sm:p-8 lg:p-10 space-y-8 policy-card">
+
+                <div class="border-b border-slate-100 pb-6">
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">
+                        Effective date: June 2026
+                    </p>
+                    <p class="mt-3">
+                        These Terms of Use govern access to and use of the AccessPoint Dx website, including provider partnership inquiries, Axis Point Premium™ direct-access testing workflows, occupational and compliance screening inquiries, and related online tools. By using this website, you agree to these Terms.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>1. Website Information Only</h2>
+                    <p>
+                        Content on this website is provided for general informational and operational purposes. It does not constitute medical advice, diagnosis, treatment, legal advice, regulatory advice, or a guarantee of service availability. Users should consult qualified professionals for medical, legal, regulatory, or compliance-specific guidance.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>2. No Emergency Use</h2>
+                    <p>
+                        This website is not intended for emergencies, urgent medical needs, crisis situations, or time-sensitive clinical communication. If you are experiencing a medical emergency, call emergency services or seek immediate care.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>3. Provider Partnerships</h2>
+                    <p>
+                        Provider partnership information is intended for clinics, care organizations, and healthcare teams evaluating laboratory partnership, onboarding, test menu access, or integration-readiness coordination. Submitting a provider inquiry does not create a client relationship, contract, service guarantee, or laboratory account unless separately reviewed and accepted by AccessPoint Dx.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>4. Axis Point Premium™ Direct-Access Testing</h2>
+                    <p>
+                        Axis Point Premium™ may describe direct-access, self-pay wellness and preventive testing workflows. Direct-access testing is not a replacement for medical care, diagnosis, treatment, or advice from a licensed healthcare provider. Patients are encouraged to share results with their healthcare provider, especially for abnormal, unexpected, or concerning findings.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>5. Occupational and Compliance Screening</h2>
+                    <p>
+                        Occupational and compliance screening information is intended for employers, workforce programs, public-sector entities, and organizations reviewing screening coordination, documentation, collection, or chain-of-custody support. This pathway is separate from provider-directed clinical care and personal direct-access wellness testing.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>6. User Responsibilities</h2>
+                    <p>
+                        Users agree to provide accurate information when submitting forms or interacting with prototype workflows. Users must not submit false, misleading, unlawful, unauthorized, or inappropriate information. Users should not submit protected health information or sensitive personal information through general inquiry forms unless a secure, approved workflow is provided.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>7. Prototype and Static Website Features</h2>
+                    <p>
+                        Some website features may be prototypes, demonstrations, or static GitHub Pages workflows. Prototype forms may save information locally in the user’s browser and may not transmit information to AccessPoint Dx. Prototype functionality is provided for demonstration, planning, and review purposes only and should not be relied on as a live production service.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>8. Payments and Orders</h2>
+                    <p>
+                        Any future paid direct-access testing workflow may be subject to additional checkout terms, refund rules, collection requirements, identity verification, and testing limitations. Prices, availability, turnaround estimates, and service options may change without notice unless otherwise confirmed in writing.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>9. Turnaround Times and Service Availability</h2>
+                    <p>
+                        Any turnaround times, local processing statements, or service descriptions are estimates or targets unless expressly stated in a separate written agreement. Certain methodologies, confirmatory testing, cultures, reference testing, logistics issues, specimen quality concerns, weather events, staffing limitations, or regulatory requirements may affect timing or availability.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>10. Intellectual Property</h2>
+                    <p>
+                        The website design, brand names, copy, graphics, logos, workflows, and other content are owned by or licensed to AccessPoint Dx unless otherwise stated. Users may not copy, modify, distribute, reproduce, or use website materials for commercial purposes without written permission.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>11. Third-Party Links and Services</h2>
+                    <p>
+                        This website may include links to third-party websites, payment processors, laboratory systems, scheduling tools, or other external services. AccessPoint Dx is not responsible for third-party content, privacy practices, terms, security, or availability.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>12. Disclaimer of Warranties</h2>
+                    <p>
+                        This website is provided on an “as is” and “as available” basis. AccessPoint Dx does not warrant that the website will be uninterrupted, error-free, secure, current, complete, or suitable for every user or purpose.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>13. Limitation of Liability</h2>
+                    <p>
+                        To the fullest extent permitted by law, AccessPoint Dx is not liable for indirect, incidental, consequential, special, exemplary, or punitive damages arising from website use, inability to use the website, prototype workflow issues, third-party services, or reliance on website content.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>14. Privacy</h2>
+                    <p>
+                        Use of this website is also governed by the Privacy Policy. Healthcare privacy practices related to protected health information may be addressed separately in a Notice of Privacy Practices when applicable.
+                    </p>
+                </div>
+
+                <div>
+                    <h2>15. Changes to These Terms</h2>
+                    <p>
+                        AccessPoint Dx may update these Terms periodically. Updated Terms will be posted on this page with a revised effective date. Continued use of the website after updates means the user accepts the updated Terms.
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+                    <h2>Contact</h2>
+                    <p>
+                        For questions about these Terms, contact AccessPoint Dx at:
+                    </p>
+                    <p class="mt-3 font-bold text-[#0A192F]">
+                        info@accesspointdx.com
+                    </p>
+                    <p class="text-xs text-slate-400 mt-2">
+                        Minneapolis, Minnesota
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="bg-[#0A192F] text-white">
+            <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+                <div class="space-y-2">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 block">
+                        AccessPoint Dx
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-black tracking-tight">
+                        Separate pathways. Clear terms.
+                    </h2>
+                    <p class="text-sm text-slate-400 font-medium max-w-2xl leading-relaxed">
+                        Provider partnerships, direct-access testing, and occupational screening are designed as distinct workflows with clear boundaries.
+                    </p>
+                </div>
+
+                <a href="index.html" class="inline-flex justify-center items-center bg-white text-[#0A192F] hover:bg-slate-100 text-xs font-black uppercase tracking-widest px-6 py-4 rounded-xl transition">
+                    Return Home
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FLOATING DOCK -->
+    <div class="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-[250] bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl shadow-xl px-3 py-2 flex items-center gap-4 text-xs">
+        <a href="index.html" class="text-[#059669] hover:scale-110 transition" title="Home" aria-label="Home">⌂</a>
+        <button type="button" onclick="history.back()" class="text-slate-500 hover:text-[#059669] hover:scale-110 transition font-bold" title="Back" aria-label="Back">←</button>
+        <button type="button" onclick="history.forward()" class="text-slate-500 hover:text-[#059669] hover:scale-110 transition font-bold" title="Forward" aria-label="Forward">→</button>
+        <button type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-slate-500 hover:text-[#059669] hover:scale-110 transition font-bold" title="Top" aria-label="Scroll to top">↑</button>
+    </div>
+
+    <footer class="bg-[#081526] text-slate-500 text-[10px] font-bold uppercase tracking-wider pb-24 pt-6">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <span>© 2026 AccessPoint Dx. All rights reserved.</span>
+            <div class="flex gap-4">
+                <a href="privacy-policy.html" class="hover:text-slate-300 transition">Privacy Policy</a>
+                <a href="terms.html" class="text-slate-300">Terms</a>
+                <a href="refund-policy.html" class="hover:text-slate-300 transition">Refund Policy</a>
+                <a href="hipaa-notice.html" class="hover:text-slate-300 transition">HIPAA Notice</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const drawerBackdrop = document.getElementById('drawerBackdrop');
+        const drawerPanel = document.getElementById('drawerPanel');
+        const closeDrawerButton = document.getElementById('closeDrawerButton');
+
+        function openDrawer() {
+            mobileDrawer.classList.remove('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', 'true');
+
+            setTimeout(() => {
+                drawerBackdrop.classList.remove('opacity-0');
+                drawerBackdrop.classList.add('opacity-100');
+                drawerPanel.classList.remove('translate-x-full');
+            }, 10);
+
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            drawerBackdrop.classList.remove('opacity-100');
+            drawerBackdrop.classList.add('opacity-0');
+            drawerPanel.classList.add('translate-x-full');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+
+            setTimeout(() => {
+                mobileDrawer.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 220);
+        }
+
+        mobileMenuButton.addEventListener('click', openDrawer);
+        closeDrawerButton.addEventListener('click', closeDrawer);
+        drawerBackdrop.addEventListener('click', closeDrawer);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !mobileDrawer.classList.contains('hidden')) {
+                closeDrawer();
+            }
+
+            if (event.altKey && event.key.toLowerCase() === 'h') {
+                event.preventDefault();
+                window.location.href = 'index.html';
+            }
+        });
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.addEventListener('touchstart', (event) => {
+            if (!event.changedTouches || event.changedTouches.length === 0) return;
+            touchStartX = event.changedTouches[0].screenX;
+            touchStartY = event.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (event) => {
+            if (!event.changedTouches || event.changedTouches.length === 0) return;
+
+            const touchEndX = event.changedTouches[0].screenX;
+            const touchEndY = event.changedTouches[0].screenY;
+
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = Math.abs(touchEndY - touchStartY);
+
+            if (deltaY > 80) return;
+
+            if (deltaX > 120 && touchStartX < 35) {
+                history.back();
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
