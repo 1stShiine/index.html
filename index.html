@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessPoint Dx | Diagnostics Without Barriers</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .diagnostic-pattern {
+            background-color: #ffffff;
+            background-image:
+                linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+                linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .gateway-card {
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        }
+
+        .gateway-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .soft-glow {
+            box-shadow: 0 20px 70px rgba(15, 23, 42, 0.08);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-[#0A192F] antialiased selection:bg-[#059669]/10">
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[999] focus:bg-[#059669] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-xs focus:font-black focus:uppercase">
+        Skip to main content
+    </a>
+
+    <div class="bg-[#0A192F] text-white text-[11px] font-medium border-b border-slate-800">
+        <div class="max-w-7xl mx-auto h-11 px-6 flex items-center justify-between">
+            <div class="flex items-center gap-5 overflow-hidden">
+                <span class="flex items-center gap-2 text-slate-300 whitespace-nowrap">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                    Minnesota-Centered Laboratory Services
+                </span>
+                <span class="hidden sm:flex items-center gap-2 text-slate-300 whitespace-nowrap">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                    Separate Pathways. Clear Boundaries.
+                </span>
+            </div>
+
+            <a href="#pathways" class="bg-[#059669] hover:bg-emerald-700 text-white font-black px-3 py-1.5 rounded-lg text-[10px] tracking-wider transition uppercase whitespace-nowrap">
+                Choose Pathway →
+            </a>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group" aria-label="AccessPoint Dx home">
+                <svg class="w-11 h-11 shrink-0" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <polyline points="45,15 15,15 15,85 45,85" fill="none" stroke="#0A192F" stroke-width="6" stroke-linecap="square"/>
+                    <circle cx="26" cy="52" r="4" fill="#0A192F"/>
+                    <path d="M45 85 L75 85 Q 85 85 85 75 L85 70 Q 85 65 75 65 L65 65" fill="#059669"/>
+                    <path d="M65 65 Q 85 65 85 45 Q 85 30 70 30" fill="none" stroke="#059669" stroke-width="9" stroke-linecap="round"/>
+                    <line x1="72" y1="30" x2="52" y2="52" stroke="#059669" stroke-width="10" stroke-linecap="round"/>
+                </svg>
+
+                <div class="flex flex-col justify-center">
+                    <div class="text-[20px] sm:text-[22px] font-black tracking-tight text-[#0A192F] leading-none">
+                        AccessPoint <span class="text-[#059669]">Dx</span>
+                    </div>
+                    <span class="text-[7.5px] sm:text-[8.5px] font-bold tracking-[0.2em] text-[#059669] uppercase mt-1.5">
+                        Diagnostics Without Barriers
+                    </span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-9 text-xs font-black tracking-[0.08em] text-slate-700">
+                <a href="#pathways" class="hover:text-[#059669] transition">Pathways</a>
+                <a href="#philosophy" class="hover:text-[#059669] transition">Clinical Philosophy</a>
+                <a href="#local" class="hover:text-[#059669] transition">Why Local</a>
+                <a href="#footer-anchor" class="hover:text-[#059669] transition">Contact</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="direct-access-testing.html" class="border border-slate-300 hover:border-[#059669] text-[#0A192F] px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition">
+                    Axis Point Premium™
+                </a>
+                <a href="provider-partnerships.html" class="bg-[#0A192F] hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition">
+                    Provider Access →
+                </a>
+            </div>
+
+            <button id="mobileMenuButton" class="lg:hidden p-2 rounded-xl hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#059669]/20" aria-label="Open mobile menu" aria-expanded="false">
+                <svg class="w-7 h-7 text-[#0A192F]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-100 bg-white shadow-xl">
+            <nav class="px-6 py-6 space-y-4 text-xs font-black uppercase tracking-wider text-slate-700">
+                <a href="#pathways" class="block hover:text-[#059669] transition">Pathways</a>
+                <a href="#philosophy" class="block hover:text-[#059669] transition">Clinical Philosophy</a>
+                <a href="#local" class="block hover:text-[#059669] transition">Why Local</a>
+                <a href="provider-partnerships.html" class="block hover:text-[#059669] transition">Provider Partnerships</a>
+                <a href="direct-access-testing.html" class="block hover:text-[#059669] transition">Axis Point Premium™</a>
+                <a href="occupational-compliance-screening.html" class="block hover:text-[#059669] transition">Occupational Screening</a>
+                <a href="#footer-anchor" class="block hover:text-[#059669] transition">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <section class="diagnostic-pattern relative overflow-hidden border-b border-slate-100">
+            <div class="absolute inset-0 bg-gradient-to-b from-white/50 via-white/80 to-white"></div>
+
+            <div class="relative max-w-7xl mx-auto px-6 pt-14 pb-16 lg:pt-20 lg:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-7">
+                    <div class="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-[#059669]"></span>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                            Provider-first. Locally grounded.
+                        </span>
+                    </div>
+
+                    <div class="space-y-5">
+                        <h1 class="text-[42px] sm:text-[56px] lg:text-[68px] font-black tracking-[-0.055em] leading-[0.94] text-[#0A192F]">
+                            Diagnostics without barriers — through the right local pathway.
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-slate-600 font-medium leading-relaxed max-w-2xl">
+                            AccessPoint Dx is a Minnesota-centered laboratory services platform supporting provider partnerships, direct-access self-pay testing, and occupational screening. Separate pathways. Clear boundaries. One local diagnostic partner.
+                        </p>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 soft-glow max-w-2xl">
+                        <p class="text-sm sm:text-base font-black text-[#0A192F] leading-relaxed">
+                            Provider-first laboratory infrastructure.
+                            <span class="text-[#059669]"> Consumer-access testing where appropriate.</span>
+                            Occupational screening where required.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="#pathways" class="inline-flex items-center justify-center bg-[#059669] hover:bg-emerald-700 text-white px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition shadow-[0_8px_20px_rgba(5,150,105,0.18)]">
+                            Choose Your Pathway →
+                        </a>
+
+                        <a href="direct-access-testing.html" class="inline-flex items-center justify-center bg-white border border-slate-300 hover:border-[#059669] text-[#0A192F] px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition">
+                            Axis Point Premium™
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="bg-white border border-slate-200 rounded-[2rem] p-6 soft-glow">
+                        <div class="bg-[#0A192F] rounded-[1.5rem] p-6 text-white space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400">Local Gateway</span>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">MN</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+                                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">1. Provider Partnerships</span>
+                                    <p class="text-sm font-bold">Clinical relationships, menu access, onboarding, and integration-readiness.</p>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+                                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">2. Axis Point Premium™</span>
+                                    <p class="text-sm font-bold">Direct-access testing, closer to home, with care-continuity boundaries.</p>
+                                </div>
+
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+                                    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-1">3. Occupational Screening</span>
+                                    <p class="text-sm font-bold">Employer and compliance testing with separate workflows.</p>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 border-t border-white/10 text-[11px] text-slate-400 font-medium leading-relaxed">
+                                Built to help the visitor enter the right pathway without mixing clinical, consumer, and compliance workflows.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pathways" class="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="text-[10px] font-black tracking-widest text-[#059669] uppercase">
+                    Three Clear Diagnostic Pathways
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F]">
+                    Choose the path that fits your need.
+                </h2>
+                <p class="text-sm text-slate-500 font-medium leading-relaxed">
+                    Each pathway is intentionally separated so providers, consumers, and employers receive the right information without blurred responsibilities.
+                </p>
+            </div>
+
+            <div id="gatewayScroller" class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-7">
+                <a href="provider-partnerships.html" class="gateway-card group bg-white border-2 border-[#0A192F] rounded-[2rem] p-7 shadow-sm hover:shadow-xl flex flex-col min-h-[420px]">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-[#0A192F] text-white flex items-center justify-center text-xl">
+                            🩺
+                        </div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                            Primary
+                        </span>
+                    </div>
+
+                    <div class="space-y-4 flex-grow">
+                        <h3 class="text-2xl font-black tracking-tight text-[#0A192F]">
+                            Provider Partnerships
+                        </h3>
+
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                            For clinics, specialty practices, long-term care, and care organizations seeking a responsive local laboratory partner, test menu access, onboarding support, and integration-readiness coordination.
+                        </p>
+
+                        <div class="space-y-2 text-xs font-bold text-slate-600 pt-2">
+                            <div>✓ Local laboratory partner positioning</div>
+                            <div>✓ Test menu and onboarding access</div>
+                            <div>✓ Integration-readiness coordination</div>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 mt-8 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-black uppercase tracking-widest text-[#059669]">Explore Provider Pathway</span>
+                        <span class="text-[#059669] group-hover:translate-x-1 transition">→</span>
+                    </div>
+                </a>
+
+                <a href="direct-access-testing.html" class="gateway-card group bg-white border border-slate-200 rounded-[2rem] p-7 shadow-sm hover:shadow-xl hover:border-[#059669] flex flex-col min-h-[420px]">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] border border-emerald-100 flex items-center justify-center text-xl">
+                            ✦
+                        </div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                            Self-Pay
+                        </span>
+                    </div>
+
+                    <div class="space-y-4 flex-grow">
+                        <h3 class="text-2xl font-black tracking-tight text-[#0A192F]">
+                            Axis Point Premium™ Direct-Access Testing
+                        </h3>
+
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                            Direct-access testing, closer to home. Appropriate self-pay wellness and preventive testing with secure results, transparent pricing, and reports designed to support follow-up with local partner providers when needed.
+                        </p>
+
+                        <div class="space-y-2 text-xs font-bold text-slate-600 pt-2">
+                            <div>✓ Transparent self-pay testing</div>
+                            <div>✓ Secure digital results pathway</div>
+                            <div>✓ Easier to share with local providers</div>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 mt-8 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-black uppercase tracking-widest text-[#059669]">Start Direct Access</span>
+                        <span class="text-[#059669] group-hover:translate-x-1 transition">→</span>
+                    </div>
+                </a>
+
+                <a href="occupational-compliance-screening.html" class="gateway-card group bg-white border border-slate-200 rounded-[2rem] p-7 shadow-sm hover:shadow-xl hover:border-[#059669] flex flex-col min-h-[420px]">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-100 text-[#0A192F] border border-slate-200 flex items-center justify-center text-xl">
+                            🛡️
+                        </div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                            Compliance
+                        </span>
+                    </div>
+
+                    <div class="space-y-4 flex-grow">
+                        <h3 class="text-2xl font-black tracking-tight text-[#0A192F]">
+                            Occupational & Compliance Screening
+                        </h3>
+
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed">
+                            For employers, workforce programs, public-sector entities, and organizations needing drug screening, compliance testing, collection coordination, or chain-of-custody support.
+                        </p>
+
+                        <div class="space-y-2 text-xs font-bold text-slate-600 pt-2">
+                            <div>✓ Workforce and employer screening</div>
+                            <div>✓ Chain-of-custody coordination</div>
+                            <div>✓ Separate compliance workflows</div>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 mt-8 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-black uppercase tracking-widest text-[#059669]">View Screening Pathway</span>
+                        <span class="text-[#059669] group-hover:translate-x-1 transition">→</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="philosophy" class="bg-slate-50 border-y border-slate-200/70 py-16 lg:py-20">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-5">
+                    <span class="text-[10px] font-black tracking-widest text-[#059669] uppercase block mb-3">
+                        Our Clinical Philosophy
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F] leading-tight">
+                        Diagnostics should connect people to care — not bypass it.
+                    </h2>
+                </div>
+
+                <div class="lg:col-span-7 space-y-5">
+                    <p class="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+                        AccessPoint Dx is built as a local diagnostic infrastructure partner. Provider relationships remain the foundation of the platform. Direct-access testing exists where appropriate for self-pay wellness and preventive testing, with clear boundaries around diagnosis, treatment, and medical decision-making.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-2">Provider-first</span>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed">
+                                The site presents AccessPoint Dx as a partner to local care organizations, not a replacement.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-2">Clear boundaries</span>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed">
+                                Consumer testing is positioned for wellness awareness and appropriate follow-up.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-[#059669] block mb-2">Local continuity</span>
+                            <p class="text-xs text-slate-600 font-medium leading-relaxed">
+                                Reports are designed to be easier to share with local providers and care teams.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="local" class="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-6 space-y-5">
+                    <span class="text-[10px] font-black tracking-widest text-[#059669] uppercase">
+                        Why Local Processing Matters
+                    </span>
+
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0A192F] leading-tight">
+                        Closer diagnostic pathways can support faster answers and better continuity.
+                    </h2>
+
+                    <p class="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+                        National testing options already exist. AccessPoint Dx differentiates by building a Minnesota-centered model: provider partnerships first, consumer access where appropriate, and occupational screening where required — all through separated pathways that protect trust.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="bg-[#0A192F] text-white rounded-[2rem] p-7 soft-glow">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div class="border border-white/10 rounded-2xl p-5">
+                                <span class="text-3xl font-black text-[#059669] block">Local</span>
+                                <p class="text-xs text-slate-300 font-medium mt-2 leading-relaxed">
+                                    Minnesota-centered laboratory services and communication.
+                                </p>
+                            </div>
+
+                            <div class="border border-white/10 rounded-2xl p-5">
+                                <span class="text-3xl font-black text-[#059669] block">Clear</span>
+                                <p class="text-xs text-slate-300 font-medium mt-2 leading-relaxed">
+                                    Separate experiences for providers, consumers, and employers.
+                                </p>
+                            </div>
+
+                            <div class="border border-white/10 rounded-2xl p-5">
+                                <span class="text-3xl font-black text-[#059669] block">Secure</span>
+                                <p class="text-xs text-slate-300 font-medium mt-2 leading-relaxed">
+                                    Results pathways designed around privacy and appropriate access.
+                                </p>
+                            </div>
+
+                            <div class="border border-white/10 rounded-2xl p-5">
+                                <span class="text-3xl font-black text-[#059669] block">Aligned</span>
+                                <p class="text-xs text-slate-300 font-medium mt-2 leading-relaxed">
+                                    Built to support provider relationships, not compete with them.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 pb-16 lg:pb-20">
+            <div class="bg-gradient-to-r from-slate-900 to-[#0A192F] rounded-[2rem] p-8 sm:p-10 text-white flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div class="space-y-2 max-w-2xl">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-emerald-400 block">
+                        Ready to continue?
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-black tracking-tight">
+                        Start with the pathway that matches your role.
+                    </h2>
+                    <p class="text-sm text-slate-300 font-medium leading-relaxed">
+                        Providers can request partnership information, consumers can use Axis Point Premium™, and employers can begin occupational screening review.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row lg:flex-col gap-3 min-w-full sm:min-w-0 lg:min-w-[260px]">
+                    <a href="provider-partnerships.html" class="bg-[#059669] hover:bg-emerald-700 text-white text-xs font-black uppercase tracking-widest py-4 px-6 rounded-xl text-center transition">
+                        Provider Partnerships
+                    </a>
+                    <a href="direct-access-testing.html" class="bg-white hover:bg-slate-100 text-[#0A192F] text-xs font-black uppercase tracking-widest py-4 px-6 rounded-xl text-center transition">
+                        Axis Point Premium™
+                    </a>
+                    <a href="occupational-compliance-screening.html" class="border border-white/20 hover:bg-white/10 text-white text-xs font-black uppercase tracking-widest py-4 px-6 rounded-xl text-center transition">
+                        Occupational Screening
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-slate-200 p-1.5 rounded-2xl shadow-xl flex items-center z-[250] select-none text-xs">
+        <div id="dockExpandedGroup" class="hidden md:flex items-center gap-4 px-2">
+            <a href="index.html" class="text-[#059669] text-sm hover:scale-110 transition" title="Home">⌂</a>
+            <button onclick="history.back()" class="text-slate-500 font-black hover:text-[#059669] transition" title="Back">←</button>
+            <button onclick="history.forward()" class="text-slate-500 font-black hover:text-[#059669] transition" title="Forward">→</button>
+            <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="text-slate-500 font-black hover:text-[#059669] transition" title="Top">↑</button>
+        </div>
+
+        <div class="md:hidden flex items-center gap-3 px-1.5 py-0.5">
+            <a href="index.html" class="text-[#059669] text-xs">⌂</a>
+            <button onclick="history.back()" class="text-slate-500 font-black">←</button>
+            <button onclick="history.forward()" class="text-slate-500 font-black">→</button>
+            <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="text-slate-500 font-black">↑</button>
+        </div>
+    </div>
+
+    <footer id="footer-anchor" class="bg-[#0A192F] text-white pt-14 pb-24 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 space-y-10">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-800 pb-10">
+                <div>
+                    <h3 class="text-2xl sm:text-3xl font-black tracking-tight">
+                        AccessPoint <span class="text-[#059669]">Dx</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 font-medium mt-2 max-w-xl leading-relaxed">
+                        Minnesota-centered laboratory services supporting provider partnerships, direct-access testing where appropriate, and occupational screening where required.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="provider-partnerships.html" class="bg-[#059669] hover:bg-emerald-700 text-white px-6 py-3.5 rounded-xl text-xs font-black uppercase tracking-widest text-center transition">
+                        Provider Pathway
+                    </a>
+                    <a href="direct-access-testing.html" class="border border-slate-700 hover:bg-slate-800 text-white px-6 py-3.5 rounded-xl text-xs font-black uppercase tracking-widest text-center transition">
+                        Direct Access
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-[11px]">
+                <div class="space-y-3">
+                    <h4 class="font-black tracking-widest text-white uppercase text-[10px]">Pathways</h4>
+                    <ul class="space-y-2 text-slate-400 font-medium">
+                        <li><a href="provider-partnerships.html" class="hover:text-white transition">Provider Partnerships</a></li>
+                        <li><a href="direct-access-testing.html" class="hover:text-white transition">Axis Point Premium™</a></li>
+                        <li><a href="occupational-compliance-screening.html" class="hover:text-white transition">Occupational Screening</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-black tracking-widest text-white uppercase text-[10px]">Consumer</h4>
+                    <ul class="space-y-2 text-slate-400 font-medium">
+                        <li><a href="direct-access-testing.html" class="hover:text-white transition">Start Testing Order</a></li>
+                        <li><a href="testing-profile.html" class="hover:text-white transition">Testing Profile</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-black tracking-widest text-white uppercase text-[10px]">Legal</h4>
+                    <ul class="space-y-2 text-slate-400 font-medium">
+                        <li><a href="privacy-policy.html" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition">Terms</a></li>
+                        <li><a href="refund-policy.html" class="hover:text-white transition">Refund Policy</a></li>
+                        <li><a href="hipaa-notice.html" class="hover:text-white transition">HIPAA Notice</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-black tracking-widest text-white uppercase text-[10px]">Contact</h4>
+                    <ul class="space-y-2 text-slate-400 font-medium">
+                        <li>Minneapolis, Minnesota</li>
+                        <li>info@accesspointdx.com</li>
+                        <li>Phone coming soon</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-[10px] text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4 font-bold uppercase tracking-wider">
+                <div>© 2026 AccessPoint Dx. All rights reserved.</div>
+                <div>Diagnostics Without Barriers</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isOpen = !mobileMenu.classList.contains('hidden');
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
+                });
+
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+
+            document.addEventListener('keydown', (event) => {
+                if (event.altKey && event.key.toLowerCase() === 'h') {
+                    event.preventDefault();
+                    window.location.href = 'index.html';
+                }
+
+                if (event.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenuButton.focus();
+                }
+            });
+
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', (event) => {
+                touchStartX = event.changedTouches[0].screenX;
+            }, { passive: true });
+
+            document.addEventListener('touchend', (event) => {
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipeGesture();
+            }, { passive: true });
+
+            function handleSwipeGesture() {
+                const distance = touchEndX - touchStartX;
+                const threshold = 120;
+
+                if (Math.abs(distance) < threshold) return;
+
+                if (distance > 0) {
+                    // Swipe right: browser-like back movement
+                    if (window.history.length > 1) history.back();
+                }
+            }
+
+            try {
+                const pageHistory = JSON.parse(localStorage.getItem('apdx_site_history') || '[]');
+                const currentPage = {
+                    file: 'index.html',
+                    name: 'AccessPoint Dx Home',
+                    visitedAt: new Date().toISOString()
+                };
+
+                const updatedHistory = pageHistory
+                    .filter(item => item.file !== currentPage.file)
+                    .slice(0, 5);
+
+                updatedHistory.unshift(currentPage);
+                localStorage.setItem('apdx_site_history', JSON.stringify(updatedHistory));
+            } catch (error) {
+                console.warn('History tracking unavailable:', error);
+            }
+        });
+    </script>
+</body>
+</html>
